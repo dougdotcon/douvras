@@ -1,6 +1,6 @@
 ---
 artifact: FAILURE_MAP
-run_id: 20260815T004820Z
+run_id: 20260815T024411Z
 generated_by: scripts/run_model_cycle.py
 status: COMPUTATIONAL_EVIDENCE
 ---

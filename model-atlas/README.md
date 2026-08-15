@@ -98,20 +98,52 @@ retratação em [R-101](00_GOVERNANCE/RETRACTIONS_AND_CORRECTIONS.md).
 **A métrica de `F3` não foi trocada.** Redefinir um falsificador depois de vê-lo disparar é
 ajustar o instrumento ao resultado.
 
-### 4 · Nenhuma capacidade foi medida — e o sistema recusa fingir que foi
+### 4 · A primeira medição real: 0 % em 96 tarefas, com **zero** chamadas de ferramenta
 
-Nenhum modelo do corpus tem pesos locais. Consequência, imposta por tipo e não por disciplina:
+`tucano-2b4-instruct` Q4_K_M, em CPU, prompt `agent-ptbr-v2`, temperatura 0:
+
+| Medida | Valor |
+|---|---:|
+| escore geral | **0,0 %** (0/96) |
+| chamadas de ferramenta emitidas | **0** |
+| tokens/s (geração) | 12,14 |
+| TTFT médio | 6,42 s |
+
+O modelo não erra a ferramenta — **nunca chega a chamar uma**. Toda trajetória termina no
+primeiro passo com um JSON que tem a forma do contrato e valores de exemplo:
+
+```json
+{"acao": "chamar", "ferramentas": "nome_daferramentas", "argumentos": {"campos": "valor"}}
+```
+
+Ele **descreve** o protocolo em vez de executá-lo. Fora do protocolo, responde português
+normalmente — não é incapacidade de língua nem de instrução.
+
+**A hipótese óbvia foi testada e rejeitada.** Um exemplo demonstrado injetado no prompt
+(`G-112`, modo diagnóstico, 16 tarefas nas oito capacidades) manteve 0,0 % e zero chamadas. O
+zero-shot não estava medindo falta de exemplo.
+
+Os três modelos sem pesos locais continuam saindo como **ausência declarada**, não como zero —
+a recusa é imposta por tipo ([ADR-0007](06_ARCHITECTURE/ADR/ADR-0007-sondas-nao-sao-modelos.md)):
 
 ```text
 CapabilityFingerprint.from_run(execução sintética)
     → todas as capacidades = None, OPEN_GAP, G-101
-    → CSS sem entrada → css_alvo = None
-    → o portão de emissão recusa qualquer relatório que diga o contrário
 ```
 
-As sondas rodam mesmo assim, porque o que elas medem — se o instrumento enxerga cada modo de
-falha — vale independentemente de haver modelo. Mas um número delas **nunca** vira afirmação
-sobre modelo ([ADR-0007](06_ARCHITECTURE/ADR/ADR-0007-sondas-nao-sao-modelos.md)).
+### 4.1 · E um defeito no artefato publicado do modelo
+
+O template de chat embutido no GGUF **está errado** (`G-114`):
+
+| Prompt | Saída |
+|---|---|
+| `<instruction>Qual é a capital da França?` | `</instruction>A capital da França é Paris…` |
+| `<instruction>…</instruction>` ← o que o template monta | `FFQuala</</. A PerguntQualfQual…` |
+
+O template fecha a tag no prompt; o modelo foi treinado para emitir essa tag. O tokenizer está
+correto e não depende de BOS. **Toda ferramenta que aplique o template publicado** — llama-server
+com `--jinja`, `apply_chat_template`, Ollama, LM Studio — recebe saída degenerada desse modelo,
+e publicaria zero atribuindo ao modelo.
 
 ### 5 · O que a aritmética já responde: cabe em 16 GB
 

@@ -18,6 +18,7 @@ estimada.
 | **A-104** | Tratabilidade, valor, custo e estabilidade de cada capacidade são os priors de `capability_priors.v1.json` | São necessários para o CSS existir; nenhum dado de calibração está disponível | três casos com desfecho conhecido (`G-104`) |
 | **A-105** | Uma margem de 0,20 entre respondente correto e degenerado é suficiente para chamar um escore de discriminante | É a ordem de grandeza usada como corte no `LHS` do Silicon Atlas | replicação contra benchmark público com desfecho conhecido (`G-105`) |
 | **A-106** | Uma sonda de calibração que dispara um modo de falha prova que o grader detecta aquele modo **quando ele é injetado desta forma** | É verificável offline e não depende de modelo | um modelo real exibindo o mesmo modo por outro caminho e passando no grader |
+| **A-107** | O prompt `agent-ptbr-v2` é uma elicitação razoável de chamada de ferramenta: um modelo capaz de agir responderia a ele | O contrato está declarado, com os nomes de chave exatos, colado ao ponto de geração; e a hipótese de falta de exemplo foi testada e rejeitada | um modelo da mesma faixa emitindo chamadas válidas com este prompt, ou o mesmo modelo emitindo com outro prompt (`G-112`) |
 
 ## O que estas premissas **não** autorizam
 

@@ -1,6 +1,6 @@
 ---
 artifact: TRANSFORMATION_MATRIX
-run_id: 20260815T004803Z
+run_id: 20260815T024439Z
 generated_by: scripts/run_cycle.py
 status: COMPUTATIONAL_EVIDENCE
 ---

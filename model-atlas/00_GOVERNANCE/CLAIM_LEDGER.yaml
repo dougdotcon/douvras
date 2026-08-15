@@ -10,6 +10,8 @@
   - RUN:20260815T000252Z
   - RUN:20260815T004444Z
   - RUN:20260815T004820Z
+  - RUN:20260815T024202Z
+  - RUN:20260815T024411Z
   falsifiers:
   - o grader aceita alguma trajetoria declarada como errada (F1)
   - o grader rejeita a trajetoria de referencia de alguma tarefa (F2)
@@ -27,6 +29,8 @@
   - RUN:20260815T000252Z
   - RUN:20260815T004444Z
   - RUN:20260815T004820Z
+  - RUN:20260815T024202Z
+  - RUN:20260815T024411Z
   falsifiers:
   - margem entre oraculo e melhor sonda degenerada abaixo de 0.20 (F3)
   owner: research
@@ -44,6 +48,8 @@
   - RUN:20260815T000252Z
   - RUN:20260815T004444Z
   - RUN:20260815T004820Z
+  - RUN:20260815T024202Z
+  - RUN:20260815T024411Z
   falsifiers:
   - alguma tarefa declara regra que nenhum grader implementa (F5)
   - alguma capacidade tem menos de oito tarefas (F5)
@@ -60,6 +66,8 @@
   - RUN:20260815T000252Z
   - RUN:20260815T004444Z
   - RUN:20260815T004820Z
+  - RUN:20260815T024202Z
+  - RUN:20260815T024411Z
   falsifiers:
   - algum modo declarado nunca aparece em nenhuma execucao de sonda (F6)
   owner: engineering
@@ -75,6 +83,8 @@
   - RUN:20260815T000252Z
   - RUN:20260815T004444Z
   - RUN:20260815T004820Z
+  - RUN:20260815T024202Z
+  - RUN:20260815T024411Z
   falsifiers:
   - duas execucoes da mesma suite divergem em qualquer veredicto (F4)
   owner: engineering
@@ -94,6 +104,23 @@
   last_reviewed: '2026-08-14'
   note: A conta cobre pesos, nao KV cache nem ativacoes. Caber nao implica ser utilizavel — a velocidade
     depende de G-102.
+- id: C-108
+  statement: 'Modelos instruidos de porte 2B a 3B nao instanciam um protocolo de chamada de ferramenta
+    em portugues sem fine-tuning especifico: reconhecem a forma do contrato e devolvem o schema com valores
+    de exemplo.'
+  status: CONJECTURE
+  assumptions:
+  - A-103
+  - A-107
+  evidence: []
+  falsifiers:
+  - qualquer modelo dessa faixa emitir chamada de ferramenta valida em mais de 10 por cento das tarefas,
+    com prompt declarado antes
+  - o mesmo modelo em fp16 emitir chamadas validas, indicando perda de quantizacao e nao limite do modelo
+  owner: research
+  last_reviewed: '2026-08-15'
+  note: Generalizacao de UMA observacao (tucano-2b4-instruct, q4, agent-ptbr-v2). E conjectura, nao resultado.
+    Falsificar exige um segundo modelo, e e a razao de G-113 e G-112 existirem.
 - id: C-107
   statement: O CSS identifica uma capacidade alvo para especializacao por dados com margem maior que o
     ruido dos proprios pesos.

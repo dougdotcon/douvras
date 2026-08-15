@@ -38,6 +38,7 @@ from . import css as css_mod
 from .capability import CapabilityFingerprint
 from .failure import FailureAtlas
 from .instrument import InstrumentReport, evaluate_instrument
+from .measurements import Measurement
 from .profiler import InferenceProfile, MemoryBudget
 from .registry import Registry, corpus_provenance
 from .runner import PROBES, run_suite
@@ -61,9 +62,15 @@ MANDATORY_SECTIONS: tuple[str, ...] = (
 )
 
 #: Confrontos texto x `Finding` exigidos pelo portao (`G-012`).
+#:
+#: A terceira regra nasceu de um defeito real deste relatorio: a secao 2 continuou afirmando
+#: "nenhuma ficha foi conferida contra o upstream" depois de `G-108` fechar, porque a frase era
+#: fixa e o `Finding` era calculado. Texto fixo ao lado de numero calculado e a receita da
+#: incoerencia — e nenhuma das duas primeiras regras a pegava.
 COHERENCE_RULES: tuple[tuple[str, str], ...] = (
     (r"nenhuma capacidade foi medida", "css_alvo"),
     (r"nenhuma execucao real ocorreu", "tokens_por_segundo"),
+    (r"nenhuma ficha deste corpus foi conferida", "proveniencia_verificada"),
 )
 
 
@@ -86,6 +93,7 @@ class Assessment:
     css_result: css_mod.CSSResult
     findings: FindingSet
     inputs: AssessmentInputs
+    measurement: Measurement | None = None
     run_id: str = ""
     generated_at: str = ""
 
@@ -107,15 +115,32 @@ class Assessment:
         ts = TaskSet.load() if tasks is None else tasks
         inst = evaluate_instrument(ts) if instrument is None else instrument
 
-        # Sem pesos locais nao ha execucao real. As sondas rodam mesmo assim, porque o que elas
-        # medem — se o instrumento enxerga cada modo de falha — vale independentemente do modelo.
-        fp = CapabilityFingerprint.unmeasured(spec.id, sorted(ts.by_capability(), key=str))
-        atlas = FailureAtlas.merged(
-            [run_suite(ts, p) for p, _ in PROBES], source="sondas de calibracao"
-        )
+        # Ha medicao real publicada para este modelo? Ela e evidencia versionada em
+        # `99_RELEASES/runs/`, produzida uma vez fora do ciclo (ADR-0006) e lida aqui offline.
+        medicao = Measurement.load(spec.id)
+
+        if medicao is not None:
+            run = medicao.to_run_result()
+            fp = CapabilityFingerprint.from_run(spec.id, run)
+            atlas = FailureAtlas.from_run(run)
+            profile = InferenceProfile(
+                model_id=spec.id,
+                measured=True,
+                ttft_s=medicao.telemetry.get("ttft_s"),
+                tokens_per_s=medicao.telemetry.get("tokens_por_segundo"),
+                quantization=medicao.quantization,
+            )
+        else:
+            # Sem pesos locais nao ha execucao real. As sondas rodam mesmo assim, porque o que
+            # elas medem — se o instrumento enxerga cada modo de falha — vale independentemente
+            # de haver modelo.
+            fp = CapabilityFingerprint.unmeasured(spec.id, sorted(ts.by_capability(), key=str))
+            atlas = FailureAtlas.merged(
+                [run_suite(ts, p) for p, _ in PROBES], source="sondas de calibracao"
+            )
+            profile = InferenceProfile(model_id=spec.id, measured=False)
 
         budget = MemoryBudget.build(spec)
-        profile = InferenceProfile(model_id=spec.id, measured=False)
 
         priors = css_mod.load_priors()
         candidatos = css_mod.build_candidates(fp, priors)
@@ -141,6 +166,7 @@ class Assessment:
             css_result=css_res,
             findings=fs,
             inputs=inputs,
+            measurement=medicao,
             run_id=run_id,
             generated_at=(
                 f"{run_id[:4]}-{run_id[4:6]}-{run_id[6:8]}T"
@@ -154,8 +180,57 @@ class Assessment:
         """O assessment consegue responder sobre capacidade, ou so sobre o instrumento?"""
         return self.fingerprint.measured
 
+    @property
+    def measurement_score(self) -> float:
+        """Fracao de tarefas aprovadas na execucao real. Zero sem medicao."""
+        if self.measurement is None or not self.measurement.grades:
+            return 0.0
+        return sum(1 for g in self.measurement.grades if g.passed) / len(self.measurement.grades)
+
     def sections(self) -> dict[str, str]:
         s: dict[str, str] = {}
+
+        if self.evaluable and self.measurement is not None:
+            m = self.measurement
+            resposta = [
+                f"**Nao — e o motivo e especifico.** Executado sobre **{m.tasks} tarefas** do "
+                f"BR-Agent-Bench, `{self.spec.id}` acertou **{100 * self.measurement_score:.1f} %** "
+                f"e emitiu **{m.tool_calls} chamadas de ferramenta**.",
+                "",
+                "Nao e que ele erre a ferramenta: ele **nunca chega a chamar uma**. Toda "
+                "trajetoria termina no primeiro passo, com um objeto JSON que tem a forma do "
+                "contrato e valores de exemplo — `\"ferramenta\": \"nome_da_ferramenta\"` copiado "
+                "literalmente. O modelo descreve o protocolo em vez de executa-lo.",
+                "",
+                "Isso **nao** significa que o modelo seja incapaz de portugues ou de instrucao: "
+                "fora do protocolo de acao ele responde bem. Significa que, nesta quantizacao e "
+                "com este prompt, ele nao instancia um schema de chamada de ferramenta.",
+                "",
+                "**Os qualificadores fazem parte do resultado**, e sem eles o numero engana:",
+                "",
+                f"| Qualificador | Valor |",
+                f"|---|---|",
+                f"| prompt | `{m.prompt_version}`, zero-shot |",
+                f"| quantizacao | `{m.quantization}` ({m.model_file}) |",
+                f"| runtime | llama.cpp em CPU, temperatura 0 |",
+                f"| teto de passos | {m.max_steps} |",
+                "",
+                "**A hipotese obvia foi testada e rejeitada.** Um exemplo demonstrado injetado no "
+                "prompt (`G-112`, modo diagnostico) manteve o escore em 0,0 % e as chamadas de "
+                "ferramenta em zero, em 16 tarefas cobrindo as oito capacidades. O zero-shot nao "
+                "estava medindo falta de exemplo.",
+            ]
+        else:
+            resposta = [
+                "**Ainda nao da para responder, e o motivo e verificavel.** Nao ha pesos "
+                "locais para este modelo, portanto **nenhuma execucao real ocorreu** e "
+                "**nenhuma capacidade foi medida**. Um assessment que respondesse mesmo "
+                "assim estaria reportando o comportamento das sondas de calibracao como se "
+                "fosse o do modelo.",
+                "",
+                "O que **sim** foi estabelecido esta na secao 9: o instrumento que fara a "
+                "medicao foi verificado contra gabaritos e contraexemplos.",
+            ]
 
         s["pergunta_e_resposta"] = "\n".join(
             [
@@ -164,20 +239,7 @@ class Assessment:
                 f"> **`{self.spec.id}` esta pronto para ser especializado por dados, e em qual "
                 f"capacidade?**",
                 "",
-                (
-                    "**Ainda nao da para responder, e o motivo e verificavel.** Nao ha pesos "
-                    "locais para este modelo, portanto **nenhuma execucao real ocorreu** e "
-                    "**nenhuma capacidade foi medida**. Um assessment que respondesse mesmo "
-                    "assim estaria reportando o comportamento das sondas de calibracao como se "
-                    "fosse o do modelo."
-                    if not self.evaluable
-                    else
-                    f"Capacidade medida sobre {len(self.tasks)} tarefas do BR-Agent-Bench. "
-                    f"Pior capacidade observada: `{self.fingerprint.weakest[0]}`."
-                ),
-                "",
-                "O que **sim** foi estabelecido neste ciclo esta na secao 9: o instrumento que "
-                "fara a medicao foi verificado contra gabaritos e contraexemplos.",
+                *resposta,
             ]
         )
 
@@ -198,10 +260,16 @@ class Assessment:
                 f"| pesos locais | {'sim' if self.spec.weights_local else '**nao**'} |",
                 f"| fonte | {self.spec.source or '—'} |",
                 "",
-                "A contagem de parametros e **aproximada** (`A-101`): a fonte diz \"cerca de\", e "
-                "transformar isso num inteiro exato seria inventar digitos. Nenhuma ficha deste "
-                "corpus foi conferida contra o upstream — `G-108`, fechada por "
-                "`matlas registry verify`.",
+                (
+                    "Ficha **conferida na fonte** com hash e data (`G-108` fechada): a contagem "
+                    "de parametros e a do checkpoint, nao a do nome comercial, e por isso entra "
+                    "como `OBSERVATION` em vez de `ASSUMPTION`."
+                    if str(self.spec.provenance) == "UPSTREAM_VERIFIED"
+                    else
+                    "Ficha **transcrita de documento secundario**, nao conferida na fonte. A "
+                    "contagem de parametros e aproximada (`A-101`) e todo numero derivado dela "
+                    "herda essa incerteza. `matlas registry verify --write` fecha `G-108`."
+                ),
             ]
         )
 
@@ -219,21 +287,47 @@ class Assessment:
             ]
         )
 
-        s["latencia_e_vazao"] = "\n".join(
-            [
-                "## 4 · Latencia e vazao",
-                "",
-                "| Metrica | Valor | Status |",
-                "|---|---|---|",
-                "| TTFT | — | `OPEN_GAP` |",
-                "| tokens/s | — | `OPEN_GAP` |",
-                "| RAM de pico | — | `OPEN_GAP` |",
-                "",
-                "Nao existe formula honesta para latencia numa maquina que nunca executou o "
-                "modelo. `G-102` fecha com uma execucao instrumentada; ate la a ausencia e "
-                "declarada em vez de estimada.",
-            ]
-        )
+        if self.profile.measured and self.measurement is not None:
+            t = self.measurement.telemetry
+            s["latencia_e_vazao"] = "\n".join(
+                [
+                    "## 4 · Latencia e vazao",
+                    "",
+                    f"Medido em CPU, quantizacao `{self.measurement.quantization}`, "
+                    f"{self.measurement.tasks} tarefas.",
+                    "",
+                    "| Metrica | Valor | Status |",
+                    "|---|---:|---|",
+                    f"| tokens/s (geracao) | {t.get('tokens_por_segundo', '—')} | `OBSERVATION` |",
+                    f"| TTFT medio | {t.get('ttft_s', '—')} s | `OBSERVATION` |",
+                    f"| tokens gerados | {t.get('tokens_gerados', '—')} | `OBSERVATION` |",
+                    f"| tempo total de modelo | {t.get('tempo_total_s', '—')} s | `OBSERVATION` |",
+                    "| RAM de pico | — | `OPEN_GAP` |",
+                    "",
+                    "O TTFT aqui e o tempo de processamento do prompt reportado pelo servidor, "
+                    "nao um cronometro ate o primeiro token em streaming. E uma boa aproximacao "
+                    "e uma medida ruim se lida como outra coisa — por isso esta dito.",
+                    "",
+                    "RAM de pico continua `OPEN_GAP`: exige instrumentar o processo, que este "
+                    "harness nao faz.",
+                ]
+            )
+        else:
+            s["latencia_e_vazao"] = "\n".join(
+                [
+                    "## 4 · Latencia e vazao",
+                    "",
+                    "| Metrica | Valor | Status |",
+                    "|---|---|---|",
+                    "| TTFT | — | `OPEN_GAP` |",
+                    "| tokens/s | — | `OPEN_GAP` |",
+                    "| RAM de pico | — | `OPEN_GAP` |",
+                    "",
+                    "Nao existe formula honesta para latencia numa maquina que nunca executou o "
+                    "modelo. `G-102` fecha com uma execucao instrumentada; ate la a ausencia e "
+                    "declarada em vez de estimada.",
+                ]
+            )
 
         s["capacidades"] = "\n".join(
             ["## 5 · Capacidades", "", self.fingerprint.render()]

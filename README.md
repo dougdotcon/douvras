@@ -6,8 +6,8 @@
 para virar silício, e o que num modelo de IA está maduro para ser medido.**
 
 [![Método](https://img.shields.io/badge/m%C3%A9todo-DOUVRAS%202.0-1f2937)](METODO_DOUVRAS.md)
-[![Testes](https://img.shields.io/badge/testes-231%20verdes-16a34a)](tests/)
-[![Ciclos](https://img.shields.io/badge/ciclos-C--001%20%C2%B7%20C--002-0d9488)](#os-dois-eixos)
+[![Testes](https://img.shields.io/badge/testes-240%20verdes-16a34a)](tests/)
+[![Ciclos](https://img.shields.io/badge/ciclos-C--001%20%C2%B7%20C--002%20%C2%B7%20C--003-0d9488)](#os-dois-eixos)
 [![Portões](https://img.shields.io/badge/port%C3%B5es-6%2F7%20em%20ambos%20os%20eixos-f59e0b)](#estado-dos-portões)
 [![Retratações](https://img.shields.io/badge/retrata%C3%A7%C3%B5es-6%20%C2%B7%20corre%C3%A7%C3%B5es-3-b91c1c)](#o-que-o-sistema-retratou-de-si-mesmo)
 
@@ -69,7 +69,7 @@ acoplamento sem conteúdo.
 
 ```bash
 pip install -e ".[dev]"        # numpy, pyyaml, pytest — nada mais
-python -m pytest tests         # 231 testes
+python -m pytest tests         # 240 testes
 ```
 
 Nenhum dos dois eixos exige GPU, pesos de modelo, `torch` ou rede no caminho principal
@@ -129,20 +129,37 @@ nem break-even. A recusa em produzir números sobre um objeto inexistente é o p
 
 Detalhes em [silicon-atlas/README.md](silicon-atlas/README.md).
 
-### Model Atlas — ciclo C-002
+### Model Atlas — ciclos C-002 e C-003
 
-| Medida do instrumento | Valor |
+**O instrumento, verificado antes de medir alguém:**
+
+| Medida | Valor |
 |---|---:|
 | aceitação do gabarito | **100,0 %** (96/96) |
 | rejeição de contraexemplo | **100,0 %** (132) |
 | precisão do rótulo | **100,0 %** |
-| determinismo | idêntico entre execuções |
-| modos de falha sem sonda | nenhum |
 | **margem de discriminação agregada** | **0,062** ← abaixo do limiar de 0,20 |
 
 O grader aceita todo gabarito e rejeita todo contraexemplo com o rótulo certo. O **escore
 agregado**, porém, não separa um respondente correto de um degenerado: cada sonda ataca uma
 família e o agregado dilui o dano pelo corpus inteiro. `C-102` foi retratada.
+
+**A primeira capacidade medida** — `tucano-2b4-instruct` Q4_K_M, CPU, 96 tarefas:
+
+| Medida | Valor |
+|---|---:|
+| escore geral | **0,0 %** |
+| chamadas de ferramenta emitidas | **0** |
+| tokens/s (geração) | 12,14 |
+| TTFT médio | 6,42 s |
+
+O modelo não erra a ferramenta: **nunca chega a chamar uma**. Devolve o schema com valores de
+exemplo — `"ferramenta": "nome_da_ferramenta"` copiado literalmente — e descreve o protocolo em
+vez de executá-lo. Um exemplo demonstrado injetado no prompt não mudou nada, então o zero não
+media falta de elicitação.
+
+No caminho, o eixo encontrou um defeito no artefato publicado do modelo: **o template de chat
+embutido no GGUF está errado** e faz qualquer ferramenta padrão receber saída degenerada.
 
 Detalhes em [model-atlas/README.md](model-atlas/README.md).
 
@@ -230,7 +247,7 @@ DOUVRAS/
 └── tests/
     ├── core/                  27 testes — o contrato, sem nenhum domínio
     ├── silicon/               149 testes
-    └── model/                 55 testes
+    └── model/                 64 testes
 ```
 
 Arquivos marcados **[GERADOS]** dentro dos projetos não devem ser editados: são saída, não
@@ -251,7 +268,8 @@ parciais.**
 
 **No eixo de capacidade** — o corpus é sintético e até prova em contrário mede o gerador, não o
 mundo; as sondas foram escritas por quem escreveu o grader; os priors do CSS nunca foram
-calibrados. **10 lacunas abertas.**
+calibrados; a única medição real cobre **um** modelo, **uma** quantização e **uma** versão de
+prompt. **11 lacunas abertas e 2 parciais.**
 
 **Nos dois** — o limiar que produz a conclusão do ciclo não tem base empírica. No silício é
 `min_stability = 0,60`; na capacidade é a margem de `0,20`. Nos dois casos, afrouxar o limiar é

@@ -7,6 +7,67 @@ artifact: CHANGELOG
 Registra mudanças de **código, corpus, priors e alegações**. Uma mudança de prior que altera
 uma recomendação é tão relevante quanto uma mudança de código, e por isso entra aqui.
 
+## [0.2.0] — 2026-08-15 — Primeira execução real: `G-101` e `G-102` parciais
+
+`tucano-2b4-instruct` Q4_K_M executado nas 96 tarefas do BR-Agent-Bench, em CPU, via llama.cpp
+b10435. É a primeira capacidade **medida** do eixo.
+
+### Resultado
+
+| Medida | Valor |
+|---|---:|
+| escore geral | **0,0 %** (0/96) |
+| chamadas de ferramenta emitidas | **0** |
+| tokens/s (geração, Q4, CPU) | 12,14 |
+| TTFT médio | 6,42 s |
+| tempo de modelo | 2 630 s |
+
+O modelo não erra a ferramenta — **nunca chega a chamar uma**. Toda trajetória termina no
+primeiro passo com um objeto JSON que tem a forma do contrato e valores de exemplo
+(`"ferramenta": "nome_da_ferramenta"` copiado literalmente). Ele descreve o protocolo em vez
+de executá-lo. Fora do protocolo, responde português normalmente.
+
+**A hipótese óbvia foi testada e rejeitada**: um exemplo demonstrado injetado no prompt
+(`G-112`, modo diagnóstico, 16 tarefas cobrindo as oito capacidades) manteve o escore em 0,0 %
+e as chamadas em zero.
+
+### Adicionado
+
+- `backends.py` — `llama-server` por HTTP, telemetria, prompt versionado, parser sem reparo.
+- `measurements.py` — execução real vira **evidência versionada** em `99_RELEASES/runs/`, com
+  hash dos pesos, runtime, quantização e versão de prompt. O ciclo reemite o assessment offline
+  a partir dela, preservando o `ADR-0006`.
+- `tucano-2b4-instruct` no corpus, ficha conferida na fonte (2 444 628 480 parâmetros).
+- `RB-102` — runbook de execução real, com o procedimento de diagnóstico de formato.
+- `C-108` como **conjectura** a partir de uma observação, com falsificadores declarados.
+
+### Encontrado no artefato publicado do modelo
+
+**O template de chat embutido no GGUF está errado** (`G-114`). Ele fecha `</instruction>` dentro
+do prompt; o modelo foi treinado para emitir essa tag. Medido:
+
+| Prompt | Saída |
+|---|---|
+| `<instruction>Q` | `</instruction>A capital da França é Paris…` |
+| `<instruction>Q</instruction>` | `FFQuala</</. A PerguntQualfQual…` |
+
+O tokenizer está correto e não depende de BOS. Consequência: toda ferramenta que aplique o
+template publicado recebe saída degenerada desse modelo.
+
+### Corrigido antes de medir
+
+- Harness enviava role `system`, que o template do modelo rejeita por exceção.
+- Prompt `v1` punha o contrato antes da lista de ferramentas, e o modelo **continuava a lista**
+  em vez de agir. `v2` move o contrato para o fim, colado à geração. Revisão feita antes de
+  qualquer execução completa e declarada em `PROMPT_VERSION`.
+- Terceira regra de coerência no portão de emissão: a seção 2 seguia afirmando "nenhuma ficha
+  foi conferida" depois de `G-108` fechar, porque a frase era fixa e o `Finding` era calculado.
+
+### Lacunas novas
+
+`G-112` (prompt zero-shot, nunca ablacionado), `G-113` (só Q4 executado), `G-114` (template do
+GGUF defeituoso).
+
 ## [0.1.1] — 2026-08-15 — `G-108` fechada, duas fichas corrigidas
 
 Primeira execução de `matlas registry verify` contra o Hub. **3 de 3 fichas conferidas**, com

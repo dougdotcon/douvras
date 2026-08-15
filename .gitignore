@@ -5,3 +5,7 @@
 .venv/
 build/
 dist/
+
+# Runtime e pesos locais: fora do versionamento (ADR-0006). Ver RB-102.
+.local/
+

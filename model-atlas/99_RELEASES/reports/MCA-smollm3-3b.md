@@ -1,8 +1,8 @@
 ---
 artifact: MODEL_CAPABILITY_ASSESSMENT
 model: smollm3-3b
-run_id: 20260815T004820Z
-generated_at: 2026-08-15T00:48:20+00:00
+run_id: 20260815T024411Z
+generated_at: 2026-08-15T02:44:11+00:00
 method: DOUVRAS 2.0
 cycle: C-002
 weakest_status: ASSUMPTION
@@ -19,7 +19,7 @@ evaluable: false
 
 **Ainda nao da para responder, e o motivo e verificavel.** Nao ha pesos locais para este modelo, portanto **nenhuma execucao real ocorreu** e **nenhuma capacidade foi medida**. Um assessment que respondesse mesmo assim estaria reportando o comportamento das sondas de calibracao como se fosse o do modelo.
 
-O que **sim** foi estabelecido neste ciclo esta na secao 9: o instrumento que fara a medicao foi verificado contra gabaritos e contraexemplos.
+O que **sim** foi estabelecido esta na secao 9: o instrumento que fara a medicao foi verificado contra gabaritos e contraexemplos.
 
 ## 2 · Ficha e proveniencia
 
@@ -36,7 +36,7 @@ O que **sim** foi estabelecido neste ciclo esta na secao 9: o instrumento que fa
 | pesos locais | **nao** |
 | fonte | https://huggingface.co/api/models/HuggingFaceTB/SmolLM3-3B |
 
-A contagem de parametros e **aproximada** (`A-101`): a fonte diz "cerca de", e transformar isso num inteiro exato seria inventar digitos. Nenhuma ficha deste corpus foi conferida contra o upstream — `G-108`, fechada por `matlas registry verify`.
+Ficha **conferida na fonte** com hash e data (`G-108` fechada): a contagem de parametros e a do checkpoint, nao a do nome comercial, e por isso entra como `OBSERVATION` em vez de `ASSUMPTION`.
 
 ## 3 · Memoria e quantizacao
 

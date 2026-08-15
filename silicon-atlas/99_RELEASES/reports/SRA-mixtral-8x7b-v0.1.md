@@ -1,8 +1,8 @@
 ---
 artifact: SILICON_READINESS_ASSESSMENT
 model: mixtral-8x7b-v0.1
-run_id: 20260815T004805Z
-generated_at: 2026-08-15T00:48:05+00:00
+run_id: 20260815T024441Z
+generated_at: 2026-08-15T02:44:41+00:00
 method: DOUVRAS 2.0
 cycle: C-001
 weakest_status: ASSUMPTION
