@@ -8,12 +8,15 @@
     "published_params": 3821079552,
     "hf_repo": "microsoft/Phi-3-mini-4k-instruct",
     "source_url": "https://huggingface.co/microsoft/Phi-3-mini-4k-instruct/resolve/main/config.json",
-    "provenance": "TRANSCRIBED_UNVERIFIED",
-    "sha256": null,
-    "note": "MHA (kv == heads) com head_dim 96, QKV e gate/up fundidos no checkpoint. A IR canonica desfaz a fusao: fusao e decisao de implementacao, nao de arquitetura."
+    "provenance": "FETCHED",
+    "sha256": "072d4df63228ef806a6b2b2f02a93f1d048ebd31584d0f61d1180aef36e5bcea",
+    "note": "MHA (kv == heads) com head_dim 96, QKV e gate/up fundidos no checkpoint. A IR canonica desfaz a fusao: fusao e decisao de implementacao, nao de arquitetura. `sliding_window` foi omitido na transcricao original e reintroduzido em 2026-08-15 pela verificacao upstream que fecha G-008 — ver correcao COR-001 em RETRACTIONS_AND_CORRECTIONS.",
+    "retrieved_at": "2026-08-15T00:39:46+00:00"
   },
   "config": {
-    "architectures": ["Phi3ForCausalLM"],
+    "architectures": [
+      "Phi3ForCausalLM"
+    ],
     "model_type": "phi3",
     "hidden_size": 3072,
     "intermediate_size": 8192,
@@ -26,6 +29,7 @@
     "rms_norm_eps": 1e-05,
     "rope_theta": 10000.0,
     "tie_word_embeddings": false,
+    "sliding_window": 2047,
     "torch_dtype": "bfloat16"
   }
 }

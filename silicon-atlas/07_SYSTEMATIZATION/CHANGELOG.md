@@ -7,6 +7,40 @@ artifact: CHANGELOG
 Registra mudanças de **código, priors e alegações**. Uma mudança de prior que altera uma
 recomendação é tão relevante quanto uma mudança de código, e por isso entra aqui.
 
+## [0.2.2] — 2026-08-15 — `G-008` parcialmente fechada, e um erro de transcrição encontrado
+
+Primeira execução de `atlas registry verify` contra o upstream. **5 dos 9 configs conferidos**
+com hash e data; os 4 restantes (`meta-llama/*`, `google/gemma-2-9b`) exigem aceite de licença.
+
+### Corrigido
+
+- **COR-001** — `phi-3-mini-4k` estava sem `sliding_window: 2047`. O modelo usa atenção com
+  janela deslizante e a IR o modelava com atenção quadrática completa. Ver
+  [RETRACTIONS_AND_CORRECTIONS](../00_GOVERNANCE/RETRACTIONS_AND_CORRECTIONS.md).
+- `verify_spec` comparava a **união das chaves** dos dois `config.json`. Como o corpus é uma
+  transcrição deliberadamente parcial (`D-006`), qualquer campo não transcrito contava como
+  divergência e `matches` nunca podia ser verdadeiro — uma verificação que estruturalmente não
+  passa não fecha lacuna, só produz a aparência de rigor. Agora normaliza os dois lados e
+  compara os `ModelSpec` resultantes, que é o que a IR de fato consome.
+
+### Alterado
+
+- `atlas registry verify` sem modelo nomeado confere o corpus inteiro; `--write` grava a
+  proveniência (`FETCHED`, hash, data) no corpus, que é o que de fato move `G-008`.
+- `fetch_hf_config` lê `HF_TOKEN`/`HUGGINGFACE_HUB_TOKEN` ou o token em disco, para que os
+  modelos com licença restrita possam ser conferidos sem mudar código.
+
+### Efeito medido
+
+| | Antes | Depois |
+|---|---:|---:|
+| dívida de evidência média | 38,6 % | **35,0 %** |
+| SRS dos 5 conferidos | — | **+0,025** cada |
+| `phi-3` decode | 320,1 tok/s | 324,1 tok/s |
+
+A ordem do ranking e todas as conclusões do ciclo permanecem: região endurecível vazia, teto de
+Amdahl 1,00×, `F1`/`F2`/`F3` disparando como antes.
+
 ## [0.2.1] — 2026-08-14 — Migração para o monorepo DOUVRAS
 
 Mudança **estrutural**, sem alteração de resultado. O contrato epistêmico saiu de

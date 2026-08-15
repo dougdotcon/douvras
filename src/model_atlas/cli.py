@@ -39,7 +39,14 @@ from .capability import CapabilityFingerprint
 from .failure import FailureAtlas
 from .instrument import MIN_TASKS_PER_CAPABILITY, evaluate_instrument, probe_expectations
 from .profiler import InferenceProfile, MemoryBudget
-from .registry import Registry, corpus_provenance, weights_available
+from .registry import (
+    Registry,
+    UpstreamUnavailable,
+    corpus_provenance,
+    record_verification,
+    verify_spec,
+    weights_available,
+)
 from .runner import PROBES, run_suite
 from .tasks import TaskSet
 
@@ -75,12 +82,39 @@ def cmd_registry(args) -> int:
         print(json.dumps(reg[args.model].as_dict(), indent=2, ensure_ascii=False))
         return 0
     if args.sub == "verify":
+        # Sem modelo nomeado, confere o corpus inteiro: G-108 fala do corpus, nao de um item.
+        alvos = [reg[args.model]] if args.model else list(reg)
+        ok, divergiram, falharam = [], [], []
+        print(f"{'modelo':<18}{'veredicto':<14}{'params upstream':>16}  descobertos")
+        for spec in alvos:
+            try:
+                r = verify_spec(spec)
+            except (ValueError, PermissionError, UpstreamUnavailable) as exc:
+                falharam.append((spec.id, str(exc)))
+                print(f"{spec.id:<18}{'SEM UPSTREAM':<14}{'—':>16}  {exc}")
+                continue
+            p = f"{r['params_upstream']:,}" if r["params_upstream"] else "—"
+            print(
+                f"{spec.id:<18}{'CONFERE' if r['matches'] else 'DIVERGE':<14}{p:>16}  "
+                f"{', '.join(f'{k}={v}' for k, v in r['discovered'].items()) or '—'}"
+            )
+            (ok if r["matches"] else divergiram).append(r)
+            if r["matches"] and args.write:
+                record_verification(spec.id, r, Path(args.models) if args.models else None)
+
+        for r in divergiram:
+            print(f"\n{r['model']} — campos que divergem da fonte:")
+            print(json.dumps(r["divergences"], indent=2, ensure_ascii=False))
+
         print(
-            "verificacao de proveniencia exige rede e o extra [run].\n"
-            "Enquanto nao rodar, G-108 fica aberta e todo derivado para em CONDITIONAL_RESULT.\n"
-            "Nao ha modo offline honesto: conferir uma ficha contra a fonte exige a fonte."
+            f"\n{len(ok)} conferido(s), {len(divergiram)} divergente(s), "
+            f"{len(falharam)} sem verificacao"
         )
-        return 2
+        if args.write and ok:
+            print(f"proveniencia gravada para {len(ok)} modelo(s) — fecha G-108")
+        elif ok and not args.write:
+            print("use --write para gravar a proveniencia no corpus e fechar G-108")
+        return 1 if (divergiram or falharam) else 0
     return 1
 
 
@@ -305,6 +339,11 @@ def build_parser() -> argparse.ArgumentParser:
     r = sub.add_parser("registry", help="modelos registrados e proveniencia")
     r.add_argument("sub", choices=["list", "show", "verify"])
     r.add_argument("model", nargs="?")
+    r.add_argument(
+        "--write",
+        action="store_true",
+        help="grava a proveniencia conferida no corpus (fecha G-108)",
+    )
     r.set_defaults(fn=cmd_registry)
 
     t = sub.add_parser("tasks", help="corpus de tarefas")

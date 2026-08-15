@@ -1,8 +1,8 @@
 ---
 artifact: MODEL_CAPABILITY_ASSESSMENT
 model: tucano2-0.5b
-run_id: 20260815T000252Z
-generated_at: 2026-08-15T00:02:52+00:00
+run_id: 20260815T004820Z
+generated_at: 2026-08-15T00:48:20+00:00
 method: DOUVRAS 2.0
 cycle: C-002
 weakest_status: ASSUMPTION
@@ -29,12 +29,12 @@ O que **sim** foi estabelecido neste ciclo esta na secao 9: o instrumento que fa
 | repositorio | `Polygl0t/Tucano2-qwen-0.5B-Base` |
 | revisao | `main` |
 | familia | tucano |
-| parametros | ≈ 0.5 B |
-| contexto | — |
-| licenca | — |
-| proveniencia | `DOCUMENT_SECONDARY` |
+| parametros | ≈ 0.4908 B |
+| contexto | 4096 |
+| licenca | apache-2.0 |
+| proveniencia | `UPSTREAM_VERIFIED` |
 | pesos locais | **nao** |
-| fonte | docs/01_TESE_LABORATORIO_DE_DADOS_E_EVALS.md secao 5.1 |
+| fonte | https://huggingface.co/api/models/Polygl0t/Tucano2-qwen-0.5B-Base |
 
 A contagem de parametros e **aproximada** (`A-101`): a fonte diz "cerca de", e transformar isso num inteiro exato seria inventar digitos. Nenhuma ficha deste corpus foi conferida contra o upstream — `G-108`, fechada por `matlas registry verify`.
 
@@ -44,11 +44,11 @@ Maquina de referencia: **16 GB de RAM, sem GPU dedicada**.
 
 | Quantizacao | Pesos | Com folga de runtime | Cabe? | Qualidade |
 |---|---:|---:|:---:|:---:|
-| `f16` | 1.00 GB | 1.20 GB | sim | — |
-| `q8` | 0.53 GB | 0.64 GB | sim | — |
-| `q6` | 0.41 GB | 0.49 GB | sim | — |
+| `f16` | 0.98 GB | 1.18 GB | sim | — |
+| `q8` | 0.52 GB | 0.62 GB | sim | — |
+| `q6` | 0.40 GB | 0.48 GB | sim | — |
 | `q5` | 0.34 GB | 0.41 GB | sim | — |
-| `q4` | 0.28 GB | 0.34 GB | sim | — |
+| `q4` | 0.27 GB | 0.33 GB | sim | — |
 | `q3` | 0.22 GB | 0.26 GB | sim | — |
 
 A coluna **Qualidade** esta vazia porque nenhuma perplexidade foi medida (`G-103`).
@@ -198,14 +198,14 @@ Lacunas abertas mantem todo derivado em `CONDITIONAL_RESULT` ou abaixo. Elo mais
 
 | Resultado | Valor | Status | Premissas | Lacunas |
 |---|---|---|---|---|
-| `proveniencia_verificada` | 0 | `CONDITIONAL_RESULT` | — | G-108 |
-| `parametros` | 500000000 parametros | `ASSUMPTION` | A-101 | — |
-| `footprint_pesos.f16` | 1 GB | `ASSUMPTION` | A-101, A-102 | — |
-| `footprint_pesos.q8` | 0.53 GB | `ASSUMPTION` | A-101, A-102 | — |
-| `footprint_pesos.q6` | 0.41 GB | `ASSUMPTION` | A-101, A-102 | — |
-| `footprint_pesos.q5` | 0.345 GB | `ASSUMPTION` | A-101, A-102 | — |
-| `footprint_pesos.q4` | 0.28 GB | `ASSUMPTION` | A-101, A-102 | — |
-| `footprint_pesos.q3` | 0.22 GB | `ASSUMPTION` | A-101, A-102 | — |
+| `proveniencia_verificada` | 1 | `OBSERVATION` | — | — |
+| `parametros` | 490800000 parametros | `OBSERVATION` | — | — |
+| `footprint_pesos.f16` | 0.982 GB | `ASSUMPTION` | A-102 | — |
+| `footprint_pesos.q8` | 0.52 GB | `ASSUMPTION` | A-102 | — |
+| `footprint_pesos.q6` | 0.402 GB | `ASSUMPTION` | A-102 | — |
+| `footprint_pesos.q5` | 0.339 GB | `ASSUMPTION` | A-102 | — |
+| `footprint_pesos.q4` | 0.275 GB | `ASSUMPTION` | A-102 | — |
+| `footprint_pesos.q3` | 0.216 GB | `ASSUMPTION` | A-102 | — |
 | `quantizacoes_que_cabem` | ['f16', 'q8', 'q6', 'q5', 'q4', 'q3'] | `ASSUMPTION` | A-101, A-102 | — |
 | `ttft` | — *(ausencia declarada)* | `OPEN_GAP` | — | G-102 |
 | `tokens_por_segundo` | — *(ausencia declarada)* | `OPEN_GAP` | — | G-102 |
@@ -228,4 +228,4 @@ Lacunas abertas mantem todo derivado em `CONDITIONAL_RESULT` ou abaixo. Elo mais
 | `modos_de_falha_sem_sonda` | [] | `COMPUTATIONAL_EVIDENCE` | — | — |
 | `css_alvo` | — *(ausencia declarada)* | `OPEN_GAP` | — | G-101 |
 
-Elo mais fraco do conjunto: **`ASSUMPTION`**. Divida de evidencia: **47.1%**.
+Elo mais fraco do conjunto: **`ASSUMPTION`**. Divida de evidencia: **41.2%**.

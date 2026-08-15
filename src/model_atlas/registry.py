@@ -19,11 +19,12 @@ Por isso:
 
 from __future__ import annotations
 
+import datetime as _dt
 import json
 from dataclasses import dataclass
 from enum import StrEnum
 from pathlib import Path
-from typing import Any, Iterator, Sequence
+from typing import Any, Iterator, Mapping, Sequence
 
 from douvras_core.paths import project_root
 from douvras_core.status import Finding, Status
@@ -146,6 +147,134 @@ class Registry:
             if s.id == model_id:
                 return s
         raise KeyError(model_id)
+
+
+# --------------------------------------------------------------------------------------
+# Verificacao upstream (exige rede; fecha G-108)
+# --------------------------------------------------------------------------------------
+
+HF_API_URL = "https://huggingface.co/api/models/{repo}"
+HF_CONFIG_URL = "https://huggingface.co/{repo}/resolve/main/config.json"
+
+#: Erro relativo tolerado entre `params_b` declarado e a contagem real do checkpoint.
+#: A ficha vem de documento que diz "cerca de"; exigir igualdade exata reprovaria uma
+#: transcricao honesta. 5 % separa "arredondado" de "errado".
+PARAM_TOLERANCE = 0.05
+
+
+class UpstreamUnavailable(RuntimeError):
+    """O repositorio nao respondeu, nao existe, ou exige credencial."""
+
+
+def _fetch_json(url: str, timeout: float = 20.0) -> tuple[dict[str, Any], str]:
+    import urllib.error
+    import urllib.request
+
+    from silicon_atlas.registry import hf_token, sha256_of
+
+    headers = {"User-Agent": "douvras-model-atlas/0.1"}
+    tok = hf_token()
+    if tok:
+        headers["Authorization"] = f"Bearer {tok}"
+    try:
+        with urllib.request.urlopen(  # noqa: S310 - host fixo
+            urllib.request.Request(url, headers=headers), timeout=timeout
+        ) as resp:
+            text = resp.read().decode("utf-8")
+    except urllib.error.HTTPError as exc:
+        raise UpstreamUnavailable(f"HTTP {exc.code} em {url}") from exc
+    except OSError as exc:
+        raise UpstreamUnavailable(f"rede indisponivel: {exc}") from exc
+    return json.loads(text), sha256_of(text)
+
+
+def verify_spec(spec: HFModelSpec) -> dict[str, Any]:
+    """Confronta a ficha local com o Hub.
+
+    A ficha deste corpus veio de documento secundario e tem campos deliberadamente nulos
+    (`D-108`): preencher `context_len` ou `license` por plausibilidade seria inventar
+    proveniencia. Entao a verificacao faz duas coisas distintas, e o resultado as separa:
+
+    - **confere** os campos que a ficha afirma — divergencia aqui e erro de transcricao;
+    - **descobre** os campos que a ficha deixou nulos — nao e divergencia, e a lacuna fechando.
+
+    `params_b` e comparado com tolerancia (`PARAM_TOLERANCE`), porque a fonte diz "cerca de"
+    e exigir igualdade exata reprovaria uma transcricao correta.
+    """
+    if spec.provenance is Provenance.CLIENT_SUPPLIED:
+        raise PermissionError(
+            f"{spec.id}: modelo de cliente nao vai para servico externo (THREAT_MODEL S-101)."
+        )
+    if not spec.repo:
+        raise ValueError(f"{spec.id}: sem `repo` declarado no corpus.")
+
+    info, digest = _fetch_json(HF_API_URL.format(repo=spec.repo))
+    try:
+        config, _ = _fetch_json(HF_CONFIG_URL.format(repo=spec.repo))
+    except UpstreamUnavailable:
+        config = {}
+
+    params_up = (info.get("safetensors") or {}).get("total")
+    archs = (info.get("config") or {}).get("architectures") or config.get("architectures") or []
+    upstream = {
+        "params_b": round(params_up / 1e9, 4) if params_up else None,
+        "architecture": archs[0] if archs else None,
+        "context_len": config.get("max_position_embeddings"),
+        "license": (info.get("cardData") or {}).get("license") or "",
+    }
+
+    divergencias: dict[str, Any] = {}
+    descobertos: dict[str, Any] = {}
+    for campo, valor_up in upstream.items():
+        local = getattr(spec, campo)
+        vazio = local in (None, "")
+        if valor_up in (None, ""):
+            continue
+        if vazio:
+            descobertos[campo] = valor_up
+        elif campo == "params_b":
+            erro = abs(float(local) - float(valor_up)) / float(valor_up)
+            if erro > PARAM_TOLERANCE:
+                divergencias[campo] = {
+                    "local": local, "upstream": valor_up, "erro_relativo": round(erro, 4)
+                }
+        elif str(local) != str(valor_up):
+            divergencias[campo] = {"local": local, "upstream": valor_up}
+
+    return {
+        "model": spec.id,
+        "repo": spec.repo,
+        "url": HF_API_URL.format(repo=spec.repo),
+        "sha256": digest,
+        "retrieved_at": _dt.datetime.now(_dt.UTC).isoformat(timespec="seconds"),
+        "matches": not divergencias,
+        "divergences": divergencias,
+        "discovered": descobertos,
+        "params_upstream": params_up,
+    }
+
+
+def record_verification(
+    model_id: str, result: Mapping[str, Any], directory: Path | None = None
+) -> Path:
+    """Grava a ficha conferida no corpus: proveniencia, hash, data e campos descobertos.
+
+    `G-108` fala do **corpus**; ela so fecha quando o corpus registra a conferencia. Recusa
+    gravar se a verificacao divergiu — registrar proveniencia de uma conferencia reprovada
+    seria pior que nao registrar nada.
+    """
+    if not result.get("matches"):
+        raise ValueError(f"{model_id}: verificacao divergiu; proveniencia nao registrada")
+    caminho = Path(directory or MODELS_DIR) / f"{model_id}.json"
+    doc = json.loads(caminho.read_text(encoding="utf-8"))
+    bloco = doc.setdefault("douvras", {})
+    bloco.update(result.get("discovered") or {})
+    bloco["provenance"] = str(Provenance.UPSTREAM_VERIFIED)
+    bloco["source"] = result["url"]
+    bloco["sha256"] = result["sha256"]
+    bloco["retrieved_at"] = result["retrieved_at"]
+    caminho.write_text(json.dumps(doc, indent=2, ensure_ascii=False) + "\n", encoding="utf-8")
+    return caminho
 
 
 def corpus_provenance(reg: Registry) -> Finding:

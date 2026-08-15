@@ -37,6 +37,36 @@ agregado como decisão.
 
 ---
 
+## COR-101 e COR-102 — duas fichas do corpus estavam erradas
+
+Encontradas ao fechar `G-108` em 2026-08-15, pela primeira execução de
+`matlas registry verify` contra o Hub. As duas passaram despercebidas por transcrição de
+documento secundário, e nenhuma delas seria detectável offline.
+
+| # | Modelo | Campo | Ficha transcrita | Fonte | Efeito |
+|---|---|---|---|---|---|
+| **COR-101** | `tucano2-0.5b` | `architecture` | `Qwen2ForCausalLM` | `Qwen3ForCausalLM` | inferido do nome do repositório, não lido do checkpoint |
+| **COR-101** | `tucano2-0.5b` | `params_b` | 0,5 | 0,4908 | dentro da tolerância; corrigido para o valor exato |
+| **COR-102** | `qwen3.5-0.8b` | `params_b` | 0,8 | **0,8734** | erro de **8,4 %**, acima da tolerância de 5 % |
+
+**Por que `COR-102` importa.** `0,8B` é o nome comercial; o checkpoint tem 873 438 784
+parâmetros. O orçamento de memória multiplica essa contagem por bytes-por-parâmetro, então o
+footprint publicado estava 8,4 % abaixo do real em toda quantização — para menos, que é a
+direção perigosa quando a pergunta é *"cabe em 16 GB?"*.
+
+**O que a verificação também descobriu.** Campos que a ficha deixava nulos por honestidade
+(`D-108`) agora vêm da fonte: `license` nos três, `context_len` em `tucano2-0.5b` (4096) e
+`smollm3-3b` (65536), e a arquitetura de `qwen3.5-0.8b` —
+`Qwen3_5ForConditionalGeneration`, que não é uma classe puramente causal e merece atenção
+antes de ser tratada como baseline de agente de texto.
+
+**Consequência aplicada.** `params_b` conferido deixa de carregar `A-101`: o `Finding`
+`parametros` sai como `OBSERVATION` em vez de `ASSUMPTION` para modelo verificado, e a dívida
+de evidência do assessment cai. `G-108` fechada; a linha correspondente na dívida de evidência
+foi quitada.
+
+---
+
 ## Correções de percurso
 
 Duas coisas foram corrigidas durante o ciclo, antes de qualquer publicação. Ficam registradas

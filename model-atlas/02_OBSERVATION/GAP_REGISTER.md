@@ -22,7 +22,7 @@ lacuna é sempre lacuna *de alguma coisa*.
 | G-105 | O limiar de discriminação de 0,20 do `F3` não tem base empírica | Replicação contra benchmarks públicos de agente com desfecho conhecido | veredicto de `F3`; portão V3 | OPEN |
 | G-106 | Dificuldade das tarefas é declarada por autoria, não calibrada por desempenho | Curva de acerto por dificuldade com ao menos três modelos reais | qualquer leitura de "tarefa difícil" | OPEN |
 | G-107 | O corpus é sintético: nenhuma tarefa veio de tráfego real de agente em produção | Traços de workload de cliente, anonimizados | validade externa do benchmark inteiro | OPEN |
-| G-108 | Fichas do corpus de modelos foram transcritas de documento secundário, não da fonte | `matlas registry verify` contra o Hub, com revisão fixada | `A-101`; todo número derivado de contagem de parâmetros | OPEN |
+| G-108 | Fichas do corpus de modelos foram transcritas de documento secundário, não da fonte | `matlas registry verify` contra o Hub, com revisão fixada | `A-101`; todo número derivado de contagem de parâmetros | **FECHADA** em 2026-08-15 — 3/3 conferidas com hash e data; duas divergências corrigidas ([COR-101, COR-102](../00_GOVERNANCE/RETRACTIONS_AND_CORRECTIONS.md)) |
 | G-109 | O alvo do subconjunto ótimo das tarefas de numeracia é calculado pelo mesmo autor do grader | Verificação independente do ótimo declarado em amostra | tarefas `BRAB-NUM-*` | OPEN |
 | G-110 | Sem revisão adversarial externa (§6.7): autor e auditor são o mesmo agente | Revisão por pessoa que não construiu o artefato | Portão V3 | OPEN |
 | G-111 | O conjunto-alvo de cada sonda é definido pelos modos declarados da tarefa, mais grosso que o que a sonda de fato ataca | Rotular por passo deformado, não por modo declarado | leitura de `probe_sensitivity`; diagnóstico de `CE-101` | OPEN |
@@ -33,6 +33,6 @@ lacuna é sempre lacuna *de alguma coisa*.
 |---|---|---|---|---|
 | Corpus sintético gerado por template | A-103 | **Alto**: mede o gerador, não o mundo | G-107 | ciclo C-003 |
 | Priors de capacidade fixos | A-104 | **Alto**: entram direto no alvo de dataset | G-104 | ciclo C-003 |
-| Contagem de parâmetros aproximada | A-101 | Médio: desloca o orçamento de memória | G-108 | ciclo C-003 |
+| ~~Contagem de parâmetros aproximada~~ | ~~A-101~~ | — | **quitada** em 2026-08-15 | — |
 | Bytes por parâmetro por quantização | A-102 | Médio: desloca o "cabe?" | G-102 | ciclo C-003 |
 | Limiar de discriminação de 0,20 | A-105 | **Alto**: decide o veredicto de F3 | G-105 | ciclo C-003 |

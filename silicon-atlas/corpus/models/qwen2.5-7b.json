@@ -8,12 +8,15 @@
     "published_params": 7615616512,
     "hf_repo": "Qwen/Qwen2.5-7B",
     "source_url": "https://huggingface.co/Qwen/Qwen2.5-7B/resolve/main/config.json",
-    "provenance": "TRANSCRIBED_UNVERIFIED",
-    "sha256": null,
-    "note": "Qwen2 usa bias em Q/K/V e nao em O; head_dim 128 com hidden 3584 (h*head_dim == d). GQA agressiva (28:4)."
+    "provenance": "FETCHED",
+    "sha256": "267ce68584c5f24c3b267d934db2de68dd21d1ca677fb78ed809eb60067f7642",
+    "note": "Qwen2 usa bias em Q/K/V e nao em O; head_dim 128 com hidden 3584 (h*head_dim == d). GQA agressiva (28:4).",
+    "retrieved_at": "2026-08-15T00:39:46+00:00"
   },
   "config": {
-    "architectures": ["Qwen2ForCausalLM"],
+    "architectures": [
+      "Qwen2ForCausalLM"
+    ],
     "model_type": "qwen2",
     "hidden_size": 3584,
     "intermediate_size": 18944,

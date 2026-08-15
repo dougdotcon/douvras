@@ -17,7 +17,7 @@ Lacuna aberta não impede o ciclo — impede que o resultado seja promovido acim
 | G-005 | NRE por nó tecnológico vem de faixas públicas | Cotação de foundry / design house | A-006, break-even | OPEN |
 | G-006 | Taxa de obsolescência extrapola histórico curto (≈3 anos de corpus) | Série mais longa + registro de rupturas arquiteturais | A-007, risco O do SRS | OPEN |
 | G-007 | Área é estimada por constantes, não por síntese | Síntese Yosys/OpenROAD do bloco candidato em PDK aberta | A-008, PPA | OPEN |
-| G-008 | Configs do corpus foram transcritas, não baixadas da fonte | `atlas registry verify` com hash upstream | A-009, todo resultado numérico | OPEN |
+| G-008 | Configs do corpus foram transcritas, não baixadas da fonte | `atlas registry verify` com hash upstream | A-009, todo resultado numérico | **PARCIAL** — 5/9 conferidos com hash e data em 2026-08-15; uma divergência real corrigida ([COR-001](../00_GOVERNANCE/RETRACTIONS_AND_CORRECTIONS.md)). Os 4 restantes (`meta-llama/*`, `google/gemma-2-9b`) exigem aceite de licença e token |
 | G-009 | Sem telemetria de produção: distribuição real de S/T/batch é assumida | Traces de workload de cliente | V (volume) do LHS | OPEN |
 | G-010 | Sem revisão adversarial externa (§6.7): autor e auditor são o mesmo | Revisão por pessoa que não construiu o artefato | Portão V3 | OPEN |
 | G-011 | Pesos do LHS/SRS nunca calibrados; 70 % do peso é inerte na comparação intra-modelo (ver [CE-001](../04_VALIDATION/COUNTEREXAMPLES/CE-001-lhs-nao-discrimina.md)) | Três casos com desfecho conhecido (bloco endurecido, ganho medido) | C-006, qualquer priorização entre papéis | OPEN |

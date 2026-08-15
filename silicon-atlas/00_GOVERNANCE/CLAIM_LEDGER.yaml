@@ -14,6 +14,10 @@
   - RUN:20260814T231520Z
   - RUN:20260814T235428Z
   - RUN:20260815T000030Z
+  - RUN:20260815T003828Z
+  - RUN:20260815T004426Z
+  - RUN:20260815T004530Z
+  - RUN:20260815T004803Z
   falsifiers:
   - cobertura de padrao maxima abaixo de 0.80 no corpus de tres familias
   - padrao so reaparece dentro da mesma familia (cobertura cruzada zero)
@@ -36,6 +40,10 @@
   - RUN:20260814T231520Z
   - RUN:20260814T235428Z
   - RUN:20260815T000030Z
+  - RUN:20260815T003828Z
+  - RUN:20260815T004426Z
+  - RUN:20260815T004530Z
+  - RUN:20260815T004803Z
   falsifiers:
   - nenhuma classe de operador ultrapassa 40 por cento do tempo em nenhuma fase
   - ranking de classes muda entre versoes da mesma familia
@@ -57,6 +65,10 @@
   - RUN:20260814T231520Z
   - RUN:20260814T235428Z
   - RUN:20260815T000030Z
+  - RUN:20260815T003828Z
+  - RUN:20260815T004426Z
+  - RUN:20260815T004530Z
+  - RUN:20260815T004803Z
   falsifiers:
   - intensidade aritmetica media em decode acima do ponto de inflexao do dispositivo
   owner: research
@@ -106,6 +118,10 @@
   - RUN:20260814T231520Z
   - RUN:20260814T235428Z
   - RUN:20260815T000030Z
+  - RUN:20260815T003828Z
+  - RUN:20260815T004426Z
+  - RUN:20260815T004530Z
+  - RUN:20260815T004803Z
   falsifiers:
   - top-1 troca em mais de 5 por cento das amostras de perturbacao
   owner: engineering
@@ -130,6 +146,10 @@
   - RUN:20260814T231520Z
   - RUN:20260814T235428Z
   - RUN:20260815T000030Z
+  - RUN:20260815T003828Z
+  - RUN:20260815T004426Z
+  - RUN:20260815T004530Z
+  - RUN:20260815T004803Z
   falsifiers:
   - erro acima de 5 por cento em qualquer modelo do corpus (F5, invalida tudo a jusante)
   owner: engineering

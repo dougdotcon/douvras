@@ -1,8 +1,8 @@
 ---
 artifact: SILICON_READINESS_ASSESSMENT
 model: qwen2.5-14b
-run_id: 20260815T000033Z
-generated_at: 2026-08-15T00:00:33+00:00
+run_id: 20260815T004805Z
+generated_at: 2026-08-15T00:48:05+00:00
 method: DOUVRAS 2.0
 cycle: C-001
 weakest_status: OPEN_GAP
@@ -49,7 +49,7 @@ Status da afirmacao: `OPEN_GAP` (elo mais fraco da cadeia de evidencia).
 - `A-006/A-008` — custos de mascara, wafer e densidade de area sao faixas publicas
 - `A-007` — taxa de mudanca futura extrapola o historico curto do corpus
 
-Lacunas abertas que limitam o status de tudo acima: `G-001`, `G-002`, `G-003`, `G-004`, `G-006`, `G-008`, `G-009`
+Lacunas abertas que limitam o status de tudo acima: `G-001`, `G-002`, `G-003`, `G-004`, `G-006`, `G-009`
 
 ## 5. Criterios de falha (declarados antes da execucao)
 
@@ -158,7 +158,7 @@ Isto **e** o resultado: para qwen2.5-14b, o bloco que domina o custo (mlp, 23.8%
 
 ### Silicon Readiness Score
 
-**SRS = 0.222** (OPEN_GAP) -> banda **software**
+**SRS = 0.247** (OPEN_GAP) -> banda **software**
 
 | Fator | Valor | Peso | Contribuicao | Status |
 |---|---|---|---|---|
@@ -167,7 +167,7 @@ Isto **e** o resultado: para qwen2.5-14b, o bloco que domina o custo (mlp, 23.8%
 | T — throughput | 0.667 | +0.15 | +0.1000 | `ASSUMPTION` |
 | P — perf_per_watt | 0.000 | +0.15 | +0.0000 | `CONDITIONAL_RESULT` |
 | Q — low_precision | 0.688 | +0.10 | +0.0688 | `ASSUMPTION` |
-| D — data_availability | 0.750 | +0.10 | +0.0750 | `ASSUMPTION` |
+| D — data_availability | 1.000 | +0.10 | +0.1000 | `OBSERVATION` |
 | C — codesign | 1.000 | +0.10 | +0.1000 | `MODEL` |
 | R — revenue_potential | 0.000 | +0.10 | +0.0000 | `CONDITIONAL_RESULT` |
 | O — obsolescence_risk | 1.000 | -0.15 | -0.1500 | `OPEN_GAP` |
@@ -186,7 +186,7 @@ Nenhum bloco exato deste modelo reaparece em outra familia do corpus (alcance ma
 Perturbando os pesos em +-20% (2,000 amostras):
 top-1 estavel em **79.0%** das amostras, top-3 em
 100.0%, banda de decisao do SRS estavel em
-100.0%. Fator dominante: `R`.
+97.1%. Fator dominante: `R`.
 
 Dispersao dos scores: 0.1414. Largura do ruido induzido pelos pesos:
 0.0268. **Diagnostico: score NAO discrimina: entre os 6 candidatos que disputam a primeira posicao, 70% do peso esta em fatores identicos; a margem (0.0030) e menor que o ruido (0.0268).**
@@ -290,7 +290,7 @@ _Sem transicoes de versao no corpus para esta familia._
 
 - Modelo: `qwen2.5-14b`, familia `qwen`, licenca `apache-2.0`
 - Fonte da configuracao: https://huggingface.co/Qwen/Qwen2.5-14B/resolve/main/config.json
-- Status de proveniencia: `TRANSCRIBED_UNVERIFIED` (lacuna G-008 aberta)
+- Status de proveniencia: `FETCHED`
 - Parametros derivados da IR: 14,770,033,664 | publicados: 14,770,033,664
 - Baseline de hardware: `h100-sxm` — picos densos de datasheet do fabricante; eficiencia e custo assumidos
 - Pesos de score: v1.0 (UNCALIBRATED — nenhum caso real de tape-out alimentou estes pesos ainda)
@@ -300,7 +300,7 @@ _Sem transicoes de versao no corpus para esta familia._
 
 | Afirmacao | Valor | Status | Lacunas |
 |---|---|---|---|
-| `qwen2.5-14b.params` | 14770033664 params | `ASSUMPTION` | G-001, G-008 |
+| `qwen2.5-14b.params` | 14770033664 params | `MODEL` | G-001 |
 | `qwen2.5-14b.serving.decode_time_share` | 0.9804 fracao do tempo de requisicao | `CONDITIONAL_RESULT` | G-003, G-009 |
 | `qwen2.5-14b.serving.energy_per_token` | 12.29 J/token gerado | `CONDITIONAL_RESULT` | G-003, G-004, G-009 |
 | `qwen2.5-14b.decode.tokens_per_s` | 94.08 tok/s | `CONDITIONAL_RESULT` | G-003 |
@@ -317,7 +317,7 @@ _Sem transicoes de versao no corpus para esta familia._
 | `economics.breakeven_years.p50` | — anos | `OPEN_GAP` | G-001 |
 | `economics.p_breakeven_before_obsolescence` | — probabilidade | `OPEN_GAP` | G-001 |
 | `economics.die_area_mm2.p50` | — mm2 | `OPEN_GAP` | G-001 |
-| `SRS.qwen2.5-14b` | 0.2224 score SRS | `OPEN_GAP` | G-001, G-002, G-003, G-006, G-008, G-009 |
+| `SRS.qwen2.5-14b` | 0.2474 score SRS | `OPEN_GAP` | G-001, G-002, G-003, G-006, G-009 |
 | `readiness.rank_stability` | 0.7905 fracao das amostras com mesmo top-1 | `OPEN_GAP` | G-001, G-002, G-003, G-006 |
 | `stability.qwen.exact` | — fracao de blocos preservados | `OPEN_GAP` | G-006 |
 

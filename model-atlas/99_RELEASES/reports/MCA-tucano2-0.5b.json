@@ -1,18 +1,18 @@
 {
   "artifact": "MODEL_CAPABILITY_ASSESSMENT",
-  "run_id": "20260815T000252Z",
-  "generated_at": "2026-08-15T00:02:52+00:00",
+  "run_id": "20260815T004820Z",
+  "generated_at": "2026-08-15T00:48:20+00:00",
   "cycle": "C-002",
   "model": {
     "id": "tucano2-0.5b",
     "repo": "Polygl0t/Tucano2-qwen-0.5B-Base",
     "revision": "main",
     "family": "tucano",
-    "params_b": 0.5,
-    "architecture": "Qwen2ForCausalLM",
-    "context_len": null,
-    "license": "",
-    "provenance": "DOCUMENT_SECONDARY",
+    "params_b": 0.4908,
+    "architecture": "Qwen3ForCausalLM",
+    "context_len": 4096,
+    "license": "apache-2.0",
+    "provenance": "UPSTREAM_VERIFIED",
     "quantizations": [
       "f16",
       "q8",
@@ -21,7 +21,7 @@
       "q4"
     ],
     "weights_local": false,
-    "source": "docs/01_TESE_LABORATORIO_DE_DADOS_E_EVALS.md secao 5.1"
+    "source": "https://huggingface.co/api/models/Polygl0t/Tucano2-qwen-0.5B-Base"
   },
   "evaluable": false,
   "capabilities": {
@@ -215,8 +215,7 @@
     "open_gaps": [
       "G-101",
       "G-102",
-      "G-105",
-      "G-108"
+      "G-105"
     ],
     "assumptions": [
       "A-101",
@@ -236,46 +235,40 @@
       "capacidade.tool_selection",
       "css_alvo"
     ],
-    "evidence_debt": 0.4706,
+    "evidence_debt": 0.4118,
     "status_histogram": {
       "OPEN_GAP": 12,
-      "ASSUMPTION": 8,
+      "ASSUMPTION": 7,
       "COMPUTATIONAL_EVIDENCE": 7,
-      "CONDITIONAL_RESULT": 1,
-      "OBSERVATION": 1
+      "OBSERVATION": 3
     },
     "findings": [
       {
         "name": "proveniencia_verificada",
-        "value": 0.0,
+        "value": 1.0,
         "unit": "",
-        "status": "CONDITIONAL_RESULT",
+        "status": "OBSERVATION",
         "assumptions": [],
-        "gaps": [
-          "G-108"
-        ],
+        "gaps": [],
         "parents": [],
-        "note": "0/3 fichas conferidas na fonte"
+        "note": "3/3 fichas conferidas na fonte"
       },
       {
         "name": "parametros",
-        "value": 500000000,
+        "value": 490800000,
         "unit": "parametros",
-        "status": "ASSUMPTION",
-        "assumptions": [
-          "A-101"
-        ],
+        "status": "OBSERVATION",
+        "assumptions": [],
         "gaps": [],
         "parents": [],
-        "note": "aproximado — a fonte diz 'cerca de', nao um inteiro"
+        "note": "contagem do checkpoint, conferida no Hub (G-108 fechada)"
       },
       {
         "name": "footprint_pesos.f16",
-        "value": 1.0,
+        "value": 0.982,
         "unit": "GB",
         "status": "ASSUMPTION",
         "assumptions": [
-          "A-101",
           "A-102"
         ],
         "gaps": [],
@@ -287,11 +280,10 @@
       },
       {
         "name": "footprint_pesos.q8",
-        "value": 0.53,
+        "value": 0.52,
         "unit": "GB",
         "status": "ASSUMPTION",
         "assumptions": [
-          "A-101",
           "A-102"
         ],
         "gaps": [],
@@ -303,11 +295,10 @@
       },
       {
         "name": "footprint_pesos.q6",
-        "value": 0.41,
+        "value": 0.402,
         "unit": "GB",
         "status": "ASSUMPTION",
         "assumptions": [
-          "A-101",
           "A-102"
         ],
         "gaps": [],
@@ -319,11 +310,10 @@
       },
       {
         "name": "footprint_pesos.q5",
-        "value": 0.345,
+        "value": 0.339,
         "unit": "GB",
         "status": "ASSUMPTION",
         "assumptions": [
-          "A-101",
           "A-102"
         ],
         "gaps": [],
@@ -335,11 +325,10 @@
       },
       {
         "name": "footprint_pesos.q4",
-        "value": 0.28,
+        "value": 0.275,
         "unit": "GB",
         "status": "ASSUMPTION",
         "assumptions": [
-          "A-101",
           "A-102"
         ],
         "gaps": [],
@@ -351,11 +340,10 @@
       },
       {
         "name": "footprint_pesos.q3",
-        "value": 0.22,
+        "value": 0.216,
         "unit": "GB",
         "status": "ASSUMPTION",
         "assumptions": [
-          "A-101",
           "A-102"
         ],
         "gaps": [],

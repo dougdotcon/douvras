@@ -1,8 +1,8 @@
 ---
 artifact: MODEL_CAPABILITY_ASSESSMENT
 model: smollm3-3b
-run_id: 20260815T000252Z
-generated_at: 2026-08-15T00:02:52+00:00
+run_id: 20260815T004820Z
+generated_at: 2026-08-15T00:48:20+00:00
 method: DOUVRAS 2.0
 cycle: C-002
 weakest_status: ASSUMPTION
@@ -30,11 +30,11 @@ O que **sim** foi estabelecido neste ciclo esta na secao 9: o instrumento que fa
 | revisao | `main` |
 | familia | smollm |
 | parametros | ≈ 3.0 B |
-| contexto | — |
-| licenca | — |
-| proveniencia | `DOCUMENT_SECONDARY` |
+| contexto | 65536 |
+| licenca | apache-2.0 |
+| proveniencia | `UPSTREAM_VERIFIED` |
 | pesos locais | **nao** |
-| fonte | docs/01_TESE_LABORATORIO_DE_DADOS_E_EVALS.md secao 11 |
+| fonte | https://huggingface.co/api/models/HuggingFaceTB/SmolLM3-3B |
 
 A contagem de parametros e **aproximada** (`A-101`): a fonte diz "cerca de", e transformar isso num inteiro exato seria inventar digitos. Nenhuma ficha deste corpus foi conferida contra o upstream — `G-108`, fechada por `matlas registry verify`.
 
@@ -198,14 +198,14 @@ Lacunas abertas mantem todo derivado em `CONDITIONAL_RESULT` ou abaixo. Elo mais
 
 | Resultado | Valor | Status | Premissas | Lacunas |
 |---|---|---|---|---|
-| `proveniencia_verificada` | 0 | `CONDITIONAL_RESULT` | — | G-108 |
-| `parametros` | 3000000000 parametros | `ASSUMPTION` | A-101 | — |
-| `footprint_pesos.f16` | 6 GB | `ASSUMPTION` | A-101, A-102 | — |
-| `footprint_pesos.q8` | 3.18 GB | `ASSUMPTION` | A-101, A-102 | — |
-| `footprint_pesos.q6` | 2.46 GB | `ASSUMPTION` | A-101, A-102 | — |
-| `footprint_pesos.q5` | 2.07 GB | `ASSUMPTION` | A-101, A-102 | — |
-| `footprint_pesos.q4` | 1.68 GB | `ASSUMPTION` | A-101, A-102 | — |
-| `footprint_pesos.q3` | 1.32 GB | `ASSUMPTION` | A-101, A-102 | — |
+| `proveniencia_verificada` | 1 | `OBSERVATION` | — | — |
+| `parametros` | 3000000000 parametros | `OBSERVATION` | — | — |
+| `footprint_pesos.f16` | 6 GB | `ASSUMPTION` | A-102 | — |
+| `footprint_pesos.q8` | 3.18 GB | `ASSUMPTION` | A-102 | — |
+| `footprint_pesos.q6` | 2.46 GB | `ASSUMPTION` | A-102 | — |
+| `footprint_pesos.q5` | 2.07 GB | `ASSUMPTION` | A-102 | — |
+| `footprint_pesos.q4` | 1.68 GB | `ASSUMPTION` | A-102 | — |
+| `footprint_pesos.q3` | 1.32 GB | `ASSUMPTION` | A-102 | — |
 | `quantizacoes_que_cabem` | ['f16', 'q8', 'q6', 'q5', 'q4', 'q3'] | `ASSUMPTION` | A-101, A-102 | — |
 | `ttft` | — *(ausencia declarada)* | `OPEN_GAP` | — | G-102 |
 | `tokens_por_segundo` | — *(ausencia declarada)* | `OPEN_GAP` | — | G-102 |
@@ -228,4 +228,4 @@ Lacunas abertas mantem todo derivado em `CONDITIONAL_RESULT` ou abaixo. Elo mais
 | `modos_de_falha_sem_sonda` | [] | `COMPUTATIONAL_EVIDENCE` | — | — |
 | `css_alvo` | — *(ausencia declarada)* | `OPEN_GAP` | — | G-101 |
 
-Elo mais fraco do conjunto: **`ASSUMPTION`**. Divida de evidencia: **47.1%**.
+Elo mais fraco do conjunto: **`ASSUMPTION`**. Divida de evidencia: **41.2%**.

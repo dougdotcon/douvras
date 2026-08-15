@@ -8,12 +8,15 @@
     "published_params": 7241732096,
     "hf_repo": "mistralai/Mistral-7B-v0.1",
     "source_url": "https://huggingface.co/mistralai/Mistral-7B-v0.1/resolve/main/config.json",
-    "provenance": "TRANSCRIBED_UNVERIFIED",
-    "sha256": null,
-    "note": "Mesmo bloco de camada do llama-3-8b (d=4096, I=14336, GQA 8) com vocab menor. Caso-teste de invariante cruzando familias."
+    "provenance": "FETCHED",
+    "sha256": "cf25cdf4719f181d1d1d371973285d9afe9afde0d0c6a6fd48de857555ce1e0d",
+    "note": "Mesmo bloco de camada do llama-3-8b (d=4096, I=14336, GQA 8) com vocab menor. Caso-teste de invariante cruzando familias.",
+    "retrieved_at": "2026-08-15T00:39:45+00:00"
   },
   "config": {
-    "architectures": ["MistralForCausalLM"],
+    "architectures": [
+      "MistralForCausalLM"
+    ],
     "model_type": "mistral",
     "hidden_size": 4096,
     "intermediate_size": 14336,

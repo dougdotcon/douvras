@@ -1,8 +1,8 @@
 ---
 artifact: SILICON_READINESS_ASSESSMENT
 model: gemma-2-9b
-run_id: 20260815T000030Z
-generated_at: 2026-08-15T00:00:30+00:00
+run_id: 20260815T004803Z
+generated_at: 2026-08-15T00:48:03+00:00
 method: DOUVRAS 2.0
 cycle: C-001
 weakest_status: OPEN_GAP

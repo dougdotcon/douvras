@@ -1,6 +1,6 @@
 {
-  "run_id": "20260815T000033Z",
-  "generated_at": "2026-08-15T00:00:33+00:00",
+  "run_id": "20260815T004805Z",
+  "generated_at": "2026-08-15T00:48:05+00:00",
   "inputs": {
     "model_id": "phi-3-mini-4k",
     "device_key": "h100-sxm",
@@ -37,7 +37,7 @@
     "qkv_bias": false,
     "o_bias": false,
     "mlp_bias": false,
-    "sliding_window": null,
+    "sliding_window": 2047,
     "release_date": "2024-04-23",
     "license": "mit",
     "published_params": 3821079552,
@@ -46,9 +46,9 @@
     "attention_type": "mha",
     "provenance": {
       "source_url": "https://huggingface.co/microsoft/Phi-3-mini-4k-instruct/resolve/main/config.json",
-      "provenance": "TRANSCRIBED_UNVERIFIED",
-      "sha256": null,
-      "retrieved_at": null
+      "provenance": "FETCHED",
+      "sha256": "072d4df63228ef806a6b2b2f02a93f1d048ebd31584d0f61d1180aef36e5bcea",
+      "retrieved_at": "2026-08-15T00:39:46+00:00"
     },
     "moe": null,
     "derived_params": 3821079552
@@ -86,7 +86,7 @@
     "routing": "dense",
     "vocab_size": 32064,
     "tied_embeddings": false,
-    "sliding_window": null,
+    "sliding_window": 2047,
     "params": 3821079552,
     "quantization_candidates": [
       "int8",
@@ -101,8 +101,8 @@
       "L0.attention": {
         "role": "attention",
         "topology": "1b843e6dbe080a7d",
-        "pattern": "bde81064451b7d17",
-        "exact": "1dcca03ba27f9239",
+        "pattern": "9b8711e05be93404",
+        "exact": "c5f04d715d5820d0",
         "num_nodes": 13,
         "constants": {
           "input_layernorm.norm": "rmsnorm",
@@ -127,8 +127,8 @@
       "L1.attention": {
         "role": "attention",
         "topology": "1b843e6dbe080a7d",
-        "pattern": "bde81064451b7d17",
-        "exact": "1dcca03ba27f9239",
+        "pattern": "9b8711e05be93404",
+        "exact": "c5f04d715d5820d0",
         "num_nodes": 13,
         "constants": {
           "input_layernorm.norm": "rmsnorm",
@@ -153,8 +153,8 @@
       "L10.attention": {
         "role": "attention",
         "topology": "1b843e6dbe080a7d",
-        "pattern": "bde81064451b7d17",
-        "exact": "1dcca03ba27f9239",
+        "pattern": "9b8711e05be93404",
+        "exact": "c5f04d715d5820d0",
         "num_nodes": 13,
         "constants": {
           "input_layernorm.norm": "rmsnorm",
@@ -179,8 +179,8 @@
       "L11.attention": {
         "role": "attention",
         "topology": "1b843e6dbe080a7d",
-        "pattern": "bde81064451b7d17",
-        "exact": "1dcca03ba27f9239",
+        "pattern": "9b8711e05be93404",
+        "exact": "c5f04d715d5820d0",
         "num_nodes": 13,
         "constants": {
           "input_layernorm.norm": "rmsnorm",
@@ -205,8 +205,8 @@
       "L12.attention": {
         "role": "attention",
         "topology": "1b843e6dbe080a7d",
-        "pattern": "bde81064451b7d17",
-        "exact": "1dcca03ba27f9239",
+        "pattern": "9b8711e05be93404",
+        "exact": "c5f04d715d5820d0",
         "num_nodes": 13,
         "constants": {
           "input_layernorm.norm": "rmsnorm",
@@ -231,8 +231,8 @@
       "L13.attention": {
         "role": "attention",
         "topology": "1b843e6dbe080a7d",
-        "pattern": "bde81064451b7d17",
-        "exact": "1dcca03ba27f9239",
+        "pattern": "9b8711e05be93404",
+        "exact": "c5f04d715d5820d0",
         "num_nodes": 13,
         "constants": {
           "input_layernorm.norm": "rmsnorm",
@@ -257,8 +257,8 @@
       "L14.attention": {
         "role": "attention",
         "topology": "1b843e6dbe080a7d",
-        "pattern": "bde81064451b7d17",
-        "exact": "1dcca03ba27f9239",
+        "pattern": "9b8711e05be93404",
+        "exact": "c5f04d715d5820d0",
         "num_nodes": 13,
         "constants": {
           "input_layernorm.norm": "rmsnorm",
@@ -283,8 +283,8 @@
       "L15.attention": {
         "role": "attention",
         "topology": "1b843e6dbe080a7d",
-        "pattern": "bde81064451b7d17",
-        "exact": "1dcca03ba27f9239",
+        "pattern": "9b8711e05be93404",
+        "exact": "c5f04d715d5820d0",
         "num_nodes": 13,
         "constants": {
           "input_layernorm.norm": "rmsnorm",
@@ -309,8 +309,8 @@
       "L16.attention": {
         "role": "attention",
         "topology": "1b843e6dbe080a7d",
-        "pattern": "bde81064451b7d17",
-        "exact": "1dcca03ba27f9239",
+        "pattern": "9b8711e05be93404",
+        "exact": "c5f04d715d5820d0",
         "num_nodes": 13,
         "constants": {
           "input_layernorm.norm": "rmsnorm",
@@ -335,8 +335,8 @@
       "L17.attention": {
         "role": "attention",
         "topology": "1b843e6dbe080a7d",
-        "pattern": "bde81064451b7d17",
-        "exact": "1dcca03ba27f9239",
+        "pattern": "9b8711e05be93404",
+        "exact": "c5f04d715d5820d0",
         "num_nodes": 13,
         "constants": {
           "input_layernorm.norm": "rmsnorm",
@@ -361,8 +361,8 @@
       "L18.attention": {
         "role": "attention",
         "topology": "1b843e6dbe080a7d",
-        "pattern": "bde81064451b7d17",
-        "exact": "1dcca03ba27f9239",
+        "pattern": "9b8711e05be93404",
+        "exact": "c5f04d715d5820d0",
         "num_nodes": 13,
         "constants": {
           "input_layernorm.norm": "rmsnorm",
@@ -387,8 +387,8 @@
       "L19.attention": {
         "role": "attention",
         "topology": "1b843e6dbe080a7d",
-        "pattern": "bde81064451b7d17",
-        "exact": "1dcca03ba27f9239",
+        "pattern": "9b8711e05be93404",
+        "exact": "c5f04d715d5820d0",
         "num_nodes": 13,
         "constants": {
           "input_layernorm.norm": "rmsnorm",
@@ -413,8 +413,8 @@
       "L2.attention": {
         "role": "attention",
         "topology": "1b843e6dbe080a7d",
-        "pattern": "bde81064451b7d17",
-        "exact": "1dcca03ba27f9239",
+        "pattern": "9b8711e05be93404",
+        "exact": "c5f04d715d5820d0",
         "num_nodes": 13,
         "constants": {
           "input_layernorm.norm": "rmsnorm",
@@ -439,8 +439,8 @@
       "L20.attention": {
         "role": "attention",
         "topology": "1b843e6dbe080a7d",
-        "pattern": "bde81064451b7d17",
-        "exact": "1dcca03ba27f9239",
+        "pattern": "9b8711e05be93404",
+        "exact": "c5f04d715d5820d0",
         "num_nodes": 13,
         "constants": {
           "input_layernorm.norm": "rmsnorm",
@@ -465,8 +465,8 @@
       "L21.attention": {
         "role": "attention",
         "topology": "1b843e6dbe080a7d",
-        "pattern": "bde81064451b7d17",
-        "exact": "1dcca03ba27f9239",
+        "pattern": "9b8711e05be93404",
+        "exact": "c5f04d715d5820d0",
         "num_nodes": 13,
         "constants": {
           "input_layernorm.norm": "rmsnorm",
@@ -491,8 +491,8 @@
       "L22.attention": {
         "role": "attention",
         "topology": "1b843e6dbe080a7d",
-        "pattern": "bde81064451b7d17",
-        "exact": "1dcca03ba27f9239",
+        "pattern": "9b8711e05be93404",
+        "exact": "c5f04d715d5820d0",
         "num_nodes": 13,
         "constants": {
           "input_layernorm.norm": "rmsnorm",
@@ -517,8 +517,8 @@
       "L23.attention": {
         "role": "attention",
         "topology": "1b843e6dbe080a7d",
-        "pattern": "bde81064451b7d17",
-        "exact": "1dcca03ba27f9239",
+        "pattern": "9b8711e05be93404",
+        "exact": "c5f04d715d5820d0",
         "num_nodes": 13,
         "constants": {
           "input_layernorm.norm": "rmsnorm",
@@ -543,8 +543,8 @@
       "L24.attention": {
         "role": "attention",
         "topology": "1b843e6dbe080a7d",
-        "pattern": "bde81064451b7d17",
-        "exact": "1dcca03ba27f9239",
+        "pattern": "9b8711e05be93404",
+        "exact": "c5f04d715d5820d0",
         "num_nodes": 13,
         "constants": {
           "input_layernorm.norm": "rmsnorm",
@@ -569,8 +569,8 @@
       "L25.attention": {
         "role": "attention",
         "topology": "1b843e6dbe080a7d",
-        "pattern": "bde81064451b7d17",
-        "exact": "1dcca03ba27f9239",
+        "pattern": "9b8711e05be93404",
+        "exact": "c5f04d715d5820d0",
         "num_nodes": 13,
         "constants": {
           "input_layernorm.norm": "rmsnorm",
@@ -595,8 +595,8 @@
       "L26.attention": {
         "role": "attention",
         "topology": "1b843e6dbe080a7d",
-        "pattern": "bde81064451b7d17",
-        "exact": "1dcca03ba27f9239",
+        "pattern": "9b8711e05be93404",
+        "exact": "c5f04d715d5820d0",
         "num_nodes": 13,
         "constants": {
           "input_layernorm.norm": "rmsnorm",
@@ -621,8 +621,8 @@
       "L27.attention": {
         "role": "attention",
         "topology": "1b843e6dbe080a7d",
-        "pattern": "bde81064451b7d17",
-        "exact": "1dcca03ba27f9239",
+        "pattern": "9b8711e05be93404",
+        "exact": "c5f04d715d5820d0",
         "num_nodes": 13,
         "constants": {
           "input_layernorm.norm": "rmsnorm",
@@ -647,8 +647,8 @@
       "L28.attention": {
         "role": "attention",
         "topology": "1b843e6dbe080a7d",
-        "pattern": "bde81064451b7d17",
-        "exact": "1dcca03ba27f9239",
+        "pattern": "9b8711e05be93404",
+        "exact": "c5f04d715d5820d0",
         "num_nodes": 13,
         "constants": {
           "input_layernorm.norm": "rmsnorm",
@@ -673,8 +673,8 @@
       "L29.attention": {
         "role": "attention",
         "topology": "1b843e6dbe080a7d",
-        "pattern": "bde81064451b7d17",
-        "exact": "1dcca03ba27f9239",
+        "pattern": "9b8711e05be93404",
+        "exact": "c5f04d715d5820d0",
         "num_nodes": 13,
         "constants": {
           "input_layernorm.norm": "rmsnorm",
@@ -699,8 +699,8 @@
       "L3.attention": {
         "role": "attention",
         "topology": "1b843e6dbe080a7d",
-        "pattern": "bde81064451b7d17",
-        "exact": "1dcca03ba27f9239",
+        "pattern": "9b8711e05be93404",
+        "exact": "c5f04d715d5820d0",
         "num_nodes": 13,
         "constants": {
           "input_layernorm.norm": "rmsnorm",
@@ -725,8 +725,8 @@
       "L30.attention": {
         "role": "attention",
         "topology": "1b843e6dbe080a7d",
-        "pattern": "bde81064451b7d17",
-        "exact": "1dcca03ba27f9239",
+        "pattern": "9b8711e05be93404",
+        "exact": "c5f04d715d5820d0",
         "num_nodes": 13,
         "constants": {
           "input_layernorm.norm": "rmsnorm",
@@ -751,8 +751,8 @@
       "L31.attention": {
         "role": "attention",
         "topology": "1b843e6dbe080a7d",
-        "pattern": "bde81064451b7d17",
-        "exact": "1dcca03ba27f9239",
+        "pattern": "9b8711e05be93404",
+        "exact": "c5f04d715d5820d0",
         "num_nodes": 13,
         "constants": {
           "input_layernorm.norm": "rmsnorm",
@@ -777,8 +777,8 @@
       "L4.attention": {
         "role": "attention",
         "topology": "1b843e6dbe080a7d",
-        "pattern": "bde81064451b7d17",
-        "exact": "1dcca03ba27f9239",
+        "pattern": "9b8711e05be93404",
+        "exact": "c5f04d715d5820d0",
         "num_nodes": 13,
         "constants": {
           "input_layernorm.norm": "rmsnorm",
@@ -803,8 +803,8 @@
       "L5.attention": {
         "role": "attention",
         "topology": "1b843e6dbe080a7d",
-        "pattern": "bde81064451b7d17",
-        "exact": "1dcca03ba27f9239",
+        "pattern": "9b8711e05be93404",
+        "exact": "c5f04d715d5820d0",
         "num_nodes": 13,
         "constants": {
           "input_layernorm.norm": "rmsnorm",
@@ -829,8 +829,8 @@
       "L6.attention": {
         "role": "attention",
         "topology": "1b843e6dbe080a7d",
-        "pattern": "bde81064451b7d17",
-        "exact": "1dcca03ba27f9239",
+        "pattern": "9b8711e05be93404",
+        "exact": "c5f04d715d5820d0",
         "num_nodes": 13,
         "constants": {
           "input_layernorm.norm": "rmsnorm",
@@ -855,8 +855,8 @@
       "L7.attention": {
         "role": "attention",
         "topology": "1b843e6dbe080a7d",
-        "pattern": "bde81064451b7d17",
-        "exact": "1dcca03ba27f9239",
+        "pattern": "9b8711e05be93404",
+        "exact": "c5f04d715d5820d0",
         "num_nodes": 13,
         "constants": {
           "input_layernorm.norm": "rmsnorm",
@@ -881,8 +881,8 @@
       "L8.attention": {
         "role": "attention",
         "topology": "1b843e6dbe080a7d",
-        "pattern": "bde81064451b7d17",
-        "exact": "1dcca03ba27f9239",
+        "pattern": "9b8711e05be93404",
+        "exact": "c5f04d715d5820d0",
         "num_nodes": 13,
         "constants": {
           "input_layernorm.norm": "rmsnorm",
@@ -907,8 +907,8 @@
       "L9.attention": {
         "role": "attention",
         "topology": "1b843e6dbe080a7d",
-        "pattern": "bde81064451b7d17",
-        "exact": "1dcca03ba27f9239",
+        "pattern": "9b8711e05be93404",
+        "exact": "c5f04d715d5820d0",
         "num_nodes": 13,
         "constants": {
           "input_layernorm.norm": "rmsnorm",
@@ -971,20 +971,20 @@
     "model": "phi-3-mini-4k",
     "device": "h100-sxm",
     "request": "prompt=2048 gen=512 B=1 ctx=2304",
-    "total_time_s": 1.6320138448038468,
-    "decode_time_share": 0.9799766797806022,
-    "generated_tokens_per_second": 313.7228287800081,
-    "energy_per_generated_token_j": 3.61465566407727,
+    "total_time_s": 1.612498197832665,
+    "decode_time_share": 0.9797344471355833,
+    "generated_tokens_per_second": 317.51973471236846,
+    "energy_per_generated_token_j": 3.5714315553559413,
     "hotspots": {
-      "gate_proj": 0.192,
-      "up_proj": 0.192,
-      "down_proj": 0.192,
-      "kv_read": 0.1063,
-      "q_proj": 0.072,
-      "k_proj": 0.072,
-      "v_proj": 0.072,
-      "o_proj": 0.072,
-      "lm_head": 0.0231,
+      "gate_proj": 0.1944,
+      "up_proj": 0.1944,
+      "down_proj": 0.1944,
+      "kv_read": 0.0956,
+      "q_proj": 0.0729,
+      "k_proj": 0.0729,
+      "v_proj": 0.0729,
+      "o_proj": 0.0729,
+      "lm_head": 0.0234,
       "act": 0.001
     }
   },
@@ -993,35 +993,35 @@
     "device": "h100-sxm",
     "workload": "decode B=1 T=2304 act=bf16",
     "weight_precision": "bf16",
-    "total_time_s": 0.003123702165989939,
-    "tokens_per_second": 320.1329534191003,
-    "total_flops": 8366664576.0,
-    "total_bytes": 8362493184.0,
+    "total_time_s": 0.0030855859967982625,
+    "tokens_per_second": 324.08754805007646,
+    "total_flops": 8264292224.0,
+    "total_bytes": 8261436672.0,
     "weight_read_bytes_per_step": 7445164032.0,
     "resident_weight_bytes": 7642159104.0,
-    "kv_bytes": 906362880.0,
-    "mean_arithmetic_intensity": 1.0004988215724924,
+    "kv_bytes": 805306368.0,
+    "mean_arithmetic_intensity": 1.0003456483555309,
     "device_ridge_point": 92.30410447761194,
-    "memory_bound_share": 0.9988275664709675,
-    "energy_per_token_j": 3.542278256232591,
+    "memory_bound_share": 0.9989454782018194,
+    "energy_per_token_j": 3.4990545203692296,
     "fits_in_device_memory": true,
     "memory_headroom": 0.9044730112,
     "hotspots_by_role": {
-      "gate_proj": 0.1925,
-      "up_proj": 0.1925,
-      "down_proj": 0.1925,
-      "kv_read": 0.1082,
-      "q_proj": 0.0722,
-      "k_proj": 0.0722,
-      "v_proj": 0.0722,
-      "o_proj": 0.0722,
-      "lm_head": 0.0235,
-      "qk": 0.0006
+      "gate_proj": 0.1949,
+      "up_proj": 0.1949,
+      "down_proj": 0.1949,
+      "kv_read": 0.0973,
+      "q_proj": 0.0731,
+      "k_proj": 0.0731,
+      "v_proj": 0.0731,
+      "o_proj": 0.0731,
+      "lm_head": 0.0238,
+      "qk": 0.0005
     },
     "hotspots_by_block": {
-      "mlp": 0.578,
-      "attention": 0.3985,
-      "head": 0.0236,
+      "mlp": 0.5851,
+      "attention": 0.3911,
+      "head": 0.0238,
       "embedding": 0.0
     }
   },
@@ -1030,17 +1030,17 @@
     "device": "h100-sxm",
     "workload": "prefill B=1 S=2048 act=bf16",
     "weight_precision": "bf16",
-    "total_time_s": 0.032678335816998055,
-    "tokens_per_second": 62671.49011103272,
-    "total_flops": 15687467724672.0,
-    "total_bytes": 31252161792.0,
+    "total_time_s": 0.03267816747195454,
+    "tokens_per_second": 62671.81296985701,
+    "total_flops": 15687467326336.0,
+    "total_bytes": 31251768576.0,
     "weight_read_bytes_per_step": 7457740800.0,
     "resident_weight_bytes": 7642159104.0,
-    "kv_bytes": 1610612736.0,
-    "mean_arithmetic_intensity": 501.96424263641546,
+    "kv_bytes": 1610219520.0,
+    "mean_arithmetic_intensity": 501.9705457048371,
     "device_ridge_point": 253.1769722814499,
-    "memory_bound_share": 0.19239523755813925,
-    "energy_per_token_j": 0.018094351961169822,
+    "memory_bound_share": 0.19239109736439405,
+    "energy_per_token_j": 0.018094258746677954,
     "fits_in_device_memory": true,
     "memory_headroom": 0.9044730112,
     "hotspots_by_role": {
@@ -1093,9 +1093,9 @@
     "weight_gb_before": 7.445164032,
     "weight_gb_after": 3.722781696,
     "memory_reduction": 0.5,
-    "time_ms_before": 3.1237021659899393,
-    "time_ms_after": 1.7347535331541182,
-    "speedup": 1.801,
+    "time_ms_before": 3.0855859967982626,
+    "time_ms_after": 1.6966373639624412,
+    "speedup": 1.819,
     "quality_delta": "UNMEASURED (G-002)",
     "findings": [
       {
@@ -1115,7 +1115,7 @@
       },
       {
         "name": "quant.sensitivity.speedup",
-        "value": 1.8006605009245567,
+        "value": 1.8186479104715558,
         "unit": "x sobre baseline",
         "status": "CONDITIONAL_RESULT",
         "assumptions": [
@@ -1149,14 +1149,14 @@
       "role": "q_proj",
       "block": "attention",
       "instances_per_token": 32,
-      "cost_share": 0.072,
+      "cost_share": 0.0729,
       "recommended_precision": "int8",
       "weight_elems": 301989888,
-      "LHS": 0.5051,
+      "LHS": 0.5052,
       "scorecard": {
         "name": "q_proj",
         "kind": "LHS",
-        "score": 0.5051,
+        "score": 0.5052,
         "status": "OPEN_GAP",
         "factors": {
           "E": {
@@ -1167,9 +1167,9 @@
             "note": "familia com uma unica versao no corpus: estabilidade temporal nao observada; usando apenas cobertura de corpus (1/9 modelos)"
           },
           "F": {
-            "value": 0.072,
+            "value": 0.0729,
             "weight": 0.15,
-            "contribution": 0.0108,
+            "contribution": 0.0109,
             "status": "CONDITIONAL_RESULT",
             "note": ""
           },
@@ -1215,14 +1215,14 @@
       "role": "v_proj",
       "block": "attention",
       "instances_per_token": 32,
-      "cost_share": 0.072,
+      "cost_share": 0.0729,
       "recommended_precision": "int8",
       "weight_elems": 301989888,
-      "LHS": 0.5051,
+      "LHS": 0.5052,
       "scorecard": {
         "name": "v_proj",
         "kind": "LHS",
-        "score": 0.5051,
+        "score": 0.5052,
         "status": "OPEN_GAP",
         "factors": {
           "E": {
@@ -1233,9 +1233,9 @@
             "note": "familia com uma unica versao no corpus: estabilidade temporal nao observada; usando apenas cobertura de corpus (1/9 modelos)"
           },
           "F": {
-            "value": 0.072,
+            "value": 0.0729,
             "weight": 0.15,
-            "contribution": 0.0108,
+            "contribution": 0.0109,
             "status": "CONDITIONAL_RESULT",
             "note": ""
           },
@@ -1281,14 +1281,14 @@
       "role": "gate_proj",
       "block": "mlp",
       "instances_per_token": 32,
-      "cost_share": 0.192,
+      "cost_share": 0.1944,
       "recommended_precision": "int4",
       "weight_elems": 805306368,
-      "LHS": 0.5036,
+      "LHS": 0.504,
       "scorecard": {
         "name": "gate_proj",
         "kind": "LHS",
-        "score": 0.5036,
+        "score": 0.504,
         "status": "OPEN_GAP",
         "factors": {
           "E": {
@@ -1299,9 +1299,9 @@
             "note": "familia com uma unica versao no corpus: estabilidade temporal nao observada; usando apenas cobertura de corpus (1/9 modelos)"
           },
           "F": {
-            "value": 0.192,
+            "value": 0.1944,
             "weight": 0.15,
-            "contribution": 0.0288,
+            "contribution": 0.0292,
             "status": "CONDITIONAL_RESULT",
             "note": ""
           },
@@ -1347,14 +1347,14 @@
       "role": "up_proj",
       "block": "mlp",
       "instances_per_token": 32,
-      "cost_share": 0.192,
+      "cost_share": 0.1944,
       "recommended_precision": "int4",
       "weight_elems": 805306368,
-      "LHS": 0.5036,
+      "LHS": 0.504,
       "scorecard": {
         "name": "up_proj",
         "kind": "LHS",
-        "score": 0.5036,
+        "score": 0.504,
         "status": "OPEN_GAP",
         "factors": {
           "E": {
@@ -1365,9 +1365,9 @@
             "note": "familia com uma unica versao no corpus: estabilidade temporal nao observada; usando apenas cobertura de corpus (1/9 modelos)"
           },
           "F": {
-            "value": 0.192,
+            "value": 0.1944,
             "weight": 0.15,
-            "contribution": 0.0288,
+            "contribution": 0.0292,
             "status": "CONDITIONAL_RESULT",
             "note": ""
           },
@@ -1413,14 +1413,14 @@
       "role": "k_proj",
       "block": "attention",
       "instances_per_token": 32,
-      "cost_share": 0.072,
+      "cost_share": 0.0729,
       "recommended_precision": "int8",
       "weight_elems": 301989888,
-      "LHS": 0.4976,
+      "LHS": 0.4977,
       "scorecard": {
         "name": "k_proj",
         "kind": "LHS",
-        "score": 0.4976,
+        "score": 0.4977,
         "status": "OPEN_GAP",
         "factors": {
           "E": {
@@ -1431,9 +1431,9 @@
             "note": "familia com uma unica versao no corpus: estabilidade temporal nao observada; usando apenas cobertura de corpus (1/9 modelos)"
           },
           "F": {
-            "value": 0.072,
+            "value": 0.0729,
             "weight": 0.15,
-            "contribution": 0.0108,
+            "contribution": 0.0109,
             "status": "CONDITIONAL_RESULT",
             "note": ""
           },
@@ -1479,14 +1479,14 @@
       "role": "down_proj",
       "block": "mlp",
       "instances_per_token": 32,
-      "cost_share": 0.192,
+      "cost_share": 0.1944,
       "recommended_precision": "int4",
       "weight_elems": 805306368,
-      "LHS": 0.4886,
+      "LHS": 0.489,
       "scorecard": {
         "name": "down_proj",
         "kind": "LHS",
-        "score": 0.4886,
+        "score": 0.489,
         "status": "OPEN_GAP",
         "factors": {
           "E": {
@@ -1497,9 +1497,9 @@
             "note": "familia com uma unica versao no corpus: estabilidade temporal nao observada; usando apenas cobertura de corpus (1/9 modelos)"
           },
           "F": {
-            "value": 0.192,
+            "value": 0.1944,
             "weight": 0.15,
-            "contribution": 0.0288,
+            "contribution": 0.0292,
             "status": "CONDITIONAL_RESULT",
             "note": ""
           },
@@ -1545,14 +1545,14 @@
       "role": "o_proj",
       "block": "attention",
       "instances_per_token": 32,
-      "cost_share": 0.072,
+      "cost_share": 0.0729,
       "recommended_precision": "int4",
       "weight_elems": 301989888,
-      "LHS": 0.4676,
+      "LHS": 0.4677,
       "scorecard": {
         "name": "o_proj",
         "kind": "LHS",
-        "score": 0.4676,
+        "score": 0.4677,
         "status": "OPEN_GAP",
         "factors": {
           "E": {
@@ -1563,9 +1563,9 @@
             "note": "familia com uma unica versao no corpus: estabilidade temporal nao observada; usando apenas cobertura de corpus (1/9 modelos)"
           },
           "F": {
-            "value": 0.072,
+            "value": 0.0729,
             "weight": 0.15,
-            "contribution": 0.0108,
+            "contribution": 0.0109,
             "status": "CONDITIONAL_RESULT",
             "note": ""
           },
@@ -1611,14 +1611,14 @@
       "role": "lm_head",
       "block": "head",
       "instances_per_token": 1,
-      "cost_share": 0.0231,
+      "cost_share": 0.0234,
       "recommended_precision": "int8",
       "weight_elems": 98500608,
-      "LHS": 0.3994,
+      "LHS": 0.3995,
       "scorecard": {
         "name": "lm_head",
         "kind": "LHS",
-        "score": 0.3994,
+        "score": 0.3995,
         "status": "OPEN_GAP",
         "factors": {
           "E": {
@@ -1629,7 +1629,7 @@
             "note": "familia com uma unica versao no corpus: estabilidade temporal nao observada; usando apenas cobertura de corpus (1/9 modelos)"
           },
           "F": {
-            "value": 0.0231,
+            "value": 0.0234,
             "weight": 0.15,
             "contribution": 0.0035,
             "status": "CONDITIONAL_RESULT",
@@ -1677,14 +1677,14 @@
       "role": "kv_read",
       "block": "attention",
       "instances_per_token": 32,
-      "cost_share": 0.1063,
+      "cost_share": 0.0956,
       "recommended_precision": "bf16",
       "weight_elems": 0,
-      "LHS": 0.3827,
+      "LHS": 0.3811,
       "scorecard": {
         "name": "kv_read",
         "kind": "LHS",
-        "score": 0.3827,
+        "score": 0.3811,
         "status": "OPEN_GAP",
         "factors": {
           "E": {
@@ -1695,9 +1695,9 @@
             "note": "familia com uma unica versao no corpus: estabilidade temporal nao observada; usando apenas cobertura de corpus (1/9 modelos)"
           },
           "F": {
-            "value": 0.1063,
+            "value": 0.0956,
             "weight": 0.15,
-            "contribution": 0.0159,
+            "contribution": 0.0143,
             "status": "CONDITIONAL_RESULT",
             "note": ""
           },
@@ -1755,53 +1755,53 @@
     "regions": {
       "reconfigurable": {
         "target": "FPGA/eFPGA",
-        "share": 0.8873,
+        "share": 0.898,
         "roles": [
           {
             "role": "gate_proj",
-            "share": 0.192,
+            "share": 0.1944,
             "precision": "int4",
             "reason": "regular e quantizavel, porem LHS=0.50 < 0.55; E=0.11 < 0.6: prototipar antes de fixar"
           },
           {
             "role": "up_proj",
-            "share": 0.192,
+            "share": 0.1944,
             "precision": "int4",
             "reason": "regular e quantizavel, porem LHS=0.50 < 0.55; E=0.11 < 0.6: prototipar antes de fixar"
           },
           {
             "role": "down_proj",
-            "share": 0.192,
+            "share": 0.1944,
             "precision": "int4",
             "reason": "regular e quantizavel, porem LHS=0.49 < 0.55; E=0.11 < 0.6: prototipar antes de fixar"
           },
           {
             "role": "q_proj",
-            "share": 0.072,
+            "share": 0.0729,
             "precision": "int8",
             "reason": "regular e quantizavel, porem LHS=0.51 < 0.55; E=0.11 < 0.6: prototipar antes de fixar"
           },
           {
             "role": "v_proj",
-            "share": 0.072,
+            "share": 0.0729,
             "precision": "int8",
             "reason": "regular e quantizavel, porem LHS=0.51 < 0.55; E=0.11 < 0.6: prototipar antes de fixar"
           },
           {
             "role": "k_proj",
-            "share": 0.072,
+            "share": 0.0729,
             "precision": "int8",
             "reason": "regular e quantizavel, porem LHS=0.50 < 0.55; E=0.11 < 0.6: prototipar antes de fixar"
           },
           {
             "role": "o_proj",
-            "share": 0.072,
+            "share": 0.0729,
             "precision": "int4",
             "reason": "regular e quantizavel, porem LHS=0.47 < 0.55; E=0.11 < 0.6: prototipar antes de fixar"
           },
           {
             "role": "lm_head",
-            "share": 0.0231,
+            "share": 0.0234,
             "precision": "int8",
             "reason": "regular e quantizavel, porem LHS=0.40 < 0.55; E=0.11 < 0.6: prototipar antes de fixar"
           }
@@ -1809,11 +1809,11 @@
       },
       "programmable": {
         "target": "CPU/GPU",
-        "share": 0.1063,
+        "share": 0.0956,
         "roles": [
           {
             "role": "kv_read",
-            "share": 0.1063,
+            "share": 0.0956,
             "precision": "bf16",
             "reason": "LHS=0.38 < 0.55; E=0.11 < 0.6; Q=0.00 < 0.6"
           }
@@ -1830,9 +1830,9 @@
       "hardened_weight_gbit": 0.0,
       "hardened_precision": "int8",
       "hardened_flops_per_token": 0.0,
-      "total_flops_per_token": 8366664576.0,
+      "total_flops_per_token": 8264292224.0,
       "hardened_cost_share": 0,
-      "kv_bytes_at_context_gb": 0.90636288,
+      "kv_bytes_at_context_gb": 0.805306368,
       "batch": 1,
       "target_tokens_per_second": 1000.0,
       "is_empty": true
@@ -1851,7 +1851,7 @@
   "srs": {
     "name": "phi-3-mini-4k",
     "kind": "SRS",
-    "score": 0.1856,
+    "score": 0.2115,
     "status": "OPEN_GAP",
     "factors": {
       "A": {
@@ -1862,9 +1862,9 @@
         "note": "familia phi sem transicao temporal no corpus (1 versao(oes)): estabilidade nao observada"
       },
       "H": {
-        "value": 0.1443,
+        "value": 0.1453,
         "weight": 0.15,
-        "contribution": 0.0216,
+        "contribution": 0.0218,
         "status": "CONDITIONAL_RESULT",
         "note": "indice de Herfindahl das participacoes por papel em decode"
       },
@@ -1883,18 +1883,18 @@
         "note": "regiao fixa vazia: sem ponto de projeto nao ha ganho, receita nem NRE"
       },
       "Q": {
-        "value": 0.6392,
+        "value": 0.6469,
         "weight": 0.1,
-        "contribution": 0.0639,
+        "contribution": 0.0647,
         "status": "ASSUMPTION",
         "note": "media dos priors ponderada por custo; nao medido"
       },
       "D": {
-        "value": 0.5,
+        "value": 0.75,
         "weight": 0.1,
-        "contribution": 0.05,
-        "status": "ASSUMPTION",
-        "note": "licenca permissiva=sim; duas ou mais versoes no corpus=nao; contagem de parametros publicada=sim; proveniencia verificada=nao"
+        "contribution": 0.075,
+        "status": "OBSERVATION",
+        "note": "licenca permissiva=sim; duas ou mais versoes no corpus=nao; contagem de parametros publicada=sim; proveniencia verificada=sim"
       },
       "C": {
         "value": 1.0,
@@ -1931,15 +1931,15 @@
   "sensitivity": {
     "perturbation": 0.2,
     "samples": 2000,
-    "top1_stability": 0.6815,
-    "top3_stability": 0.6815,
+    "top1_stability": 0.663,
+    "top3_stability": 0.663,
     "band_stability": 1.0,
     "threshold": 0.95,
     "decidable": false,
     "discriminates": false,
-    "score_spread": 0.12236,
+    "score_spread": 0.1241,
     "noise_band": 0.02636,
-    "margin": 0.0015,
+    "margin": 0.00128,
     "inert_weight": 0.55,
     "contenders": [
       "q_proj",
@@ -1955,10 +1955,10 @@
       "Q",
       "V"
     ],
-    "diagnosis": "score NAO discrimina: entre os 6 candidatos que disputam a primeira posicao, 70% do peso esta em fatores identicos; a margem (0.0015) e menor que o ruido (0.0264)",
+    "diagnosis": "score NAO discrimina: entre os 6 candidatos que disputam a primeira posicao, 70% do peso esta em fatores identicos; a margem (0.0013) e menor que o ruido (0.0264)",
     "winners": {
-      "q_proj": 1363,
-      "up_proj": 637
+      "q_proj": 1326,
+      "up_proj": 674
     },
     "dominant_factor": "R"
   },
@@ -1970,12 +1970,12 @@
     },
     "F2": {
       "criterio": "o padrao mais custoso muda de identidade entre versoes",
-      "observado": "bloco mais custoso 'mlp' (papel gate_proj, 19.2% do custo): E = 0.11",
+      "observado": "bloco mais custoso 'mlp' (papel gate_proj, 19.4% do custo): E = 0.11",
       "disparado": true
     },
     "F3": {
       "criterio": "top-1 do ranking troca sob perturbacao de +-20% dos pesos, ou vence por margem menor que o ruido (criterio reforcado apos CE-001)",
-      "observado": "estabilidade do top-1 = 0.681 (limite 0.95); margem = 0.0015 contra ruido 0.0264",
+      "observado": "estabilidade do top-1 = 0.663 (limite 0.95); margem = 0.0013 contra ruido 0.0264",
       "disparado": true
     },
     "F4": {
@@ -1998,7 +1998,6 @@
       "G-003",
       "G-004",
       "G-006",
-      "G-008",
       "G-009"
     ],
     "assumptions": [
@@ -2007,8 +2006,7 @@
       "A-003",
       "A-004",
       "A-005",
-      "A-007",
-      "A-009"
+      "A-007"
     ],
     "declared_absences": [
       "quant.sensitivity.quality_delta",
@@ -2017,32 +2015,30 @@
       "economics.die_area_mm2.p50",
       "stability.phi.exact"
     ],
-    "evidence_debt": 0.4,
+    "evidence_debt": 0.3333,
     "status_histogram": {
       "OPEN_GAP": 10,
       "CONDITIONAL_RESULT": 9,
-      "ASSUMPTION": 1
+      "MODEL": 1
     },
     "findings": [
       {
         "name": "phi-3-mini-4k.params",
         "value": 3821079552,
         "unit": "params",
-        "status": "ASSUMPTION",
+        "status": "MODEL",
         "assumptions": [
-          "A-001",
-          "A-009"
+          "A-001"
         ],
         "gaps": [
-          "G-001",
-          "G-008"
+          "G-001"
         ],
         "parents": [],
         "note": "derivado analiticamente do config; ver ADR-0001"
       },
       {
         "name": "phi-3-mini-4k.serving.decode_time_share",
-        "value": 0.9799766797806022,
+        "value": 0.9797344471355833,
         "unit": "fracao do tempo de requisicao",
         "status": "CONDITIONAL_RESULT",
         "assumptions": [
@@ -2058,7 +2054,7 @@
       },
       {
         "name": "phi-3-mini-4k.serving.energy_per_token",
-        "value": 3.61465566407727,
+        "value": 3.5714315553559413,
         "unit": "J/token gerado",
         "status": "CONDITIONAL_RESULT",
         "assumptions": [
@@ -2076,7 +2072,7 @@
       },
       {
         "name": "phi-3-mini-4k.decode.tokens_per_s",
-        "value": 320.1329534191003,
+        "value": 324.08754805007646,
         "unit": "tok/s",
         "status": "CONDITIONAL_RESULT",
         "assumptions": [
@@ -2091,7 +2087,7 @@
       },
       {
         "name": "phi-3-mini-4k.decode.memory_bound_share",
-        "value": 0.9988275664709675,
+        "value": 0.9989454782018194,
         "unit": "fracao do tempo",
         "status": "CONDITIONAL_RESULT",
         "assumptions": [
@@ -2106,7 +2102,7 @@
       },
       {
         "name": "phi-3-mini-4k.decode.arith_intensity",
-        "value": 1.0004988215724924,
+        "value": 1.0003456483555309,
         "unit": "FLOP/byte",
         "status": "CONDITIONAL_RESULT",
         "assumptions": [
@@ -2121,7 +2117,7 @@
       },
       {
         "name": "phi-3-mini-4k.decode.energy_per_token",
-        "value": 3.542278256232591,
+        "value": 3.4990545203692296,
         "unit": "J/token",
         "status": "CONDITIONAL_RESULT",
         "assumptions": [
@@ -2153,7 +2149,7 @@
       },
       {
         "name": "quant.sensitivity.speedup",
-        "value": 1.8006605009245567,
+        "value": 1.8186479104715558,
         "unit": "x sobre baseline",
         "status": "CONDITIONAL_RESULT",
         "assumptions": [
@@ -2182,7 +2178,7 @@
       },
       {
         "name": "quant.reachable_cost_share.int4",
-        "value": 0.6496278711055055,
+        "value": 0.6576527084856268,
         "unit": "fracao do tempo",
         "status": "CONDITIONAL_RESULT",
         "assumptions": [
@@ -2324,21 +2320,19 @@
       },
       {
         "name": "SRS.phi-3-mini-4k",
-        "value": 0.18555370126081383,
+        "value": 0.21148249937707408,
         "unit": "score SRS",
         "status": "OPEN_GAP",
         "assumptions": [
           "A-002",
           "A-004",
-          "A-007",
-          "A-009"
+          "A-007"
         ],
         "gaps": [
           "G-001",
           "G-002",
           "G-003",
           "G-006",
-          "G-008",
           "G-009"
         ],
         "parents": [
@@ -2357,7 +2351,7 @@
       },
       {
         "name": "readiness.rank_stability",
-        "value": 0.6815,
+        "value": 0.663,
         "unit": "fracao das amostras com mesmo top-1",
         "status": "OPEN_GAP",
         "assumptions": [
@@ -2437,7 +2431,7 @@
           "M.kv_read",
           "L.kv_read"
         ],
-        "note": "perturbacao +-20%, 2000 amostras; NAO DECIDIVEL — F3 disparado; score NAO discrimina: entre os 6 candidatos que disputam a primeira posicao, 70% do peso esta em fatores identicos; a margem (0.0015) e menor que o ruido (0.0264)"
+        "note": "perturbacao +-20%, 2000 amostras; NAO DECIDIVEL — F3 disparado; score NAO discrimina: entre os 6 candidatos que disputam a primeira posicao, 70% do peso esta em fatores identicos; a margem (0.0013) e menor que o ruido (0.0264)"
       },
       {
         "name": "stability.phi.exact",

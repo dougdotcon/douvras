@@ -3,14 +3,22 @@
     "id": "tucano2-0.5b",
     "repo": "Polygl0t/Tucano2-qwen-0.5B-Base",
     "family": "tucano",
-    "params_b": 0.5,
-    "architecture": "Qwen2ForCausalLM",
-    "context_len": null,
-    "license": "",
-    "quantizations": ["f16", "q8", "q6", "q5", "q4"],
+    "params_b": 0.4908,
+    "architecture": "Qwen3ForCausalLM",
+    "context_len": 4096,
+    "license": "apache-2.0",
+    "quantizations": [
+      "f16",
+      "q8",
+      "q6",
+      "q5",
+      "q4"
+    ],
     "weights_local": false,
-    "provenance": "DOCUMENT_SECONDARY",
-    "source": "docs/01_TESE_LABORATORIO_DE_DADOS_E_EVALS.md secao 5.1",
-    "note": "Familia aberta focada em portugues. `params_b` e aproximado: a fonte fala em faixa de ~0,5B a 3,7B, nao em contagem exata. `context_len` e `license` ficam nulos porque a fonte nao os afirma — preencher por plausibilidade seria inventar proveniencia."
+    "provenance": "UPSTREAM_VERIFIED",
+    "source": "https://huggingface.co/api/models/Polygl0t/Tucano2-qwen-0.5B-Base",
+    "note": "Familia aberta focada em portugues. A ficha transcrita dizia `Qwen2ForCausalLM`, inferido do nome do repositorio; o checkpoint declara `Qwen3ForCausalLM`. Contagem real: 490.799.104 parametros. Corrigido em 2026-08-15 pela verificacao que fecha G-108 — ver correcao COR-101 em RETRACTIONS_AND_CORRECTIONS.",
+    "sha256": "9b410ca437403dd37215244d5cd0387c5c5edecaa7f42c212b708968b4fe0eb6",
+    "retrieved_at": "2026-08-15T00:41:54+00:00"
   }
 }

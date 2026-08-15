@@ -8,12 +8,15 @@
     "published_params": 46702792704,
     "hf_repo": "mistralai/Mixtral-8x7B-v0.1",
     "source_url": "https://huggingface.co/mistralai/Mixtral-8x7B-v0.1/resolve/main/config.json",
-    "provenance": "TRANSCRIBED_UNVERIFIED",
-    "sha256": null,
-    "note": "MoE esparsa: mesmo bloco de atencao do mistral-7b, MLP substituido por 8 especialistas com top-2. Caso-teste de roteamento dinamico (regiao NAO endurecivel)."
+    "provenance": "FETCHED",
+    "sha256": "9d56d04b36d0fd12ff54ae4c5bac769cc176e254e64ff71144614b6318b40793",
+    "note": "MoE esparsa: mesmo bloco de atencao do mistral-7b, MLP substituido por 8 especialistas com top-2. Caso-teste de roteamento dinamico (regiao NAO endurecivel).",
+    "retrieved_at": "2026-08-15T00:39:45+00:00"
   },
   "config": {
-    "architectures": ["MixtralForCausalLM"],
+    "architectures": [
+      "MixtralForCausalLM"
+    ],
     "model_type": "mixtral",
     "hidden_size": 4096,
     "intermediate_size": 14336,

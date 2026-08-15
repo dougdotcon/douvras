@@ -8,6 +8,8 @@
   - RUN:20260814T235329Z
   - RUN:20260815T000051Z
   - RUN:20260815T000252Z
+  - RUN:20260815T004444Z
+  - RUN:20260815T004820Z
   falsifiers:
   - o grader aceita alguma trajetoria declarada como errada (F1)
   - o grader rejeita a trajetoria de referencia de alguma tarefa (F2)
@@ -23,6 +25,8 @@
   - RUN:20260814T235329Z
   - RUN:20260815T000051Z
   - RUN:20260815T000252Z
+  - RUN:20260815T004444Z
+  - RUN:20260815T004820Z
   falsifiers:
   - margem entre oraculo e melhor sonda degenerada abaixo de 0.20 (F3)
   owner: research
@@ -38,6 +42,8 @@
   - RUN:20260814T235329Z
   - RUN:20260815T000051Z
   - RUN:20260815T000252Z
+  - RUN:20260815T004444Z
+  - RUN:20260815T004820Z
   falsifiers:
   - alguma tarefa declara regra que nenhum grader implementa (F5)
   - alguma capacidade tem menos de oito tarefas (F5)
@@ -52,6 +58,8 @@
   - RUN:20260814T235329Z
   - RUN:20260815T000051Z
   - RUN:20260815T000252Z
+  - RUN:20260815T004444Z
+  - RUN:20260815T004820Z
   falsifiers:
   - algum modo declarado nunca aparece em nenhuma execucao de sonda (F6)
   owner: engineering
@@ -65,6 +73,8 @@
   - RUN:20260814T235329Z
   - RUN:20260815T000051Z
   - RUN:20260815T000252Z
+  - RUN:20260815T004444Z
+  - RUN:20260815T004820Z
   falsifiers:
   - duas execucoes da mesma suite divergem em qualquer veredicto (F4)
   owner: engineering

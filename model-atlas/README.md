@@ -9,7 +9,7 @@ instrumento que faz essa medida antes de existir qualquer modelo para medir.**
 [![Ciclo](https://img.shields.io/badge/ciclo-C--002%20conclu%C3%ADdo-0d9488)](04_VALIDATION/EXPERIMENTS/X-002-RESULT.md)
 [![Testes](https://img.shields.io/badge/testes-82%20verdes-16a34a)](../tests/model/)
 [![Portões](https://img.shields.io/badge/port%C3%B5es-6%2F7%20%E2%80%94%20V3%20bloqueado-f59e0b)](#portões-do-ciclo)
-[![Lacunas](https://img.shields.io/badge/lacunas-11%20abertas-dc2626)](02_OBSERVATION/GAP_REGISTER.md)
+[![Lacunas](https://img.shields.io/badge/lacunas-10%20abertas-dc2626)](02_OBSERVATION/GAP_REGISTER.md)
 
 [![Falsificadores](https://img.shields.io/badge/falsificadores-1%20de%206%20disparado-b91c1c)](00_GOVERNANCE/RETRACTIONS_AND_CORRECTIONS.md)
 [![Corpus](https://img.shields.io/badge/BR--Agent--Bench-96%20tarefas%20%C2%B7%20132%20contraexemplos-0369a1)](corpus/tasks/)
@@ -179,8 +179,10 @@ humana de qualidade.
   *na forma em que a sonda a produz* (`A-106`). Um modelo real erra por caminhos que quem
   escreveu o corpus não antecipou — e é exatamente por isso que mais sondas não substituem
   `G-110`.
-- **Nenhuma ficha de modelo foi conferida na fonte** (`G-108`). A contagem de parâmetros é
-  aproximada por construção: "cerca de 0,5B" não vira `500_000_000` sem inventar sete dígitos.
+- ~~Nenhuma ficha de modelo foi conferida na fonte~~ — **`G-108` fechada em 2026-08-15**: as
+  três fichas foram conferidas contra o Hub, com hash e data. Achou dois erros de transcrição
+  ([COR-101, COR-102](00_GOVERNANCE/RETRACTIONS_AND_CORRECTIONS.md)), incluindo `qwen3.5-0.8b`
+  com 8,4 % a menos de parâmetros que o checkpoint real.
 - **Os priors do CSS nunca foram calibrados** (`G-104`). Quatro dos cinco fatores são palpite
   de engenharia.
 - **O limiar de 0,20 que retratou `C-102` não tem base empírica** (`G-105`). Um valor de 0,05

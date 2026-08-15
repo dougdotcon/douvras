@@ -7,6 +7,39 @@ artifact: CHANGELOG
 Registra mudanças de **código, corpus, priors e alegações**. Uma mudança de prior que altera
 uma recomendação é tão relevante quanto uma mudança de código, e por isso entra aqui.
 
+## [0.1.1] — 2026-08-15 — `G-108` fechada, duas fichas corrigidas
+
+Primeira execução de `matlas registry verify` contra o Hub. **3 de 3 fichas conferidas**, com
+hash e data gravados no corpus.
+
+### Adicionado
+
+- `verify_spec` e `record_verification`: o comando deixou de ser um aviso e passou a conferir
+  contra a API do Hub. Separa **conferir** (campo declarado diverge = erro de transcrição) de
+  **descobrir** (campo nulo preenchido pela fonte = lacuna fechando).
+- Tolerância de 5 % em `params_b`: a ficha vinha de documento que diz "cerca de", e exigir
+  igualdade exata reprovaria uma transcrição honesta.
+
+### Corrigido
+
+- **COR-101** — `tucano2-0.5b` declarava `Qwen2ForCausalLM`, inferido do nome do repositório;
+  o checkpoint diz `Qwen3ForCausalLM`. Parâmetros: 0,5 → 0,4908 B.
+- **COR-102** — `qwen3.5-0.8b` declarava 0,8 B; o checkpoint tem **0,8734 B**, erro de 8,4 %.
+  O nome comercial não é a contagem. O footprint publicado estava 8,4 % abaixo do real em toda
+  quantização — para menos, que é a direção perigosa quando a pergunta é "cabe em 16 GB?".
+
+### Descoberto pela fonte
+
+`license` nos três; `context_len` de `tucano2-0.5b` (4096) e `smollm3-3b` (65536); e a
+arquitetura de `qwen3.5-0.8b` — `Qwen3_5ForConditionalGeneration`, que não é puramente causal e
+merece atenção antes de ser tratada como baseline de agente de texto.
+
+### Efeito no contrato
+
+`params_b` conferido não carrega mais `A-101`: o `Finding` `parametros` sai como `OBSERVATION`
+em vez de `ASSUMPTION`, e `corpus_provenance` subiu de `CONDITIONAL_RESULT` para `OBSERVATION`.
+Lacunas abertas: 11 → **10**.
+
 ## [0.1.0] — 2026-08-14 — Ciclo C-002: o instrumento antes da medida
 
 ### Adicionado

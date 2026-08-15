@@ -1,8 +1,8 @@
 ---
 artifact: SILICON_READINESS_ASSESSMENT
 model: mistral-7b-v0.1
-run_id: 20260815T000032Z
-generated_at: 2026-08-15T00:00:32+00:00
+run_id: 20260815T004804Z
+generated_at: 2026-08-15T00:48:04+00:00
 method: DOUVRAS 2.0
 cycle: C-001
 weakest_status: ASSUMPTION
@@ -49,7 +49,7 @@ Status da afirmacao: `ASSUMPTION` (elo mais fraco da cadeia de evidencia).
 - `A-006/A-008` — custos de mascara, wafer e densidade de area sao faixas publicas
 - `A-007` — taxa de mudanca futura extrapola o historico curto do corpus
 
-Lacunas abertas que limitam o status de tudo acima: `G-001`, `G-002`, `G-003`, `G-004`, `G-006`, `G-008`, `G-009`
+Lacunas abertas que limitam o status de tudo acima: `G-001`, `G-002`, `G-003`, `G-004`, `G-006`, `G-009`
 
 ## 5. Criterios de falha (declarados antes da execucao)
 
@@ -158,7 +158,7 @@ Isto **e** o resultado: para mistral-7b-v0.1, o bloco que domina o custo (mlp, 2
 
 ### Silicon Readiness Score
 
-**SRS = 0.225** (ASSUMPTION) -> banda **software**
+**SRS = 0.250** (ASSUMPTION) -> banda **software**
 
 | Fator | Valor | Peso | Contribuicao | Status |
 |---|---|---|---|---|
@@ -167,7 +167,7 @@ Isto **e** o resultado: para mistral-7b-v0.1, o bloco que domina o custo (mlp, 2
 | T — throughput | 0.667 | +0.15 | +0.1000 | `ASSUMPTION` |
 | P — perf_per_watt | 0.000 | +0.15 | +0.0000 | `CONDITIONAL_RESULT` |
 | Q — low_precision | 0.684 | +0.10 | +0.0684 | `ASSUMPTION` |
-| D — data_availability | 0.750 | +0.10 | +0.0750 | `ASSUMPTION` |
+| D — data_availability | 1.000 | +0.10 | +0.1000 | `OBSERVATION` |
 | C — codesign | 1.000 | +0.10 | +0.1000 | `MODEL` |
 | R — revenue_potential | 0.000 | +0.10 | +0.0000 | `CONDITIONAL_RESULT` |
 | O — obsolescence_risk | 1.000 | -0.15 | -0.1500 | `CONDITIONAL_RESULT` |
@@ -207,7 +207,7 @@ As duas propriedades sao independentes e ambas precisam ser verdadeiras para jus
 Perturbando os pesos em +-20% (2,000 amostras):
 top-1 estavel em **100.0%** das amostras, top-3 em
 92.8%, banda de decisao do SRS estavel em
-99.9%. Fator dominante: `R`.
+96.2%. Fator dominante: `R`.
 
 Dispersao dos scores: 0.1747. Largura do ruido induzido pelos pesos:
 0.0273. **Diagnostico: top-1 estavel, mas a margem sobre o concorrente (0.0150) nao supera o ruido dos pesos (0.0273): a ordem pode ser artefato.**
@@ -313,7 +313,7 @@ Taxa de mudanca estrutural observada: 4.87 por ano
 
 - Modelo: `mistral-7b-v0.1`, familia `mistral`, licenca `apache-2.0`
 - Fonte da configuracao: https://huggingface.co/mistralai/Mistral-7B-v0.1/resolve/main/config.json
-- Status de proveniencia: `TRANSCRIBED_UNVERIFIED` (lacuna G-008 aberta)
+- Status de proveniencia: `FETCHED`
 - Parametros derivados da IR: 7,241,732,096 | publicados: 7,241,732,096
 - Baseline de hardware: `h100-sxm` — picos densos de datasheet do fabricante; eficiencia e custo assumidos
 - Pesos de score: v1.0 (UNCALIBRATED — nenhum caso real de tape-out alimentou estes pesos ainda)
@@ -323,7 +323,7 @@ Taxa de mudanca estrutural observada: 4.87 por ano
 
 | Afirmacao | Valor | Status | Lacunas |
 |---|---|---|---|
-| `mistral-7b-v0.1.params` | 7241732096 params | `ASSUMPTION` | G-001, G-008 |
+| `mistral-7b-v0.1.params` | 7241732096 params | `MODEL` | G-001 |
 | `mistral-7b-v0.1.serving.decode_time_share` | 0.9794 fracao do tempo de requisicao | `CONDITIONAL_RESULT` | G-003, G-009 |
 | `mistral-7b-v0.1.serving.energy_per_token` | 6.287 J/token gerado | `CONDITIONAL_RESULT` | G-003, G-004, G-009 |
 | `mistral-7b-v0.1.decode.tokens_per_s` | 184.2 tok/s | `CONDITIONAL_RESULT` | G-003 |
@@ -340,7 +340,7 @@ Taxa de mudanca estrutural observada: 4.87 por ano
 | `economics.breakeven_years.p50` | — anos | `OPEN_GAP` | G-001 |
 | `economics.p_breakeven_before_obsolescence` | — probabilidade | `OPEN_GAP` | G-001 |
 | `economics.die_area_mm2.p50` | — mm2 | `OPEN_GAP` | G-001 |
-| `SRS.mistral-7b-v0.1` | 0.2252 score SRS | `ASSUMPTION` | G-001, G-002, G-003, G-006, G-008, G-009 |
+| `SRS.mistral-7b-v0.1` | 0.2502 score SRS | `ASSUMPTION` | G-001, G-002, G-003, G-006, G-009 |
 | `readiness.rank_stability` | 1 fracao das amostras com mesmo top-1 | `ASSUMPTION` | G-001, G-002, G-003, G-006 |
 | `stability.mistral.exact` | 0 fracao de blocos preservados | `COMPUTATIONAL_EVIDENCE` | G-001 |
 

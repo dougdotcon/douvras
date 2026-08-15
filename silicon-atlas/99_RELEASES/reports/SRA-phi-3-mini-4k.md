@@ -1,8 +1,8 @@
 ---
 artifact: SILICON_READINESS_ASSESSMENT
 model: phi-3-mini-4k
-run_id: 20260815T000033Z
-generated_at: 2026-08-15T00:00:33+00:00
+run_id: 20260815T004805Z
+generated_at: 2026-08-15T00:48:05+00:00
 method: DOUVRAS 2.0
 cycle: C-001
 weakest_status: OPEN_GAP
@@ -49,7 +49,7 @@ Status da afirmacao: `OPEN_GAP` (elo mais fraco da cadeia de evidencia).
 - `A-006/A-008` — custos de mascara, wafer e densidade de area sao faixas publicas
 - `A-007` — taxa de mudanca futura extrapola o historico curto do corpus
 
-Lacunas abertas que limitam o status de tudo acima: `G-001`, `G-002`, `G-003`, `G-004`, `G-006`, `G-008`, `G-009`
+Lacunas abertas que limitam o status de tudo acima: `G-001`, `G-002`, `G-003`, `G-004`, `G-006`, `G-009`
 
 ## 5. Criterios de falha (declarados antes da execucao)
 
@@ -57,10 +57,10 @@ Lacunas abertas que limitam o status de tudo acima: `G-001`, `G-002`, `G-003`, `
   observado: familia sem transicao temporal no corpus (1 versao(oes)): nao avaliavel  
   **nao disparado**
 - **F2** — o padrao mais custoso muda de identidade entre versoes  
-  observado: bloco mais custoso 'mlp' (papel gate_proj, 19.2% do custo): E = 0.11  
+  observado: bloco mais custoso 'mlp' (papel gate_proj, 19.4% do custo): E = 0.11  
   **DISPARADO**
 - **F3** — top-1 do ranking troca sob perturbacao de +-20% dos pesos, ou vence por margem menor que o ruido (criterio reforcado apos CE-001)  
-  observado: estabilidade do top-1 = 0.681 (limite 0.95); margem = 0.0015 contra ruido 0.0264  
+  observado: estabilidade do top-1 = 0.663 (limite 0.95); margem = 0.0013 contra ruido 0.0264  
   **DISPARADO**
 - **F4** — break-even P50 posterior a vida economica  
   observado: nao avaliavel: regiao fixa vazia (nenhum FLOP endurecido e nenhum peso a fixar): nao ha ponto de projeto a simular  
@@ -78,11 +78,11 @@ lote 1, contexto 2304, pesos bf16.
 
 | Metrica | Prefill | Decode |
 |---|---|---|
-| tokens/s | 62,671 | 320.1 |
+| tokens/s | 62,672 | 324.1 |
 | intensidade aritmetica (FLOP/byte) | 502.0 | 1.00 |
 | ponto de inflexao do dispositivo | 253 | 92 |
 | tempo limitado por memoria | 19.2% | 99.9% |
-| energia por token | 18.09 mJ | 3542.3 mJ |
+| energia por token | 18.09 mJ | 3499.1 mJ |
 
 O decode consome 98.0% do tempo da requisicao. Toda decisao de
 hardening abaixo e ponderada por essa mistura, nao por FLOPs isolados.
@@ -91,42 +91,42 @@ hardening abaixo e ponderada por essa mistura, nao por FLOPs isolados.
 
 | Papel | Participacao na requisicao |
 |---|---|
-| gate_proj | 19.20% |
-| up_proj | 19.20% |
-| down_proj | 19.20% |
-| kv_read | 10.63% |
-| q_proj | 7.20% |
-| k_proj | 7.20% |
-| v_proj | 7.20% |
-| o_proj | 7.20% |
+| gate_proj | 19.44% |
+| up_proj | 19.44% |
+| down_proj | 19.44% |
+| kv_read | 9.56% |
+| q_proj | 7.29% |
+| k_proj | 7.29% |
+| v_proj | 7.29% |
+| o_proj | 7.29% |
 
 ### Candidatos a endurecimento (LHS)
 
 | Papel | Bloco | Custo | Instancias/token | Precisao | LHS |
 |---|---|---|---|---|---|
-| q_proj | attention | 7.2% | 32 | int8 | 0.505 |
-| v_proj | attention | 7.2% | 32 | int8 | 0.505 |
-| gate_proj | mlp | 19.2% | 32 | int4 | 0.504 |
-| up_proj | mlp | 19.2% | 32 | int4 | 0.504 |
-| k_proj | attention | 7.2% | 32 | int8 | 0.498 |
-| down_proj | mlp | 19.2% | 32 | int4 | 0.489 |
-| o_proj | attention | 7.2% | 32 | int4 | 0.468 |
+| q_proj | attention | 7.3% | 32 | int8 | 0.505 |
+| v_proj | attention | 7.3% | 32 | int8 | 0.505 |
+| gate_proj | mlp | 19.4% | 32 | int4 | 0.504 |
+| up_proj | mlp | 19.4% | 32 | int4 | 0.504 |
+| k_proj | attention | 7.3% | 32 | int8 | 0.498 |
+| down_proj | mlp | 19.4% | 32 | int4 | 0.489 |
+| o_proj | attention | 7.3% | 32 | int4 | 0.468 |
 | lm_head | head | 2.3% | 1 | int8 | 0.399 |
 
 ### Particao recomendada
 
 ```text
-FPGA/eFPGA: 88.7% do custo
-  ├── gate_proj             19.2%  regular e quantizavel, porem LHS=0.50 < 0.55; E=0.11 < 0.6: prototipar antes de fixar
-  ├── up_proj               19.2%  regular e quantizavel, porem LHS=0.50 < 0.55; E=0.11 < 0.6: prototipar antes de fixar
-  ├── down_proj             19.2%  regular e quantizavel, porem LHS=0.49 < 0.55; E=0.11 < 0.6: prototipar antes de fixar
-  ├── q_proj                 7.2%  regular e quantizavel, porem LHS=0.51 < 0.55; E=0.11 < 0.6: prototipar antes de fixar
-  ├── v_proj                 7.2%  regular e quantizavel, porem LHS=0.51 < 0.55; E=0.11 < 0.6: prototipar antes de fixar
-  ├── k_proj                 7.2%  regular e quantizavel, porem LHS=0.50 < 0.55; E=0.11 < 0.6: prototipar antes de fixar
-  ├── o_proj                 7.2%  regular e quantizavel, porem LHS=0.47 < 0.55; E=0.11 < 0.6: prototipar antes de fixar
+FPGA/eFPGA: 89.8% do custo
+  ├── gate_proj             19.4%  regular e quantizavel, porem LHS=0.50 < 0.55; E=0.11 < 0.6: prototipar antes de fixar
+  ├── up_proj               19.4%  regular e quantizavel, porem LHS=0.50 < 0.55; E=0.11 < 0.6: prototipar antes de fixar
+  ├── down_proj             19.4%  regular e quantizavel, porem LHS=0.49 < 0.55; E=0.11 < 0.6: prototipar antes de fixar
+  ├── q_proj                 7.3%  regular e quantizavel, porem LHS=0.51 < 0.55; E=0.11 < 0.6: prototipar antes de fixar
+  ├── v_proj                 7.3%  regular e quantizavel, porem LHS=0.51 < 0.55; E=0.11 < 0.6: prototipar antes de fixar
+  ├── k_proj                 7.3%  regular e quantizavel, porem LHS=0.50 < 0.55; E=0.11 < 0.6: prototipar antes de fixar
+  ├── o_proj                 7.3%  regular e quantizavel, porem LHS=0.47 < 0.55; E=0.11 < 0.6: prototipar antes de fixar
   └── lm_head                2.3%  regular e quantizavel, porem LHS=0.40 < 0.55; E=0.11 < 0.6: prototipar antes de fixar
-CPU/GPU: 10.6% do custo
-  └── kv_read               10.6%  LHS=0.38 < 0.55; E=0.11 < 0.6; Q=0.00 < 0.6
+CPU/GPU: 9.6% do custo
+  └── kv_read                9.6%  LHS=0.38 < 0.55; E=0.11 < 0.6; Q=0.00 < 0.6
 ```
 
 Nivel de especializacao implicado: **3 — acelerador por arquitetura**.
@@ -140,7 +140,7 @@ Um ganho de 100x e inalcancavel nesta particao mesmo com aceleracao infinita na 
 Plano por sensibilidade reduz o **trafego de leitura de pesos por passo** em
 **50.0%** (7.45 GB para
 3.72 GB por passo de decode), com aceleracao estimada de
-1.80x. O **footprint residente** e grandeza distinta:
+1.82x. O **footprint residente** e grandeza distinta:
 7.64 GB, contra
 80 GB de capacidade
 (cabe,
@@ -154,20 +154,20 @@ A regiao fixa ficou **vazia** sob a politica de particionamento vigente: regiao 
 
 Consequencia registrada: os fatores **P** (ganho por watt), **R** (receita) e **N** (risco de NRE) do SRS entram como **zero declarado**, e o falsificador **F4** fica *nao avaliavel*. Publicar percentis de area, NRE ou break-even aqui seria descrever um objeto inexistente — foi exatamente o defeito retratado em `R-002`.
 
-Isto **e** o resultado: para phi-3-mini-4k, o bloco que domina o custo (mlp, 19.2% do tempo) tem estabilidade estrutural E = 0.11, abaixo do limite da politica. O gasto em mascara nao tem o que financiar. A decisao economica so passa a existir se essa estabilidade subir — por escopo declarado mais estreito, por observacao de mais versoes, ou por calibracao da politica contra casos reais (`G-011`).
+Isto **e** o resultado: para phi-3-mini-4k, o bloco que domina o custo (mlp, 19.4% do tempo) tem estabilidade estrutural E = 0.11, abaixo do limite da politica. O gasto em mascara nao tem o que financiar. A decisao economica so passa a existir se essa estabilidade subir — por escopo declarado mais estreito, por observacao de mais versoes, ou por calibracao da politica contra casos reais (`G-011`).
 
 ### Silicon Readiness Score
 
-**SRS = 0.186** (OPEN_GAP) -> banda **software**
+**SRS = 0.211** (OPEN_GAP) -> banda **software**
 
 | Fator | Valor | Peso | Contribuicao | Status |
 |---|---|---|---|---|
 | A — arch_stability | 0.000 | +0.15 | +0.0000 | `OPEN_GAP` |
-| H — concentration | 0.144 | +0.15 | +0.0216 | `CONDITIONAL_RESULT` |
+| H — concentration | 0.145 | +0.15 | +0.0218 | `CONDITIONAL_RESULT` |
 | T — throughput | 0.667 | +0.15 | +0.1000 | `ASSUMPTION` |
 | P — perf_per_watt | 0.000 | +0.15 | +0.0000 | `CONDITIONAL_RESULT` |
-| Q — low_precision | 0.639 | +0.10 | +0.0639 | `ASSUMPTION` |
-| D — data_availability | 0.500 | +0.10 | +0.0500 | `ASSUMPTION` |
+| Q — low_precision | 0.647 | +0.10 | +0.0647 | `ASSUMPTION` |
+| D — data_availability | 0.750 | +0.10 | +0.0750 | `OBSERVATION` |
 | C — codesign | 1.000 | +0.10 | +0.1000 | `MODEL` |
 | R — revenue_potential | 0.000 | +0.10 | +0.0000 | `CONDITIONAL_RESULT` |
 | O — obsolescence_risk | 1.000 | -0.15 | -0.1500 | `OPEN_GAP` |
@@ -184,12 +184,12 @@ Nenhum bloco exato deste modelo reaparece em outra familia do corpus (alcance ma
 ### Estabilidade do proprio score
 
 Perturbando os pesos em +-20% (2,000 amostras):
-top-1 estavel em **68.2%** das amostras, top-3 em
-68.2%, banda de decisao do SRS estavel em
+top-1 estavel em **66.3%** das amostras, top-3 em
+66.3%, banda de decisao do SRS estavel em
 100.0%. Fator dominante: `R`.
 
-Dispersao dos scores: 0.1224. Largura do ruido induzido pelos pesos:
-0.0264. **Diagnostico: score NAO discrimina: entre os 6 candidatos que disputam a primeira posicao, 70% do peso esta em fatores identicos; a margem (0.0015) e menor que o ruido (0.0264).**
+Dispersao dos scores: 0.1241. Largura do ruido induzido pelos pesos:
+0.0264. **Diagnostico: score NAO discrimina: entre os 6 candidatos que disputam a primeira posicao, 70% do peso esta em fatores identicos; a margem (0.0013) e menor que o ruido (0.0264).**
 
 Disputam a primeira posicao, dentro do ruido: `q_proj`, `v_proj`, `gate_proj`, `up_proj`, `k_proj`, `down_proj`. Entre eles, **70% do peso do LHS esta em fatores identicos** — estabilidade, regularidade, previsibilidade de memoria, volume e vida util sao os mesmos para toda projecao linear do mesmo modelo. Sobre o conjunto completo de candidatos o peso inerte e 55%.
 
@@ -256,7 +256,7 @@ Este relatorio **nao** demonstra:
   "routing": "dense",
   "vocab_size": 32064,
   "tied_embeddings": false,
-  "sliding_window": null,
+  "sliding_window": 2047,
   "params": 3821079552,
   "quantization_candidates": [
     "int8",
@@ -290,7 +290,7 @@ _Sem transicoes de versao no corpus para esta familia._
 
 - Modelo: `phi-3-mini-4k`, familia `phi`, licenca `mit`
 - Fonte da configuracao: https://huggingface.co/microsoft/Phi-3-mini-4k-instruct/resolve/main/config.json
-- Status de proveniencia: `TRANSCRIBED_UNVERIFIED` (lacuna G-008 aberta)
+- Status de proveniencia: `FETCHED`
 - Parametros derivados da IR: 3,821,079,552 | publicados: 3,821,079,552
 - Baseline de hardware: `h100-sxm` — picos densos de datasheet do fabricante; eficiencia e custo assumidos
 - Pesos de score: v1.0 (UNCALIBRATED — nenhum caso real de tape-out alimentou estes pesos ainda)
@@ -300,25 +300,25 @@ _Sem transicoes de versao no corpus para esta familia._
 
 | Afirmacao | Valor | Status | Lacunas |
 |---|---|---|---|
-| `phi-3-mini-4k.params` | 3821079552 params | `ASSUMPTION` | G-001, G-008 |
-| `phi-3-mini-4k.serving.decode_time_share` | 0.98 fracao do tempo de requisicao | `CONDITIONAL_RESULT` | G-003, G-009 |
-| `phi-3-mini-4k.serving.energy_per_token` | 3.615 J/token gerado | `CONDITIONAL_RESULT` | G-003, G-004, G-009 |
-| `phi-3-mini-4k.decode.tokens_per_s` | 320.1 tok/s | `CONDITIONAL_RESULT` | G-003 |
-| `phi-3-mini-4k.decode.memory_bound_share` | 0.9988 fracao do tempo | `CONDITIONAL_RESULT` | G-003 |
+| `phi-3-mini-4k.params` | 3821079552 params | `MODEL` | G-001 |
+| `phi-3-mini-4k.serving.decode_time_share` | 0.9797 fracao do tempo de requisicao | `CONDITIONAL_RESULT` | G-003, G-009 |
+| `phi-3-mini-4k.serving.energy_per_token` | 3.571 J/token gerado | `CONDITIONAL_RESULT` | G-003, G-004, G-009 |
+| `phi-3-mini-4k.decode.tokens_per_s` | 324.1 tok/s | `CONDITIONAL_RESULT` | G-003 |
+| `phi-3-mini-4k.decode.memory_bound_share` | 0.9989 fracao do tempo | `CONDITIONAL_RESULT` | G-003 |
 | `phi-3-mini-4k.decode.arith_intensity` | 1 FLOP/byte | `CONDITIONAL_RESULT` | G-003 |
-| `phi-3-mini-4k.decode.energy_per_token` | 3.542 J/token | `CONDITIONAL_RESULT` | G-003, G-004 |
+| `phi-3-mini-4k.decode.energy_per_token` | 3.499 J/token | `CONDITIONAL_RESULT` | G-003, G-004 |
 | `quant.sensitivity.memory_reduction` | 0.5 fracao | `CONDITIONAL_RESULT` | G-002, G-003 |
-| `quant.sensitivity.speedup` | 1.801 x sobre baseline | `CONDITIONAL_RESULT` | G-002, G-003 |
+| `quant.sensitivity.speedup` | 1.819 x sobre baseline | `CONDITIONAL_RESULT` | G-002, G-003 |
 | `quant.sensitivity.quality_delta` | — perplexidade / acuracia | `OPEN_GAP` | G-002 |
-| `quant.reachable_cost_share.int4` | 0.6496 fracao do tempo | `CONDITIONAL_RESULT` | G-002, G-003 |
+| `quant.reachable_cost_share.int4` | 0.6577 fracao do tempo | `CONDITIONAL_RESULT` | G-002, G-003 |
 | `phi-3-mini-4k.partition.hardened_share` | 0 fracao do tempo | `OPEN_GAP` | G-001, G-002, G-003, G-006 |
 | `phi-3-mini-4k.partition.amdahl_ceiling` | 1 x sobre baseline | `OPEN_GAP` | G-001, G-002, G-003, G-006 |
 | `partition.claim_check` | 1 x (teto do sistema) | `OPEN_GAP` | G-001, G-002, G-003, G-006 |
 | `economics.breakeven_years.p50` | — anos | `OPEN_GAP` | G-001 |
 | `economics.p_breakeven_before_obsolescence` | — probabilidade | `OPEN_GAP` | G-001 |
 | `economics.die_area_mm2.p50` | — mm2 | `OPEN_GAP` | G-001 |
-| `SRS.phi-3-mini-4k` | 0.1856 score SRS | `OPEN_GAP` | G-001, G-002, G-003, G-006, G-008, G-009 |
-| `readiness.rank_stability` | 0.6815 fracao das amostras com mesmo top-1 | `OPEN_GAP` | G-001, G-002, G-003, G-006 |
+| `SRS.phi-3-mini-4k` | 0.2115 score SRS | `OPEN_GAP` | G-001, G-002, G-003, G-006, G-009 |
+| `readiness.rank_stability` | 0.663 fracao das amostras com mesmo top-1 | `OPEN_GAP` | G-001, G-002, G-003, G-006 |
 | `stability.phi.exact` | — fracao de blocos preservados | `OPEN_GAP` | G-006 |
 
 ---

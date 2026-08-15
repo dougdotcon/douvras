@@ -3,14 +3,23 @@
     "id": "qwen3.5-0.8b",
     "repo": "Qwen/Qwen3.5-0.8B",
     "family": "qwen",
-    "params_b": 0.8,
-    "architecture": "",
+    "params_b": 0.8734,
+    "architecture": "Qwen3_5ForConditionalGeneration",
     "context_len": null,
-    "license": "",
-    "quantizations": ["f16", "q8", "q6", "q5", "q4", "q3"],
+    "license": "apache-2.0",
+    "quantizations": [
+      "f16",
+      "q8",
+      "q6",
+      "q5",
+      "q4",
+      "q3"
+    ],
     "weights_local": false,
-    "provenance": "DOCUMENT_SECONDARY",
-    "source": "docs/01_TESE_LABORATORIO_DE_DADOS_E_EVALS.md secao 5.2",
-    "note": "Apontado pela fonte para prototipagem, fine-tuning de tarefa e pesquisa — o segundo baseline do laboratorio. `architecture` fica vazio: a fonte nao nomeia a classe."
+    "provenance": "UPSTREAM_VERIFIED",
+    "source": "https://huggingface.co/api/models/Qwen/Qwen3.5-0.8B",
+    "note": "Apontado pela fonte para prototipagem, fine-tuning de tarefa e pesquisa — o segundo baseline do laboratorio. O nome comercial diz 0,8B; o checkpoint tem 873.438.784 parametros (0,8734 B), erro de 8,4 % contra a ficha transcrita. Corrigido em 2026-08-15 pela verificacao que fecha G-108 — ver correcao COR-102 em RETRACTIONS_AND_CORRECTIONS.",
+    "sha256": "ad1c6a7111632d84d5a41e45432655ecb83257c08db7ffe5432715bfa753c323",
+    "retrieved_at": "2026-08-15T00:41:53+00:00"
   }
 }

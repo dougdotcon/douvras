@@ -365,6 +365,24 @@ class Registry:
 HF_CONFIG_URL = "https://huggingface.co/{repo}/resolve/main/config.json"
 
 
+def hf_token() -> str | None:
+    """Token do Hugging Face, se houver.
+
+    Modelos com licenca restrita (`meta-llama/*`, `google/gemma-*`) devolvem 401 sem token,
+    **mesmo para o `config.json`**. Ler o token do ambiente permite fechar `G-008` para eles
+    sem mudar codigo — mas exige que a conta tenha aceitado a licenca de cada repositorio.
+    Contornar o gate nao e opcao: a restricao e do detentor do modelo.
+    """
+    import os
+    from pathlib import Path as _P
+
+    for var in ("HF_TOKEN", "HUGGINGFACE_HUB_TOKEN"):
+        if os.environ.get(var):
+            return os.environ[var]
+    cache = _P.home() / ".cache" / "huggingface" / "token"
+    return cache.read_text(encoding="utf-8").strip() if cache.exists() else None
+
+
 def fetch_hf_config(repo: str, timeout: float = 20.0) -> tuple[dict[str, Any], str, str]:
     """Baixa `config.json` de um repositorio Hugging Face.
 
@@ -374,14 +392,56 @@ def fetch_hf_config(repo: str, timeout: float = 20.0) -> tuple[dict[str, Any], s
     import urllib.request
 
     url = HF_CONFIG_URL.format(repo=repo)
-    req = urllib.request.Request(url, headers={"User-Agent": "douvras-silicon-atlas/0.1"})
+    headers = {"User-Agent": "douvras-silicon-atlas/0.1"}
+    tok = hf_token()
+    if tok:
+        headers["Authorization"] = f"Bearer {tok}"
+    req = urllib.request.Request(url, headers=headers)
     with urllib.request.urlopen(req, timeout=timeout) as resp:  # noqa: S310 - url fixa
         text = resp.read().decode("utf-8")
     return json.loads(text), sha256_of(text), url
 
 
+#: Campos do `ModelSpec` que descrevem a arquitetura e alimentam a IR. Sao eles que a
+#: verificacao compara — nao as chaves cruas do `config.json`. Metadados de catalogo
+#: (`license`, `release_date`, `hf_repo`, proveniencia) ficam de fora porque nao entram em
+#: nenhum numero derivado.
+ARCHITECTURAL_FIELDS: tuple[str, ...] = (
+    "architecture",
+    "hidden_size",
+    "num_layers",
+    "num_heads",
+    "num_kv_heads",
+    "head_dim",
+    "intermediate_size",
+    "vocab_size",
+    "max_position",
+    "norm_type",
+    "norms_per_layer",
+    "mlp_type",
+    "position_type",
+    "rope_theta",
+    "tie_word_embeddings",
+    "qkv_bias",
+    "o_bias",
+    "mlp_bias",
+    "sliding_window",
+)
+
+
 def verify_spec(spec: ModelSpec, repo: str | None = None) -> dict[str, Any]:
-    """Compara o config registrado com o upstream e devolve o diff de campos.
+    """Confronta a transcricao local com o `config.json` upstream.
+
+    A comparacao **nao** e byte a byte entre os dois JSON, e a razao importa. O corpus e uma
+    transcricao deliberadamente parcial: registra o que o construtor de IR consome e ignora
+    `bos_token_id`, `torch_dtype`, `transformers_version` e afins (decisao `D-006`). Comparar a
+    uniao das chaves faria `matches` ser sempre falso — uma verificacao que estruturalmente nao
+    pode passar nao fecha lacuna nenhuma, so produz a aparencia de rigor.
+
+    O que se compara e o **`ModelSpec` normalizado** dos dois lados. Se os dois normalizam para
+    a mesma arquitetura, a transcricao e fiel em tudo que o sistema usa — e a contagem de
+    parametros, o roofline e a particao a jusante sao os mesmos que sairiam do arquivo original.
+    Campos presentes upstream e ausentes localmente aparecem como contexto, nunca como falha.
 
     Recusa modelos marcados como ``CLIENT_SUPPLIED``: enviar a arquitetura de um cliente para um
     servico externo seria exatamente a ameaca S-003 do THREAT_MODEL, e nenhuma conveniencia de
@@ -399,21 +459,79 @@ def verify_spec(spec: ModelSpec, repo: str | None = None) -> dict[str, Any]:
             f"ou passe --repo <org/nome>."
         )
     upstream, digest, url = fetch_hf_config(repo)
-    keys = set(spec.raw_config) | set(upstream)
-    diff = {
-        k: {"local": spec.raw_config.get(k), "upstream": upstream.get(k)}
-        for k in sorted(keys)
-        if spec.raw_config.get(k) != upstream.get(k)
+
+    meta = {"id": spec.id, "family": spec.family, "version_label": spec.version_label}
+    try:
+        upstream_spec = normalize_config(upstream, meta)
+    except UnsupportedArchitecture as exc:
+        return {
+            "model": spec.id,
+            "repo": repo,
+            "url": url,
+            "sha256": digest,
+            "retrieved_at": _dt.datetime.now(_dt.UTC).isoformat(timespec="seconds"),
+            "matches": False,
+            "divergences": {"architecture": {"local": spec.architecture, "upstream": str(exc)}},
+            "not_transcribed": [],
+            "derived_params": {"local": spec.param_count(), "upstream": None},
+        }
+
+    divergences = {
+        f: {"local": getattr(spec, f), "upstream": getattr(upstream_spec, f)}
+        for f in ARCHITECTURAL_FIELDS
+        if getattr(spec, f) != getattr(upstream_spec, f)
     }
+    if (spec.moe is None) != (upstream_spec.moe is None) or (
+        spec.moe and upstream_spec.moe and spec.moe.__dict__ != upstream_spec.moe.__dict__
+    ):
+        divergences["moe"] = {
+            "local": spec.moe.__dict__ if spec.moe else None,
+            "upstream": upstream_spec.moe.__dict__ if upstream_spec.moe else None,
+        }
+
+    local_params, upstream_params = spec.param_count(), upstream_spec.param_count()
     return {
         "model": spec.id,
         "repo": repo,
         "url": url,
         "sha256": digest,
         "retrieved_at": _dt.datetime.now(_dt.UTC).isoformat(timespec="seconds"),
-        "matches": not diff,
-        "diff": diff,
+        "matches": not divergences,
+        "divergences": divergences,
+        # Contexto, nao falha: chaves que o upstream tem e a transcricao nao precisa.
+        "not_transcribed": sorted(set(upstream) - set(spec.raw_config)),
+        "derived_params": {
+            "local": local_params,
+            "upstream": upstream_params,
+            "equal": local_params == upstream_params,
+        },
     }
+
+
+def record_verification(
+    model_id: str, result: Mapping[str, Any], corpus_dir: Path | None = None
+) -> Path:
+    """Grava a proveniencia conferida no arquivo do corpus.
+
+    Sem isto a verificacao seria um comando que imprime e esquece: a lacuna `G-008` fala do
+    **corpus**, e so fecha quando o proprio corpus registra que foi conferido, com hash e data.
+    Grava apenas quando `matches` e verdadeiro — registrar proveniencia de uma conferencia que
+    divergiu seria pior que nao registrar nada.
+    """
+    if not result.get("matches"):
+        raise ValueError(f"{model_id}: verificacao divergiu; proveniencia nao registrada")
+    d = Path(corpus_dir or CORPUS_DIR)
+    caminho = d / f"{model_id}.json"
+    doc = json.loads(caminho.read_text(encoding="utf-8"))
+    bloco = doc.setdefault("douvras", {})
+    bloco["provenance"] = ProvenanceStatus.FETCHED
+    bloco["source_url"] = result["url"]
+    bloco["sha256"] = result["sha256"]
+    bloco["retrieved_at"] = result["retrieved_at"]
+    caminho.write_text(
+        json.dumps(doc, indent=2, ensure_ascii=False) + "\n", encoding="utf-8"
+    )
+    return caminho
 
 
 def corpus_integrity(registry: Registry) -> Finding:

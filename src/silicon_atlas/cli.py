@@ -48,7 +48,7 @@ from .ir import build_graph
 from .profiler import concentration_index, dominant_roles, serving_profile
 from .quantization import QuantPriors, evaluate_plan, sensitivity_plan
 from .readiness import Weights, build_candidates, sensitivity
-from .registry import Registry, corpus_integrity, verify_spec
+from .registry import Registry, corpus_integrity, record_verification, verify_spec
 
 ROOT = project_root("silicon-atlas")
 
@@ -94,19 +94,46 @@ def cmd_registry(args) -> int:
             return 2
         print(json.dumps(reg[args.model].as_dict(), indent=2, ensure_ascii=False, default=str))
     elif args.action == "verify":
-        if not args.model:
-            print("uso: atlas registry verify <modelo> [--repo org/nome]", file=sys.stderr)
-            return 2
-        try:
-            result = verify_spec(reg[args.model], args.repo)
-        except (ValueError, PermissionError) as exc:
-            print(str(exc), file=sys.stderr)
-            return 2
-        except OSError as exc:  # rede indisponivel
-            print(f"falha de rede ao verificar upstream: {exc}", file=sys.stderr)
-            return 4
-        print(json.dumps(result, indent=2, ensure_ascii=False))
-        return 0 if result["matches"] else 1
+        # Sem modelo nomeado, confere o corpus inteiro: `G-008` fala do corpus, nao de um item.
+        alvos = [reg[args.model]] if args.model else list(reg)
+        divergiram, falharam, ok = [], [], []
+        print(f"{'modelo':<20}{'veredicto':<14}{'params local = upstream':<26}nao transcritos")
+        for spec in alvos:
+            try:
+                r = verify_spec(spec, args.repo if args.model else None)
+            except (ValueError, PermissionError) as exc:
+                falharam.append((spec.id, str(exc)))
+                print(f"{spec.id:<20}{'SEM UPSTREAM':<14}{'—':<26}{exc}")
+                continue
+            except OSError as exc:
+                falharam.append((spec.id, f"rede: {exc}"))
+                print(f"{spec.id:<20}{'FALHA DE REDE':<14}{'—':<26}{exc}")
+                continue
+            p = r["derived_params"]
+            print(
+                f"{spec.id:<20}{'CONFERE' if r['matches'] else 'DIVERGE':<14}"
+                f"{('sim' if p.get('equal') else 'NAO'):<26}{len(r['not_transcribed'])}"
+            )
+            if r["matches"]:
+                ok.append(r)
+                if args.write:
+                    record_verification(spec.id, r, _corpus(args))
+            else:
+                divergiram.append(r)
+
+        for r in divergiram:
+            print(f"\n{r['model']} — campos que divergem do upstream:")
+            print(json.dumps(r["divergences"], indent=2, ensure_ascii=False))
+
+        print(
+            f"\n{len(ok)} conferido(s), {len(divergiram)} divergente(s), "
+            f"{len(falharam)} sem verificacao"
+        )
+        if args.write and ok:
+            print(f"proveniencia gravada no corpus para {len(ok)} modelo(s) — fecha G-008")
+        elif ok and not args.write:
+            print("use --write para gravar a proveniencia no corpus e fechar G-008")
+        return 1 if (divergiram or falharam) else 0
     return 0
 
 
@@ -400,6 +427,11 @@ def build_parser() -> argparse.ArgumentParser:
     r.add_argument("action", choices=["list", "show", "verify"])
     r.add_argument("model", nargs="?")
     r.add_argument("--repo", help="repositorio HF para verificacao upstream")
+    r.add_argument(
+        "--write",
+        action="store_true",
+        help="grava a proveniencia conferida no corpus (fecha G-008)",
+    )
     r.set_defaults(func=cmd_registry)
 
     f = sub.add_parser("fingerprint", help="fingerprint arquitetural")

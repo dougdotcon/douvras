@@ -9,7 +9,7 @@ para virar silício, e o que num modelo de IA está maduro para ser medido.**
 [![Testes](https://img.shields.io/badge/testes-231%20verdes-16a34a)](tests/)
 [![Ciclos](https://img.shields.io/badge/ciclos-C--001%20%C2%B7%20C--002-0d9488)](#os-dois-eixos)
 [![Portões](https://img.shields.io/badge/port%C3%B5es-6%2F7%20em%20ambos%20os%20eixos-f59e0b)](#estado-dos-portões)
-[![Retratações](https://img.shields.io/badge/retrata%C3%A7%C3%B5es-6-b91c1c)](#o-que-o-sistema-retratou-de-si-mesmo)
+[![Retratações](https://img.shields.io/badge/retrata%C3%A7%C3%B5es-6%20%C2%B7%20corre%C3%A7%C3%B5es-3-b91c1c)](#o-que-o-sistema-retratou-de-si-mesmo)
 
 [![Status máximo](https://img.shields.io/badge/status%20m%C3%A1ximo-CONDITIONAL__RESULT-7c3aed)](00_GOVERNANCE/STATUS_POLICY.md)
 [![Python](https://img.shields.io/badge/python-3.11%2B-3776ab)](pyproject.toml)
@@ -165,6 +165,22 @@ Em nenhum dos seis casos a métrica foi redefinida para caber no resultado. Rede
 falsificador depois de vê-lo disparar é ajustar o instrumento ao resultado, e está proibido por
 decisão registrada nos dois eixos (`D-008`, `D-106`).
 
+### E três correções, encontradas ao conferir os corpora contra a fonte
+
+Nenhuma alegação caiu, mas números publicados estavam errados — e nenhum dos três era
+detectável sem sair do repositório.
+
+| # | Eixo | O que estava errado |
+|---|---|---|
+| [COR-001](silicon-atlas/00_GOVERNANCE/RETRACTIONS_AND_CORRECTIONS.md) | silício | `phi-3-mini-4k` sem `sliding_window: 2047`: a IR modelava atenção quadrática num modelo de janela deslizante |
+| [COR-101](model-atlas/00_GOVERNANCE/RETRACTIONS_AND_CORRECTIONS.md) | capacidade | `tucano2-0.5b` declarado `Qwen2ForCausalLM`, inferido do nome do repositório; o checkpoint diz `Qwen3ForCausalLM` |
+| [COR-102](model-atlas/00_GOVERNANCE/RETRACTIONS_AND_CORRECTIONS.md) | capacidade | `qwen3.5-0.8b` tem **0,8734 B** parâmetros, não 0,8 — 8,4 % de erro no footprint, para menos |
+
+`COR-001` é o caso instrutivo: o falsificador `F5` compara contagem de parâmetros derivada com
+publicada, e `sliding_window` **não afeta contagem de parâmetros** — afeta custo. O erro
+atravessou um corpus inteiro com erro de parâmetros de 0,00 %. Verificação interna não
+substitui a fonte, e é exatamente para isso que a lacuna existia.
+
 ---
 
 ## Estado dos portões
@@ -230,12 +246,12 @@ capacidade de nenhum modelo, e **não** substitui síntese física nem avaliaç�
 
 **No eixo de silício** — o roofline não foi calibrado contra latência medida; a tolerância à
 quantização é prior de literatura; a energia do alvo especializado é modelo analítico comparado
-com TDP de GPU, assimetria que favorece estruturalmente o alvo. **13 lacunas abertas e 1
-parcial.**
+com TDP de GPU, assimetria que favorece estruturalmente o alvo. **12 lacunas abertas e 2
+parciais.**
 
 **No eixo de capacidade** — o corpus é sintético e até prova em contrário mede o gerador, não o
-mundo; as sondas foram escritas por quem escreveu o grader; nenhuma ficha de modelo foi
-conferida na fonte; os priors do CSS nunca foram calibrados. **11 lacunas abertas.**
+mundo; as sondas foram escritas por quem escreveu o grader; os priors do CSS nunca foram
+calibrados. **10 lacunas abertas.**
 
 **Nos dois** — o limiar que produz a conclusão do ciclo não tem base empírica. No silício é
 `min_stability = 0,60`; na capacidade é a margem de `0,20`. Nos dois casos, afrouxar o limiar é

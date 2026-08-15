@@ -25,7 +25,7 @@ from dataclasses import dataclass, field
 
 from douvras_core.status import Finding, FindingSet, Status, derive
 
-from .registry import BYTES_PER_PARAM, HFModelSpec
+from .registry import BYTES_PER_PARAM, HFModelSpec, Provenance
 
 #: Lacuna de medicao de execucao: nenhuma latencia, vazao ou RAM de pico foi observada.
 GAP_NO_TELEMETRY = "G-102"
@@ -48,6 +48,10 @@ class MemoryBudget:
     model_id: str
     params: int | None
     rows: dict[str, float] = field(default_factory=dict)
+    #: A contagem veio conferida da fonte, ou transcrita de documento secundario?
+    #: Decide se o footprint sai como `OBSERVATION` ou como `ASSUMPTION` — e a diferenca
+    #: entre "o checkpoint tem N parametros" e "um documento diz cerca de N".
+    params_verified: bool = False
 
     @classmethod
     def build(cls, spec: HFModelSpec) -> "MemoryBudget":
@@ -56,7 +60,12 @@ class MemoryBudget:
             b = spec.weights_bytes(q)
             if b is not None:
                 linhas[q] = b
-        return cls(model_id=spec.id, params=spec.params, rows=linhas)
+        return cls(
+            model_id=spec.id,
+            params=spec.params,
+            rows=linhas,
+            params_verified=spec.provenance is Provenance.UPSTREAM_VERIFIED,
+        )
 
     def fits_in(self, quant: str, ram_bytes: float) -> bool | None:
         b = self.rows.get(quant)
@@ -75,13 +84,23 @@ class MemoryBudget:
                 )
             )
             return fs
-        base = Finding(
-            "parametros",
-            self.params,
-            Status.ASSUMPTION,
-            unit="parametros",
-            assumptions=(A_PARAMS,),
-            note="aproximado — a fonte diz 'cerca de', nao um inteiro",
+        base = (
+            Finding(
+                "parametros",
+                self.params,
+                Status.OBSERVATION,
+                unit="parametros",
+                note="contagem do checkpoint, conferida no Hub (G-108 fechada)",
+            )
+            if self.params_verified
+            else Finding(
+                "parametros",
+                self.params,
+                Status.ASSUMPTION,
+                unit="parametros",
+                assumptions=(A_PARAMS,),
+                note="aproximado — a fonte diz 'cerca de', nao um inteiro",
+            )
         )
         fs.add(base)
         for q, b in self.rows.items():

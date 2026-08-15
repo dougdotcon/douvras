@@ -12,6 +12,47 @@ evidência derrubou uma afirmação, e é patrimônio intelectual tanto quanto u
 Toda entrada declara: o que foi afirmado, o que a derrubou, o que muda em consequência, e o que
 **não** muda.
 
+Entradas `R-*` são **retratações**: uma afirmação publicada foi retirada. Entradas `COR-*` são
+**correções**: nenhuma afirmação cai, mas um número publicado estava errado.
+
+---
+
+## COR-001 — `phi-3-mini-4k` tinha `sliding_window` faltando na transcrição
+
+- **Data**: 2026-08-15 · **Ciclo**: C-002 · **Origem**: primeira execução de
+  `atlas registry verify` contra o upstream, fechando parcialmente `G-008`
+- **Nenhuma alegação é retratada.** A conclusão do ciclo C-001 não muda: o SRS de
+  `phi-3-mini-4k` continua `+0,186`, a região endurecível continua vazia, o teto de Amdahl
+  continua `1,00×` e `F2`/`F3` continuam disparando.
+
+**O que estava errado.** O `config.json` transcrito omitia `sliding_window: 2047`. O
+`Phi3ForCausalLM` usa atenção com janela deslizante; sem o campo, a IR modelou atenção
+quadrática completa.
+
+**O que mudou nos números publicados.**
+
+| Métrica (decode) | Antes | Depois |
+|---|---:|---:|
+| tokens/s | 320,1 | **324,1** |
+| energia por token | 3 542,3 mJ | **3 499,1 mJ** |
+| participação de `kv_read` | 10,63 % | **9,56 %** |
+| participação de `gate_proj` | 19,20 % | **19,44 %** |
+| estabilidade do top-1 do LHS | 0,681 | **0,663** |
+
+E, mais relevante que qualquer um desses: os **fingerprints `pattern` e `exact` do bloco de
+atenção mudaram**. A janela deslizante é parte da identidade arquitetural, então o `phi-3`
+estava sendo comparado com os outros modelos do corpus por uma assinatura que não era a dele.
+Como ele não compartilhava bloco exato com ninguém, nenhum invariante publicado se altera —
+mas isso é sorte da composição do corpus, não robustez do método.
+
+**Por que não foi detectado antes.** O falsificador `F5` compara a contagem de parâmetros
+derivada com a publicada, e `sliding_window` **não afeta contagem de parâmetros** — afeta custo.
+O erro passou por um corpus inteiro com erro de parâmetros de 0,00 %. É a demonstração mais
+direta possível de por que `G-008` existia: verificação interna não substitui a fonte.
+
+**Consequência aplicada.** Corpus corrigido, proveniência gravada (`FETCHED`, com hash e data),
+ciclo reexecutado, assessments reemitidos.
+
 ---
 
 ## R-001 — C-006 retratada: o ranking do LHS não sobrevive à perturbação dos pesos

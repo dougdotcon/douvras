@@ -1,8 +1,8 @@
 ---
 artifact: SILICON_READINESS_ASSESSMENT
 model: mixtral-8x7b-v0.1
-run_id: 20260815T000032Z
-generated_at: 2026-08-15T00:00:32+00:00
+run_id: 20260815T004805Z
+generated_at: 2026-08-15T00:48:05+00:00
 method: DOUVRAS 2.0
 cycle: C-001
 weakest_status: ASSUMPTION
@@ -49,7 +49,7 @@ Status da afirmacao: `ASSUMPTION` (elo mais fraco da cadeia de evidencia).
 - `A-006/A-008` — custos de mascara, wafer e densidade de area sao faixas publicas
 - `A-007` — taxa de mudanca futura extrapola o historico curto do corpus
 
-Lacunas abertas que limitam o status de tudo acima: `G-001`, `G-002`, `G-003`, `G-004`, `G-006`, `G-008`, `G-009`
+Lacunas abertas que limitam o status de tudo acima: `G-001`, `G-002`, `G-003`, `G-004`, `G-006`, `G-009`
 
 ## 5. Criterios de falha (declarados antes da execucao)
 
@@ -158,7 +158,7 @@ Isto **e** o resultado: para mixtral-8x7b-v0.1, o bloco que domina o custo (moe,
 
 ### Silicon Readiness Score
 
-**SRS = 0.197** (ASSUMPTION) -> banda **software**
+**SRS = 0.222** (ASSUMPTION) -> banda **software**
 
 | Fator | Valor | Peso | Contribuicao | Status |
 |---|---|---|---|---|
@@ -167,7 +167,7 @@ Isto **e** o resultado: para mixtral-8x7b-v0.1, o bloco que domina o custo (moe,
 | T — throughput | 0.667 | +0.15 | +0.1000 | `ASSUMPTION` |
 | P — perf_per_watt | 0.000 | +0.15 | +0.0000 | `CONDITIONAL_RESULT` |
 | Q — low_precision | 0.769 | +0.10 | +0.0769 | `ASSUMPTION` |
-| D — data_availability | 0.750 | +0.10 | +0.0750 | `ASSUMPTION` |
+| D — data_availability | 1.000 | +0.10 | +0.1000 | `OBSERVATION` |
 | C — codesign | 0.563 | +0.10 | +0.0563 | `MODEL` |
 | R — revenue_potential | 0.000 | +0.10 | +0.0000 | `CONDITIONAL_RESULT` |
 | O — obsolescence_risk | 1.000 | -0.15 | -0.1500 | `CONDITIONAL_RESULT` |
@@ -313,7 +313,7 @@ Taxa de mudanca estrutural observada: 4.87 por ano
 
 - Modelo: `mixtral-8x7b-v0.1`, familia `mistral`, licenca `apache-2.0`
 - Fonte da configuracao: https://huggingface.co/mistralai/Mixtral-8x7B-v0.1/resolve/main/config.json
-- Status de proveniencia: `TRANSCRIBED_UNVERIFIED` (lacuna G-008 aberta)
+- Status de proveniencia: `FETCHED`
 - Parametros derivados da IR: 46,702,792,704 | publicados: 46,702,792,704
 - Baseline de hardware: `h100-sxm` — picos densos de datasheet do fabricante; eficiencia e custo assumidos
 - Pesos de score: v1.0 (UNCALIBRATED — nenhum caso real de tape-out alimentou estes pesos ainda)
@@ -323,7 +323,7 @@ Taxa de mudanca estrutural observada: 4.87 por ano
 
 | Afirmacao | Valor | Status | Lacunas |
 |---|---|---|---|
-| `mixtral-8x7b-v0.1.params` | 46702792704 params | `ASSUMPTION` | G-001, G-008 |
+| `mixtral-8x7b-v0.1.params` | 46702792704 params | `MODEL` | G-001 |
 | `mixtral-8x7b-v0.1.serving.decode_time_share` | 0.9792 fracao do tempo de requisicao | `CONDITIONAL_RESULT` | G-003, G-009 |
 | `mixtral-8x7b-v0.1.serving.energy_per_token` | 11.16 J/token gerado | `CONDITIONAL_RESULT` | G-003, G-004, G-009 |
 | `mixtral-8x7b-v0.1.decode.tokens_per_s` | 103.7 tok/s | `CONDITIONAL_RESULT` | G-003 |
@@ -340,7 +340,7 @@ Taxa de mudanca estrutural observada: 4.87 por ano
 | `economics.breakeven_years.p50` | — anos | `OPEN_GAP` | G-001 |
 | `economics.p_breakeven_before_obsolescence` | — probabilidade | `OPEN_GAP` | G-001 |
 | `economics.die_area_mm2.p50` | — mm2 | `OPEN_GAP` | G-001 |
-| `SRS.mixtral-8x7b-v0.1` | 0.1968 score SRS | `ASSUMPTION` | G-001, G-002, G-003, G-006, G-008, G-009 |
+| `SRS.mixtral-8x7b-v0.1` | 0.2218 score SRS | `ASSUMPTION` | G-001, G-002, G-003, G-006, G-009 |
 | `readiness.rank_stability` | 0.643 fracao das amostras com mesmo top-1 | `ASSUMPTION` | G-001, G-002, G-003, G-006 |
 | `stability.mistral.exact` | 0 fracao de blocos preservados | `COMPUTATIONAL_EVIDENCE` | G-001 |
 

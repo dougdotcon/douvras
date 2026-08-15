@@ -9,10 +9,10 @@ baixa precisão o suficiente para virar silício — e a partir de qual volume i
 [![Ciclo](https://img.shields.io/badge/ciclo-C--001%20conclu%C3%ADdo-0d9488)](04_VALIDATION/EXPERIMENTS/X-001-RESULT.md)
 [![Testes](https://img.shields.io/badge/testes-176%20verdes-16a34a)](../tests/silicon/)
 [![Portões](https://img.shields.io/badge/port%C3%B5es-6%2F7%20%E2%80%94%20V3%20bloqueado-f59e0b)](#-portões-do-ciclo)
-[![Lacunas](https://img.shields.io/badge/lacunas-13%20abertas%20%2B%201%20parcial-dc2626)](02_OBSERVATION/GAP_REGISTER.md)
+[![Lacunas](https://img.shields.io/badge/lacunas-12%20abertas%20%2B%202%20parciais-dc2626)](02_OBSERVATION/GAP_REGISTER.md)
 
 [![Status máximo](https://img.shields.io/badge/status%20m%C3%A1ximo-CONDITIONAL__RESULT-7c3aed)](../00_GOVERNANCE/STATUS_POLICY.md)
-[![Dívida de evidência](https://img.shields.io/badge/d%C3%ADvida%20de%20evid%C3%AAncia-38.6%25-ea580c)](07_SYSTEMATIZATION/OBSERVABILITY.md)
+[![Dívida de evidência](https://img.shields.io/badge/d%C3%ADvida%20de%20evid%C3%AAncia-35.0%25-ea580c)](07_SYSTEMATIZATION/OBSERVABILITY.md)
 [![Retratações](https://img.shields.io/badge/retrata%C3%A7%C3%B5es-5-b91c1c)](00_GOVERNANCE/RETRACTIONS_AND_CORRECTIONS.md)
 [![Python](https://img.shields.io/badge/python-3.11%2B-3776ab)](pyproject.toml)
 [![Sem GPU](https://img.shields.io/badge/requer%20GPU-n%C3%A3o-64748b)](06_ARCHITECTURE/ADR/ADR-0001-ir-analitica.md)
@@ -233,11 +233,17 @@ Nos nove modelos, **nenhum papel passa simultaneamente pelos três limiares**. R
 | `llama-3-8b` | 0,276 | `software` | 0,0 % | 1,00× | estabilidade (99,5 %) |
 | `llama-3.1-8b` | 0,276 | `software` | 0,0 % | 1,00× | estabilidade (99,5 %) |
 | `llama-2-7b` | 0,266 | `software` | 0,0 % | 1,00× | estabilidade |
-| `qwen2.5-7b` | 0,227 | `software` | 0,0 % | 1,00× | estabilidade |
-| `mistral-7b-v0.1` | 0,225 | `software` | 0,0 % | 1,00× | estabilidade |
-| `qwen2.5-14b` | 0,222 | `software` | 0,0 % | 1,00× | estabilidade |
-| `mixtral-8x7b-v0.1` | 0,197 | `software` | 0,0 % | 1,00× | **irregularidade (87,0 %)** |
-| `phi-3-mini-4k` | 0,186 | `software` | 0,0 % | 1,00× | estabilidade |
+| `qwen2.5-7b` | 0,252 | `software` | 0,0 % | 1,00× | estabilidade |
+| `mistral-7b-v0.1` | 0,250 | `software` | 0,0 % | 1,00× | estabilidade |
+| `qwen2.5-14b` | 0,247 | `software` | 0,0 % | 1,00× | estabilidade |
+| `mixtral-8x7b-v0.1` | 0,222 | `software` | 0,0 % | 1,00× | **irregularidade (87,0 %)** |
+| `phi-3-mini-4k` | 0,211 | `software` | 0,0 % | 1,00× | estabilidade |
+
+Os cinco últimos subiram `+0,025` em 2026-08-15, quando `atlas registry verify` conferiu suas
+fichas contra o upstream e a proveniência deixou de ser premissa. **A ordem não mudou e a
+conclusão não muda**: com região endurecível vazia, o SRS não decide nada — é a mesma leitura
+de `CE-001`. Os quatro primeiros continuam com proveniência transcrita porque exigem aceite de
+licença (`G-008`, parcial).
 | `gemma-2-9b` | 0,168 | `software` | 0,0 % | 1,00× | estabilidade |
 
 > **Um ganho de 100× é inalcançável nesta partição por aritmética**, independentemente do silício.
@@ -342,10 +348,12 @@ não dependa de quem criou o resultado. Agentes revisando agentes não fecham es
 Fração dos resultados apoiados em premissa não demonstrada, medida a cada ciclo (Método §6.3):
 
 ```
-llama-*, mistral-*, mixtral   38 %
-gemma, phi, qwen-*            40 %
-                              ────
-média                       38,6 %
+llama-* (proveniência transcrita)      38 %
+gemma-2-9b (transcrita)                40 %
+mistral-*, mixtral (conferidas)        31 %
+phi, qwen-* (conferidas)               33 %
+                                       ────
+média                                35,0 %
 ```
 
 Distribuição de status dos `Finding` emitidos (`llama-3.1-8b`):
@@ -433,7 +441,7 @@ quantização e **não** substitui síntese física.
   [`config/partition_policy.v1.json`](config/partition_policy.v1.json) — afrouxá-la é a manobra
   mais provável sob pressão comercial, e agora aparece no `git diff`.
 
-São **13 lacunas abertas e 1 parcial**, 14 registradas em
+São **12 lacunas abertas e 2 parciais**, 14 registradas em
 [GAP_REGISTER](02_OBSERVATION/GAP_REGISTER.md). Enquanto existirem, nenhum resultado passa de
 `CONDITIONAL_RESULT` — literalmente: tentar promover levanta `StatusViolation`.
 

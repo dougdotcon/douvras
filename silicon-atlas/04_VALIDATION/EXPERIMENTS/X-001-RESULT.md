@@ -1,7 +1,7 @@
 ---
 artifact: EXPERIMENT_RESULT
 experiment: X-001
-run_id: 20260815T000030Z
+run_id: 20260815T004803Z
 generated_by: scripts/run_cycle.py
 ---
 
@@ -24,11 +24,11 @@ H1 (estabilidade parcial) e H2 (valor concentrado), do Metodo 14.2.
 | llama-2-7b | 99.9% | gate_proj, up_proj, down_proj | 59.8% | 0.0% | 1.00x | 0.266 | software |
 | llama-3-8b | 99.9% | gate_proj, up_proj, down_proj | 73.4% | 0.0% | 1.00x | 0.276 | software |
 | llama-3.1-8b | 99.9% | gate_proj, up_proj, down_proj | 73.4% | 0.0% | 1.00x | 0.276 | software |
-| mistral-7b-v0.1 | 99.9% | gate_proj, up_proj, down_proj | 77.3% | 0.0% | 1.00x | 0.225 | software |
-| mixtral-8x7b-v0.1 | 99.9% | expert_gate_proj, expert_up_proj, expert_down_proj | 87.0% | 0.0% | 1.00x | 0.197 | software |
-| phi-3-mini-4k | 99.9% | gate_proj, up_proj, down_proj | 57.6% | 0.0% | 1.00x | 0.186 | software |
-| qwen2.5-14b | 99.9% | gate_proj, up_proj, down_proj | 71.4% | 0.0% | 1.00x | 0.222 | software |
-| qwen2.5-7b | 99.9% | gate_proj, up_proj, down_proj | 79.6% | 0.0% | 1.00x | 0.227 | software |
+| mistral-7b-v0.1 | 99.9% | gate_proj, up_proj, down_proj | 77.3% | 0.0% | 1.00x | 0.250 | software |
+| mixtral-8x7b-v0.1 | 99.9% | expert_gate_proj, expert_up_proj, expert_down_proj | 87.0% | 0.0% | 1.00x | 0.222 | software |
+| phi-3-mini-4k | 99.9% | gate_proj, up_proj, down_proj | 58.3% | 0.0% | 1.00x | 0.211 | software |
+| qwen2.5-14b | 99.9% | gate_proj, up_proj, down_proj | 71.4% | 0.0% | 1.00x | 0.247 | software |
+| qwen2.5-7b | 99.9% | gate_proj, up_proj, down_proj | 79.6% | 0.0% | 1.00x | 0.252 | software |
 
 ## Interpretacao permitida
 
