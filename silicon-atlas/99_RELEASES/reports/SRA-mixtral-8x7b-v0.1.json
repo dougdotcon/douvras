@@ -1,0 +1,2531 @@
+{
+  "run_id": "20260815T000032Z",
+  "generated_at": "2026-08-15T00:00:32+00:00",
+  "inputs": {
+    "model_id": "mixtral-8x7b-v0.1",
+    "device_key": "h100-sxm",
+    "batch": 1,
+    "prompt_len": 2048,
+    "gen_len": 512,
+    "context_len": null,
+    "annual_tokens": 10000000000000.0,
+    "tech_node": "6nm",
+    "target_tokens_per_second": 1000.0,
+    "claimed_gain": 100.0,
+    "mc_samples": 20000,
+    "hardened_only": true
+  },
+  "model": {
+    "id": "mixtral-8x7b-v0.1",
+    "family": "mistral",
+    "version_label": "moe-0.1",
+    "architecture": "MixtralForCausalLM",
+    "hidden_size": 4096,
+    "num_layers": 32,
+    "num_heads": 32,
+    "num_kv_heads": 8,
+    "head_dim": 128,
+    "intermediate_size": 14336,
+    "vocab_size": 32000,
+    "max_position": 32768,
+    "norm_type": "rmsnorm",
+    "norms_per_layer": 2,
+    "mlp_type": "swiglu",
+    "position_type": "rope",
+    "rope_theta": 1000000.0,
+    "tie_word_embeddings": false,
+    "qkv_bias": false,
+    "o_bias": false,
+    "mlp_bias": false,
+    "sliding_window": null,
+    "release_date": "2023-12-11",
+    "license": "apache-2.0",
+    "published_params": 46702792704,
+    "hf_repo": "mistralai/Mixtral-8x7B-v0.1",
+    "default_dtype": "bf16",
+    "attention_type": "gqa",
+    "provenance": {
+      "source_url": "https://huggingface.co/mistralai/Mixtral-8x7B-v0.1/resolve/main/config.json",
+      "provenance": "TRANSCRIBED_UNVERIFIED",
+      "sha256": null,
+      "retrieved_at": null
+    },
+    "moe": {
+      "num_experts": 8,
+      "experts_per_token": 2,
+      "expert_intermediate_size": 14336,
+      "shared_experts": 0
+    },
+    "derived_params": 46702792704
+  },
+  "device": {
+    "key": "h100-sxm",
+    "name": "NVIDIA H100 SXM 80GB",
+    "class": "gpu",
+    "memory_bandwidth_gbs": 3350.0,
+    "memory_capacity_gb": 80.0,
+    "tdp_watts": 700.0,
+    "wall_power_watts": 1134.0,
+    "hourly_cost_usd": 2.99,
+    "process_node_nm": 4,
+    "source": "picos densos de datasheet do fabricante; eficiencia e custo assumidos"
+  },
+  "fingerprint": {
+    "model": "mixtral-8x7b-v0.1",
+    "family": "mistral",
+    "version": "moe-0.1",
+    "release_date": "2023-12-11",
+    "architecture_class": "decoder_transformer",
+    "attention": "gqa",
+    "gqa_ratio": 4,
+    "head_dim": 128,
+    "layers": 32,
+    "hidden_size": 4096,
+    "intermediate_size": 14336,
+    "mlp": "swiglu",
+    "mlp_ratio": 3.5,
+    "normalization": "rmsnorm",
+    "norms_per_layer": 2,
+    "position": "rope",
+    "rope_theta": 1000000.0,
+    "routing": "sparse_moe",
+    "vocab_size": 32000,
+    "tied_embeddings": false,
+    "sliding_window": null,
+    "params": 46702792704,
+    "quantization_candidates": [
+      "int8",
+      "int4"
+    ],
+    "dynamic_regions": [
+      "head",
+      "moe"
+    ],
+    "distinct_layer_patterns": 2,
+    "blocks": {
+      "L0.attention": {
+        "role": "attention",
+        "topology": "1b843e6dbe080a7d",
+        "pattern": "410efbb6b9708460",
+        "exact": "da9fee83b12689cc",
+        "num_nodes": 13,
+        "constants": {
+          "input_layernorm.norm": "rmsnorm",
+          "pv.causal": true,
+          "qk.causal": true,
+          "rope_k.theta": 1000000.0,
+          "rope_q.theta": 1000000.0,
+          "softmax.causal": true
+        }
+      },
+      "L0.moe": {
+        "role": "moe",
+        "topology": "0bf1e11fb16648f0",
+        "pattern": "16fefe365d93f908",
+        "exact": "d20899860b24cde9",
+        "num_nodes": 10,
+        "constants": {
+          "act.fn": "silu",
+          "post_attention_layernorm.norm": "rmsnorm"
+        }
+      },
+      "L1.attention": {
+        "role": "attention",
+        "topology": "1b843e6dbe080a7d",
+        "pattern": "410efbb6b9708460",
+        "exact": "da9fee83b12689cc",
+        "num_nodes": 13,
+        "constants": {
+          "input_layernorm.norm": "rmsnorm",
+          "pv.causal": true,
+          "qk.causal": true,
+          "rope_k.theta": 1000000.0,
+          "rope_q.theta": 1000000.0,
+          "softmax.causal": true
+        }
+      },
+      "L1.moe": {
+        "role": "moe",
+        "topology": "0bf1e11fb16648f0",
+        "pattern": "16fefe365d93f908",
+        "exact": "d20899860b24cde9",
+        "num_nodes": 10,
+        "constants": {
+          "act.fn": "silu",
+          "post_attention_layernorm.norm": "rmsnorm"
+        }
+      },
+      "L10.attention": {
+        "role": "attention",
+        "topology": "1b843e6dbe080a7d",
+        "pattern": "410efbb6b9708460",
+        "exact": "da9fee83b12689cc",
+        "num_nodes": 13,
+        "constants": {
+          "input_layernorm.norm": "rmsnorm",
+          "pv.causal": true,
+          "qk.causal": true,
+          "rope_k.theta": 1000000.0,
+          "rope_q.theta": 1000000.0,
+          "softmax.causal": true
+        }
+      },
+      "L10.moe": {
+        "role": "moe",
+        "topology": "0bf1e11fb16648f0",
+        "pattern": "16fefe365d93f908",
+        "exact": "d20899860b24cde9",
+        "num_nodes": 10,
+        "constants": {
+          "act.fn": "silu",
+          "post_attention_layernorm.norm": "rmsnorm"
+        }
+      },
+      "L11.attention": {
+        "role": "attention",
+        "topology": "1b843e6dbe080a7d",
+        "pattern": "410efbb6b9708460",
+        "exact": "da9fee83b12689cc",
+        "num_nodes": 13,
+        "constants": {
+          "input_layernorm.norm": "rmsnorm",
+          "pv.causal": true,
+          "qk.causal": true,
+          "rope_k.theta": 1000000.0,
+          "rope_q.theta": 1000000.0,
+          "softmax.causal": true
+        }
+      },
+      "L11.moe": {
+        "role": "moe",
+        "topology": "0bf1e11fb16648f0",
+        "pattern": "16fefe365d93f908",
+        "exact": "d20899860b24cde9",
+        "num_nodes": 10,
+        "constants": {
+          "act.fn": "silu",
+          "post_attention_layernorm.norm": "rmsnorm"
+        }
+      },
+      "L12.attention": {
+        "role": "attention",
+        "topology": "1b843e6dbe080a7d",
+        "pattern": "410efbb6b9708460",
+        "exact": "da9fee83b12689cc",
+        "num_nodes": 13,
+        "constants": {
+          "input_layernorm.norm": "rmsnorm",
+          "pv.causal": true,
+          "qk.causal": true,
+          "rope_k.theta": 1000000.0,
+          "rope_q.theta": 1000000.0,
+          "softmax.causal": true
+        }
+      },
+      "L12.moe": {
+        "role": "moe",
+        "topology": "0bf1e11fb16648f0",
+        "pattern": "16fefe365d93f908",
+        "exact": "d20899860b24cde9",
+        "num_nodes": 10,
+        "constants": {
+          "act.fn": "silu",
+          "post_attention_layernorm.norm": "rmsnorm"
+        }
+      },
+      "L13.attention": {
+        "role": "attention",
+        "topology": "1b843e6dbe080a7d",
+        "pattern": "410efbb6b9708460",
+        "exact": "da9fee83b12689cc",
+        "num_nodes": 13,
+        "constants": {
+          "input_layernorm.norm": "rmsnorm",
+          "pv.causal": true,
+          "qk.causal": true,
+          "rope_k.theta": 1000000.0,
+          "rope_q.theta": 1000000.0,
+          "softmax.causal": true
+        }
+      },
+      "L13.moe": {
+        "role": "moe",
+        "topology": "0bf1e11fb16648f0",
+        "pattern": "16fefe365d93f908",
+        "exact": "d20899860b24cde9",
+        "num_nodes": 10,
+        "constants": {
+          "act.fn": "silu",
+          "post_attention_layernorm.norm": "rmsnorm"
+        }
+      },
+      "L14.attention": {
+        "role": "attention",
+        "topology": "1b843e6dbe080a7d",
+        "pattern": "410efbb6b9708460",
+        "exact": "da9fee83b12689cc",
+        "num_nodes": 13,
+        "constants": {
+          "input_layernorm.norm": "rmsnorm",
+          "pv.causal": true,
+          "qk.causal": true,
+          "rope_k.theta": 1000000.0,
+          "rope_q.theta": 1000000.0,
+          "softmax.causal": true
+        }
+      },
+      "L14.moe": {
+        "role": "moe",
+        "topology": "0bf1e11fb16648f0",
+        "pattern": "16fefe365d93f908",
+        "exact": "d20899860b24cde9",
+        "num_nodes": 10,
+        "constants": {
+          "act.fn": "silu",
+          "post_attention_layernorm.norm": "rmsnorm"
+        }
+      },
+      "L15.attention": {
+        "role": "attention",
+        "topology": "1b843e6dbe080a7d",
+        "pattern": "410efbb6b9708460",
+        "exact": "da9fee83b12689cc",
+        "num_nodes": 13,
+        "constants": {
+          "input_layernorm.norm": "rmsnorm",
+          "pv.causal": true,
+          "qk.causal": true,
+          "rope_k.theta": 1000000.0,
+          "rope_q.theta": 1000000.0,
+          "softmax.causal": true
+        }
+      },
+      "L15.moe": {
+        "role": "moe",
+        "topology": "0bf1e11fb16648f0",
+        "pattern": "16fefe365d93f908",
+        "exact": "d20899860b24cde9",
+        "num_nodes": 10,
+        "constants": {
+          "act.fn": "silu",
+          "post_attention_layernorm.norm": "rmsnorm"
+        }
+      },
+      "L16.attention": {
+        "role": "attention",
+        "topology": "1b843e6dbe080a7d",
+        "pattern": "410efbb6b9708460",
+        "exact": "da9fee83b12689cc",
+        "num_nodes": 13,
+        "constants": {
+          "input_layernorm.norm": "rmsnorm",
+          "pv.causal": true,
+          "qk.causal": true,
+          "rope_k.theta": 1000000.0,
+          "rope_q.theta": 1000000.0,
+          "softmax.causal": true
+        }
+      },
+      "L16.moe": {
+        "role": "moe",
+        "topology": "0bf1e11fb16648f0",
+        "pattern": "16fefe365d93f908",
+        "exact": "d20899860b24cde9",
+        "num_nodes": 10,
+        "constants": {
+          "act.fn": "silu",
+          "post_attention_layernorm.norm": "rmsnorm"
+        }
+      },
+      "L17.attention": {
+        "role": "attention",
+        "topology": "1b843e6dbe080a7d",
+        "pattern": "410efbb6b9708460",
+        "exact": "da9fee83b12689cc",
+        "num_nodes": 13,
+        "constants": {
+          "input_layernorm.norm": "rmsnorm",
+          "pv.causal": true,
+          "qk.causal": true,
+          "rope_k.theta": 1000000.0,
+          "rope_q.theta": 1000000.0,
+          "softmax.causal": true
+        }
+      },
+      "L17.moe": {
+        "role": "moe",
+        "topology": "0bf1e11fb16648f0",
+        "pattern": "16fefe365d93f908",
+        "exact": "d20899860b24cde9",
+        "num_nodes": 10,
+        "constants": {
+          "act.fn": "silu",
+          "post_attention_layernorm.norm": "rmsnorm"
+        }
+      },
+      "L18.attention": {
+        "role": "attention",
+        "topology": "1b843e6dbe080a7d",
+        "pattern": "410efbb6b9708460",
+        "exact": "da9fee83b12689cc",
+        "num_nodes": 13,
+        "constants": {
+          "input_layernorm.norm": "rmsnorm",
+          "pv.causal": true,
+          "qk.causal": true,
+          "rope_k.theta": 1000000.0,
+          "rope_q.theta": 1000000.0,
+          "softmax.causal": true
+        }
+      },
+      "L18.moe": {
+        "role": "moe",
+        "topology": "0bf1e11fb16648f0",
+        "pattern": "16fefe365d93f908",
+        "exact": "d20899860b24cde9",
+        "num_nodes": 10,
+        "constants": {
+          "act.fn": "silu",
+          "post_attention_layernorm.norm": "rmsnorm"
+        }
+      },
+      "L19.attention": {
+        "role": "attention",
+        "topology": "1b843e6dbe080a7d",
+        "pattern": "410efbb6b9708460",
+        "exact": "da9fee83b12689cc",
+        "num_nodes": 13,
+        "constants": {
+          "input_layernorm.norm": "rmsnorm",
+          "pv.causal": true,
+          "qk.causal": true,
+          "rope_k.theta": 1000000.0,
+          "rope_q.theta": 1000000.0,
+          "softmax.causal": true
+        }
+      },
+      "L19.moe": {
+        "role": "moe",
+        "topology": "0bf1e11fb16648f0",
+        "pattern": "16fefe365d93f908",
+        "exact": "d20899860b24cde9",
+        "num_nodes": 10,
+        "constants": {
+          "act.fn": "silu",
+          "post_attention_layernorm.norm": "rmsnorm"
+        }
+      },
+      "L2.attention": {
+        "role": "attention",
+        "topology": "1b843e6dbe080a7d",
+        "pattern": "410efbb6b9708460",
+        "exact": "da9fee83b12689cc",
+        "num_nodes": 13,
+        "constants": {
+          "input_layernorm.norm": "rmsnorm",
+          "pv.causal": true,
+          "qk.causal": true,
+          "rope_k.theta": 1000000.0,
+          "rope_q.theta": 1000000.0,
+          "softmax.causal": true
+        }
+      },
+      "L2.moe": {
+        "role": "moe",
+        "topology": "0bf1e11fb16648f0",
+        "pattern": "16fefe365d93f908",
+        "exact": "d20899860b24cde9",
+        "num_nodes": 10,
+        "constants": {
+          "act.fn": "silu",
+          "post_attention_layernorm.norm": "rmsnorm"
+        }
+      },
+      "L20.attention": {
+        "role": "attention",
+        "topology": "1b843e6dbe080a7d",
+        "pattern": "410efbb6b9708460",
+        "exact": "da9fee83b12689cc",
+        "num_nodes": 13,
+        "constants": {
+          "input_layernorm.norm": "rmsnorm",
+          "pv.causal": true,
+          "qk.causal": true,
+          "rope_k.theta": 1000000.0,
+          "rope_q.theta": 1000000.0,
+          "softmax.causal": true
+        }
+      },
+      "L20.moe": {
+        "role": "moe",
+        "topology": "0bf1e11fb16648f0",
+        "pattern": "16fefe365d93f908",
+        "exact": "d20899860b24cde9",
+        "num_nodes": 10,
+        "constants": {
+          "act.fn": "silu",
+          "post_attention_layernorm.norm": "rmsnorm"
+        }
+      },
+      "L21.attention": {
+        "role": "attention",
+        "topology": "1b843e6dbe080a7d",
+        "pattern": "410efbb6b9708460",
+        "exact": "da9fee83b12689cc",
+        "num_nodes": 13,
+        "constants": {
+          "input_layernorm.norm": "rmsnorm",
+          "pv.causal": true,
+          "qk.causal": true,
+          "rope_k.theta": 1000000.0,
+          "rope_q.theta": 1000000.0,
+          "softmax.causal": true
+        }
+      },
+      "L21.moe": {
+        "role": "moe",
+        "topology": "0bf1e11fb16648f0",
+        "pattern": "16fefe365d93f908",
+        "exact": "d20899860b24cde9",
+        "num_nodes": 10,
+        "constants": {
+          "act.fn": "silu",
+          "post_attention_layernorm.norm": "rmsnorm"
+        }
+      },
+      "L22.attention": {
+        "role": "attention",
+        "topology": "1b843e6dbe080a7d",
+        "pattern": "410efbb6b9708460",
+        "exact": "da9fee83b12689cc",
+        "num_nodes": 13,
+        "constants": {
+          "input_layernorm.norm": "rmsnorm",
+          "pv.causal": true,
+          "qk.causal": true,
+          "rope_k.theta": 1000000.0,
+          "rope_q.theta": 1000000.0,
+          "softmax.causal": true
+        }
+      },
+      "L22.moe": {
+        "role": "moe",
+        "topology": "0bf1e11fb16648f0",
+        "pattern": "16fefe365d93f908",
+        "exact": "d20899860b24cde9",
+        "num_nodes": 10,
+        "constants": {
+          "act.fn": "silu",
+          "post_attention_layernorm.norm": "rmsnorm"
+        }
+      },
+      "L23.attention": {
+        "role": "attention",
+        "topology": "1b843e6dbe080a7d",
+        "pattern": "410efbb6b9708460",
+        "exact": "da9fee83b12689cc",
+        "num_nodes": 13,
+        "constants": {
+          "input_layernorm.norm": "rmsnorm",
+          "pv.causal": true,
+          "qk.causal": true,
+          "rope_k.theta": 1000000.0,
+          "rope_q.theta": 1000000.0,
+          "softmax.causal": true
+        }
+      },
+      "L23.moe": {
+        "role": "moe",
+        "topology": "0bf1e11fb16648f0",
+        "pattern": "16fefe365d93f908",
+        "exact": "d20899860b24cde9",
+        "num_nodes": 10,
+        "constants": {
+          "act.fn": "silu",
+          "post_attention_layernorm.norm": "rmsnorm"
+        }
+      },
+      "L24.attention": {
+        "role": "attention",
+        "topology": "1b843e6dbe080a7d",
+        "pattern": "410efbb6b9708460",
+        "exact": "da9fee83b12689cc",
+        "num_nodes": 13,
+        "constants": {
+          "input_layernorm.norm": "rmsnorm",
+          "pv.causal": true,
+          "qk.causal": true,
+          "rope_k.theta": 1000000.0,
+          "rope_q.theta": 1000000.0,
+          "softmax.causal": true
+        }
+      },
+      "L24.moe": {
+        "role": "moe",
+        "topology": "0bf1e11fb16648f0",
+        "pattern": "16fefe365d93f908",
+        "exact": "d20899860b24cde9",
+        "num_nodes": 10,
+        "constants": {
+          "act.fn": "silu",
+          "post_attention_layernorm.norm": "rmsnorm"
+        }
+      },
+      "L25.attention": {
+        "role": "attention",
+        "topology": "1b843e6dbe080a7d",
+        "pattern": "410efbb6b9708460",
+        "exact": "da9fee83b12689cc",
+        "num_nodes": 13,
+        "constants": {
+          "input_layernorm.norm": "rmsnorm",
+          "pv.causal": true,
+          "qk.causal": true,
+          "rope_k.theta": 1000000.0,
+          "rope_q.theta": 1000000.0,
+          "softmax.causal": true
+        }
+      },
+      "L25.moe": {
+        "role": "moe",
+        "topology": "0bf1e11fb16648f0",
+        "pattern": "16fefe365d93f908",
+        "exact": "d20899860b24cde9",
+        "num_nodes": 10,
+        "constants": {
+          "act.fn": "silu",
+          "post_attention_layernorm.norm": "rmsnorm"
+        }
+      },
+      "L26.attention": {
+        "role": "attention",
+        "topology": "1b843e6dbe080a7d",
+        "pattern": "410efbb6b9708460",
+        "exact": "da9fee83b12689cc",
+        "num_nodes": 13,
+        "constants": {
+          "input_layernorm.norm": "rmsnorm",
+          "pv.causal": true,
+          "qk.causal": true,
+          "rope_k.theta": 1000000.0,
+          "rope_q.theta": 1000000.0,
+          "softmax.causal": true
+        }
+      },
+      "L26.moe": {
+        "role": "moe",
+        "topology": "0bf1e11fb16648f0",
+        "pattern": "16fefe365d93f908",
+        "exact": "d20899860b24cde9",
+        "num_nodes": 10,
+        "constants": {
+          "act.fn": "silu",
+          "post_attention_layernorm.norm": "rmsnorm"
+        }
+      },
+      "L27.attention": {
+        "role": "attention",
+        "topology": "1b843e6dbe080a7d",
+        "pattern": "410efbb6b9708460",
+        "exact": "da9fee83b12689cc",
+        "num_nodes": 13,
+        "constants": {
+          "input_layernorm.norm": "rmsnorm",
+          "pv.causal": true,
+          "qk.causal": true,
+          "rope_k.theta": 1000000.0,
+          "rope_q.theta": 1000000.0,
+          "softmax.causal": true
+        }
+      },
+      "L27.moe": {
+        "role": "moe",
+        "topology": "0bf1e11fb16648f0",
+        "pattern": "16fefe365d93f908",
+        "exact": "d20899860b24cde9",
+        "num_nodes": 10,
+        "constants": {
+          "act.fn": "silu",
+          "post_attention_layernorm.norm": "rmsnorm"
+        }
+      },
+      "L28.attention": {
+        "role": "attention",
+        "topology": "1b843e6dbe080a7d",
+        "pattern": "410efbb6b9708460",
+        "exact": "da9fee83b12689cc",
+        "num_nodes": 13,
+        "constants": {
+          "input_layernorm.norm": "rmsnorm",
+          "pv.causal": true,
+          "qk.causal": true,
+          "rope_k.theta": 1000000.0,
+          "rope_q.theta": 1000000.0,
+          "softmax.causal": true
+        }
+      },
+      "L28.moe": {
+        "role": "moe",
+        "topology": "0bf1e11fb16648f0",
+        "pattern": "16fefe365d93f908",
+        "exact": "d20899860b24cde9",
+        "num_nodes": 10,
+        "constants": {
+          "act.fn": "silu",
+          "post_attention_layernorm.norm": "rmsnorm"
+        }
+      },
+      "L29.attention": {
+        "role": "attention",
+        "topology": "1b843e6dbe080a7d",
+        "pattern": "410efbb6b9708460",
+        "exact": "da9fee83b12689cc",
+        "num_nodes": 13,
+        "constants": {
+          "input_layernorm.norm": "rmsnorm",
+          "pv.causal": true,
+          "qk.causal": true,
+          "rope_k.theta": 1000000.0,
+          "rope_q.theta": 1000000.0,
+          "softmax.causal": true
+        }
+      },
+      "L29.moe": {
+        "role": "moe",
+        "topology": "0bf1e11fb16648f0",
+        "pattern": "16fefe365d93f908",
+        "exact": "d20899860b24cde9",
+        "num_nodes": 10,
+        "constants": {
+          "act.fn": "silu",
+          "post_attention_layernorm.norm": "rmsnorm"
+        }
+      },
+      "L3.attention": {
+        "role": "attention",
+        "topology": "1b843e6dbe080a7d",
+        "pattern": "410efbb6b9708460",
+        "exact": "da9fee83b12689cc",
+        "num_nodes": 13,
+        "constants": {
+          "input_layernorm.norm": "rmsnorm",
+          "pv.causal": true,
+          "qk.causal": true,
+          "rope_k.theta": 1000000.0,
+          "rope_q.theta": 1000000.0,
+          "softmax.causal": true
+        }
+      },
+      "L3.moe": {
+        "role": "moe",
+        "topology": "0bf1e11fb16648f0",
+        "pattern": "16fefe365d93f908",
+        "exact": "d20899860b24cde9",
+        "num_nodes": 10,
+        "constants": {
+          "act.fn": "silu",
+          "post_attention_layernorm.norm": "rmsnorm"
+        }
+      },
+      "L30.attention": {
+        "role": "attention",
+        "topology": "1b843e6dbe080a7d",
+        "pattern": "410efbb6b9708460",
+        "exact": "da9fee83b12689cc",
+        "num_nodes": 13,
+        "constants": {
+          "input_layernorm.norm": "rmsnorm",
+          "pv.causal": true,
+          "qk.causal": true,
+          "rope_k.theta": 1000000.0,
+          "rope_q.theta": 1000000.0,
+          "softmax.causal": true
+        }
+      },
+      "L30.moe": {
+        "role": "moe",
+        "topology": "0bf1e11fb16648f0",
+        "pattern": "16fefe365d93f908",
+        "exact": "d20899860b24cde9",
+        "num_nodes": 10,
+        "constants": {
+          "act.fn": "silu",
+          "post_attention_layernorm.norm": "rmsnorm"
+        }
+      },
+      "L31.attention": {
+        "role": "attention",
+        "topology": "1b843e6dbe080a7d",
+        "pattern": "410efbb6b9708460",
+        "exact": "da9fee83b12689cc",
+        "num_nodes": 13,
+        "constants": {
+          "input_layernorm.norm": "rmsnorm",
+          "pv.causal": true,
+          "qk.causal": true,
+          "rope_k.theta": 1000000.0,
+          "rope_q.theta": 1000000.0,
+          "softmax.causal": true
+        }
+      },
+      "L31.moe": {
+        "role": "moe",
+        "topology": "0bf1e11fb16648f0",
+        "pattern": "16fefe365d93f908",
+        "exact": "d20899860b24cde9",
+        "num_nodes": 10,
+        "constants": {
+          "act.fn": "silu",
+          "post_attention_layernorm.norm": "rmsnorm"
+        }
+      },
+      "L4.attention": {
+        "role": "attention",
+        "topology": "1b843e6dbe080a7d",
+        "pattern": "410efbb6b9708460",
+        "exact": "da9fee83b12689cc",
+        "num_nodes": 13,
+        "constants": {
+          "input_layernorm.norm": "rmsnorm",
+          "pv.causal": true,
+          "qk.causal": true,
+          "rope_k.theta": 1000000.0,
+          "rope_q.theta": 1000000.0,
+          "softmax.causal": true
+        }
+      },
+      "L4.moe": {
+        "role": "moe",
+        "topology": "0bf1e11fb16648f0",
+        "pattern": "16fefe365d93f908",
+        "exact": "d20899860b24cde9",
+        "num_nodes": 10,
+        "constants": {
+          "act.fn": "silu",
+          "post_attention_layernorm.norm": "rmsnorm"
+        }
+      },
+      "L5.attention": {
+        "role": "attention",
+        "topology": "1b843e6dbe080a7d",
+        "pattern": "410efbb6b9708460",
+        "exact": "da9fee83b12689cc",
+        "num_nodes": 13,
+        "constants": {
+          "input_layernorm.norm": "rmsnorm",
+          "pv.causal": true,
+          "qk.causal": true,
+          "rope_k.theta": 1000000.0,
+          "rope_q.theta": 1000000.0,
+          "softmax.causal": true
+        }
+      },
+      "L5.moe": {
+        "role": "moe",
+        "topology": "0bf1e11fb16648f0",
+        "pattern": "16fefe365d93f908",
+        "exact": "d20899860b24cde9",
+        "num_nodes": 10,
+        "constants": {
+          "act.fn": "silu",
+          "post_attention_layernorm.norm": "rmsnorm"
+        }
+      },
+      "L6.attention": {
+        "role": "attention",
+        "topology": "1b843e6dbe080a7d",
+        "pattern": "410efbb6b9708460",
+        "exact": "da9fee83b12689cc",
+        "num_nodes": 13,
+        "constants": {
+          "input_layernorm.norm": "rmsnorm",
+          "pv.causal": true,
+          "qk.causal": true,
+          "rope_k.theta": 1000000.0,
+          "rope_q.theta": 1000000.0,
+          "softmax.causal": true
+        }
+      },
+      "L6.moe": {
+        "role": "moe",
+        "topology": "0bf1e11fb16648f0",
+        "pattern": "16fefe365d93f908",
+        "exact": "d20899860b24cde9",
+        "num_nodes": 10,
+        "constants": {
+          "act.fn": "silu",
+          "post_attention_layernorm.norm": "rmsnorm"
+        }
+      },
+      "L7.attention": {
+        "role": "attention",
+        "topology": "1b843e6dbe080a7d",
+        "pattern": "410efbb6b9708460",
+        "exact": "da9fee83b12689cc",
+        "num_nodes": 13,
+        "constants": {
+          "input_layernorm.norm": "rmsnorm",
+          "pv.causal": true,
+          "qk.causal": true,
+          "rope_k.theta": 1000000.0,
+          "rope_q.theta": 1000000.0,
+          "softmax.causal": true
+        }
+      },
+      "L7.moe": {
+        "role": "moe",
+        "topology": "0bf1e11fb16648f0",
+        "pattern": "16fefe365d93f908",
+        "exact": "d20899860b24cde9",
+        "num_nodes": 10,
+        "constants": {
+          "act.fn": "silu",
+          "post_attention_layernorm.norm": "rmsnorm"
+        }
+      },
+      "L8.attention": {
+        "role": "attention",
+        "topology": "1b843e6dbe080a7d",
+        "pattern": "410efbb6b9708460",
+        "exact": "da9fee83b12689cc",
+        "num_nodes": 13,
+        "constants": {
+          "input_layernorm.norm": "rmsnorm",
+          "pv.causal": true,
+          "qk.causal": true,
+          "rope_k.theta": 1000000.0,
+          "rope_q.theta": 1000000.0,
+          "softmax.causal": true
+        }
+      },
+      "L8.moe": {
+        "role": "moe",
+        "topology": "0bf1e11fb16648f0",
+        "pattern": "16fefe365d93f908",
+        "exact": "d20899860b24cde9",
+        "num_nodes": 10,
+        "constants": {
+          "act.fn": "silu",
+          "post_attention_layernorm.norm": "rmsnorm"
+        }
+      },
+      "L9.attention": {
+        "role": "attention",
+        "topology": "1b843e6dbe080a7d",
+        "pattern": "410efbb6b9708460",
+        "exact": "da9fee83b12689cc",
+        "num_nodes": 13,
+        "constants": {
+          "input_layernorm.norm": "rmsnorm",
+          "pv.causal": true,
+          "qk.causal": true,
+          "rope_k.theta": 1000000.0,
+          "rope_q.theta": 1000000.0,
+          "softmax.causal": true
+        }
+      },
+      "L9.moe": {
+        "role": "moe",
+        "topology": "0bf1e11fb16648f0",
+        "pattern": "16fefe365d93f908",
+        "exact": "d20899860b24cde9",
+        "num_nodes": 10,
+        "constants": {
+          "act.fn": "silu",
+          "post_attention_layernorm.norm": "rmsnorm"
+        }
+      },
+      "embedding": {
+        "role": "embedding",
+        "topology": "6ee389465d8b9a6a",
+        "pattern": "d0c6d6ec4ef2080e",
+        "exact": "683d78dd392ed94e",
+        "num_nodes": 1,
+        "constants": {}
+      },
+      "head": {
+        "role": "head",
+        "topology": "1a12bd5a3fa9c2fb",
+        "pattern": "9131855b83504261",
+        "exact": "2da8313825ee7cbc",
+        "num_nodes": 3,
+        "constants": {
+          "final_norm.norm": "rmsnorm"
+        }
+      }
+    }
+  },
+  "stability": {
+    "family": "mistral",
+    "versions": [
+      "mistral-7b-v0.1",
+      "mixtral-8x7b-v0.1"
+    ],
+    "transitions": 1,
+    "scale_pairs": [],
+    "level_stability": {
+      "topology": 0.3333,
+      "pattern": 0.0,
+      "exact": 0.0
+    },
+    "recent_exact_stability": 0.0,
+    "scope_spread": 0.0,
+    "change_rate_per_year": 4.87,
+    "diffs": [
+      {
+        "older": "mistral-7b-v0.1",
+        "newer": "mixtral-8x7b-v0.1",
+        "days_between": 75,
+        "changed_config": {
+          "rope_theta": [
+            10000.0,
+            1000000.0
+          ],
+          "sliding_window": [
+            4096,
+            null
+          ]
+        },
+        "stability": {
+          "topology": 0.3333,
+          "pattern": 0.0,
+          "exact": 0.0
+        },
+        "lost_patterns": {
+          "topology": [
+            "mlp"
+          ],
+          "pattern": [
+            "attention",
+            "mlp"
+          ],
+          "exact": [
+            "attention",
+            "mlp"
+          ]
+        },
+        "gained_patterns": {
+          "topology": [
+            "moe"
+          ],
+          "pattern": [
+            "attention",
+            "moe"
+          ],
+          "exact": [
+            "attention",
+            "moe"
+          ]
+        },
+        "signature_changes": [
+          "[attention] -kv_write|kv_write||windowed",
+          "[attention] -kv_read|kv_read||windowed",
+          "[attention] -attn_scores|qk||hd=0.03125|gqa=4|windowed",
+          "[attention] -attn_softmax|softmax||hd=0.03125|gqa=4|windowed",
+          "[attention] -attn_context|pv||hd=0.03125|gqa=4|windowed",
+          "[attention] +kv_write|kv_write|",
+          "[attention] +kv_read|kv_read|",
+          "[attention] +attn_scores|qk||hd=0.03125|gqa=4",
+          "[attention] +attn_softmax|softmax||hd=0.03125|gqa=4",
+          "[attention] +attn_context|pv||hd=0.03125|gqa=4"
+        ]
+      }
+    ]
+  },
+  "serving_profile": {
+    "model": "mixtral-8x7b-v0.1",
+    "device": "h100-sxm",
+    "request": "prompt=2048 gen=512 B=1 ctx=2304",
+    "total_time_s": 5.040957389308793,
+    "decode_time_share": 0.9792261999313353,
+    "generated_tokens_per_second": 101.56800791172816,
+    "energy_per_generated_token_j": 11.164932967726896,
+    "hotspots": {
+      "expert_gate_proj": 0.2901,
+      "expert_up_proj": 0.2901,
+      "expert_down_proj": 0.2901,
+      "q_proj": 0.0414,
+      "o_proj": 0.0414,
+      "kv_read": 0.0115,
+      "k_proj": 0.0104,
+      "v_proj": 0.0104,
+      "lm_head": 0.01,
+      "act": 0.0012
+    }
+  },
+  "decode_profile": {
+    "model": "mixtral-8x7b-v0.1",
+    "device": "h100-sxm",
+    "workload": "decode B=1 T=2304 act=bf16",
+    "weight_precision": "bf16",
+    "total_time_s": 0.009641088961618426,
+    "tokens_per_second": 103.7227230223724,
+    "total_flops": 26725466880.0,
+    "total_bytes": 25826080256.0,
+    "weight_read_bytes_per_step": 25497714688.0,
+    "resident_weight_bytes": 93405585408.0,
+    "kv_bytes": 302120960.0,
+    "mean_arithmetic_intensity": 1.0348247436345301,
+    "device_ridge_point": 92.30410447761194,
+    "memory_bound_share": 0.9994935104435196,
+    "energy_per_token_j": 10.932994882475295,
+    "fits_in_device_memory": false,
+    "memory_headroom": -0.1675698176,
+    "hotspots_by_role": {
+      "expert_gate_proj": 0.291,
+      "expert_up_proj": 0.291,
+      "expert_down_proj": 0.291,
+      "q_proj": 0.0416,
+      "o_proj": 0.0416,
+      "kv_read": 0.0117,
+      "k_proj": 0.0104,
+      "v_proj": 0.0104,
+      "lm_head": 0.0101,
+      "qk": 0.0003
+    },
+    "hotspots_by_block": {
+      "moe": 0.8736,
+      "attention": 0.1163,
+      "head": 0.0102,
+      "embedding": 0.0
+    }
+  },
+  "prefill_profile": {
+    "model": "mixtral-8x7b-v0.1",
+    "device": "h100-sxm",
+    "workload": "prefill B=1 S=2048 act=bf16",
+    "weight_precision": "bf16",
+    "total_time_s": 0.10471984096015871,
+    "tokens_per_second": 19556.943375985204,
+    "total_flops": 52809485184512.0,
+    "total_bytes": 79521526784.0,
+    "weight_read_bytes_per_step": 25514483712.0,
+    "resident_weight_bytes": 93405585408.0,
+    "kv_bytes": 536870912.0,
+    "mean_arithmetic_intensity": 664.0904333735384,
+    "device_ridge_point": 253.1769722814499,
+    "memory_bound_share": 0.15111382854497882,
+    "energy_per_token_j": 0.05798452131290038,
+    "fits_in_device_memory": false,
+    "memory_headroom": -0.1675698176,
+    "hotspots_by_role": {
+      "expert_gate_proj": 0.2476,
+      "expert_up_proj": 0.2476,
+      "expert_down_proj": 0.2476,
+      "act": 0.0459,
+      "glu_mul": 0.0459,
+      "q_proj": 0.0354,
+      "o_proj": 0.0354,
+      "expert_combine": 0.0131,
+      "residual_add": 0.0131,
+      "qk": 0.0088
+    },
+    "hotspots_by_block": {
+      "moe": 0.8696,
+      "attention": 0.1291,
+      "head": 0.0012,
+      "embedding": 0.0001
+    }
+  },
+  "quantization": {
+    "plan": {
+      "name": "sensitivity",
+      "priors_version": "1.0",
+      "weakest_status": "ASSUMPTION",
+      "by_role": {
+        "embed_tokens": "int8",
+        "q_proj": "bf16",
+        "k_proj": "bf16",
+        "v_proj": "bf16",
+        "o_proj": "bf16",
+        "expert_gate_proj": "bf16",
+        "expert_up_proj": "bf16",
+        "expert_down_proj": "bf16",
+        "lm_head": "int8"
+      },
+      "tolerance": {
+        "embed_tokens": 0.675,
+        "expert_down_proj": 1.0,
+        "expert_gate_proj": 1.0,
+        "expert_up_proj": 1.0,
+        "k_proj": 1.0,
+        "lm_head": 0.63,
+        "o_proj": 1.0,
+        "q_proj": 1.0,
+        "v_proj": 1.0
+      }
+    },
+    "weight_gb_before": 25.497714688,
+    "weight_gb_after": 25.366638592,
+    "memory_reduction": 0.0051,
+    "time_ms_before": 9.641088961618426,
+    "time_ms_after": 9.59217997057365,
+    "speedup": 1.005,
+    "quality_delta": "UNMEASURED (G-002)",
+    "findings": [
+      {
+        "name": "quant.sensitivity.memory_reduction",
+        "value": 0.005140699768739987,
+        "unit": "fracao",
+        "status": "CONDITIONAL_RESULT",
+        "assumptions": [
+          "A-004"
+        ],
+        "gaps": [
+          "G-002",
+          "G-003"
+        ],
+        "parents": [],
+        "note": "aritmetica exata sobre bytes de peso; nao depende de prior"
+      },
+      {
+        "name": "quant.sensitivity.speedup",
+        "value": 1.0050988400128873,
+        "unit": "x sobre baseline",
+        "status": "CONDITIONAL_RESULT",
+        "assumptions": [
+          "A-002",
+          "A-004",
+          "A-005"
+        ],
+        "gaps": [
+          "G-002",
+          "G-003"
+        ],
+        "parents": [],
+        "note": ""
+      },
+      {
+        "name": "quant.sensitivity.quality_delta",
+        "value": null,
+        "unit": "perplexidade / acuracia",
+        "status": "OPEN_GAP",
+        "assumptions": [],
+        "gaps": [
+          "G-002"
+        ],
+        "parents": [],
+        "note": "NAO MEDIDO. Sem isto o plano nao e recomendavel, apenas testavel."
+      }
+    ]
+  },
+  "candidates": [
+    {
+      "role": "lm_head",
+      "block": "head",
+      "instances_per_token": 1,
+      "cost_share": 0.01,
+      "recommended_precision": "int8",
+      "weight_elems": 131072000,
+      "LHS": 0.5114,
+      "scorecard": {
+        "name": "lm_head",
+        "kind": "LHS",
+        "score": 0.5114,
+        "status": "ASSUMPTION",
+        "factors": {
+          "E": {
+            "value": 0.7333,
+            "weight": 0.2,
+            "contribution": 0.1467,
+            "status": "COMPUTATIONAL_EVIDENCE",
+            "note": "preservado em 1/1 transicoes de versao; presente em 3/9 modelos do corpus"
+          },
+          "F": {
+            "value": 0.01,
+            "weight": 0.15,
+            "contribution": 0.0015,
+            "status": "CONDITIONAL_RESULT",
+            "note": ""
+          },
+          "R": {
+            "value": 1.0,
+            "weight": 0.15,
+            "contribution": 0.15,
+            "status": "MODEL",
+            "note": "1 nos, 0% dinamicos"
+          },
+          "Q": {
+            "value": 0.63,
+            "weight": 0.15,
+            "contribution": 0.0945,
+            "status": "ASSUMPTION",
+            "note": "melhor precisao aceitavel: int8 (sem indice de camada)"
+          },
+          "V": {
+            "value": 0.125,
+            "weight": 0.15,
+            "contribution": 0.0187,
+            "status": "MODEL",
+            "note": "1 instancias por token"
+          },
+          "M": {
+            "value": 1.0,
+            "weight": 0.1,
+            "contribution": 0.1,
+            "status": "MODEL",
+            "note": "0% com enderecamento dependente de dado"
+          },
+          "L": {
+            "value": 0.0,
+            "weight": 0.1,
+            "contribution": 0.0,
+            "status": "COMPUTATIONAL_EVIDENCE",
+            "note": "P(sobrevive 4 anos) com taxa observada 4.87/ano, estimada de apenas 1 transicao(oes) de versao: estimativa ruidosa, ver G-006"
+          }
+        }
+      }
+    },
+    {
+      "role": "o_proj",
+      "block": "attention",
+      "instances_per_token": 32,
+      "cost_share": 0.0414,
+      "recommended_precision": "int8",
+      "weight_elems": 536870912,
+      "LHS": 0.5052,
+      "scorecard": {
+        "name": "o_proj",
+        "kind": "LHS",
+        "score": 0.5052,
+        "status": "ASSUMPTION",
+        "factors": {
+          "E": {
+            "value": 0.1778,
+            "weight": 0.2,
+            "contribution": 0.0356,
+            "status": "COMPUTATIONAL_EVIDENCE",
+            "note": "preservado em 0/1 transicoes de versao; presente em 4/9 modelos do corpus"
+          },
+          "F": {
+            "value": 0.0414,
+            "weight": 0.15,
+            "contribution": 0.0062,
+            "status": "CONDITIONAL_RESULT",
+            "note": ""
+          },
+          "R": {
+            "value": 1.0,
+            "weight": 0.15,
+            "contribution": 0.15,
+            "status": "MODEL",
+            "note": "32 nos, 0% dinamicos"
+          },
+          "Q": {
+            "value": 0.792,
+            "weight": 0.15,
+            "contribution": 0.1188,
+            "status": "ASSUMPTION",
+            "note": "melhor precisao aceitavel: int8 (camada representativa 16)"
+          },
+          "V": {
+            "value": 0.6305,
+            "weight": 0.15,
+            "contribution": 0.0946,
+            "status": "MODEL",
+            "note": "32 instancias por token"
+          },
+          "M": {
+            "value": 1.0,
+            "weight": 0.1,
+            "contribution": 0.1,
+            "status": "MODEL",
+            "note": "0% com enderecamento dependente de dado"
+          },
+          "L": {
+            "value": 0.0,
+            "weight": 0.1,
+            "contribution": 0.0,
+            "status": "COMPUTATIONAL_EVIDENCE",
+            "note": "P(sobrevive 4 anos) com taxa observada 4.87/ano, estimada de apenas 1 transicao(oes) de versao: estimativa ruidosa, ver G-006"
+          }
+        }
+      }
+    },
+    {
+      "role": "q_proj",
+      "block": "attention",
+      "instances_per_token": 32,
+      "cost_share": 0.0414,
+      "recommended_precision": "int8",
+      "weight_elems": 536870912,
+      "LHS": 0.5011,
+      "scorecard": {
+        "name": "q_proj",
+        "kind": "LHS",
+        "score": 0.5011,
+        "status": "ASSUMPTION",
+        "factors": {
+          "E": {
+            "value": 0.1778,
+            "weight": 0.2,
+            "contribution": 0.0356,
+            "status": "COMPUTATIONAL_EVIDENCE",
+            "note": "preservado em 0/1 transicoes de versao; presente em 4/9 modelos do corpus"
+          },
+          "F": {
+            "value": 0.0414,
+            "weight": 0.15,
+            "contribution": 0.0062,
+            "status": "CONDITIONAL_RESULT",
+            "note": ""
+          },
+          "R": {
+            "value": 1.0,
+            "weight": 0.15,
+            "contribution": 0.15,
+            "status": "MODEL",
+            "note": "32 nos, 0% dinamicos"
+          },
+          "Q": {
+            "value": 0.765,
+            "weight": 0.15,
+            "contribution": 0.1147,
+            "status": "ASSUMPTION",
+            "note": "melhor precisao aceitavel: int8 (camada representativa 16)"
+          },
+          "V": {
+            "value": 0.6305,
+            "weight": 0.15,
+            "contribution": 0.0946,
+            "status": "MODEL",
+            "note": "32 instancias por token"
+          },
+          "M": {
+            "value": 1.0,
+            "weight": 0.1,
+            "contribution": 0.1,
+            "status": "MODEL",
+            "note": "0% com enderecamento dependente de dado"
+          },
+          "L": {
+            "value": 0.0,
+            "weight": 0.1,
+            "contribution": 0.0,
+            "status": "COMPUTATIONAL_EVIDENCE",
+            "note": "P(sobrevive 4 anos) com taxa observada 4.87/ano, estimada de apenas 1 transicao(oes) de versao: estimativa ruidosa, ver G-006"
+          }
+        }
+      }
+    },
+    {
+      "role": "v_proj",
+      "block": "attention",
+      "instances_per_token": 32,
+      "cost_share": 0.0104,
+      "recommended_precision": "int8",
+      "weight_elems": 134217728,
+      "LHS": 0.4964,
+      "scorecard": {
+        "name": "v_proj",
+        "kind": "LHS",
+        "score": 0.4964,
+        "status": "ASSUMPTION",
+        "factors": {
+          "E": {
+            "value": 0.1778,
+            "weight": 0.2,
+            "contribution": 0.0356,
+            "status": "COMPUTATIONAL_EVIDENCE",
+            "note": "preservado em 0/1 transicoes de versao; presente em 4/9 modelos do corpus"
+          },
+          "F": {
+            "value": 0.0104,
+            "weight": 0.15,
+            "contribution": 0.0016,
+            "status": "CONDITIONAL_RESULT",
+            "note": ""
+          },
+          "R": {
+            "value": 1.0,
+            "weight": 0.15,
+            "contribution": 0.15,
+            "status": "MODEL",
+            "note": "32 nos, 0% dinamicos"
+          },
+          "Q": {
+            "value": 0.765,
+            "weight": 0.15,
+            "contribution": 0.1147,
+            "status": "ASSUMPTION",
+            "note": "melhor precisao aceitavel: int8 (camada representativa 16)"
+          },
+          "V": {
+            "value": 0.6305,
+            "weight": 0.15,
+            "contribution": 0.0946,
+            "status": "MODEL",
+            "note": "32 instancias por token"
+          },
+          "M": {
+            "value": 1.0,
+            "weight": 0.1,
+            "contribution": 0.1,
+            "status": "MODEL",
+            "note": "0% com enderecamento dependente de dado"
+          },
+          "L": {
+            "value": 0.0,
+            "weight": 0.1,
+            "contribution": 0.0,
+            "status": "COMPUTATIONAL_EVIDENCE",
+            "note": "P(sobrevive 4 anos) com taxa observada 4.87/ano, estimada de apenas 1 transicao(oes) de versao: estimativa ruidosa, ver G-006"
+          }
+        }
+      }
+    },
+    {
+      "role": "k_proj",
+      "block": "attention",
+      "instances_per_token": 32,
+      "cost_share": 0.0104,
+      "recommended_precision": "int8",
+      "weight_elems": 134217728,
+      "LHS": 0.4897,
+      "scorecard": {
+        "name": "k_proj",
+        "kind": "LHS",
+        "score": 0.4897,
+        "status": "ASSUMPTION",
+        "factors": {
+          "E": {
+            "value": 0.1778,
+            "weight": 0.2,
+            "contribution": 0.0356,
+            "status": "COMPUTATIONAL_EVIDENCE",
+            "note": "preservado em 0/1 transicoes de versao; presente em 4/9 modelos do corpus"
+          },
+          "F": {
+            "value": 0.0104,
+            "weight": 0.15,
+            "contribution": 0.0016,
+            "status": "CONDITIONAL_RESULT",
+            "note": ""
+          },
+          "R": {
+            "value": 1.0,
+            "weight": 0.15,
+            "contribution": 0.15,
+            "status": "MODEL",
+            "note": "32 nos, 0% dinamicos"
+          },
+          "Q": {
+            "value": 0.72,
+            "weight": 0.15,
+            "contribution": 0.108,
+            "status": "ASSUMPTION",
+            "note": "melhor precisao aceitavel: int8 (camada representativa 16)"
+          },
+          "V": {
+            "value": 0.6305,
+            "weight": 0.15,
+            "contribution": 0.0946,
+            "status": "MODEL",
+            "note": "32 instancias por token"
+          },
+          "M": {
+            "value": 1.0,
+            "weight": 0.1,
+            "contribution": 0.1,
+            "status": "MODEL",
+            "note": "0% com enderecamento dependente de dado"
+          },
+          "L": {
+            "value": 0.0,
+            "weight": 0.1,
+            "contribution": 0.0,
+            "status": "COMPUTATIONAL_EVIDENCE",
+            "note": "P(sobrevive 4 anos) com taxa observada 4.87/ano, estimada de apenas 1 transicao(oes) de versao: estimativa ruidosa, ver G-006"
+          }
+        }
+      }
+    },
+    {
+      "role": "expert_gate_proj",
+      "block": "moe",
+      "instances_per_token": 64,
+      "cost_share": 0.2901,
+      "recommended_precision": "int8",
+      "weight_elems": 15032385536,
+      "LHS": 0.4475,
+      "scorecard": {
+        "name": "expert_gate_proj",
+        "kind": "LHS",
+        "score": 0.4475,
+        "status": "ASSUMPTION",
+        "factors": {
+          "E": {
+            "value": 0.1111,
+            "weight": 0.2,
+            "contribution": 0.0222,
+            "status": "ASSUMPTION",
+            "note": "familia com uma unica versao no corpus: estabilidade temporal nao observada; usando apenas cobertura de corpus (1/9 modelos)"
+          },
+          "F": {
+            "value": 0.2901,
+            "weight": 0.15,
+            "contribution": 0.0435,
+            "status": "CONDITIONAL_RESULT",
+            "note": ""
+          },
+          "R": {
+            "value": 1.0,
+            "weight": 0.15,
+            "contribution": 0.15,
+            "status": "MODEL",
+            "note": "32 nos, 0% dinamicos"
+          },
+          "Q": {
+            "value": 0.792,
+            "weight": 0.15,
+            "contribution": 0.1188,
+            "status": "ASSUMPTION",
+            "note": "melhor precisao aceitavel: int8 (camada representativa 16)"
+          },
+          "V": {
+            "value": 0.7528,
+            "weight": 0.15,
+            "contribution": 0.1129,
+            "status": "MODEL",
+            "note": "64 instancias por token"
+          },
+          "M": {
+            "value": 0.0,
+            "weight": 0.1,
+            "contribution": 0.0,
+            "status": "MODEL",
+            "note": "100% com enderecamento dependente de dado"
+          },
+          "L": {
+            "value": 0.0,
+            "weight": 0.1,
+            "contribution": 0.0,
+            "status": "COMPUTATIONAL_EVIDENCE",
+            "note": "P(sobrevive 4 anos) com taxa observada 4.87/ano, estimada de apenas 1 transicao(oes) de versao: estimativa ruidosa, ver G-006"
+          }
+        }
+      }
+    },
+    {
+      "role": "expert_up_proj",
+      "block": "moe",
+      "instances_per_token": 64,
+      "cost_share": 0.2901,
+      "recommended_precision": "int8",
+      "weight_elems": 15032385536,
+      "LHS": 0.4475,
+      "scorecard": {
+        "name": "expert_up_proj",
+        "kind": "LHS",
+        "score": 0.4475,
+        "status": "ASSUMPTION",
+        "factors": {
+          "E": {
+            "value": 0.1111,
+            "weight": 0.2,
+            "contribution": 0.0222,
+            "status": "ASSUMPTION",
+            "note": "familia com uma unica versao no corpus: estabilidade temporal nao observada; usando apenas cobertura de corpus (1/9 modelos)"
+          },
+          "F": {
+            "value": 0.2901,
+            "weight": 0.15,
+            "contribution": 0.0435,
+            "status": "CONDITIONAL_RESULT",
+            "note": ""
+          },
+          "R": {
+            "value": 1.0,
+            "weight": 0.15,
+            "contribution": 0.15,
+            "status": "MODEL",
+            "note": "32 nos, 0% dinamicos"
+          },
+          "Q": {
+            "value": 0.792,
+            "weight": 0.15,
+            "contribution": 0.1188,
+            "status": "ASSUMPTION",
+            "note": "melhor precisao aceitavel: int8 (camada representativa 16)"
+          },
+          "V": {
+            "value": 0.7528,
+            "weight": 0.15,
+            "contribution": 0.1129,
+            "status": "MODEL",
+            "note": "64 instancias por token"
+          },
+          "M": {
+            "value": 0.0,
+            "weight": 0.1,
+            "contribution": 0.0,
+            "status": "MODEL",
+            "note": "100% com enderecamento dependente de dado"
+          },
+          "L": {
+            "value": 0.0,
+            "weight": 0.1,
+            "contribution": 0.0,
+            "status": "COMPUTATIONAL_EVIDENCE",
+            "note": "P(sobrevive 4 anos) com taxa observada 4.87/ano, estimada de apenas 1 transicao(oes) de versao: estimativa ruidosa, ver G-006"
+          }
+        }
+      }
+    },
+    {
+      "role": "expert_down_proj",
+      "block": "moe",
+      "instances_per_token": 64,
+      "cost_share": 0.2901,
+      "recommended_precision": "int8",
+      "weight_elems": 15032385536,
+      "LHS": 0.442,
+      "scorecard": {
+        "name": "expert_down_proj",
+        "kind": "LHS",
+        "score": 0.442,
+        "status": "ASSUMPTION",
+        "factors": {
+          "E": {
+            "value": 0.1111,
+            "weight": 0.2,
+            "contribution": 0.0222,
+            "status": "ASSUMPTION",
+            "note": "familia com uma unica versao no corpus: estabilidade temporal nao observada; usando apenas cobertura de corpus (1/9 modelos)"
+          },
+          "F": {
+            "value": 0.2901,
+            "weight": 0.15,
+            "contribution": 0.0435,
+            "status": "CONDITIONAL_RESULT",
+            "note": ""
+          },
+          "R": {
+            "value": 1.0,
+            "weight": 0.15,
+            "contribution": 0.15,
+            "status": "MODEL",
+            "note": "32 nos, 0% dinamicos"
+          },
+          "Q": {
+            "value": 0.756,
+            "weight": 0.15,
+            "contribution": 0.1134,
+            "status": "ASSUMPTION",
+            "note": "melhor precisao aceitavel: int8 (camada representativa 16)"
+          },
+          "V": {
+            "value": 0.7528,
+            "weight": 0.15,
+            "contribution": 0.1129,
+            "status": "MODEL",
+            "note": "64 instancias por token"
+          },
+          "M": {
+            "value": 0.0,
+            "weight": 0.1,
+            "contribution": 0.0,
+            "status": "MODEL",
+            "note": "100% com enderecamento dependente de dado"
+          },
+          "L": {
+            "value": 0.0,
+            "weight": 0.1,
+            "contribution": 0.0,
+            "status": "COMPUTATIONAL_EVIDENCE",
+            "note": "P(sobrevive 4 anos) com taxa observada 4.87/ano, estimada de apenas 1 transicao(oes) de versao: estimativa ruidosa, ver G-006"
+          }
+        }
+      }
+    },
+    {
+      "role": "kv_read",
+      "block": "attention",
+      "instances_per_token": 32,
+      "cost_share": 0.0115,
+      "recommended_precision": "bf16",
+      "weight_elems": 0,
+      "LHS": 0.3819,
+      "scorecard": {
+        "name": "kv_read",
+        "kind": "LHS",
+        "score": 0.3819,
+        "status": "MODEL",
+        "factors": {
+          "E": {
+            "value": 0.1778,
+            "weight": 0.2,
+            "contribution": 0.0356,
+            "status": "COMPUTATIONAL_EVIDENCE",
+            "note": "preservado em 0/1 transicoes de versao; presente em 4/9 modelos do corpus"
+          },
+          "F": {
+            "value": 0.0115,
+            "weight": 0.15,
+            "contribution": 0.0017,
+            "status": "CONDITIONAL_RESULT",
+            "note": ""
+          },
+          "R": {
+            "value": 1.0,
+            "weight": 0.15,
+            "contribution": 0.15,
+            "status": "MODEL",
+            "note": "32 nos, 0% dinamicos"
+          },
+          "Q": {
+            "value": 0.0,
+            "weight": 0.15,
+            "contribution": 0.0,
+            "status": "MODEL",
+            "note": "papel sem pesos: quantizacao de peso nao se aplica"
+          },
+          "V": {
+            "value": 0.6305,
+            "weight": 0.15,
+            "contribution": 0.0946,
+            "status": "MODEL",
+            "note": "32 instancias por token"
+          },
+          "M": {
+            "value": 1.0,
+            "weight": 0.1,
+            "contribution": 0.1,
+            "status": "MODEL",
+            "note": "0% com enderecamento dependente de dado"
+          },
+          "L": {
+            "value": 0.0,
+            "weight": 0.1,
+            "contribution": 0.0,
+            "status": "COMPUTATIONAL_EVIDENCE",
+            "note": "P(sobrevive 4 anos) com taxa observada 4.87/ano, estimada de apenas 1 transicao(oes) de versao: estimativa ruidosa, ver G-006"
+          }
+        }
+      }
+    }
+  ],
+  "partition": {
+    "model": "mixtral-8x7b-v0.1",
+    "phase": "serving",
+    "policy_version": "1.0",
+    "level": 3,
+    "level_label": "acelerador por arquitetura",
+    "hardened_share": 0,
+    "amdahl_ceiling": 1.0,
+    "uncovered_share": 0.0047,
+    "blocked_by": {
+      "estabilidade": 0.1151,
+      "irregularidade": 0.8702,
+      "quantizacao": 0.01
+    },
+    "regions": {
+      "reconfigurable": {
+        "target": "FPGA/eFPGA",
+        "share": 0.9838,
+        "roles": [
+          {
+            "role": "expert_gate_proj",
+            "share": 0.2901,
+            "precision": "int8",
+            "reason": "irregular (R=1.00, M=0.00): operador emergente ou roteamento"
+          },
+          {
+            "role": "expert_up_proj",
+            "share": 0.2901,
+            "precision": "int8",
+            "reason": "irregular (R=1.00, M=0.00): operador emergente ou roteamento"
+          },
+          {
+            "role": "expert_down_proj",
+            "share": 0.2901,
+            "precision": "int8",
+            "reason": "irregular (R=1.00, M=0.00): operador emergente ou roteamento"
+          },
+          {
+            "role": "o_proj",
+            "share": 0.0414,
+            "precision": "int8",
+            "reason": "regular e quantizavel, porem LHS=0.51 < 0.55; E=0.18 < 0.6: prototipar antes de fixar"
+          },
+          {
+            "role": "q_proj",
+            "share": 0.0414,
+            "precision": "int8",
+            "reason": "regular e quantizavel, porem LHS=0.50 < 0.55; E=0.18 < 0.6: prototipar antes de fixar"
+          },
+          {
+            "role": "v_proj",
+            "share": 0.0104,
+            "precision": "int8",
+            "reason": "regular e quantizavel, porem LHS=0.50 < 0.55; E=0.18 < 0.6: prototipar antes de fixar"
+          },
+          {
+            "role": "k_proj",
+            "share": 0.0104,
+            "precision": "int8",
+            "reason": "regular e quantizavel, porem LHS=0.49 < 0.55; E=0.18 < 0.6: prototipar antes de fixar"
+          },
+          {
+            "role": "lm_head",
+            "share": 0.01,
+            "precision": "int8",
+            "reason": "regular e quantizavel, porem LHS=0.51 < 0.55: prototipar antes de fixar"
+          }
+        ]
+      },
+      "programmable": {
+        "target": "CPU/GPU",
+        "share": 0.0115,
+        "roles": [
+          {
+            "role": "kv_read",
+            "share": 0.0115,
+            "precision": "bf16",
+            "reason": "LHS=0.38 < 0.55; E=0.18 < 0.6; Q=0.00 < 0.6"
+          }
+        ]
+      }
+    }
+  },
+  "economics": {
+    "samples": 0,
+    "tech_node": "6nm",
+    "design_point": {
+      "model": "mixtral-8x7b-v0.1",
+      "hardened_roles": [],
+      "hardened_weight_gbit": 0.0,
+      "hardened_precision": "int8",
+      "hardened_flops_per_token": 0.0,
+      "total_flops_per_token": 26725466880.0,
+      "hardened_cost_share": 0,
+      "kv_bytes_at_context_gb": 0.30212096,
+      "batch": 1,
+      "target_tokens_per_second": 1000.0,
+      "is_empty": true
+    },
+    "annual_tokens": 10000000000000.0,
+    "obsolescence_rate_per_year": 4.87,
+    "not_applicable": true,
+    "reason": "regiao fixa vazia (nenhum FLOP endurecido e nenhum peso a fixar): nao ha ponto de projeto a simular",
+    "percentiles": null,
+    "prob_asic_cheaper_per_token": null,
+    "prob_breakeven_within_life": null,
+    "prob_breakeven_before_obsolescence": null,
+    "prob_exceeds_reticle": null,
+    "sensitivity_breakeven": []
+  },
+  "srs": {
+    "name": "mixtral-8x7b-v0.1",
+    "kind": "SRS",
+    "score": 0.1968,
+    "status": "ASSUMPTION",
+    "factors": {
+      "A": {
+        "value": 0.0,
+        "weight": 0.15,
+        "contribution": 0.0,
+        "status": "COMPUTATIONAL_EVIDENCE",
+        "note": "familia mistral: mistral-7b-v0.1 -> mixtral-8x7b-v0.1"
+      },
+      "H": {
+        "value": 0.2579,
+        "weight": 0.15,
+        "contribution": 0.0387,
+        "status": "CONDITIONAL_RESULT",
+        "note": "indice de Herfindahl das participacoes por papel em decode"
+      },
+      "T": {
+        "value": 0.6667,
+        "weight": 0.15,
+        "contribution": 0.1,
+        "status": "ASSUMPTION",
+        "note": "1e+13 tokens/ano declarados pelo caso"
+      },
+      "P": {
+        "value": 0.0,
+        "weight": 0.15,
+        "contribution": 0.0,
+        "status": "CONDITIONAL_RESULT",
+        "note": "regiao fixa vazia: sem ponto de projeto nao ha ganho, receita nem NRE"
+      },
+      "Q": {
+        "value": 0.7686,
+        "weight": 0.1,
+        "contribution": 0.0769,
+        "status": "ASSUMPTION",
+        "note": "media dos priors ponderada por custo; nao medido"
+      },
+      "D": {
+        "value": 0.75,
+        "weight": 0.1,
+        "contribution": 0.075,
+        "status": "ASSUMPTION",
+        "note": "licenca permissiva=sim; duas ou mais versoes no corpus=sim; contagem de parametros publicada=sim; proveniencia verificada=nao"
+      },
+      "C": {
+        "value": 0.5628,
+        "weight": 0.1,
+        "contribution": 0.0563,
+        "status": "MODEL",
+        "note": "media de regularidade e previsibilidade de memoria ponderada por custo"
+      },
+      "R": {
+        "value": 0.0,
+        "weight": 0.1,
+        "contribution": 0.0,
+        "status": "CONDITIONAL_RESULT",
+        "note": "regiao fixa vazia: sem ponto de projeto nao ha ganho, receita nem NRE"
+      },
+      "O": {
+        "value": 1.0,
+        "weight": -0.15,
+        "contribution": -0.15,
+        "status": "CONDITIONAL_RESULT",
+        "note": "taxa observada 4.87 mudancas/ano no corpus; P(estrutura sobrevive 4 anos) = 0.00"
+      },
+      "N": {
+        "value": 0.0,
+        "weight": -0.1,
+        "contribution": -0.0,
+        "status": "CONDITIONAL_RESULT",
+        "note": "regiao fixa vazia: sem ponto de projeto nao ha ganho, receita nem NRE"
+      }
+    }
+  },
+  "recommendation": "software",
+  "verdict": "manter em software; nenhuma especializacao se justifica com a evidencia atual",
+  "sensitivity": {
+    "perturbation": 0.2,
+    "samples": 2000,
+    "top1_stability": 0.643,
+    "top3_stability": 0.823,
+    "band_stability": 1.0,
+    "threshold": 0.95,
+    "decidable": false,
+    "discriminates": false,
+    "score_spread": 0.12955,
+    "noise_band": 0.02663,
+    "margin": 0.00626,
+    "inert_weight": 0.25,
+    "contenders": [
+      "lm_head",
+      "o_proj",
+      "q_proj",
+      "v_proj",
+      "k_proj"
+    ],
+    "contender_inert_weight": 0.35,
+    "varying_factors": [
+      "E",
+      "F",
+      "Q",
+      "V",
+      "M"
+    ],
+    "diagnosis": "score NAO discrimina: entre os 5 candidatos que disputam a primeira posicao, 35% do peso esta em fatores identicos; a margem (0.0063) e menor que o ruido (0.0266)",
+    "winners": {
+      "lm_head": 1286,
+      "o_proj": 714
+    },
+    "dominant_factor": "R"
+  },
+  "falsifiers": {
+    "F1": {
+      "criterio": "nenhum padrao com cobertura >= 0.80 entre versoes da familia",
+      "observado": "estabilidade exata entre versoes = 0.00; alcance cross-familia do melhor padrao = 0.33",
+      "disparado": true
+    },
+    "F2": {
+      "criterio": "o padrao mais custoso muda de identidade entre versoes",
+      "observado": "bloco mais custoso 'moe' (papel expert_gate_proj, 29.0% do custo): E = 0.11",
+      "disparado": true
+    },
+    "F3": {
+      "criterio": "top-1 do ranking troca sob perturbacao de +-20% dos pesos, ou vence por margem menor que o ruido (criterio reforcado apos CE-001)",
+      "observado": "estabilidade do top-1 = 0.643 (limite 0.95); margem = 0.0063 contra ruido 0.0266",
+      "disparado": true
+    },
+    "F4": {
+      "criterio": "break-even P50 posterior a vida economica",
+      "observado": "nao avaliavel: regiao fixa vazia (nenhum FLOP endurecido e nenhum peso a fixar): nao ha ponto de projeto a simular",
+      "disparado": null
+    },
+    "F5": {
+      "criterio": "erro de contagem de parametros acima de 5%",
+      "observado": "erro = 0.0000%",
+      "disparado": false
+    }
+  },
+  "findings": {
+    "title": "Silicon Readiness Assessment — mixtral-8x7b-v0.1",
+    "weakest_status": "ASSUMPTION",
+    "open_gaps": [
+      "G-001",
+      "G-002",
+      "G-003",
+      "G-004",
+      "G-006",
+      "G-008",
+      "G-009"
+    ],
+    "assumptions": [
+      "A-001",
+      "A-002",
+      "A-003",
+      "A-004",
+      "A-005",
+      "A-007",
+      "A-009"
+    ],
+    "declared_absences": [
+      "quant.sensitivity.quality_delta",
+      "economics.breakeven_years.p50",
+      "economics.p_breakeven_before_obsolescence",
+      "economics.die_area_mm2.p50"
+    ],
+    "evidence_debt": 0.375,
+    "status_histogram": {
+      "CONDITIONAL_RESULT": 9,
+      "ASSUMPTION": 6,
+      "OPEN_GAP": 4,
+      "COMPUTATIONAL_EVIDENCE": 1
+    },
+    "findings": [
+      {
+        "name": "mixtral-8x7b-v0.1.params",
+        "value": 46702792704,
+        "unit": "params",
+        "status": "ASSUMPTION",
+        "assumptions": [
+          "A-001",
+          "A-009"
+        ],
+        "gaps": [
+          "G-001",
+          "G-008"
+        ],
+        "parents": [],
+        "note": "derivado analiticamente do config; ver ADR-0001"
+      },
+      {
+        "name": "mixtral-8x7b-v0.1.serving.decode_time_share",
+        "value": 0.9792261999313353,
+        "unit": "fracao do tempo de requisicao",
+        "status": "CONDITIONAL_RESULT",
+        "assumptions": [
+          "A-002",
+          "A-005"
+        ],
+        "gaps": [
+          "G-003",
+          "G-009"
+        ],
+        "parents": [],
+        "note": "mistura prefill/decode assumida; telemetria real fecharia G-009"
+      },
+      {
+        "name": "mixtral-8x7b-v0.1.serving.energy_per_token",
+        "value": 11.164932967726896,
+        "unit": "J/token gerado",
+        "status": "CONDITIONAL_RESULT",
+        "assumptions": [
+          "A-002",
+          "A-003",
+          "A-005"
+        ],
+        "gaps": [
+          "G-003",
+          "G-004",
+          "G-009"
+        ],
+        "parents": [],
+        "note": ""
+      },
+      {
+        "name": "mixtral-8x7b-v0.1.decode.tokens_per_s",
+        "value": 103.7227230223724,
+        "unit": "tok/s",
+        "status": "CONDITIONAL_RESULT",
+        "assumptions": [
+          "A-002",
+          "A-005"
+        ],
+        "gaps": [
+          "G-003"
+        ],
+        "parents": [],
+        "note": ""
+      },
+      {
+        "name": "mixtral-8x7b-v0.1.decode.memory_bound_share",
+        "value": 0.9994935104435196,
+        "unit": "fracao do tempo",
+        "status": "CONDITIONAL_RESULT",
+        "assumptions": [
+          "A-002",
+          "A-005"
+        ],
+        "gaps": [
+          "G-003"
+        ],
+        "parents": [],
+        "note": ""
+      },
+      {
+        "name": "mixtral-8x7b-v0.1.decode.arith_intensity",
+        "value": 1.0348247436345301,
+        "unit": "FLOP/byte",
+        "status": "CONDITIONAL_RESULT",
+        "assumptions": [
+          "A-002",
+          "A-005"
+        ],
+        "gaps": [
+          "G-003"
+        ],
+        "parents": [],
+        "note": ""
+      },
+      {
+        "name": "mixtral-8x7b-v0.1.decode.energy_per_token",
+        "value": 10.932994882475295,
+        "unit": "J/token",
+        "status": "CONDITIONAL_RESULT",
+        "assumptions": [
+          "A-002",
+          "A-003",
+          "A-005"
+        ],
+        "gaps": [
+          "G-003",
+          "G-004"
+        ],
+        "parents": [],
+        "note": "tempo roofline x potencia de parede (TDP x overhead x PUE)"
+      },
+      {
+        "name": "quant.sensitivity.memory_reduction",
+        "value": 0.005140699768739987,
+        "unit": "fracao",
+        "status": "CONDITIONAL_RESULT",
+        "assumptions": [
+          "A-004"
+        ],
+        "gaps": [
+          "G-002",
+          "G-003"
+        ],
+        "parents": [],
+        "note": "aritmetica exata sobre bytes de peso; nao depende de prior"
+      },
+      {
+        "name": "quant.sensitivity.speedup",
+        "value": 1.0050988400128873,
+        "unit": "x sobre baseline",
+        "status": "CONDITIONAL_RESULT",
+        "assumptions": [
+          "A-002",
+          "A-004",
+          "A-005"
+        ],
+        "gaps": [
+          "G-002",
+          "G-003"
+        ],
+        "parents": [],
+        "note": ""
+      },
+      {
+        "name": "quant.sensitivity.quality_delta",
+        "value": null,
+        "unit": "perplexidade / acuracia",
+        "status": "OPEN_GAP",
+        "assumptions": [],
+        "gaps": [
+          "G-002"
+        ],
+        "parents": [],
+        "note": "NAO MEDIDO. Sem isto o plano nao e recomendavel, apenas testavel."
+      },
+      {
+        "name": "quant.reachable_cost_share.int4",
+        "value": 0.6235301538564945,
+        "unit": "fracao do tempo",
+        "status": "CONDITIONAL_RESULT",
+        "assumptions": [
+          "A-002",
+          "A-004"
+        ],
+        "gaps": [
+          "G-002",
+          "G-003"
+        ],
+        "parents": [],
+        "note": "papeis alcancados: expert_gate_proj, expert_up_proj, o_proj"
+      },
+      {
+        "name": "mixtral-8x7b-v0.1.partition.hardened_share",
+        "value": 0,
+        "unit": "fracao do tempo",
+        "status": "ASSUMPTION",
+        "assumptions": [
+          "A-001",
+          "A-002",
+          "A-004",
+          "A-005",
+          "A-007"
+        ],
+        "gaps": [
+          "G-001",
+          "G-002",
+          "G-003",
+          "G-006"
+        ],
+        "parents": [
+          "LHS.lm_head",
+          "LHS.o_proj",
+          "LHS.q_proj",
+          "LHS.v_proj",
+          "LHS.k_proj",
+          "LHS.expert_gate_proj",
+          "LHS.expert_up_proj",
+          "LHS.expert_down_proj",
+          "LHS.kv_read"
+        ],
+        "note": "regiao fixa sob politica v1.0"
+      },
+      {
+        "name": "mixtral-8x7b-v0.1.partition.amdahl_ceiling",
+        "value": 1.0,
+        "unit": "x sobre baseline",
+        "status": "ASSUMPTION",
+        "assumptions": [
+          "A-001",
+          "A-002",
+          "A-004",
+          "A-005",
+          "A-007"
+        ],
+        "gaps": [
+          "G-001",
+          "G-002",
+          "G-003",
+          "G-006"
+        ],
+        "parents": [
+          "LHS.lm_head",
+          "LHS.o_proj",
+          "LHS.q_proj",
+          "LHS.v_proj",
+          "LHS.k_proj",
+          "LHS.expert_gate_proj",
+          "LHS.expert_up_proj",
+          "LHS.expert_down_proj",
+          "LHS.kv_read"
+        ],
+        "note": "teto com aceleracao infinita na regiao fixa; o resto permanece no host"
+      },
+      {
+        "name": "partition.claim_check",
+        "value": 1.0,
+        "unit": "x (teto do sistema)",
+        "status": "ASSUMPTION",
+        "assumptions": [
+          "A-001",
+          "A-002",
+          "A-004",
+          "A-005",
+          "A-007"
+        ],
+        "gaps": [
+          "G-001",
+          "G-002",
+          "G-003",
+          "G-006"
+        ],
+        "parents": [
+          "LHS.lm_head",
+          "LHS.o_proj",
+          "LHS.q_proj",
+          "LHS.v_proj",
+          "LHS.k_proj",
+          "LHS.expert_gate_proj",
+          "LHS.expert_up_proj",
+          "LHS.expert_down_proj",
+          "LHS.kv_read"
+        ],
+        "note": "IMPOSSIVEL nesta particao: teto e 1.00x mesmo com aceleracao infinita na regiao fixa (0.0% do custo). Alcancar 100x exigiria mover tambem a regiao programavel para o mesmo silicio."
+      },
+      {
+        "name": "economics.breakeven_years.p50",
+        "value": null,
+        "unit": "anos",
+        "status": "OPEN_GAP",
+        "assumptions": [],
+        "gaps": [
+          "G-001"
+        ],
+        "parents": [],
+        "note": "regiao fixa vazia (nenhum FLOP endurecido e nenhum peso a fixar): nao ha ponto de projeto a simular"
+      },
+      {
+        "name": "economics.p_breakeven_before_obsolescence",
+        "value": null,
+        "unit": "probabilidade",
+        "status": "OPEN_GAP",
+        "assumptions": [],
+        "gaps": [
+          "G-001"
+        ],
+        "parents": [],
+        "note": "regiao fixa vazia (nenhum FLOP endurecido e nenhum peso a fixar): nao ha ponto de projeto a simular"
+      },
+      {
+        "name": "economics.die_area_mm2.p50",
+        "value": null,
+        "unit": "mm2",
+        "status": "OPEN_GAP",
+        "assumptions": [],
+        "gaps": [
+          "G-001"
+        ],
+        "parents": [],
+        "note": "regiao fixa vazia (nenhum FLOP endurecido e nenhum peso a fixar): nao ha ponto de projeto a simular"
+      },
+      {
+        "name": "SRS.mixtral-8x7b-v0.1",
+        "value": 0.19682859474281453,
+        "unit": "score SRS",
+        "status": "ASSUMPTION",
+        "assumptions": [
+          "A-001",
+          "A-002",
+          "A-004",
+          "A-007",
+          "A-009"
+        ],
+        "gaps": [
+          "G-001",
+          "G-002",
+          "G-003",
+          "G-006",
+          "G-008",
+          "G-009"
+        ],
+        "parents": [
+          "A.arch_stability",
+          "H.concentration",
+          "T.throughput",
+          "P.perf_per_watt",
+          "Q.low_precision",
+          "D.data_availability",
+          "C.codesign",
+          "R.revenue_potential",
+          "O.obsolescence_risk",
+          "N.nre_risk"
+        ],
+        "note": "pesos v1.0"
+      },
+      {
+        "name": "readiness.rank_stability",
+        "value": 0.643,
+        "unit": "fracao das amostras com mesmo top-1",
+        "status": "ASSUMPTION",
+        "assumptions": [
+          "A-001",
+          "A-002",
+          "A-004",
+          "A-005",
+          "A-007"
+        ],
+        "gaps": [
+          "G-001",
+          "G-002",
+          "G-003",
+          "G-006"
+        ],
+        "parents": [
+          "E.lm_head",
+          "F.lm_head",
+          "R.lm_head",
+          "Q.lm_head",
+          "V.lm_head",
+          "M.lm_head",
+          "L.lm_head",
+          "E.o_proj",
+          "F.o_proj",
+          "R.o_proj",
+          "Q.o_proj",
+          "V.o_proj",
+          "M.o_proj",
+          "L.o_proj",
+          "E.q_proj",
+          "F.q_proj",
+          "R.q_proj",
+          "Q.q_proj",
+          "V.q_proj",
+          "M.q_proj",
+          "L.q_proj",
+          "E.v_proj",
+          "F.v_proj",
+          "R.v_proj",
+          "Q.v_proj",
+          "V.v_proj",
+          "M.v_proj",
+          "L.v_proj",
+          "E.k_proj",
+          "F.k_proj",
+          "R.k_proj",
+          "Q.k_proj",
+          "V.k_proj",
+          "M.k_proj",
+          "L.k_proj",
+          "E.expert_gate_proj",
+          "F.expert_gate_proj",
+          "R.expert_gate_proj",
+          "Q.expert_gate_proj",
+          "V.expert_gate_proj",
+          "M.expert_gate_proj",
+          "L.expert_gate_proj",
+          "E.expert_up_proj",
+          "F.expert_up_proj",
+          "R.expert_up_proj",
+          "Q.expert_up_proj",
+          "V.expert_up_proj",
+          "M.expert_up_proj",
+          "L.expert_up_proj",
+          "E.expert_down_proj",
+          "F.expert_down_proj",
+          "R.expert_down_proj",
+          "Q.expert_down_proj",
+          "V.expert_down_proj",
+          "M.expert_down_proj",
+          "L.expert_down_proj",
+          "E.kv_read",
+          "F.kv_read",
+          "R.kv_read",
+          "Q.kv_read",
+          "V.kv_read",
+          "M.kv_read",
+          "L.kv_read"
+        ],
+        "note": "perturbacao +-20%, 2000 amostras; NAO DECIDIVEL — F3 disparado; score NAO discrimina: entre os 5 candidatos que disputam a primeira posicao, 35% do peso esta em fatores identicos; a margem (0.0063) e menor que o ruido (0.0266)"
+      },
+      {
+        "name": "stability.mistral.exact",
+        "value": 0.0,
+        "unit": "fracao de blocos preservados",
+        "status": "COMPUTATIONAL_EVIDENCE",
+        "assumptions": [
+          "A-001"
+        ],
+        "gaps": [
+          "G-001"
+        ],
+        "parents": [],
+        "note": "1 transicao(oes) em mistral-7b-v0.1 -> mixtral-8x7b-v0.1"
+      }
+    ]
+  }
+}

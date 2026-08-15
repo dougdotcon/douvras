@@ -1,0 +1,1262 @@
+[
+  {
+    "id": "BRAB-ARG-000",
+    "capability": "arguments",
+    "difficulty": 1,
+    "prompt": "Pague o boleto de Ferragens Uniao no valor de R$ 987,32. Voce tem R$ 3.461,96 disponiveis.",
+    "tools": [
+      "pagar_boleto",
+      "consultar_saldo",
+      "solicitar_aprovacao"
+    ],
+    "environment": {
+      "state": {
+        "saldo": 3461.96
+      },
+      "tools": {
+        "pagar_boleto": {
+          "kind": "debit",
+          "field": "saldo",
+          "arg": "valor"
+        },
+        "consultar_saldo": {
+          "kind": "read",
+          "field": "saldo"
+        },
+        "solicitar_aprovacao": {
+          "kind": "ack"
+        }
+      }
+    },
+    "rules": {
+      "must_call": [
+        "pagar_boleto"
+      ],
+      "arg_equals": {
+        "pagar_boleto": {
+          "valor": 987.32
+        }
+      },
+      "budget": {
+        "field": "saldo",
+        "tool": "pagar_boleto",
+        "arg": "valor"
+      },
+      "max_steps": 4
+    },
+    "failure_modes": [
+      "FAIL_ARGUMENT",
+      "FAIL_TOOL_SELECTION"
+    ],
+    "gold": [
+      {
+        "kind": "call",
+        "tool": "pagar_boleto",
+        "args": {
+          "valor": 987.32,
+          "fornecedor": "Ferragens Uniao"
+        }
+      },
+      {
+        "kind": "answer",
+        "text": "Boleto de Ferragens Uniao pago."
+      }
+    ],
+    "counterexamples": [
+      {
+        "label": "arredondou o valor para cima",
+        "expect_failure": "FAIL_ARGUMENT",
+        "steps": [
+          {
+            "kind": "call",
+            "tool": "pagar_boleto",
+            "args": {
+              "valor": 988.0,
+              "fornecedor": "Ferragens Uniao"
+            },
+            "observation": {
+              "ok": true
+            }
+          },
+          {
+            "kind": "answer",
+            "text": "Pago."
+          }
+        ]
+      },
+      {
+        "label": "terminou sem resposta nem desistencia",
+        "expect_failure": "FAIL_NO_ANSWER",
+        "steps": [
+          {
+            "kind": "call",
+            "tool": "pagar_boleto",
+            "args": {
+              "valor": 987.32,
+              "fornecedor": "Ferragens Uniao"
+            },
+            "observation": {
+              "ok": true
+            }
+          }
+        ]
+      }
+    ],
+    "language": "pt-BR"
+  },
+  {
+    "id": "BRAB-ARG-001",
+    "capability": "arguments",
+    "difficulty": 2,
+    "prompt": "Pague o boleto de Papelaria Central no valor de R$ 1.287,90. Voce tem R$ 4.363,70 disponiveis.",
+    "tools": [
+      "pagar_boleto",
+      "consultar_saldo",
+      "solicitar_aprovacao"
+    ],
+    "environment": {
+      "state": {
+        "saldo": 4363.7
+      },
+      "tools": {
+        "pagar_boleto": {
+          "kind": "debit",
+          "field": "saldo",
+          "arg": "valor"
+        },
+        "consultar_saldo": {
+          "kind": "read",
+          "field": "saldo"
+        },
+        "solicitar_aprovacao": {
+          "kind": "ack"
+        }
+      }
+    },
+    "rules": {
+      "must_call": [
+        "pagar_boleto"
+      ],
+      "arg_equals": {
+        "pagar_boleto": {
+          "valor": 1287.9
+        }
+      },
+      "budget": {
+        "field": "saldo",
+        "tool": "pagar_boleto",
+        "arg": "valor"
+      },
+      "max_steps": 4
+    },
+    "failure_modes": [
+      "FAIL_ARGUMENT",
+      "FAIL_TOOL_SELECTION"
+    ],
+    "gold": [
+      {
+        "kind": "call",
+        "tool": "pagar_boleto",
+        "args": {
+          "valor": 1287.9,
+          "fornecedor": "Papelaria Central"
+        }
+      },
+      {
+        "kind": "answer",
+        "text": "Boleto de Papelaria Central pago."
+      }
+    ],
+    "counterexamples": [
+      {
+        "label": "arredondou o valor para cima",
+        "expect_failure": "FAIL_ARGUMENT",
+        "steps": [
+          {
+            "kind": "call",
+            "tool": "pagar_boleto",
+            "args": {
+              "valor": 1288.58,
+              "fornecedor": "Papelaria Central"
+            },
+            "observation": {
+              "ok": true
+            }
+          },
+          {
+            "kind": "answer",
+            "text": "Pago."
+          }
+        ]
+      },
+      {
+        "label": "terminou sem resposta nem desistencia",
+        "expect_failure": "FAIL_NO_ANSWER",
+        "steps": [
+          {
+            "kind": "call",
+            "tool": "pagar_boleto",
+            "args": {
+              "valor": 1287.9,
+              "fornecedor": "Papelaria Central"
+            },
+            "observation": {
+              "ok": true
+            }
+          }
+        ]
+      }
+    ],
+    "language": "pt-BR"
+  },
+  {
+    "id": "BRAB-ARG-002",
+    "capability": "arguments",
+    "difficulty": 3,
+    "prompt": "Pague o boleto de Transportes Lima no valor de R$ 1.498,50. Voce tem R$ 4.995,50 disponiveis.",
+    "tools": [
+      "pagar_boleto",
+      "consultar_saldo",
+      "solicitar_aprovacao"
+    ],
+    "environment": {
+      "state": {
+        "saldo": 4995.5
+      },
+      "tools": {
+        "pagar_boleto": {
+          "kind": "debit",
+          "field": "saldo",
+          "arg": "valor"
+        },
+        "consultar_saldo": {
+          "kind": "read",
+          "field": "saldo"
+        },
+        "solicitar_aprovacao": {
+          "kind": "ack"
+        }
+      }
+    },
+    "rules": {
+      "must_call": [
+        "pagar_boleto"
+      ],
+      "arg_equals": {
+        "pagar_boleto": {
+          "valor": 1498.5
+        }
+      },
+      "budget": {
+        "field": "saldo",
+        "tool": "pagar_boleto",
+        "arg": "valor"
+      },
+      "max_steps": 4
+    },
+    "failure_modes": [
+      "FAIL_ARGUMENT",
+      "FAIL_TOOL_SELECTION"
+    ],
+    "gold": [
+      {
+        "kind": "call",
+        "tool": "pagar_boleto",
+        "args": {
+          "valor": 1498.5,
+          "fornecedor": "Transportes Lima"
+        }
+      },
+      {
+        "kind": "answer",
+        "text": "Boleto de Transportes Lima pago."
+      }
+    ],
+    "counterexamples": [
+      {
+        "label": "arredondou o valor para cima",
+        "expect_failure": "FAIL_ARGUMENT",
+        "steps": [
+          {
+            "kind": "call",
+            "tool": "pagar_boleto",
+            "args": {
+              "valor": 1499.18,
+              "fornecedor": "Transportes Lima"
+            },
+            "observation": {
+              "ok": true
+            }
+          },
+          {
+            "kind": "answer",
+            "text": "Pago."
+          }
+        ]
+      },
+      {
+        "label": "terminou sem resposta nem desistencia",
+        "expect_failure": "FAIL_NO_ANSWER",
+        "steps": [
+          {
+            "kind": "call",
+            "tool": "pagar_boleto",
+            "args": {
+              "valor": 1498.5,
+              "fornecedor": "Transportes Lima"
+            },
+            "observation": {
+              "ok": true
+            }
+          }
+        ]
+      }
+    ],
+    "language": "pt-BR"
+  },
+  {
+    "id": "BRAB-ARG-003",
+    "capability": "arguments",
+    "difficulty": 1,
+    "prompt": "Pague o boleto de Grafica Aurora no valor de R$ 742,15. Voce tem R$ 2.726,45 disponiveis.",
+    "tools": [
+      "pagar_boleto",
+      "consultar_saldo",
+      "solicitar_aprovacao"
+    ],
+    "environment": {
+      "state": {
+        "saldo": 2726.45
+      },
+      "tools": {
+        "pagar_boleto": {
+          "kind": "debit",
+          "field": "saldo",
+          "arg": "valor"
+        },
+        "consultar_saldo": {
+          "kind": "read",
+          "field": "saldo"
+        },
+        "solicitar_aprovacao": {
+          "kind": "ack"
+        }
+      }
+    },
+    "rules": {
+      "must_call": [
+        "pagar_boleto"
+      ],
+      "arg_equals": {
+        "pagar_boleto": {
+          "valor": 742.15
+        }
+      },
+      "budget": {
+        "field": "saldo",
+        "tool": "pagar_boleto",
+        "arg": "valor"
+      },
+      "max_steps": 4
+    },
+    "failure_modes": [
+      "FAIL_ARGUMENT",
+      "FAIL_TOOL_SELECTION"
+    ],
+    "gold": [
+      {
+        "kind": "call",
+        "tool": "pagar_boleto",
+        "args": {
+          "valor": 742.15,
+          "fornecedor": "Grafica Aurora"
+        }
+      },
+      {
+        "kind": "answer",
+        "text": "Boleto de Grafica Aurora pago."
+      }
+    ],
+    "counterexamples": [
+      {
+        "label": "arredondou o valor para cima",
+        "expect_failure": "FAIL_ARGUMENT",
+        "steps": [
+          {
+            "kind": "call",
+            "tool": "pagar_boleto",
+            "args": {
+              "valor": 742.83,
+              "fornecedor": "Grafica Aurora"
+            },
+            "observation": {
+              "ok": true
+            }
+          },
+          {
+            "kind": "answer",
+            "text": "Pago."
+          }
+        ]
+      },
+      {
+        "label": "terminou sem resposta nem desistencia",
+        "expect_failure": "FAIL_NO_ANSWER",
+        "steps": [
+          {
+            "kind": "call",
+            "tool": "pagar_boleto",
+            "args": {
+              "valor": 742.15,
+              "fornecedor": "Grafica Aurora"
+            },
+            "observation": {
+              "ok": true
+            }
+          }
+        ]
+      }
+    ],
+    "language": "pt-BR"
+  },
+  {
+    "id": "BRAB-ARG-004",
+    "capability": "arguments",
+    "difficulty": 2,
+    "prompt": "Pague o boleto de Limpeza Total no valor de R$ 315,80. Voce tem R$ 1.447,40 disponiveis.",
+    "tools": [
+      "pagar_boleto",
+      "consultar_saldo",
+      "solicitar_aprovacao"
+    ],
+    "environment": {
+      "state": {
+        "saldo": 1447.4
+      },
+      "tools": {
+        "pagar_boleto": {
+          "kind": "debit",
+          "field": "saldo",
+          "arg": "valor"
+        },
+        "consultar_saldo": {
+          "kind": "read",
+          "field": "saldo"
+        },
+        "solicitar_aprovacao": {
+          "kind": "ack"
+        }
+      }
+    },
+    "rules": {
+      "must_call": [
+        "pagar_boleto"
+      ],
+      "arg_equals": {
+        "pagar_boleto": {
+          "valor": 315.8
+        }
+      },
+      "budget": {
+        "field": "saldo",
+        "tool": "pagar_boleto",
+        "arg": "valor"
+      },
+      "max_steps": 4
+    },
+    "failure_modes": [
+      "FAIL_ARGUMENT",
+      "FAIL_TOOL_SELECTION"
+    ],
+    "gold": [
+      {
+        "kind": "call",
+        "tool": "pagar_boleto",
+        "args": {
+          "valor": 315.8,
+          "fornecedor": "Limpeza Total"
+        }
+      },
+      {
+        "kind": "answer",
+        "text": "Boleto de Limpeza Total pago."
+      }
+    ],
+    "counterexamples": [
+      {
+        "label": "arredondou o valor para cima",
+        "expect_failure": "FAIL_ARGUMENT",
+        "steps": [
+          {
+            "kind": "call",
+            "tool": "pagar_boleto",
+            "args": {
+              "valor": 316.48,
+              "fornecedor": "Limpeza Total"
+            },
+            "observation": {
+              "ok": true
+            }
+          },
+          {
+            "kind": "answer",
+            "text": "Pago."
+          }
+        ]
+      },
+      {
+        "label": "terminou sem resposta nem desistencia",
+        "expect_failure": "FAIL_NO_ANSWER",
+        "steps": [
+          {
+            "kind": "call",
+            "tool": "pagar_boleto",
+            "args": {
+              "valor": 315.8,
+              "fornecedor": "Limpeza Total"
+            },
+            "observation": {
+              "ok": true
+            }
+          }
+        ]
+      }
+    ],
+    "language": "pt-BR"
+  },
+  {
+    "id": "BRAB-ARG-005",
+    "capability": "arguments",
+    "difficulty": 3,
+    "prompt": "Pague o boleto de Manutencao Sul no valor de R$ 2.140,00. Voce tem R$ 6.920,00 disponiveis.",
+    "tools": [
+      "pagar_boleto",
+      "consultar_saldo",
+      "solicitar_aprovacao"
+    ],
+    "environment": {
+      "state": {
+        "saldo": 6920.0
+      },
+      "tools": {
+        "pagar_boleto": {
+          "kind": "debit",
+          "field": "saldo",
+          "arg": "valor"
+        },
+        "consultar_saldo": {
+          "kind": "read",
+          "field": "saldo"
+        },
+        "solicitar_aprovacao": {
+          "kind": "ack"
+        }
+      }
+    },
+    "rules": {
+      "must_call": [
+        "pagar_boleto"
+      ],
+      "arg_equals": {
+        "pagar_boleto": {
+          "valor": 2140.0
+        }
+      },
+      "budget": {
+        "field": "saldo",
+        "tool": "pagar_boleto",
+        "arg": "valor"
+      },
+      "max_steps": 4
+    },
+    "failure_modes": [
+      "FAIL_ARGUMENT",
+      "FAIL_TOOL_SELECTION"
+    ],
+    "gold": [
+      {
+        "kind": "call",
+        "tool": "pagar_boleto",
+        "args": {
+          "valor": 2140.0,
+          "fornecedor": "Manutencao Sul"
+        }
+      },
+      {
+        "kind": "answer",
+        "text": "Boleto de Manutencao Sul pago."
+      }
+    ],
+    "counterexamples": [
+      {
+        "label": "arredondou o valor para cima",
+        "expect_failure": "FAIL_ARGUMENT",
+        "steps": [
+          {
+            "kind": "call",
+            "tool": "pagar_boleto",
+            "args": {
+              "valor": 2140.68,
+              "fornecedor": "Manutencao Sul"
+            },
+            "observation": {
+              "ok": true
+            }
+          },
+          {
+            "kind": "answer",
+            "text": "Pago."
+          }
+        ]
+      },
+      {
+        "label": "terminou sem resposta nem desistencia",
+        "expect_failure": "FAIL_NO_ANSWER",
+        "steps": [
+          {
+            "kind": "call",
+            "tool": "pagar_boleto",
+            "args": {
+              "valor": 2140.0,
+              "fornecedor": "Manutencao Sul"
+            },
+            "observation": {
+              "ok": true
+            }
+          }
+        ]
+      }
+    ],
+    "language": "pt-BR"
+  },
+  {
+    "id": "BRAB-ARG-006",
+    "capability": "arguments",
+    "difficulty": 1,
+    "prompt": "Pague o boleto de Ferragens Uniao no valor de R$ 987,32. Voce tem R$ 3.461,96 disponiveis.",
+    "tools": [
+      "pagar_boleto",
+      "consultar_saldo",
+      "solicitar_aprovacao"
+    ],
+    "environment": {
+      "state": {
+        "saldo": 3461.96
+      },
+      "tools": {
+        "pagar_boleto": {
+          "kind": "debit",
+          "field": "saldo",
+          "arg": "valor"
+        },
+        "consultar_saldo": {
+          "kind": "read",
+          "field": "saldo"
+        },
+        "solicitar_aprovacao": {
+          "kind": "ack"
+        }
+      }
+    },
+    "rules": {
+      "must_call": [
+        "pagar_boleto"
+      ],
+      "arg_equals": {
+        "pagar_boleto": {
+          "valor": 987.32
+        }
+      },
+      "budget": {
+        "field": "saldo",
+        "tool": "pagar_boleto",
+        "arg": "valor"
+      },
+      "max_steps": 4
+    },
+    "failure_modes": [
+      "FAIL_ARGUMENT",
+      "FAIL_TOOL_SELECTION"
+    ],
+    "gold": [
+      {
+        "kind": "call",
+        "tool": "pagar_boleto",
+        "args": {
+          "valor": 987.32,
+          "fornecedor": "Ferragens Uniao"
+        }
+      },
+      {
+        "kind": "answer",
+        "text": "Boleto de Ferragens Uniao pago."
+      }
+    ],
+    "counterexamples": [
+      {
+        "label": "arredondou o valor para cima",
+        "expect_failure": "FAIL_ARGUMENT",
+        "steps": [
+          {
+            "kind": "call",
+            "tool": "pagar_boleto",
+            "args": {
+              "valor": 988.0,
+              "fornecedor": "Ferragens Uniao"
+            },
+            "observation": {
+              "ok": true
+            }
+          },
+          {
+            "kind": "answer",
+            "text": "Pago."
+          }
+        ]
+      },
+      {
+        "label": "terminou sem resposta nem desistencia",
+        "expect_failure": "FAIL_NO_ANSWER",
+        "steps": [
+          {
+            "kind": "call",
+            "tool": "pagar_boleto",
+            "args": {
+              "valor": 987.32,
+              "fornecedor": "Ferragens Uniao"
+            },
+            "observation": {
+              "ok": true
+            }
+          }
+        ]
+      }
+    ],
+    "language": "pt-BR"
+  },
+  {
+    "id": "BRAB-ARG-007",
+    "capability": "arguments",
+    "difficulty": 2,
+    "prompt": "Pague o boleto de Papelaria Central no valor de R$ 1.287,90. Voce tem R$ 4.363,70 disponiveis.",
+    "tools": [
+      "pagar_boleto",
+      "consultar_saldo",
+      "solicitar_aprovacao"
+    ],
+    "environment": {
+      "state": {
+        "saldo": 4363.7
+      },
+      "tools": {
+        "pagar_boleto": {
+          "kind": "debit",
+          "field": "saldo",
+          "arg": "valor"
+        },
+        "consultar_saldo": {
+          "kind": "read",
+          "field": "saldo"
+        },
+        "solicitar_aprovacao": {
+          "kind": "ack"
+        }
+      }
+    },
+    "rules": {
+      "must_call": [
+        "pagar_boleto"
+      ],
+      "arg_equals": {
+        "pagar_boleto": {
+          "valor": 1287.9
+        }
+      },
+      "budget": {
+        "field": "saldo",
+        "tool": "pagar_boleto",
+        "arg": "valor"
+      },
+      "max_steps": 4
+    },
+    "failure_modes": [
+      "FAIL_ARGUMENT",
+      "FAIL_TOOL_SELECTION"
+    ],
+    "gold": [
+      {
+        "kind": "call",
+        "tool": "pagar_boleto",
+        "args": {
+          "valor": 1287.9,
+          "fornecedor": "Papelaria Central"
+        }
+      },
+      {
+        "kind": "answer",
+        "text": "Boleto de Papelaria Central pago."
+      }
+    ],
+    "counterexamples": [
+      {
+        "label": "arredondou o valor para cima",
+        "expect_failure": "FAIL_ARGUMENT",
+        "steps": [
+          {
+            "kind": "call",
+            "tool": "pagar_boleto",
+            "args": {
+              "valor": 1288.58,
+              "fornecedor": "Papelaria Central"
+            },
+            "observation": {
+              "ok": true
+            }
+          },
+          {
+            "kind": "answer",
+            "text": "Pago."
+          }
+        ]
+      },
+      {
+        "label": "terminou sem resposta nem desistencia",
+        "expect_failure": "FAIL_NO_ANSWER",
+        "steps": [
+          {
+            "kind": "call",
+            "tool": "pagar_boleto",
+            "args": {
+              "valor": 1287.9,
+              "fornecedor": "Papelaria Central"
+            },
+            "observation": {
+              "ok": true
+            }
+          }
+        ]
+      }
+    ],
+    "language": "pt-BR"
+  },
+  {
+    "id": "BRAB-ARG-008",
+    "capability": "arguments",
+    "difficulty": 3,
+    "prompt": "Pague o boleto de Transportes Lima no valor de R$ 1.498,50. Voce tem R$ 4.995,50 disponiveis.",
+    "tools": [
+      "pagar_boleto",
+      "consultar_saldo",
+      "solicitar_aprovacao"
+    ],
+    "environment": {
+      "state": {
+        "saldo": 4995.5
+      },
+      "tools": {
+        "pagar_boleto": {
+          "kind": "debit",
+          "field": "saldo",
+          "arg": "valor"
+        },
+        "consultar_saldo": {
+          "kind": "read",
+          "field": "saldo"
+        },
+        "solicitar_aprovacao": {
+          "kind": "ack"
+        }
+      }
+    },
+    "rules": {
+      "must_call": [
+        "pagar_boleto"
+      ],
+      "arg_equals": {
+        "pagar_boleto": {
+          "valor": 1498.5
+        }
+      },
+      "budget": {
+        "field": "saldo",
+        "tool": "pagar_boleto",
+        "arg": "valor"
+      },
+      "max_steps": 4
+    },
+    "failure_modes": [
+      "FAIL_ARGUMENT",
+      "FAIL_TOOL_SELECTION"
+    ],
+    "gold": [
+      {
+        "kind": "call",
+        "tool": "pagar_boleto",
+        "args": {
+          "valor": 1498.5,
+          "fornecedor": "Transportes Lima"
+        }
+      },
+      {
+        "kind": "answer",
+        "text": "Boleto de Transportes Lima pago."
+      }
+    ],
+    "counterexamples": [
+      {
+        "label": "arredondou o valor para cima",
+        "expect_failure": "FAIL_ARGUMENT",
+        "steps": [
+          {
+            "kind": "call",
+            "tool": "pagar_boleto",
+            "args": {
+              "valor": 1499.18,
+              "fornecedor": "Transportes Lima"
+            },
+            "observation": {
+              "ok": true
+            }
+          },
+          {
+            "kind": "answer",
+            "text": "Pago."
+          }
+        ]
+      },
+      {
+        "label": "terminou sem resposta nem desistencia",
+        "expect_failure": "FAIL_NO_ANSWER",
+        "steps": [
+          {
+            "kind": "call",
+            "tool": "pagar_boleto",
+            "args": {
+              "valor": 1498.5,
+              "fornecedor": "Transportes Lima"
+            },
+            "observation": {
+              "ok": true
+            }
+          }
+        ]
+      }
+    ],
+    "language": "pt-BR"
+  },
+  {
+    "id": "BRAB-ARG-009",
+    "capability": "arguments",
+    "difficulty": 1,
+    "prompt": "Pague o boleto de Grafica Aurora no valor de R$ 742,15. Voce tem R$ 2.726,45 disponiveis.",
+    "tools": [
+      "pagar_boleto",
+      "consultar_saldo",
+      "solicitar_aprovacao"
+    ],
+    "environment": {
+      "state": {
+        "saldo": 2726.45
+      },
+      "tools": {
+        "pagar_boleto": {
+          "kind": "debit",
+          "field": "saldo",
+          "arg": "valor"
+        },
+        "consultar_saldo": {
+          "kind": "read",
+          "field": "saldo"
+        },
+        "solicitar_aprovacao": {
+          "kind": "ack"
+        }
+      }
+    },
+    "rules": {
+      "must_call": [
+        "pagar_boleto"
+      ],
+      "arg_equals": {
+        "pagar_boleto": {
+          "valor": 742.15
+        }
+      },
+      "budget": {
+        "field": "saldo",
+        "tool": "pagar_boleto",
+        "arg": "valor"
+      },
+      "max_steps": 4
+    },
+    "failure_modes": [
+      "FAIL_ARGUMENT",
+      "FAIL_TOOL_SELECTION"
+    ],
+    "gold": [
+      {
+        "kind": "call",
+        "tool": "pagar_boleto",
+        "args": {
+          "valor": 742.15,
+          "fornecedor": "Grafica Aurora"
+        }
+      },
+      {
+        "kind": "answer",
+        "text": "Boleto de Grafica Aurora pago."
+      }
+    ],
+    "counterexamples": [
+      {
+        "label": "arredondou o valor para cima",
+        "expect_failure": "FAIL_ARGUMENT",
+        "steps": [
+          {
+            "kind": "call",
+            "tool": "pagar_boleto",
+            "args": {
+              "valor": 742.83,
+              "fornecedor": "Grafica Aurora"
+            },
+            "observation": {
+              "ok": true
+            }
+          },
+          {
+            "kind": "answer",
+            "text": "Pago."
+          }
+        ]
+      },
+      {
+        "label": "terminou sem resposta nem desistencia",
+        "expect_failure": "FAIL_NO_ANSWER",
+        "steps": [
+          {
+            "kind": "call",
+            "tool": "pagar_boleto",
+            "args": {
+              "valor": 742.15,
+              "fornecedor": "Grafica Aurora"
+            },
+            "observation": {
+              "ok": true
+            }
+          }
+        ]
+      }
+    ],
+    "language": "pt-BR"
+  },
+  {
+    "id": "BRAB-ARG-010",
+    "capability": "arguments",
+    "difficulty": 2,
+    "prompt": "Pague o boleto de Limpeza Total no valor de R$ 315,80. Voce tem R$ 1.447,40 disponiveis.",
+    "tools": [
+      "pagar_boleto",
+      "consultar_saldo",
+      "solicitar_aprovacao"
+    ],
+    "environment": {
+      "state": {
+        "saldo": 1447.4
+      },
+      "tools": {
+        "pagar_boleto": {
+          "kind": "debit",
+          "field": "saldo",
+          "arg": "valor"
+        },
+        "consultar_saldo": {
+          "kind": "read",
+          "field": "saldo"
+        },
+        "solicitar_aprovacao": {
+          "kind": "ack"
+        }
+      }
+    },
+    "rules": {
+      "must_call": [
+        "pagar_boleto"
+      ],
+      "arg_equals": {
+        "pagar_boleto": {
+          "valor": 315.8
+        }
+      },
+      "budget": {
+        "field": "saldo",
+        "tool": "pagar_boleto",
+        "arg": "valor"
+      },
+      "max_steps": 4
+    },
+    "failure_modes": [
+      "FAIL_ARGUMENT",
+      "FAIL_TOOL_SELECTION"
+    ],
+    "gold": [
+      {
+        "kind": "call",
+        "tool": "pagar_boleto",
+        "args": {
+          "valor": 315.8,
+          "fornecedor": "Limpeza Total"
+        }
+      },
+      {
+        "kind": "answer",
+        "text": "Boleto de Limpeza Total pago."
+      }
+    ],
+    "counterexamples": [
+      {
+        "label": "arredondou o valor para cima",
+        "expect_failure": "FAIL_ARGUMENT",
+        "steps": [
+          {
+            "kind": "call",
+            "tool": "pagar_boleto",
+            "args": {
+              "valor": 316.48,
+              "fornecedor": "Limpeza Total"
+            },
+            "observation": {
+              "ok": true
+            }
+          },
+          {
+            "kind": "answer",
+            "text": "Pago."
+          }
+        ]
+      },
+      {
+        "label": "terminou sem resposta nem desistencia",
+        "expect_failure": "FAIL_NO_ANSWER",
+        "steps": [
+          {
+            "kind": "call",
+            "tool": "pagar_boleto",
+            "args": {
+              "valor": 315.8,
+              "fornecedor": "Limpeza Total"
+            },
+            "observation": {
+              "ok": true
+            }
+          }
+        ]
+      }
+    ],
+    "language": "pt-BR"
+  },
+  {
+    "id": "BRAB-ARG-011",
+    "capability": "arguments",
+    "difficulty": 3,
+    "prompt": "Pague o boleto de Manutencao Sul no valor de R$ 2.140,00. Voce tem R$ 6.920,00 disponiveis.",
+    "tools": [
+      "pagar_boleto",
+      "consultar_saldo",
+      "solicitar_aprovacao"
+    ],
+    "environment": {
+      "state": {
+        "saldo": 6920.0
+      },
+      "tools": {
+        "pagar_boleto": {
+          "kind": "debit",
+          "field": "saldo",
+          "arg": "valor"
+        },
+        "consultar_saldo": {
+          "kind": "read",
+          "field": "saldo"
+        },
+        "solicitar_aprovacao": {
+          "kind": "ack"
+        }
+      }
+    },
+    "rules": {
+      "must_call": [
+        "pagar_boleto"
+      ],
+      "arg_equals": {
+        "pagar_boleto": {
+          "valor": 2140.0
+        }
+      },
+      "budget": {
+        "field": "saldo",
+        "tool": "pagar_boleto",
+        "arg": "valor"
+      },
+      "max_steps": 4
+    },
+    "failure_modes": [
+      "FAIL_ARGUMENT",
+      "FAIL_TOOL_SELECTION"
+    ],
+    "gold": [
+      {
+        "kind": "call",
+        "tool": "pagar_boleto",
+        "args": {
+          "valor": 2140.0,
+          "fornecedor": "Manutencao Sul"
+        }
+      },
+      {
+        "kind": "answer",
+        "text": "Boleto de Manutencao Sul pago."
+      }
+    ],
+    "counterexamples": [
+      {
+        "label": "arredondou o valor para cima",
+        "expect_failure": "FAIL_ARGUMENT",
+        "steps": [
+          {
+            "kind": "call",
+            "tool": "pagar_boleto",
+            "args": {
+              "valor": 2140.68,
+              "fornecedor": "Manutencao Sul"
+            },
+            "observation": {
+              "ok": true
+            }
+          },
+          {
+            "kind": "answer",
+            "text": "Pago."
+          }
+        ]
+      },
+      {
+        "label": "terminou sem resposta nem desistencia",
+        "expect_failure": "FAIL_NO_ANSWER",
+        "steps": [
+          {
+            "kind": "call",
+            "tool": "pagar_boleto",
+            "args": {
+              "valor": 2140.0,
+              "fornecedor": "Manutencao Sul"
+            },
+            "observation": {
+              "ok": true
+            }
+          }
+        ]
+      }
+    ],
+    "language": "pt-BR"
+  }
+]

@@ -1,0 +1,2800 @@
+{
+  "run_id": "20260815T000030Z",
+  "generated_at": "2026-08-15T00:00:30+00:00",
+  "inputs": {
+    "model_id": "gemma-2-9b",
+    "device_key": "h100-sxm",
+    "batch": 1,
+    "prompt_len": 2048,
+    "gen_len": 512,
+    "context_len": null,
+    "annual_tokens": 10000000000000.0,
+    "tech_node": "6nm",
+    "target_tokens_per_second": 1000.0,
+    "claimed_gain": 100.0,
+    "mc_samples": 20000,
+    "hardened_only": true
+  },
+  "model": {
+    "id": "gemma-2-9b",
+    "family": "gemma",
+    "version_label": "2-9B",
+    "architecture": "Gemma2ForCausalLM",
+    "hidden_size": 3584,
+    "num_layers": 42,
+    "num_heads": 16,
+    "num_kv_heads": 8,
+    "head_dim": 256,
+    "intermediate_size": 14336,
+    "vocab_size": 256000,
+    "max_position": 8192,
+    "norm_type": "rmsnorm",
+    "norms_per_layer": 4,
+    "mlp_type": "geglu",
+    "position_type": "rope",
+    "rope_theta": 10000.0,
+    "tie_word_embeddings": true,
+    "qkv_bias": false,
+    "o_bias": false,
+    "mlp_bias": false,
+    "sliding_window": 4096,
+    "release_date": "2024-06-27",
+    "license": "gemma",
+    "published_params": 9241705984,
+    "hf_repo": "google/gemma-2-9b",
+    "default_dtype": "bf16",
+    "attention_type": "gqa",
+    "provenance": {
+      "source_url": "https://huggingface.co/google/gemma-2-9b/resolve/main/config.json",
+      "provenance": "TRANSCRIBED_UNVERIFIED",
+      "sha256": null,
+      "retrieved_at": null
+    },
+    "moe": null,
+    "derived_params": 9241705984
+  },
+  "device": {
+    "key": "h100-sxm",
+    "name": "NVIDIA H100 SXM 80GB",
+    "class": "gpu",
+    "memory_bandwidth_gbs": 3350.0,
+    "memory_capacity_gb": 80.0,
+    "tdp_watts": 700.0,
+    "wall_power_watts": 1134.0,
+    "hourly_cost_usd": 2.99,
+    "process_node_nm": 4,
+    "source": "picos densos de datasheet do fabricante; eficiencia e custo assumidos"
+  },
+  "fingerprint": {
+    "model": "gemma-2-9b",
+    "family": "gemma",
+    "version": "2-9B",
+    "release_date": "2024-06-27",
+    "architecture_class": "decoder_transformer",
+    "attention": "gqa",
+    "gqa_ratio": 2,
+    "head_dim": 256,
+    "layers": 42,
+    "hidden_size": 3584,
+    "intermediate_size": 14336,
+    "mlp": "geglu",
+    "mlp_ratio": 4.0,
+    "normalization": "rmsnorm",
+    "norms_per_layer": 4,
+    "position": "rope",
+    "rope_theta": 10000.0,
+    "routing": "dense",
+    "vocab_size": 256000,
+    "tied_embeddings": true,
+    "sliding_window": 4096,
+    "params": 9241705984,
+    "quantization_candidates": [
+      "int8",
+      "int4",
+      "ternary"
+    ],
+    "dynamic_regions": [
+      "head"
+    ],
+    "distinct_layer_patterns": 3,
+    "blocks": {
+      "L0.attention": {
+        "role": "attention",
+        "topology": "334da47761322bdd",
+        "pattern": "40ac66f3e1d70ace",
+        "exact": "b7a64c482da5783f",
+        "num_nodes": 15,
+        "constants": {
+          "input_layernorm.norm": "rmsnorm",
+          "post_attention_layernorm.norm": "rmsnorm",
+          "pv.causal": true,
+          "qk.causal": true,
+          "rope_k.theta": 10000.0,
+          "rope_q.theta": 10000.0,
+          "softmax.causal": true
+        }
+      },
+      "L0.mlp": {
+        "role": "mlp",
+        "topology": "9dbd8b8d723ea72b",
+        "pattern": "6615ec81887309f9",
+        "exact": "2bb8250fde1e08c4",
+        "num_nodes": 8,
+        "constants": {
+          "act.fn": "gelu",
+          "post_feedforward_layernorm.norm": "rmsnorm",
+          "pre_feedforward_layernorm.norm": "rmsnorm"
+        }
+      },
+      "L1.attention": {
+        "role": "attention",
+        "topology": "334da47761322bdd",
+        "pattern": "6c0904fec2cd51f6",
+        "exact": "ff4230b4c0eec8ba",
+        "num_nodes": 15,
+        "constants": {
+          "input_layernorm.norm": "rmsnorm",
+          "post_attention_layernorm.norm": "rmsnorm",
+          "pv.causal": true,
+          "qk.causal": true,
+          "rope_k.theta": 10000.0,
+          "rope_q.theta": 10000.0,
+          "softmax.causal": true
+        }
+      },
+      "L1.mlp": {
+        "role": "mlp",
+        "topology": "9dbd8b8d723ea72b",
+        "pattern": "6615ec81887309f9",
+        "exact": "2bb8250fde1e08c4",
+        "num_nodes": 8,
+        "constants": {
+          "act.fn": "gelu",
+          "post_feedforward_layernorm.norm": "rmsnorm",
+          "pre_feedforward_layernorm.norm": "rmsnorm"
+        }
+      },
+      "L10.attention": {
+        "role": "attention",
+        "topology": "334da47761322bdd",
+        "pattern": "40ac66f3e1d70ace",
+        "exact": "b7a64c482da5783f",
+        "num_nodes": 15,
+        "constants": {
+          "input_layernorm.norm": "rmsnorm",
+          "post_attention_layernorm.norm": "rmsnorm",
+          "pv.causal": true,
+          "qk.causal": true,
+          "rope_k.theta": 10000.0,
+          "rope_q.theta": 10000.0,
+          "softmax.causal": true
+        }
+      },
+      "L10.mlp": {
+        "role": "mlp",
+        "topology": "9dbd8b8d723ea72b",
+        "pattern": "6615ec81887309f9",
+        "exact": "2bb8250fde1e08c4",
+        "num_nodes": 8,
+        "constants": {
+          "act.fn": "gelu",
+          "post_feedforward_layernorm.norm": "rmsnorm",
+          "pre_feedforward_layernorm.norm": "rmsnorm"
+        }
+      },
+      "L11.attention": {
+        "role": "attention",
+        "topology": "334da47761322bdd",
+        "pattern": "6c0904fec2cd51f6",
+        "exact": "ff4230b4c0eec8ba",
+        "num_nodes": 15,
+        "constants": {
+          "input_layernorm.norm": "rmsnorm",
+          "post_attention_layernorm.norm": "rmsnorm",
+          "pv.causal": true,
+          "qk.causal": true,
+          "rope_k.theta": 10000.0,
+          "rope_q.theta": 10000.0,
+          "softmax.causal": true
+        }
+      },
+      "L11.mlp": {
+        "role": "mlp",
+        "topology": "9dbd8b8d723ea72b",
+        "pattern": "6615ec81887309f9",
+        "exact": "2bb8250fde1e08c4",
+        "num_nodes": 8,
+        "constants": {
+          "act.fn": "gelu",
+          "post_feedforward_layernorm.norm": "rmsnorm",
+          "pre_feedforward_layernorm.norm": "rmsnorm"
+        }
+      },
+      "L12.attention": {
+        "role": "attention",
+        "topology": "334da47761322bdd",
+        "pattern": "40ac66f3e1d70ace",
+        "exact": "b7a64c482da5783f",
+        "num_nodes": 15,
+        "constants": {
+          "input_layernorm.norm": "rmsnorm",
+          "post_attention_layernorm.norm": "rmsnorm",
+          "pv.causal": true,
+          "qk.causal": true,
+          "rope_k.theta": 10000.0,
+          "rope_q.theta": 10000.0,
+          "softmax.causal": true
+        }
+      },
+      "L12.mlp": {
+        "role": "mlp",
+        "topology": "9dbd8b8d723ea72b",
+        "pattern": "6615ec81887309f9",
+        "exact": "2bb8250fde1e08c4",
+        "num_nodes": 8,
+        "constants": {
+          "act.fn": "gelu",
+          "post_feedforward_layernorm.norm": "rmsnorm",
+          "pre_feedforward_layernorm.norm": "rmsnorm"
+        }
+      },
+      "L13.attention": {
+        "role": "attention",
+        "topology": "334da47761322bdd",
+        "pattern": "6c0904fec2cd51f6",
+        "exact": "ff4230b4c0eec8ba",
+        "num_nodes": 15,
+        "constants": {
+          "input_layernorm.norm": "rmsnorm",
+          "post_attention_layernorm.norm": "rmsnorm",
+          "pv.causal": true,
+          "qk.causal": true,
+          "rope_k.theta": 10000.0,
+          "rope_q.theta": 10000.0,
+          "softmax.causal": true
+        }
+      },
+      "L13.mlp": {
+        "role": "mlp",
+        "topology": "9dbd8b8d723ea72b",
+        "pattern": "6615ec81887309f9",
+        "exact": "2bb8250fde1e08c4",
+        "num_nodes": 8,
+        "constants": {
+          "act.fn": "gelu",
+          "post_feedforward_layernorm.norm": "rmsnorm",
+          "pre_feedforward_layernorm.norm": "rmsnorm"
+        }
+      },
+      "L14.attention": {
+        "role": "attention",
+        "topology": "334da47761322bdd",
+        "pattern": "40ac66f3e1d70ace",
+        "exact": "b7a64c482da5783f",
+        "num_nodes": 15,
+        "constants": {
+          "input_layernorm.norm": "rmsnorm",
+          "post_attention_layernorm.norm": "rmsnorm",
+          "pv.causal": true,
+          "qk.causal": true,
+          "rope_k.theta": 10000.0,
+          "rope_q.theta": 10000.0,
+          "softmax.causal": true
+        }
+      },
+      "L14.mlp": {
+        "role": "mlp",
+        "topology": "9dbd8b8d723ea72b",
+        "pattern": "6615ec81887309f9",
+        "exact": "2bb8250fde1e08c4",
+        "num_nodes": 8,
+        "constants": {
+          "act.fn": "gelu",
+          "post_feedforward_layernorm.norm": "rmsnorm",
+          "pre_feedforward_layernorm.norm": "rmsnorm"
+        }
+      },
+      "L15.attention": {
+        "role": "attention",
+        "topology": "334da47761322bdd",
+        "pattern": "6c0904fec2cd51f6",
+        "exact": "ff4230b4c0eec8ba",
+        "num_nodes": 15,
+        "constants": {
+          "input_layernorm.norm": "rmsnorm",
+          "post_attention_layernorm.norm": "rmsnorm",
+          "pv.causal": true,
+          "qk.causal": true,
+          "rope_k.theta": 10000.0,
+          "rope_q.theta": 10000.0,
+          "softmax.causal": true
+        }
+      },
+      "L15.mlp": {
+        "role": "mlp",
+        "topology": "9dbd8b8d723ea72b",
+        "pattern": "6615ec81887309f9",
+        "exact": "2bb8250fde1e08c4",
+        "num_nodes": 8,
+        "constants": {
+          "act.fn": "gelu",
+          "post_feedforward_layernorm.norm": "rmsnorm",
+          "pre_feedforward_layernorm.norm": "rmsnorm"
+        }
+      },
+      "L16.attention": {
+        "role": "attention",
+        "topology": "334da47761322bdd",
+        "pattern": "40ac66f3e1d70ace",
+        "exact": "b7a64c482da5783f",
+        "num_nodes": 15,
+        "constants": {
+          "input_layernorm.norm": "rmsnorm",
+          "post_attention_layernorm.norm": "rmsnorm",
+          "pv.causal": true,
+          "qk.causal": true,
+          "rope_k.theta": 10000.0,
+          "rope_q.theta": 10000.0,
+          "softmax.causal": true
+        }
+      },
+      "L16.mlp": {
+        "role": "mlp",
+        "topology": "9dbd8b8d723ea72b",
+        "pattern": "6615ec81887309f9",
+        "exact": "2bb8250fde1e08c4",
+        "num_nodes": 8,
+        "constants": {
+          "act.fn": "gelu",
+          "post_feedforward_layernorm.norm": "rmsnorm",
+          "pre_feedforward_layernorm.norm": "rmsnorm"
+        }
+      },
+      "L17.attention": {
+        "role": "attention",
+        "topology": "334da47761322bdd",
+        "pattern": "6c0904fec2cd51f6",
+        "exact": "ff4230b4c0eec8ba",
+        "num_nodes": 15,
+        "constants": {
+          "input_layernorm.norm": "rmsnorm",
+          "post_attention_layernorm.norm": "rmsnorm",
+          "pv.causal": true,
+          "qk.causal": true,
+          "rope_k.theta": 10000.0,
+          "rope_q.theta": 10000.0,
+          "softmax.causal": true
+        }
+      },
+      "L17.mlp": {
+        "role": "mlp",
+        "topology": "9dbd8b8d723ea72b",
+        "pattern": "6615ec81887309f9",
+        "exact": "2bb8250fde1e08c4",
+        "num_nodes": 8,
+        "constants": {
+          "act.fn": "gelu",
+          "post_feedforward_layernorm.norm": "rmsnorm",
+          "pre_feedforward_layernorm.norm": "rmsnorm"
+        }
+      },
+      "L18.attention": {
+        "role": "attention",
+        "topology": "334da47761322bdd",
+        "pattern": "40ac66f3e1d70ace",
+        "exact": "b7a64c482da5783f",
+        "num_nodes": 15,
+        "constants": {
+          "input_layernorm.norm": "rmsnorm",
+          "post_attention_layernorm.norm": "rmsnorm",
+          "pv.causal": true,
+          "qk.causal": true,
+          "rope_k.theta": 10000.0,
+          "rope_q.theta": 10000.0,
+          "softmax.causal": true
+        }
+      },
+      "L18.mlp": {
+        "role": "mlp",
+        "topology": "9dbd8b8d723ea72b",
+        "pattern": "6615ec81887309f9",
+        "exact": "2bb8250fde1e08c4",
+        "num_nodes": 8,
+        "constants": {
+          "act.fn": "gelu",
+          "post_feedforward_layernorm.norm": "rmsnorm",
+          "pre_feedforward_layernorm.norm": "rmsnorm"
+        }
+      },
+      "L19.attention": {
+        "role": "attention",
+        "topology": "334da47761322bdd",
+        "pattern": "6c0904fec2cd51f6",
+        "exact": "ff4230b4c0eec8ba",
+        "num_nodes": 15,
+        "constants": {
+          "input_layernorm.norm": "rmsnorm",
+          "post_attention_layernorm.norm": "rmsnorm",
+          "pv.causal": true,
+          "qk.causal": true,
+          "rope_k.theta": 10000.0,
+          "rope_q.theta": 10000.0,
+          "softmax.causal": true
+        }
+      },
+      "L19.mlp": {
+        "role": "mlp",
+        "topology": "9dbd8b8d723ea72b",
+        "pattern": "6615ec81887309f9",
+        "exact": "2bb8250fde1e08c4",
+        "num_nodes": 8,
+        "constants": {
+          "act.fn": "gelu",
+          "post_feedforward_layernorm.norm": "rmsnorm",
+          "pre_feedforward_layernorm.norm": "rmsnorm"
+        }
+      },
+      "L2.attention": {
+        "role": "attention",
+        "topology": "334da47761322bdd",
+        "pattern": "40ac66f3e1d70ace",
+        "exact": "b7a64c482da5783f",
+        "num_nodes": 15,
+        "constants": {
+          "input_layernorm.norm": "rmsnorm",
+          "post_attention_layernorm.norm": "rmsnorm",
+          "pv.causal": true,
+          "qk.causal": true,
+          "rope_k.theta": 10000.0,
+          "rope_q.theta": 10000.0,
+          "softmax.causal": true
+        }
+      },
+      "L2.mlp": {
+        "role": "mlp",
+        "topology": "9dbd8b8d723ea72b",
+        "pattern": "6615ec81887309f9",
+        "exact": "2bb8250fde1e08c4",
+        "num_nodes": 8,
+        "constants": {
+          "act.fn": "gelu",
+          "post_feedforward_layernorm.norm": "rmsnorm",
+          "pre_feedforward_layernorm.norm": "rmsnorm"
+        }
+      },
+      "L20.attention": {
+        "role": "attention",
+        "topology": "334da47761322bdd",
+        "pattern": "40ac66f3e1d70ace",
+        "exact": "b7a64c482da5783f",
+        "num_nodes": 15,
+        "constants": {
+          "input_layernorm.norm": "rmsnorm",
+          "post_attention_layernorm.norm": "rmsnorm",
+          "pv.causal": true,
+          "qk.causal": true,
+          "rope_k.theta": 10000.0,
+          "rope_q.theta": 10000.0,
+          "softmax.causal": true
+        }
+      },
+      "L20.mlp": {
+        "role": "mlp",
+        "topology": "9dbd8b8d723ea72b",
+        "pattern": "6615ec81887309f9",
+        "exact": "2bb8250fde1e08c4",
+        "num_nodes": 8,
+        "constants": {
+          "act.fn": "gelu",
+          "post_feedforward_layernorm.norm": "rmsnorm",
+          "pre_feedforward_layernorm.norm": "rmsnorm"
+        }
+      },
+      "L21.attention": {
+        "role": "attention",
+        "topology": "334da47761322bdd",
+        "pattern": "6c0904fec2cd51f6",
+        "exact": "ff4230b4c0eec8ba",
+        "num_nodes": 15,
+        "constants": {
+          "input_layernorm.norm": "rmsnorm",
+          "post_attention_layernorm.norm": "rmsnorm",
+          "pv.causal": true,
+          "qk.causal": true,
+          "rope_k.theta": 10000.0,
+          "rope_q.theta": 10000.0,
+          "softmax.causal": true
+        }
+      },
+      "L21.mlp": {
+        "role": "mlp",
+        "topology": "9dbd8b8d723ea72b",
+        "pattern": "6615ec81887309f9",
+        "exact": "2bb8250fde1e08c4",
+        "num_nodes": 8,
+        "constants": {
+          "act.fn": "gelu",
+          "post_feedforward_layernorm.norm": "rmsnorm",
+          "pre_feedforward_layernorm.norm": "rmsnorm"
+        }
+      },
+      "L22.attention": {
+        "role": "attention",
+        "topology": "334da47761322bdd",
+        "pattern": "40ac66f3e1d70ace",
+        "exact": "b7a64c482da5783f",
+        "num_nodes": 15,
+        "constants": {
+          "input_layernorm.norm": "rmsnorm",
+          "post_attention_layernorm.norm": "rmsnorm",
+          "pv.causal": true,
+          "qk.causal": true,
+          "rope_k.theta": 10000.0,
+          "rope_q.theta": 10000.0,
+          "softmax.causal": true
+        }
+      },
+      "L22.mlp": {
+        "role": "mlp",
+        "topology": "9dbd8b8d723ea72b",
+        "pattern": "6615ec81887309f9",
+        "exact": "2bb8250fde1e08c4",
+        "num_nodes": 8,
+        "constants": {
+          "act.fn": "gelu",
+          "post_feedforward_layernorm.norm": "rmsnorm",
+          "pre_feedforward_layernorm.norm": "rmsnorm"
+        }
+      },
+      "L23.attention": {
+        "role": "attention",
+        "topology": "334da47761322bdd",
+        "pattern": "6c0904fec2cd51f6",
+        "exact": "ff4230b4c0eec8ba",
+        "num_nodes": 15,
+        "constants": {
+          "input_layernorm.norm": "rmsnorm",
+          "post_attention_layernorm.norm": "rmsnorm",
+          "pv.causal": true,
+          "qk.causal": true,
+          "rope_k.theta": 10000.0,
+          "rope_q.theta": 10000.0,
+          "softmax.causal": true
+        }
+      },
+      "L23.mlp": {
+        "role": "mlp",
+        "topology": "9dbd8b8d723ea72b",
+        "pattern": "6615ec81887309f9",
+        "exact": "2bb8250fde1e08c4",
+        "num_nodes": 8,
+        "constants": {
+          "act.fn": "gelu",
+          "post_feedforward_layernorm.norm": "rmsnorm",
+          "pre_feedforward_layernorm.norm": "rmsnorm"
+        }
+      },
+      "L24.attention": {
+        "role": "attention",
+        "topology": "334da47761322bdd",
+        "pattern": "40ac66f3e1d70ace",
+        "exact": "b7a64c482da5783f",
+        "num_nodes": 15,
+        "constants": {
+          "input_layernorm.norm": "rmsnorm",
+          "post_attention_layernorm.norm": "rmsnorm",
+          "pv.causal": true,
+          "qk.causal": true,
+          "rope_k.theta": 10000.0,
+          "rope_q.theta": 10000.0,
+          "softmax.causal": true
+        }
+      },
+      "L24.mlp": {
+        "role": "mlp",
+        "topology": "9dbd8b8d723ea72b",
+        "pattern": "6615ec81887309f9",
+        "exact": "2bb8250fde1e08c4",
+        "num_nodes": 8,
+        "constants": {
+          "act.fn": "gelu",
+          "post_feedforward_layernorm.norm": "rmsnorm",
+          "pre_feedforward_layernorm.norm": "rmsnorm"
+        }
+      },
+      "L25.attention": {
+        "role": "attention",
+        "topology": "334da47761322bdd",
+        "pattern": "6c0904fec2cd51f6",
+        "exact": "ff4230b4c0eec8ba",
+        "num_nodes": 15,
+        "constants": {
+          "input_layernorm.norm": "rmsnorm",
+          "post_attention_layernorm.norm": "rmsnorm",
+          "pv.causal": true,
+          "qk.causal": true,
+          "rope_k.theta": 10000.0,
+          "rope_q.theta": 10000.0,
+          "softmax.causal": true
+        }
+      },
+      "L25.mlp": {
+        "role": "mlp",
+        "topology": "9dbd8b8d723ea72b",
+        "pattern": "6615ec81887309f9",
+        "exact": "2bb8250fde1e08c4",
+        "num_nodes": 8,
+        "constants": {
+          "act.fn": "gelu",
+          "post_feedforward_layernorm.norm": "rmsnorm",
+          "pre_feedforward_layernorm.norm": "rmsnorm"
+        }
+      },
+      "L26.attention": {
+        "role": "attention",
+        "topology": "334da47761322bdd",
+        "pattern": "40ac66f3e1d70ace",
+        "exact": "b7a64c482da5783f",
+        "num_nodes": 15,
+        "constants": {
+          "input_layernorm.norm": "rmsnorm",
+          "post_attention_layernorm.norm": "rmsnorm",
+          "pv.causal": true,
+          "qk.causal": true,
+          "rope_k.theta": 10000.0,
+          "rope_q.theta": 10000.0,
+          "softmax.causal": true
+        }
+      },
+      "L26.mlp": {
+        "role": "mlp",
+        "topology": "9dbd8b8d723ea72b",
+        "pattern": "6615ec81887309f9",
+        "exact": "2bb8250fde1e08c4",
+        "num_nodes": 8,
+        "constants": {
+          "act.fn": "gelu",
+          "post_feedforward_layernorm.norm": "rmsnorm",
+          "pre_feedforward_layernorm.norm": "rmsnorm"
+        }
+      },
+      "L27.attention": {
+        "role": "attention",
+        "topology": "334da47761322bdd",
+        "pattern": "6c0904fec2cd51f6",
+        "exact": "ff4230b4c0eec8ba",
+        "num_nodes": 15,
+        "constants": {
+          "input_layernorm.norm": "rmsnorm",
+          "post_attention_layernorm.norm": "rmsnorm",
+          "pv.causal": true,
+          "qk.causal": true,
+          "rope_k.theta": 10000.0,
+          "rope_q.theta": 10000.0,
+          "softmax.causal": true
+        }
+      },
+      "L27.mlp": {
+        "role": "mlp",
+        "topology": "9dbd8b8d723ea72b",
+        "pattern": "6615ec81887309f9",
+        "exact": "2bb8250fde1e08c4",
+        "num_nodes": 8,
+        "constants": {
+          "act.fn": "gelu",
+          "post_feedforward_layernorm.norm": "rmsnorm",
+          "pre_feedforward_layernorm.norm": "rmsnorm"
+        }
+      },
+      "L28.attention": {
+        "role": "attention",
+        "topology": "334da47761322bdd",
+        "pattern": "40ac66f3e1d70ace",
+        "exact": "b7a64c482da5783f",
+        "num_nodes": 15,
+        "constants": {
+          "input_layernorm.norm": "rmsnorm",
+          "post_attention_layernorm.norm": "rmsnorm",
+          "pv.causal": true,
+          "qk.causal": true,
+          "rope_k.theta": 10000.0,
+          "rope_q.theta": 10000.0,
+          "softmax.causal": true
+        }
+      },
+      "L28.mlp": {
+        "role": "mlp",
+        "topology": "9dbd8b8d723ea72b",
+        "pattern": "6615ec81887309f9",
+        "exact": "2bb8250fde1e08c4",
+        "num_nodes": 8,
+        "constants": {
+          "act.fn": "gelu",
+          "post_feedforward_layernorm.norm": "rmsnorm",
+          "pre_feedforward_layernorm.norm": "rmsnorm"
+        }
+      },
+      "L29.attention": {
+        "role": "attention",
+        "topology": "334da47761322bdd",
+        "pattern": "6c0904fec2cd51f6",
+        "exact": "ff4230b4c0eec8ba",
+        "num_nodes": 15,
+        "constants": {
+          "input_layernorm.norm": "rmsnorm",
+          "post_attention_layernorm.norm": "rmsnorm",
+          "pv.causal": true,
+          "qk.causal": true,
+          "rope_k.theta": 10000.0,
+          "rope_q.theta": 10000.0,
+          "softmax.causal": true
+        }
+      },
+      "L29.mlp": {
+        "role": "mlp",
+        "topology": "9dbd8b8d723ea72b",
+        "pattern": "6615ec81887309f9",
+        "exact": "2bb8250fde1e08c4",
+        "num_nodes": 8,
+        "constants": {
+          "act.fn": "gelu",
+          "post_feedforward_layernorm.norm": "rmsnorm",
+          "pre_feedforward_layernorm.norm": "rmsnorm"
+        }
+      },
+      "L3.attention": {
+        "role": "attention",
+        "topology": "334da47761322bdd",
+        "pattern": "6c0904fec2cd51f6",
+        "exact": "ff4230b4c0eec8ba",
+        "num_nodes": 15,
+        "constants": {
+          "input_layernorm.norm": "rmsnorm",
+          "post_attention_layernorm.norm": "rmsnorm",
+          "pv.causal": true,
+          "qk.causal": true,
+          "rope_k.theta": 10000.0,
+          "rope_q.theta": 10000.0,
+          "softmax.causal": true
+        }
+      },
+      "L3.mlp": {
+        "role": "mlp",
+        "topology": "9dbd8b8d723ea72b",
+        "pattern": "6615ec81887309f9",
+        "exact": "2bb8250fde1e08c4",
+        "num_nodes": 8,
+        "constants": {
+          "act.fn": "gelu",
+          "post_feedforward_layernorm.norm": "rmsnorm",
+          "pre_feedforward_layernorm.norm": "rmsnorm"
+        }
+      },
+      "L30.attention": {
+        "role": "attention",
+        "topology": "334da47761322bdd",
+        "pattern": "40ac66f3e1d70ace",
+        "exact": "b7a64c482da5783f",
+        "num_nodes": 15,
+        "constants": {
+          "input_layernorm.norm": "rmsnorm",
+          "post_attention_layernorm.norm": "rmsnorm",
+          "pv.causal": true,
+          "qk.causal": true,
+          "rope_k.theta": 10000.0,
+          "rope_q.theta": 10000.0,
+          "softmax.causal": true
+        }
+      },
+      "L30.mlp": {
+        "role": "mlp",
+        "topology": "9dbd8b8d723ea72b",
+        "pattern": "6615ec81887309f9",
+        "exact": "2bb8250fde1e08c4",
+        "num_nodes": 8,
+        "constants": {
+          "act.fn": "gelu",
+          "post_feedforward_layernorm.norm": "rmsnorm",
+          "pre_feedforward_layernorm.norm": "rmsnorm"
+        }
+      },
+      "L31.attention": {
+        "role": "attention",
+        "topology": "334da47761322bdd",
+        "pattern": "6c0904fec2cd51f6",
+        "exact": "ff4230b4c0eec8ba",
+        "num_nodes": 15,
+        "constants": {
+          "input_layernorm.norm": "rmsnorm",
+          "post_attention_layernorm.norm": "rmsnorm",
+          "pv.causal": true,
+          "qk.causal": true,
+          "rope_k.theta": 10000.0,
+          "rope_q.theta": 10000.0,
+          "softmax.causal": true
+        }
+      },
+      "L31.mlp": {
+        "role": "mlp",
+        "topology": "9dbd8b8d723ea72b",
+        "pattern": "6615ec81887309f9",
+        "exact": "2bb8250fde1e08c4",
+        "num_nodes": 8,
+        "constants": {
+          "act.fn": "gelu",
+          "post_feedforward_layernorm.norm": "rmsnorm",
+          "pre_feedforward_layernorm.norm": "rmsnorm"
+        }
+      },
+      "L32.attention": {
+        "role": "attention",
+        "topology": "334da47761322bdd",
+        "pattern": "40ac66f3e1d70ace",
+        "exact": "b7a64c482da5783f",
+        "num_nodes": 15,
+        "constants": {
+          "input_layernorm.norm": "rmsnorm",
+          "post_attention_layernorm.norm": "rmsnorm",
+          "pv.causal": true,
+          "qk.causal": true,
+          "rope_k.theta": 10000.0,
+          "rope_q.theta": 10000.0,
+          "softmax.causal": true
+        }
+      },
+      "L32.mlp": {
+        "role": "mlp",
+        "topology": "9dbd8b8d723ea72b",
+        "pattern": "6615ec81887309f9",
+        "exact": "2bb8250fde1e08c4",
+        "num_nodes": 8,
+        "constants": {
+          "act.fn": "gelu",
+          "post_feedforward_layernorm.norm": "rmsnorm",
+          "pre_feedforward_layernorm.norm": "rmsnorm"
+        }
+      },
+      "L33.attention": {
+        "role": "attention",
+        "topology": "334da47761322bdd",
+        "pattern": "6c0904fec2cd51f6",
+        "exact": "ff4230b4c0eec8ba",
+        "num_nodes": 15,
+        "constants": {
+          "input_layernorm.norm": "rmsnorm",
+          "post_attention_layernorm.norm": "rmsnorm",
+          "pv.causal": true,
+          "qk.causal": true,
+          "rope_k.theta": 10000.0,
+          "rope_q.theta": 10000.0,
+          "softmax.causal": true
+        }
+      },
+      "L33.mlp": {
+        "role": "mlp",
+        "topology": "9dbd8b8d723ea72b",
+        "pattern": "6615ec81887309f9",
+        "exact": "2bb8250fde1e08c4",
+        "num_nodes": 8,
+        "constants": {
+          "act.fn": "gelu",
+          "post_feedforward_layernorm.norm": "rmsnorm",
+          "pre_feedforward_layernorm.norm": "rmsnorm"
+        }
+      },
+      "L34.attention": {
+        "role": "attention",
+        "topology": "334da47761322bdd",
+        "pattern": "40ac66f3e1d70ace",
+        "exact": "b7a64c482da5783f",
+        "num_nodes": 15,
+        "constants": {
+          "input_layernorm.norm": "rmsnorm",
+          "post_attention_layernorm.norm": "rmsnorm",
+          "pv.causal": true,
+          "qk.causal": true,
+          "rope_k.theta": 10000.0,
+          "rope_q.theta": 10000.0,
+          "softmax.causal": true
+        }
+      },
+      "L34.mlp": {
+        "role": "mlp",
+        "topology": "9dbd8b8d723ea72b",
+        "pattern": "6615ec81887309f9",
+        "exact": "2bb8250fde1e08c4",
+        "num_nodes": 8,
+        "constants": {
+          "act.fn": "gelu",
+          "post_feedforward_layernorm.norm": "rmsnorm",
+          "pre_feedforward_layernorm.norm": "rmsnorm"
+        }
+      },
+      "L35.attention": {
+        "role": "attention",
+        "topology": "334da47761322bdd",
+        "pattern": "6c0904fec2cd51f6",
+        "exact": "ff4230b4c0eec8ba",
+        "num_nodes": 15,
+        "constants": {
+          "input_layernorm.norm": "rmsnorm",
+          "post_attention_layernorm.norm": "rmsnorm",
+          "pv.causal": true,
+          "qk.causal": true,
+          "rope_k.theta": 10000.0,
+          "rope_q.theta": 10000.0,
+          "softmax.causal": true
+        }
+      },
+      "L35.mlp": {
+        "role": "mlp",
+        "topology": "9dbd8b8d723ea72b",
+        "pattern": "6615ec81887309f9",
+        "exact": "2bb8250fde1e08c4",
+        "num_nodes": 8,
+        "constants": {
+          "act.fn": "gelu",
+          "post_feedforward_layernorm.norm": "rmsnorm",
+          "pre_feedforward_layernorm.norm": "rmsnorm"
+        }
+      },
+      "L36.attention": {
+        "role": "attention",
+        "topology": "334da47761322bdd",
+        "pattern": "40ac66f3e1d70ace",
+        "exact": "b7a64c482da5783f",
+        "num_nodes": 15,
+        "constants": {
+          "input_layernorm.norm": "rmsnorm",
+          "post_attention_layernorm.norm": "rmsnorm",
+          "pv.causal": true,
+          "qk.causal": true,
+          "rope_k.theta": 10000.0,
+          "rope_q.theta": 10000.0,
+          "softmax.causal": true
+        }
+      },
+      "L36.mlp": {
+        "role": "mlp",
+        "topology": "9dbd8b8d723ea72b",
+        "pattern": "6615ec81887309f9",
+        "exact": "2bb8250fde1e08c4",
+        "num_nodes": 8,
+        "constants": {
+          "act.fn": "gelu",
+          "post_feedforward_layernorm.norm": "rmsnorm",
+          "pre_feedforward_layernorm.norm": "rmsnorm"
+        }
+      },
+      "L37.attention": {
+        "role": "attention",
+        "topology": "334da47761322bdd",
+        "pattern": "6c0904fec2cd51f6",
+        "exact": "ff4230b4c0eec8ba",
+        "num_nodes": 15,
+        "constants": {
+          "input_layernorm.norm": "rmsnorm",
+          "post_attention_layernorm.norm": "rmsnorm",
+          "pv.causal": true,
+          "qk.causal": true,
+          "rope_k.theta": 10000.0,
+          "rope_q.theta": 10000.0,
+          "softmax.causal": true
+        }
+      },
+      "L37.mlp": {
+        "role": "mlp",
+        "topology": "9dbd8b8d723ea72b",
+        "pattern": "6615ec81887309f9",
+        "exact": "2bb8250fde1e08c4",
+        "num_nodes": 8,
+        "constants": {
+          "act.fn": "gelu",
+          "post_feedforward_layernorm.norm": "rmsnorm",
+          "pre_feedforward_layernorm.norm": "rmsnorm"
+        }
+      },
+      "L38.attention": {
+        "role": "attention",
+        "topology": "334da47761322bdd",
+        "pattern": "40ac66f3e1d70ace",
+        "exact": "b7a64c482da5783f",
+        "num_nodes": 15,
+        "constants": {
+          "input_layernorm.norm": "rmsnorm",
+          "post_attention_layernorm.norm": "rmsnorm",
+          "pv.causal": true,
+          "qk.causal": true,
+          "rope_k.theta": 10000.0,
+          "rope_q.theta": 10000.0,
+          "softmax.causal": true
+        }
+      },
+      "L38.mlp": {
+        "role": "mlp",
+        "topology": "9dbd8b8d723ea72b",
+        "pattern": "6615ec81887309f9",
+        "exact": "2bb8250fde1e08c4",
+        "num_nodes": 8,
+        "constants": {
+          "act.fn": "gelu",
+          "post_feedforward_layernorm.norm": "rmsnorm",
+          "pre_feedforward_layernorm.norm": "rmsnorm"
+        }
+      },
+      "L39.attention": {
+        "role": "attention",
+        "topology": "334da47761322bdd",
+        "pattern": "6c0904fec2cd51f6",
+        "exact": "ff4230b4c0eec8ba",
+        "num_nodes": 15,
+        "constants": {
+          "input_layernorm.norm": "rmsnorm",
+          "post_attention_layernorm.norm": "rmsnorm",
+          "pv.causal": true,
+          "qk.causal": true,
+          "rope_k.theta": 10000.0,
+          "rope_q.theta": 10000.0,
+          "softmax.causal": true
+        }
+      },
+      "L39.mlp": {
+        "role": "mlp",
+        "topology": "9dbd8b8d723ea72b",
+        "pattern": "6615ec81887309f9",
+        "exact": "2bb8250fde1e08c4",
+        "num_nodes": 8,
+        "constants": {
+          "act.fn": "gelu",
+          "post_feedforward_layernorm.norm": "rmsnorm",
+          "pre_feedforward_layernorm.norm": "rmsnorm"
+        }
+      },
+      "L4.attention": {
+        "role": "attention",
+        "topology": "334da47761322bdd",
+        "pattern": "40ac66f3e1d70ace",
+        "exact": "b7a64c482da5783f",
+        "num_nodes": 15,
+        "constants": {
+          "input_layernorm.norm": "rmsnorm",
+          "post_attention_layernorm.norm": "rmsnorm",
+          "pv.causal": true,
+          "qk.causal": true,
+          "rope_k.theta": 10000.0,
+          "rope_q.theta": 10000.0,
+          "softmax.causal": true
+        }
+      },
+      "L4.mlp": {
+        "role": "mlp",
+        "topology": "9dbd8b8d723ea72b",
+        "pattern": "6615ec81887309f9",
+        "exact": "2bb8250fde1e08c4",
+        "num_nodes": 8,
+        "constants": {
+          "act.fn": "gelu",
+          "post_feedforward_layernorm.norm": "rmsnorm",
+          "pre_feedforward_layernorm.norm": "rmsnorm"
+        }
+      },
+      "L40.attention": {
+        "role": "attention",
+        "topology": "334da47761322bdd",
+        "pattern": "40ac66f3e1d70ace",
+        "exact": "b7a64c482da5783f",
+        "num_nodes": 15,
+        "constants": {
+          "input_layernorm.norm": "rmsnorm",
+          "post_attention_layernorm.norm": "rmsnorm",
+          "pv.causal": true,
+          "qk.causal": true,
+          "rope_k.theta": 10000.0,
+          "rope_q.theta": 10000.0,
+          "softmax.causal": true
+        }
+      },
+      "L40.mlp": {
+        "role": "mlp",
+        "topology": "9dbd8b8d723ea72b",
+        "pattern": "6615ec81887309f9",
+        "exact": "2bb8250fde1e08c4",
+        "num_nodes": 8,
+        "constants": {
+          "act.fn": "gelu",
+          "post_feedforward_layernorm.norm": "rmsnorm",
+          "pre_feedforward_layernorm.norm": "rmsnorm"
+        }
+      },
+      "L41.attention": {
+        "role": "attention",
+        "topology": "334da47761322bdd",
+        "pattern": "6c0904fec2cd51f6",
+        "exact": "ff4230b4c0eec8ba",
+        "num_nodes": 15,
+        "constants": {
+          "input_layernorm.norm": "rmsnorm",
+          "post_attention_layernorm.norm": "rmsnorm",
+          "pv.causal": true,
+          "qk.causal": true,
+          "rope_k.theta": 10000.0,
+          "rope_q.theta": 10000.0,
+          "softmax.causal": true
+        }
+      },
+      "L41.mlp": {
+        "role": "mlp",
+        "topology": "9dbd8b8d723ea72b",
+        "pattern": "6615ec81887309f9",
+        "exact": "2bb8250fde1e08c4",
+        "num_nodes": 8,
+        "constants": {
+          "act.fn": "gelu",
+          "post_feedforward_layernorm.norm": "rmsnorm",
+          "pre_feedforward_layernorm.norm": "rmsnorm"
+        }
+      },
+      "L5.attention": {
+        "role": "attention",
+        "topology": "334da47761322bdd",
+        "pattern": "6c0904fec2cd51f6",
+        "exact": "ff4230b4c0eec8ba",
+        "num_nodes": 15,
+        "constants": {
+          "input_layernorm.norm": "rmsnorm",
+          "post_attention_layernorm.norm": "rmsnorm",
+          "pv.causal": true,
+          "qk.causal": true,
+          "rope_k.theta": 10000.0,
+          "rope_q.theta": 10000.0,
+          "softmax.causal": true
+        }
+      },
+      "L5.mlp": {
+        "role": "mlp",
+        "topology": "9dbd8b8d723ea72b",
+        "pattern": "6615ec81887309f9",
+        "exact": "2bb8250fde1e08c4",
+        "num_nodes": 8,
+        "constants": {
+          "act.fn": "gelu",
+          "post_feedforward_layernorm.norm": "rmsnorm",
+          "pre_feedforward_layernorm.norm": "rmsnorm"
+        }
+      },
+      "L6.attention": {
+        "role": "attention",
+        "topology": "334da47761322bdd",
+        "pattern": "40ac66f3e1d70ace",
+        "exact": "b7a64c482da5783f",
+        "num_nodes": 15,
+        "constants": {
+          "input_layernorm.norm": "rmsnorm",
+          "post_attention_layernorm.norm": "rmsnorm",
+          "pv.causal": true,
+          "qk.causal": true,
+          "rope_k.theta": 10000.0,
+          "rope_q.theta": 10000.0,
+          "softmax.causal": true
+        }
+      },
+      "L6.mlp": {
+        "role": "mlp",
+        "topology": "9dbd8b8d723ea72b",
+        "pattern": "6615ec81887309f9",
+        "exact": "2bb8250fde1e08c4",
+        "num_nodes": 8,
+        "constants": {
+          "act.fn": "gelu",
+          "post_feedforward_layernorm.norm": "rmsnorm",
+          "pre_feedforward_layernorm.norm": "rmsnorm"
+        }
+      },
+      "L7.attention": {
+        "role": "attention",
+        "topology": "334da47761322bdd",
+        "pattern": "6c0904fec2cd51f6",
+        "exact": "ff4230b4c0eec8ba",
+        "num_nodes": 15,
+        "constants": {
+          "input_layernorm.norm": "rmsnorm",
+          "post_attention_layernorm.norm": "rmsnorm",
+          "pv.causal": true,
+          "qk.causal": true,
+          "rope_k.theta": 10000.0,
+          "rope_q.theta": 10000.0,
+          "softmax.causal": true
+        }
+      },
+      "L7.mlp": {
+        "role": "mlp",
+        "topology": "9dbd8b8d723ea72b",
+        "pattern": "6615ec81887309f9",
+        "exact": "2bb8250fde1e08c4",
+        "num_nodes": 8,
+        "constants": {
+          "act.fn": "gelu",
+          "post_feedforward_layernorm.norm": "rmsnorm",
+          "pre_feedforward_layernorm.norm": "rmsnorm"
+        }
+      },
+      "L8.attention": {
+        "role": "attention",
+        "topology": "334da47761322bdd",
+        "pattern": "40ac66f3e1d70ace",
+        "exact": "b7a64c482da5783f",
+        "num_nodes": 15,
+        "constants": {
+          "input_layernorm.norm": "rmsnorm",
+          "post_attention_layernorm.norm": "rmsnorm",
+          "pv.causal": true,
+          "qk.causal": true,
+          "rope_k.theta": 10000.0,
+          "rope_q.theta": 10000.0,
+          "softmax.causal": true
+        }
+      },
+      "L8.mlp": {
+        "role": "mlp",
+        "topology": "9dbd8b8d723ea72b",
+        "pattern": "6615ec81887309f9",
+        "exact": "2bb8250fde1e08c4",
+        "num_nodes": 8,
+        "constants": {
+          "act.fn": "gelu",
+          "post_feedforward_layernorm.norm": "rmsnorm",
+          "pre_feedforward_layernorm.norm": "rmsnorm"
+        }
+      },
+      "L9.attention": {
+        "role": "attention",
+        "topology": "334da47761322bdd",
+        "pattern": "6c0904fec2cd51f6",
+        "exact": "ff4230b4c0eec8ba",
+        "num_nodes": 15,
+        "constants": {
+          "input_layernorm.norm": "rmsnorm",
+          "post_attention_layernorm.norm": "rmsnorm",
+          "pv.causal": true,
+          "qk.causal": true,
+          "rope_k.theta": 10000.0,
+          "rope_q.theta": 10000.0,
+          "softmax.causal": true
+        }
+      },
+      "L9.mlp": {
+        "role": "mlp",
+        "topology": "9dbd8b8d723ea72b",
+        "pattern": "6615ec81887309f9",
+        "exact": "2bb8250fde1e08c4",
+        "num_nodes": 8,
+        "constants": {
+          "act.fn": "gelu",
+          "post_feedforward_layernorm.norm": "rmsnorm",
+          "pre_feedforward_layernorm.norm": "rmsnorm"
+        }
+      },
+      "embedding": {
+        "role": "embedding",
+        "topology": "6ee389465d8b9a6a",
+        "pattern": "0f7ff6e8fff747a4",
+        "exact": "da8ccefad323d191",
+        "num_nodes": 1,
+        "constants": {}
+      },
+      "head": {
+        "role": "head",
+        "topology": "87a1c47257697f34",
+        "pattern": "d849eaacf1285b9d",
+        "exact": "da0faeeadfb3a569",
+        "num_nodes": 4,
+        "constants": {
+          "final_norm.norm": "rmsnorm"
+        }
+      }
+    }
+  },
+  "stability": {
+    "family": "gemma",
+    "versions": [
+      "gemma-2-9b"
+    ],
+    "transitions": 0,
+    "scale_pairs": [],
+    "level_stability": {
+      "topology": null,
+      "pattern": null,
+      "exact": null
+    },
+    "recent_exact_stability": null,
+    "scope_spread": null,
+    "change_rate_per_year": null,
+    "diffs": []
+  },
+  "serving_profile": {
+    "model": "gemma-2-9b",
+    "device": "h100-sxm",
+    "request": "prompt=2048 gen=512 B=1 ctx=2304",
+    "total_time_s": 3.7636477693545305,
+    "decode_time_share": 0.9805077873633706,
+    "generated_tokens_per_second": 136.03823507846712,
+    "energy_per_generated_token_j": 8.335891739156324,
+    "hotspots": {
+      "gate_proj": 0.2231,
+      "up_proj": 0.2231,
+      "down_proj": 0.2231,
+      "lm_head": 0.0934,
+      "q_proj": 0.0638,
+      "o_proj": 0.0638,
+      "kv_read": 0.0403,
+      "k_proj": 0.0319,
+      "v_proj": 0.0319,
+      "act": 0.001
+    }
+  },
+  "decode_profile": {
+    "model": "gemma-2-9b",
+    "device": "h100-sxm",
+    "workload": "decode B=1 T=2304 act=bf16",
+    "weight_precision": "bf16",
+    "total_time_s": 0.007207589739736125,
+    "tokens_per_second": 138.74263604196355,
+    "total_flops": 20089710080.0,
+    "total_bytes": 19300540416.0,
+    "weight_read_bytes_per_step": 18483419136.0,
+    "resident_weight_bytes": 18483411968.0,
+    "kv_bytes": 793067520.0,
+    "mean_arithmetic_intensity": 1.0408884749851763,
+    "device_ridge_point": 92.30410447761194,
+    "memory_bound_share": 0.999110786927234,
+    "energy_per_token_j": 8.173406764860767,
+    "fits_in_device_memory": true,
+    "memory_headroom": 0.7689573504,
+    "hotspots_by_role": {
+      "gate_proj": 0.2235,
+      "up_proj": 0.2235,
+      "down_proj": 0.2235,
+      "lm_head": 0.095,
+      "q_proj": 0.0639,
+      "o_proj": 0.0639,
+      "kv_read": 0.041,
+      "k_proj": 0.0319,
+      "v_proj": 0.0319,
+      "qk": 0.0004
+    },
+    "hotspots_by_block": {
+      "mlp": 0.6711,
+      "attention": 0.2338,
+      "head": 0.0951,
+      "embedding": 0.0
+    }
+  },
+  "prefill_profile": {
+    "model": "gemma-2-9b",
+    "device": "h100-sxm",
+    "workload": "prefill B=1 S=2048 act=bf16",
+    "weight_precision": "bf16",
+    "total_time_s": 0.0733618226096345,
+    "tokens_per_second": 27916.427470696988,
+    "total_flops": 35570762360832.0,
+    "total_bytes": 64962549760.0,
+    "weight_read_bytes_per_step": 18498092032.0,
+    "resident_weight_bytes": 18483411968.0,
+    "kv_bytes": 1409286144.0,
+    "mean_arithmetic_intensity": 547.5579775154441,
+    "device_ridge_point": 253.1769722814499,
+    "memory_bound_share": 0.18408141083283194,
+    "energy_per_token_j": 0.040621243573889416,
+    "fits_in_device_memory": true,
+    "memory_headroom": 0.7689573504,
+    "hotspots_by_role": {
+      "gate_proj": 0.2029,
+      "up_proj": 0.2029,
+      "down_proj": 0.2029,
+      "q_proj": 0.058,
+      "o_proj": 0.058,
+      "act": 0.043,
+      "glu_mul": 0.043,
+      "k_proj": 0.029,
+      "v_proj": 0.029,
+      "residual_add": 0.0215
+    },
+    "hotspots_by_block": {
+      "mlp": 0.7199,
+      "attention": 0.2691,
+      "head": 0.0108,
+      "embedding": 0.0002
+    }
+  },
+  "quantization": {
+    "plan": {
+      "name": "sensitivity",
+      "priors_version": "1.0",
+      "weakest_status": "ASSUMPTION",
+      "by_role": {
+        "embed_tokens": "int8",
+        "q_proj": "int8",
+        "k_proj": "int8",
+        "v_proj": "int8",
+        "o_proj": "int8",
+        "gate_proj": "int8",
+        "up_proj": "int8",
+        "down_proj": "int8",
+        "lm_head": "int8"
+      },
+      "tolerance": {
+        "down_proj": 0.66,
+        "embed_tokens": 0.75,
+        "gate_proj": 0.69,
+        "k_proj": 0.6,
+        "lm_head": 0.7,
+        "o_proj": 0.66,
+        "q_proj": 0.637,
+        "up_proj": 0.69,
+        "v_proj": 0.637
+      }
+    },
+    "weight_gb_before": 18.483419136,
+    "weight_gb_after": 9.242315264,
+    "memory_reduction": 0.5,
+    "time_ms_before": 7.207589739736125,
+    "time_ms_after": 3.7594166531689606,
+    "speedup": 1.917,
+    "quality_delta": "UNMEASURED (G-002)",
+    "findings": [
+      {
+        "name": "quant.sensitivity.memory_reduction",
+        "value": 0.49996723030541357,
+        "unit": "fracao",
+        "status": "CONDITIONAL_RESULT",
+        "assumptions": [
+          "A-004"
+        ],
+        "gaps": [
+          "G-002",
+          "G-003"
+        ],
+        "parents": [],
+        "note": "aritmetica exata sobre bytes de peso; nao depende de prior"
+      },
+      {
+        "name": "quant.sensitivity.speedup",
+        "value": 1.9172096111402186,
+        "unit": "x sobre baseline",
+        "status": "CONDITIONAL_RESULT",
+        "assumptions": [
+          "A-002",
+          "A-004",
+          "A-005"
+        ],
+        "gaps": [
+          "G-002",
+          "G-003"
+        ],
+        "parents": [],
+        "note": ""
+      },
+      {
+        "name": "quant.sensitivity.quality_delta",
+        "value": null,
+        "unit": "perplexidade / acuracia",
+        "status": "OPEN_GAP",
+        "assumptions": [],
+        "gaps": [
+          "G-002"
+        ],
+        "parents": [],
+        "note": "NAO MEDIDO. Sem isto o plano nao e recomendavel, apenas testavel."
+      }
+    ]
+  },
+  "candidates": [
+    {
+      "role": "gate_proj",
+      "block": "mlp",
+      "instances_per_token": 42,
+      "cost_share": 0.2231,
+      "recommended_precision": "int4",
+      "weight_elems": 2157969408,
+      "LHS": 0.5154,
+      "scorecard": {
+        "name": "gate_proj",
+        "kind": "LHS",
+        "score": 0.5154,
+        "status": "OPEN_GAP",
+        "factors": {
+          "E": {
+            "value": 0.1111,
+            "weight": 0.2,
+            "contribution": 0.0222,
+            "status": "ASSUMPTION",
+            "note": "familia com uma unica versao no corpus: estabilidade temporal nao observada; usando apenas cobertura de corpus (1/9 modelos)"
+          },
+          "F": {
+            "value": 0.2231,
+            "weight": 0.15,
+            "contribution": 0.0335,
+            "status": "CONDITIONAL_RESULT",
+            "note": ""
+          },
+          "R": {
+            "value": 1.0,
+            "weight": 0.15,
+            "contribution": 0.15,
+            "status": "MODEL",
+            "note": "42 nos, 0% dinamicos"
+          },
+          "Q": {
+            "value": 0.72,
+            "weight": 0.15,
+            "contribution": 0.108,
+            "status": "ASSUMPTION",
+            "note": "melhor precisao aceitavel: int4 (camada representativa 21)"
+          },
+          "V": {
+            "value": 0.6783,
+            "weight": 0.15,
+            "contribution": 0.1017,
+            "status": "MODEL",
+            "note": "42 instancias por token"
+          },
+          "M": {
+            "value": 1.0,
+            "weight": 0.1,
+            "contribution": 0.1,
+            "status": "MODEL",
+            "note": "0% com enderecamento dependente de dado"
+          },
+          "L": {
+            "value": 0.0,
+            "weight": 0.1,
+            "contribution": 0.0,
+            "status": "OPEN_GAP",
+            "note": "sem transicao temporal na familia (0 transicao(oes)): vida util nao estimavel"
+          }
+        }
+      }
+    },
+    {
+      "role": "up_proj",
+      "block": "mlp",
+      "instances_per_token": 42,
+      "cost_share": 0.2231,
+      "recommended_precision": "int4",
+      "weight_elems": 2157969408,
+      "LHS": 0.5154,
+      "scorecard": {
+        "name": "up_proj",
+        "kind": "LHS",
+        "score": 0.5154,
+        "status": "OPEN_GAP",
+        "factors": {
+          "E": {
+            "value": 0.1111,
+            "weight": 0.2,
+            "contribution": 0.0222,
+            "status": "ASSUMPTION",
+            "note": "familia com uma unica versao no corpus: estabilidade temporal nao observada; usando apenas cobertura de corpus (1/9 modelos)"
+          },
+          "F": {
+            "value": 0.2231,
+            "weight": 0.15,
+            "contribution": 0.0335,
+            "status": "CONDITIONAL_RESULT",
+            "note": ""
+          },
+          "R": {
+            "value": 1.0,
+            "weight": 0.15,
+            "contribution": 0.15,
+            "status": "MODEL",
+            "note": "42 nos, 0% dinamicos"
+          },
+          "Q": {
+            "value": 0.72,
+            "weight": 0.15,
+            "contribution": 0.108,
+            "status": "ASSUMPTION",
+            "note": "melhor precisao aceitavel: int4 (camada representativa 21)"
+          },
+          "V": {
+            "value": 0.6783,
+            "weight": 0.15,
+            "contribution": 0.1017,
+            "status": "MODEL",
+            "note": "42 instancias por token"
+          },
+          "M": {
+            "value": 1.0,
+            "weight": 0.1,
+            "contribution": 0.1,
+            "status": "MODEL",
+            "note": "0% com enderecamento dependente de dado"
+          },
+          "L": {
+            "value": 0.0,
+            "weight": 0.1,
+            "contribution": 0.0,
+            "status": "OPEN_GAP",
+            "note": "sem transicao temporal na familia (0 transicao(oes)): vida util nao estimavel"
+          }
+        }
+      }
+    },
+    {
+      "role": "q_proj",
+      "block": "attention",
+      "instances_per_token": 42,
+      "cost_share": 0.0638,
+      "recommended_precision": "int8",
+      "weight_elems": 616562688,
+      "LHS": 0.511,
+      "scorecard": {
+        "name": "q_proj",
+        "kind": "LHS",
+        "score": 0.511,
+        "status": "OPEN_GAP",
+        "factors": {
+          "E": {
+            "value": 0.1111,
+            "weight": 0.2,
+            "contribution": 0.0222,
+            "status": "ASSUMPTION",
+            "note": "familia com uma unica versao no corpus: estabilidade temporal nao observada; usando apenas cobertura de corpus (1/9 modelos)"
+          },
+          "F": {
+            "value": 0.0638,
+            "weight": 0.15,
+            "contribution": 0.0096,
+            "status": "CONDITIONAL_RESULT",
+            "note": ""
+          },
+          "R": {
+            "value": 1.0,
+            "weight": 0.15,
+            "contribution": 0.15,
+            "status": "MODEL",
+            "note": "42 nos, 0% dinamicos"
+          },
+          "Q": {
+            "value": 0.85,
+            "weight": 0.15,
+            "contribution": 0.1275,
+            "status": "ASSUMPTION",
+            "note": "melhor precisao aceitavel: int8 (camada representativa 21)"
+          },
+          "V": {
+            "value": 0.6783,
+            "weight": 0.15,
+            "contribution": 0.1017,
+            "status": "MODEL",
+            "note": "42 instancias por token"
+          },
+          "M": {
+            "value": 1.0,
+            "weight": 0.1,
+            "contribution": 0.1,
+            "status": "MODEL",
+            "note": "0% com enderecamento dependente de dado"
+          },
+          "L": {
+            "value": 0.0,
+            "weight": 0.1,
+            "contribution": 0.0,
+            "status": "OPEN_GAP",
+            "note": "sem transicao temporal na familia (0 transicao(oes)): vida util nao estimavel"
+          }
+        }
+      }
+    },
+    {
+      "role": "v_proj",
+      "block": "attention",
+      "instances_per_token": 42,
+      "cost_share": 0.0319,
+      "recommended_precision": "int8",
+      "weight_elems": 308281344,
+      "LHS": 0.5062,
+      "scorecard": {
+        "name": "v_proj",
+        "kind": "LHS",
+        "score": 0.5062,
+        "status": "OPEN_GAP",
+        "factors": {
+          "E": {
+            "value": 0.1111,
+            "weight": 0.2,
+            "contribution": 0.0222,
+            "status": "ASSUMPTION",
+            "note": "familia com uma unica versao no corpus: estabilidade temporal nao observada; usando apenas cobertura de corpus (1/9 modelos)"
+          },
+          "F": {
+            "value": 0.0319,
+            "weight": 0.15,
+            "contribution": 0.0048,
+            "status": "CONDITIONAL_RESULT",
+            "note": ""
+          },
+          "R": {
+            "value": 1.0,
+            "weight": 0.15,
+            "contribution": 0.15,
+            "status": "MODEL",
+            "note": "42 nos, 0% dinamicos"
+          },
+          "Q": {
+            "value": 0.85,
+            "weight": 0.15,
+            "contribution": 0.1275,
+            "status": "ASSUMPTION",
+            "note": "melhor precisao aceitavel: int8 (camada representativa 21)"
+          },
+          "V": {
+            "value": 0.6783,
+            "weight": 0.15,
+            "contribution": 0.1017,
+            "status": "MODEL",
+            "note": "42 instancias por token"
+          },
+          "M": {
+            "value": 1.0,
+            "weight": 0.1,
+            "contribution": 0.1,
+            "status": "MODEL",
+            "note": "0% com enderecamento dependente de dado"
+          },
+          "L": {
+            "value": 0.0,
+            "weight": 0.1,
+            "contribution": 0.0,
+            "status": "OPEN_GAP",
+            "note": "sem transicao temporal na familia (0 transicao(oes)): vida util nao estimavel"
+          }
+        }
+      }
+    },
+    {
+      "role": "down_proj",
+      "block": "mlp",
+      "instances_per_token": 42,
+      "cost_share": 0.2231,
+      "recommended_precision": "int4",
+      "weight_elems": 2157969408,
+      "LHS": 0.5004,
+      "scorecard": {
+        "name": "down_proj",
+        "kind": "LHS",
+        "score": 0.5004,
+        "status": "OPEN_GAP",
+        "factors": {
+          "E": {
+            "value": 0.1111,
+            "weight": 0.2,
+            "contribution": 0.0222,
+            "status": "ASSUMPTION",
+            "note": "familia com uma unica versao no corpus: estabilidade temporal nao observada; usando apenas cobertura de corpus (1/9 modelos)"
+          },
+          "F": {
+            "value": 0.2231,
+            "weight": 0.15,
+            "contribution": 0.0335,
+            "status": "CONDITIONAL_RESULT",
+            "note": ""
+          },
+          "R": {
+            "value": 1.0,
+            "weight": 0.15,
+            "contribution": 0.15,
+            "status": "MODEL",
+            "note": "42 nos, 0% dinamicos"
+          },
+          "Q": {
+            "value": 0.62,
+            "weight": 0.15,
+            "contribution": 0.093,
+            "status": "ASSUMPTION",
+            "note": "melhor precisao aceitavel: int4 (camada representativa 21)"
+          },
+          "V": {
+            "value": 0.6783,
+            "weight": 0.15,
+            "contribution": 0.1017,
+            "status": "MODEL",
+            "note": "42 instancias por token"
+          },
+          "M": {
+            "value": 1.0,
+            "weight": 0.1,
+            "contribution": 0.1,
+            "status": "MODEL",
+            "note": "0% com enderecamento dependente de dado"
+          },
+          "L": {
+            "value": 0.0,
+            "weight": 0.1,
+            "contribution": 0.0,
+            "status": "OPEN_GAP",
+            "note": "sem transicao temporal na familia (0 transicao(oes)): vida util nao estimavel"
+          }
+        }
+      }
+    },
+    {
+      "role": "k_proj",
+      "block": "attention",
+      "instances_per_token": 42,
+      "cost_share": 0.0319,
+      "recommended_precision": "int8",
+      "weight_elems": 308281344,
+      "LHS": 0.4987,
+      "scorecard": {
+        "name": "k_proj",
+        "kind": "LHS",
+        "score": 0.4987,
+        "status": "OPEN_GAP",
+        "factors": {
+          "E": {
+            "value": 0.1111,
+            "weight": 0.2,
+            "contribution": 0.0222,
+            "status": "ASSUMPTION",
+            "note": "familia com uma unica versao no corpus: estabilidade temporal nao observada; usando apenas cobertura de corpus (1/9 modelos)"
+          },
+          "F": {
+            "value": 0.0319,
+            "weight": 0.15,
+            "contribution": 0.0048,
+            "status": "CONDITIONAL_RESULT",
+            "note": ""
+          },
+          "R": {
+            "value": 1.0,
+            "weight": 0.15,
+            "contribution": 0.15,
+            "status": "MODEL",
+            "note": "42 nos, 0% dinamicos"
+          },
+          "Q": {
+            "value": 0.8,
+            "weight": 0.15,
+            "contribution": 0.12,
+            "status": "ASSUMPTION",
+            "note": "melhor precisao aceitavel: int8 (camada representativa 21)"
+          },
+          "V": {
+            "value": 0.6783,
+            "weight": 0.15,
+            "contribution": 0.1017,
+            "status": "MODEL",
+            "note": "42 instancias por token"
+          },
+          "M": {
+            "value": 1.0,
+            "weight": 0.1,
+            "contribution": 0.1,
+            "status": "MODEL",
+            "note": "0% com enderecamento dependente de dado"
+          },
+          "L": {
+            "value": 0.0,
+            "weight": 0.1,
+            "contribution": 0.0,
+            "status": "OPEN_GAP",
+            "note": "sem transicao temporal na familia (0 transicao(oes)): vida util nao estimavel"
+          }
+        }
+      }
+    },
+    {
+      "role": "o_proj",
+      "block": "attention",
+      "instances_per_token": 42,
+      "cost_share": 0.0638,
+      "recommended_precision": "int4",
+      "weight_elems": 616562688,
+      "LHS": 0.4735,
+      "scorecard": {
+        "name": "o_proj",
+        "kind": "LHS",
+        "score": 0.4735,
+        "status": "OPEN_GAP",
+        "factors": {
+          "E": {
+            "value": 0.1111,
+            "weight": 0.2,
+            "contribution": 0.0222,
+            "status": "ASSUMPTION",
+            "note": "familia com uma unica versao no corpus: estabilidade temporal nao observada; usando apenas cobertura de corpus (1/9 modelos)"
+          },
+          "F": {
+            "value": 0.0638,
+            "weight": 0.15,
+            "contribution": 0.0096,
+            "status": "CONDITIONAL_RESULT",
+            "note": ""
+          },
+          "R": {
+            "value": 1.0,
+            "weight": 0.15,
+            "contribution": 0.15,
+            "status": "MODEL",
+            "note": "42 nos, 0% dinamicos"
+          },
+          "Q": {
+            "value": 0.6,
+            "weight": 0.15,
+            "contribution": 0.09,
+            "status": "ASSUMPTION",
+            "note": "melhor precisao aceitavel: int4 (camada representativa 21)"
+          },
+          "V": {
+            "value": 0.6783,
+            "weight": 0.15,
+            "contribution": 0.1017,
+            "status": "MODEL",
+            "note": "42 instancias por token"
+          },
+          "M": {
+            "value": 1.0,
+            "weight": 0.1,
+            "contribution": 0.1,
+            "status": "MODEL",
+            "note": "0% com enderecamento dependente de dado"
+          },
+          "L": {
+            "value": 0.0,
+            "weight": 0.1,
+            "contribution": 0.0,
+            "status": "OPEN_GAP",
+            "note": "sem transicao temporal na familia (0 transicao(oes)): vida util nao estimavel"
+          }
+        }
+      }
+    },
+    {
+      "role": "lm_head",
+      "block": "head",
+      "instances_per_token": 1,
+      "cost_share": 0.0934,
+      "recommended_precision": "int8",
+      "weight_elems": 0,
+      "LHS": 0.41,
+      "scorecard": {
+        "name": "lm_head",
+        "kind": "LHS",
+        "score": 0.41,
+        "status": "OPEN_GAP",
+        "factors": {
+          "E": {
+            "value": 0.1111,
+            "weight": 0.2,
+            "contribution": 0.0222,
+            "status": "ASSUMPTION",
+            "note": "familia com uma unica versao no corpus: estabilidade temporal nao observada; usando apenas cobertura de corpus (1/9 modelos)"
+          },
+          "F": {
+            "value": 0.0934,
+            "weight": 0.15,
+            "contribution": 0.014,
+            "status": "CONDITIONAL_RESULT",
+            "note": ""
+          },
+          "R": {
+            "value": 1.0,
+            "weight": 0.15,
+            "contribution": 0.15,
+            "status": "MODEL",
+            "note": "1 nos, 0% dinamicos"
+          },
+          "Q": {
+            "value": 0.7,
+            "weight": 0.15,
+            "contribution": 0.105,
+            "status": "ASSUMPTION",
+            "note": "melhor precisao aceitavel: int8 (sem indice de camada)"
+          },
+          "V": {
+            "value": 0.125,
+            "weight": 0.15,
+            "contribution": 0.0187,
+            "status": "MODEL",
+            "note": "1 instancias por token"
+          },
+          "M": {
+            "value": 1.0,
+            "weight": 0.1,
+            "contribution": 0.1,
+            "status": "MODEL",
+            "note": "0% com enderecamento dependente de dado"
+          },
+          "L": {
+            "value": 0.0,
+            "weight": 0.1,
+            "contribution": 0.0,
+            "status": "OPEN_GAP",
+            "note": "sem transicao temporal na familia (0 transicao(oes)): vida util nao estimavel"
+          }
+        }
+      }
+    },
+    {
+      "role": "kv_read",
+      "block": "attention",
+      "instances_per_token": 42,
+      "cost_share": 0.0403,
+      "recommended_precision": "bf16",
+      "weight_elems": 0,
+      "LHS": 0.38,
+      "scorecard": {
+        "name": "kv_read",
+        "kind": "LHS",
+        "score": 0.38,
+        "status": "OPEN_GAP",
+        "factors": {
+          "E": {
+            "value": 0.1111,
+            "weight": 0.2,
+            "contribution": 0.0222,
+            "status": "ASSUMPTION",
+            "note": "familia com uma unica versao no corpus: estabilidade temporal nao observada; usando apenas cobertura de corpus (1/9 modelos)"
+          },
+          "F": {
+            "value": 0.0403,
+            "weight": 0.15,
+            "contribution": 0.006,
+            "status": "CONDITIONAL_RESULT",
+            "note": ""
+          },
+          "R": {
+            "value": 1.0,
+            "weight": 0.15,
+            "contribution": 0.15,
+            "status": "MODEL",
+            "note": "42 nos, 0% dinamicos"
+          },
+          "Q": {
+            "value": 0.0,
+            "weight": 0.15,
+            "contribution": 0.0,
+            "status": "MODEL",
+            "note": "papel sem pesos: quantizacao de peso nao se aplica"
+          },
+          "V": {
+            "value": 0.6783,
+            "weight": 0.15,
+            "contribution": 0.1017,
+            "status": "MODEL",
+            "note": "42 instancias por token"
+          },
+          "M": {
+            "value": 1.0,
+            "weight": 0.1,
+            "contribution": 0.1,
+            "status": "MODEL",
+            "note": "0% com enderecamento dependente de dado"
+          },
+          "L": {
+            "value": 0.0,
+            "weight": 0.1,
+            "contribution": 0.0,
+            "status": "OPEN_GAP",
+            "note": "sem transicao temporal na familia (0 transicao(oes)): vida util nao estimavel"
+          }
+        }
+      }
+    }
+  ],
+  "partition": {
+    "model": "gemma-2-9b",
+    "phase": "serving",
+    "policy_version": "1.0",
+    "level": 3,
+    "level_label": "acelerador por arquitetura",
+    "hardened_share": 0,
+    "amdahl_ceiling": 1.0,
+    "uncovered_share": 0.0057,
+    "blocked_by": {
+      "estabilidade": 0.9943
+    },
+    "regions": {
+      "reconfigurable": {
+        "target": "FPGA/eFPGA",
+        "share": 0.954,
+        "roles": [
+          {
+            "role": "gate_proj",
+            "share": 0.2231,
+            "precision": "int4",
+            "reason": "regular e quantizavel, porem LHS=0.52 < 0.55; E=0.11 < 0.6: prototipar antes de fixar"
+          },
+          {
+            "role": "up_proj",
+            "share": 0.2231,
+            "precision": "int4",
+            "reason": "regular e quantizavel, porem LHS=0.52 < 0.55; E=0.11 < 0.6: prototipar antes de fixar"
+          },
+          {
+            "role": "down_proj",
+            "share": 0.2231,
+            "precision": "int4",
+            "reason": "regular e quantizavel, porem LHS=0.50 < 0.55; E=0.11 < 0.6: prototipar antes de fixar"
+          },
+          {
+            "role": "lm_head",
+            "share": 0.0934,
+            "precision": "int8",
+            "reason": "regular e quantizavel, porem LHS=0.41 < 0.55; E=0.11 < 0.6: prototipar antes de fixar"
+          },
+          {
+            "role": "q_proj",
+            "share": 0.0638,
+            "precision": "int8",
+            "reason": "regular e quantizavel, porem LHS=0.51 < 0.55; E=0.11 < 0.6: prototipar antes de fixar"
+          },
+          {
+            "role": "o_proj",
+            "share": 0.0638,
+            "precision": "int4",
+            "reason": "regular e quantizavel, porem LHS=0.47 < 0.55; E=0.11 < 0.6: prototipar antes de fixar"
+          },
+          {
+            "role": "v_proj",
+            "share": 0.0319,
+            "precision": "int8",
+            "reason": "regular e quantizavel, porem LHS=0.51 < 0.55; E=0.11 < 0.6: prototipar antes de fixar"
+          },
+          {
+            "role": "k_proj",
+            "share": 0.0319,
+            "precision": "int8",
+            "reason": "regular e quantizavel, porem LHS=0.50 < 0.55; E=0.11 < 0.6: prototipar antes de fixar"
+          }
+        ]
+      },
+      "programmable": {
+        "target": "CPU/GPU",
+        "share": 0.0403,
+        "roles": [
+          {
+            "role": "kv_read",
+            "share": 0.0403,
+            "precision": "bf16",
+            "reason": "LHS=0.38 < 0.55; E=0.11 < 0.6; Q=0.00 < 0.6"
+          }
+        ]
+      }
+    }
+  },
+  "economics": {
+    "samples": 0,
+    "tech_node": "6nm",
+    "design_point": {
+      "model": "gemma-2-9b",
+      "hardened_roles": [],
+      "hardened_weight_gbit": 0.0,
+      "hardened_precision": "int8",
+      "hardened_flops_per_token": 0.0,
+      "total_flops_per_token": 20089710080.0,
+      "hardened_cost_share": 0,
+      "kv_bytes_at_context_gb": 0.79306752,
+      "batch": 1,
+      "target_tokens_per_second": 1000.0,
+      "is_empty": true
+    },
+    "annual_tokens": 10000000000000.0,
+    "obsolescence_rate_per_year": null,
+    "not_applicable": true,
+    "reason": "regiao fixa vazia (nenhum FLOP endurecido e nenhum peso a fixar): nao ha ponto de projeto a simular",
+    "percentiles": null,
+    "prob_asic_cheaper_per_token": null,
+    "prob_breakeven_within_life": null,
+    "prob_breakeven_before_obsolescence": null,
+    "prob_exceeds_reticle": null,
+    "sensitivity_breakeven": []
+  },
+  "srs": {
+    "name": "gemma-2-9b",
+    "kind": "SRS",
+    "score": 0.168,
+    "status": "OPEN_GAP",
+    "factors": {
+      "A": {
+        "value": 0.0,
+        "weight": 0.15,
+        "contribution": 0.0,
+        "status": "OPEN_GAP",
+        "note": "familia gemma sem transicao temporal no corpus (1 versao(oes)): estabilidade nao observada"
+      },
+      "H": {
+        "value": 0.1708,
+        "weight": 0.15,
+        "contribution": 0.0256,
+        "status": "CONDITIONAL_RESULT",
+        "note": "indice de Herfindahl das participacoes por papel em decode"
+      },
+      "T": {
+        "value": 0.6667,
+        "weight": 0.15,
+        "contribution": 0.1,
+        "status": "ASSUMPTION",
+        "note": "1e+13 tokens/ano declarados pelo caso"
+      },
+      "P": {
+        "value": 0.0,
+        "weight": 0.15,
+        "contribution": 0.0,
+        "status": "CONDITIONAL_RESULT",
+        "note": "regiao fixa vazia: sem ponto de projeto nao ha ganho, receita nem NRE"
+      },
+      "Q": {
+        "value": 0.6739,
+        "weight": 0.1,
+        "contribution": 0.0674,
+        "status": "ASSUMPTION",
+        "note": "media dos priors ponderada por custo; nao medido"
+      },
+      "D": {
+        "value": 0.25,
+        "weight": 0.1,
+        "contribution": 0.025,
+        "status": "ASSUMPTION",
+        "note": "licenca permissiva=nao; duas ou mais versoes no corpus=nao; contagem de parametros publicada=sim; proveniencia verificada=nao"
+      },
+      "C": {
+        "value": 1.0,
+        "weight": 0.1,
+        "contribution": 0.1,
+        "status": "MODEL",
+        "note": "media de regularidade e previsibilidade de memoria ponderada por custo"
+      },
+      "R": {
+        "value": 0.0,
+        "weight": 0.1,
+        "contribution": 0.0,
+        "status": "CONDITIONAL_RESULT",
+        "note": "regiao fixa vazia: sem ponto de projeto nao ha ganho, receita nem NRE"
+      },
+      "O": {
+        "value": 1.0,
+        "weight": -0.15,
+        "contribution": -0.15,
+        "status": "OPEN_GAP",
+        "note": "taxa de mudanca estrutural nao estimada: risco tratado como maximo"
+      },
+      "N": {
+        "value": 0.0,
+        "weight": -0.1,
+        "contribution": -0.0,
+        "status": "CONDITIONAL_RESULT",
+        "note": "regiao fixa vazia: sem ponto de projeto nao ha ganho, receita nem NRE"
+      }
+    }
+  },
+  "recommendation": "software",
+  "verdict": "manter em software; nenhuma especializacao se justifica com a evidencia atual",
+  "sensitivity": {
+    "perturbation": 0.2,
+    "samples": 2000,
+    "top1_stability": 0.876,
+    "top3_stability": 0.9925,
+    "band_stability": 1.0,
+    "threshold": 0.95,
+    "decidable": false,
+    "discriminates": false,
+    "score_spread": 0.13542,
+    "noise_band": 0.02669,
+    "margin": 0.0044,
+    "inert_weight": 0.55,
+    "contenders": [
+      "gate_proj",
+      "up_proj",
+      "q_proj",
+      "v_proj",
+      "down_proj",
+      "k_proj"
+    ],
+    "contender_inert_weight": 0.7,
+    "varying_factors": [
+      "F",
+      "Q",
+      "V"
+    ],
+    "diagnosis": "score NAO discrimina: entre os 6 candidatos que disputam a primeira posicao, 70% do peso esta em fatores identicos; a margem (0.0044) e menor que o ruido (0.0267)",
+    "winners": {
+      "gate_proj": 1752,
+      "q_proj": 248
+    },
+    "dominant_factor": "R"
+  },
+  "falsifiers": {
+    "F1": {
+      "criterio": "nenhum padrao com cobertura >= 0.80 entre versoes da familia",
+      "observado": "familia sem transicao temporal no corpus (1 versao(oes)): nao avaliavel",
+      "disparado": null
+    },
+    "F2": {
+      "criterio": "o padrao mais custoso muda de identidade entre versoes",
+      "observado": "bloco mais custoso 'mlp' (papel gate_proj, 22.3% do custo): E = 0.11",
+      "disparado": true
+    },
+    "F3": {
+      "criterio": "top-1 do ranking troca sob perturbacao de +-20% dos pesos, ou vence por margem menor que o ruido (criterio reforcado apos CE-001)",
+      "observado": "estabilidade do top-1 = 0.876 (limite 0.95); margem = 0.0044 contra ruido 0.0267",
+      "disparado": true
+    },
+    "F4": {
+      "criterio": "break-even P50 posterior a vida economica",
+      "observado": "nao avaliavel: regiao fixa vazia (nenhum FLOP endurecido e nenhum peso a fixar): nao ha ponto de projeto a simular",
+      "disparado": null
+    },
+    "F5": {
+      "criterio": "erro de contagem de parametros acima de 5%",
+      "observado": "erro = 0.0000%",
+      "disparado": false
+    }
+  },
+  "findings": {
+    "title": "Silicon Readiness Assessment — gemma-2-9b",
+    "weakest_status": "OPEN_GAP",
+    "open_gaps": [
+      "G-001",
+      "G-002",
+      "G-003",
+      "G-004",
+      "G-006",
+      "G-008",
+      "G-009"
+    ],
+    "assumptions": [
+      "A-001",
+      "A-002",
+      "A-003",
+      "A-004",
+      "A-005",
+      "A-007",
+      "A-009"
+    ],
+    "declared_absences": [
+      "quant.sensitivity.quality_delta",
+      "economics.breakeven_years.p50",
+      "economics.p_breakeven_before_obsolescence",
+      "economics.die_area_mm2.p50",
+      "stability.gemma.exact"
+    ],
+    "evidence_debt": 0.4,
+    "status_histogram": {
+      "OPEN_GAP": 10,
+      "CONDITIONAL_RESULT": 9,
+      "ASSUMPTION": 1
+    },
+    "findings": [
+      {
+        "name": "gemma-2-9b.params",
+        "value": 9241705984,
+        "unit": "params",
+        "status": "ASSUMPTION",
+        "assumptions": [
+          "A-001",
+          "A-009"
+        ],
+        "gaps": [
+          "G-001",
+          "G-008"
+        ],
+        "parents": [],
+        "note": "derivado analiticamente do config; ver ADR-0001"
+      },
+      {
+        "name": "gemma-2-9b.serving.decode_time_share",
+        "value": 0.9805077873633706,
+        "unit": "fracao do tempo de requisicao",
+        "status": "CONDITIONAL_RESULT",
+        "assumptions": [
+          "A-002",
+          "A-005"
+        ],
+        "gaps": [
+          "G-003",
+          "G-009"
+        ],
+        "parents": [],
+        "note": "mistura prefill/decode assumida; telemetria real fecharia G-009"
+      },
+      {
+        "name": "gemma-2-9b.serving.energy_per_token",
+        "value": 8.335891739156324,
+        "unit": "J/token gerado",
+        "status": "CONDITIONAL_RESULT",
+        "assumptions": [
+          "A-002",
+          "A-003",
+          "A-005"
+        ],
+        "gaps": [
+          "G-003",
+          "G-004",
+          "G-009"
+        ],
+        "parents": [],
+        "note": ""
+      },
+      {
+        "name": "gemma-2-9b.decode.tokens_per_s",
+        "value": 138.74263604196355,
+        "unit": "tok/s",
+        "status": "CONDITIONAL_RESULT",
+        "assumptions": [
+          "A-002",
+          "A-005"
+        ],
+        "gaps": [
+          "G-003"
+        ],
+        "parents": [],
+        "note": ""
+      },
+      {
+        "name": "gemma-2-9b.decode.memory_bound_share",
+        "value": 0.999110786927234,
+        "unit": "fracao do tempo",
+        "status": "CONDITIONAL_RESULT",
+        "assumptions": [
+          "A-002",
+          "A-005"
+        ],
+        "gaps": [
+          "G-003"
+        ],
+        "parents": [],
+        "note": ""
+      },
+      {
+        "name": "gemma-2-9b.decode.arith_intensity",
+        "value": 1.0408884749851763,
+        "unit": "FLOP/byte",
+        "status": "CONDITIONAL_RESULT",
+        "assumptions": [
+          "A-002",
+          "A-005"
+        ],
+        "gaps": [
+          "G-003"
+        ],
+        "parents": [],
+        "note": ""
+      },
+      {
+        "name": "gemma-2-9b.decode.energy_per_token",
+        "value": 8.173406764860767,
+        "unit": "J/token",
+        "status": "CONDITIONAL_RESULT",
+        "assumptions": [
+          "A-002",
+          "A-003",
+          "A-005"
+        ],
+        "gaps": [
+          "G-003",
+          "G-004"
+        ],
+        "parents": [],
+        "note": "tempo roofline x potencia de parede (TDP x overhead x PUE)"
+      },
+      {
+        "name": "quant.sensitivity.memory_reduction",
+        "value": 0.49996723030541357,
+        "unit": "fracao",
+        "status": "CONDITIONAL_RESULT",
+        "assumptions": [
+          "A-004"
+        ],
+        "gaps": [
+          "G-002",
+          "G-003"
+        ],
+        "parents": [],
+        "note": "aritmetica exata sobre bytes de peso; nao depende de prior"
+      },
+      {
+        "name": "quant.sensitivity.speedup",
+        "value": 1.9172096111402186,
+        "unit": "x sobre baseline",
+        "status": "CONDITIONAL_RESULT",
+        "assumptions": [
+          "A-002",
+          "A-004",
+          "A-005"
+        ],
+        "gaps": [
+          "G-002",
+          "G-003"
+        ],
+        "parents": [],
+        "note": ""
+      },
+      {
+        "name": "quant.sensitivity.quality_delta",
+        "value": null,
+        "unit": "perplexidade / acuracia",
+        "status": "OPEN_GAP",
+        "assumptions": [],
+        "gaps": [
+          "G-002"
+        ],
+        "parents": [],
+        "note": "NAO MEDIDO. Sem isto o plano nao e recomendavel, apenas testavel."
+      },
+      {
+        "name": "quant.reachable_cost_share.int4",
+        "value": 0.7344094385874619,
+        "unit": "fracao do tempo",
+        "status": "CONDITIONAL_RESULT",
+        "assumptions": [
+          "A-002",
+          "A-004"
+        ],
+        "gaps": [
+          "G-002",
+          "G-003"
+        ],
+        "parents": [],
+        "note": "papeis alcancados: down_proj, gate_proj, o_proj, up_proj"
+      },
+      {
+        "name": "gemma-2-9b.partition.hardened_share",
+        "value": 0,
+        "unit": "fracao do tempo",
+        "status": "OPEN_GAP",
+        "assumptions": [
+          "A-002",
+          "A-004",
+          "A-005",
+          "A-007"
+        ],
+        "gaps": [
+          "G-001",
+          "G-002",
+          "G-003",
+          "G-006"
+        ],
+        "parents": [
+          "LHS.gate_proj",
+          "LHS.up_proj",
+          "LHS.q_proj",
+          "LHS.v_proj",
+          "LHS.down_proj",
+          "LHS.k_proj",
+          "LHS.o_proj",
+          "LHS.lm_head",
+          "LHS.kv_read"
+        ],
+        "note": "regiao fixa sob politica v1.0"
+      },
+      {
+        "name": "gemma-2-9b.partition.amdahl_ceiling",
+        "value": 1.0,
+        "unit": "x sobre baseline",
+        "status": "OPEN_GAP",
+        "assumptions": [
+          "A-002",
+          "A-004",
+          "A-005",
+          "A-007"
+        ],
+        "gaps": [
+          "G-001",
+          "G-002",
+          "G-003",
+          "G-006"
+        ],
+        "parents": [
+          "LHS.gate_proj",
+          "LHS.up_proj",
+          "LHS.q_proj",
+          "LHS.v_proj",
+          "LHS.down_proj",
+          "LHS.k_proj",
+          "LHS.o_proj",
+          "LHS.lm_head",
+          "LHS.kv_read"
+        ],
+        "note": "teto com aceleracao infinita na regiao fixa; o resto permanece no host"
+      },
+      {
+        "name": "partition.claim_check",
+        "value": 1.0,
+        "unit": "x (teto do sistema)",
+        "status": "OPEN_GAP",
+        "assumptions": [
+          "A-002",
+          "A-004",
+          "A-005",
+          "A-007"
+        ],
+        "gaps": [
+          "G-001",
+          "G-002",
+          "G-003",
+          "G-006"
+        ],
+        "parents": [
+          "LHS.gate_proj",
+          "LHS.up_proj",
+          "LHS.q_proj",
+          "LHS.v_proj",
+          "LHS.down_proj",
+          "LHS.k_proj",
+          "LHS.o_proj",
+          "LHS.lm_head",
+          "LHS.kv_read"
+        ],
+        "note": "IMPOSSIVEL nesta particao: teto e 1.00x mesmo com aceleracao infinita na regiao fixa (0.0% do custo). Alcancar 100x exigiria mover tambem a regiao programavel para o mesmo silicio."
+      },
+      {
+        "name": "economics.breakeven_years.p50",
+        "value": null,
+        "unit": "anos",
+        "status": "OPEN_GAP",
+        "assumptions": [],
+        "gaps": [
+          "G-001"
+        ],
+        "parents": [],
+        "note": "regiao fixa vazia (nenhum FLOP endurecido e nenhum peso a fixar): nao ha ponto de projeto a simular"
+      },
+      {
+        "name": "economics.p_breakeven_before_obsolescence",
+        "value": null,
+        "unit": "probabilidade",
+        "status": "OPEN_GAP",
+        "assumptions": [],
+        "gaps": [
+          "G-001"
+        ],
+        "parents": [],
+        "note": "regiao fixa vazia (nenhum FLOP endurecido e nenhum peso a fixar): nao ha ponto de projeto a simular"
+      },
+      {
+        "name": "economics.die_area_mm2.p50",
+        "value": null,
+        "unit": "mm2",
+        "status": "OPEN_GAP",
+        "assumptions": [],
+        "gaps": [
+          "G-001"
+        ],
+        "parents": [],
+        "note": "regiao fixa vazia (nenhum FLOP endurecido e nenhum peso a fixar): nao ha ponto de projeto a simular"
+      },
+      {
+        "name": "SRS.gemma-2-9b",
+        "value": 0.16800451657965512,
+        "unit": "score SRS",
+        "status": "OPEN_GAP",
+        "assumptions": [
+          "A-002",
+          "A-004",
+          "A-007",
+          "A-009"
+        ],
+        "gaps": [
+          "G-001",
+          "G-002",
+          "G-003",
+          "G-006",
+          "G-008",
+          "G-009"
+        ],
+        "parents": [
+          "A.arch_stability",
+          "H.concentration",
+          "T.throughput",
+          "P.perf_per_watt",
+          "Q.low_precision",
+          "D.data_availability",
+          "C.codesign",
+          "R.revenue_potential",
+          "O.obsolescence_risk",
+          "N.nre_risk"
+        ],
+        "note": "pesos v1.0"
+      },
+      {
+        "name": "readiness.rank_stability",
+        "value": 0.876,
+        "unit": "fracao das amostras com mesmo top-1",
+        "status": "OPEN_GAP",
+        "assumptions": [
+          "A-002",
+          "A-004",
+          "A-005",
+          "A-007"
+        ],
+        "gaps": [
+          "G-001",
+          "G-002",
+          "G-003",
+          "G-006"
+        ],
+        "parents": [
+          "E.gate_proj",
+          "F.gate_proj",
+          "R.gate_proj",
+          "Q.gate_proj",
+          "V.gate_proj",
+          "M.gate_proj",
+          "L.gate_proj",
+          "E.up_proj",
+          "F.up_proj",
+          "R.up_proj",
+          "Q.up_proj",
+          "V.up_proj",
+          "M.up_proj",
+          "L.up_proj",
+          "E.q_proj",
+          "F.q_proj",
+          "R.q_proj",
+          "Q.q_proj",
+          "V.q_proj",
+          "M.q_proj",
+          "L.q_proj",
+          "E.v_proj",
+          "F.v_proj",
+          "R.v_proj",
+          "Q.v_proj",
+          "V.v_proj",
+          "M.v_proj",
+          "L.v_proj",
+          "E.down_proj",
+          "F.down_proj",
+          "R.down_proj",
+          "Q.down_proj",
+          "V.down_proj",
+          "M.down_proj",
+          "L.down_proj",
+          "E.k_proj",
+          "F.k_proj",
+          "R.k_proj",
+          "Q.k_proj",
+          "V.k_proj",
+          "M.k_proj",
+          "L.k_proj",
+          "E.o_proj",
+          "F.o_proj",
+          "R.o_proj",
+          "Q.o_proj",
+          "V.o_proj",
+          "M.o_proj",
+          "L.o_proj",
+          "E.lm_head",
+          "F.lm_head",
+          "R.lm_head",
+          "Q.lm_head",
+          "V.lm_head",
+          "M.lm_head",
+          "L.lm_head",
+          "E.kv_read",
+          "F.kv_read",
+          "R.kv_read",
+          "Q.kv_read",
+          "V.kv_read",
+          "M.kv_read",
+          "L.kv_read"
+        ],
+        "note": "perturbacao +-20%, 2000 amostras; NAO DECIDIVEL — F3 disparado; score NAO discrimina: entre os 6 candidatos que disputam a primeira posicao, 70% do peso esta em fatores identicos; a margem (0.0044) e menor que o ruido (0.0267)"
+      },
+      {
+        "name": "stability.gemma.exact",
+        "value": null,
+        "unit": "fracao de blocos preservados",
+        "status": "OPEN_GAP",
+        "assumptions": [],
+        "gaps": [
+          "G-006"
+        ],
+        "parents": [],
+        "note": "1 versao(oes) sem transicao temporal: estabilidade estrutural nao observada"
+      }
+    ]
+  }
+}

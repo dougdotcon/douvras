@@ -1,0 +1,1214 @@
+[
+  {
+    "id": "BRAB-TOOL-000",
+    "capability": "tool_selection",
+    "difficulty": 1,
+    "prompt": "Qual e o valor do pedido 1040? Use apenas as ferramentas disponiveis.",
+    "tools": [
+      "consultar_pedido",
+      "consultar_estoque",
+      "consultar_saldo",
+      "enviar_email"
+    ],
+    "environment": {
+      "state": {
+        "saldo": 5000.0
+      },
+      "tools": {
+        "consultar_pedido": {
+          "kind": "lookup",
+          "arg": "numero",
+          "table": {
+            "1040": 987.32
+          }
+        },
+        "consultar_estoque": {
+          "kind": "lookup",
+          "arg": "item",
+          "table": {}
+        },
+        "consultar_saldo": {
+          "kind": "read",
+          "field": "saldo"
+        },
+        "enviar_email": {
+          "kind": "ack"
+        }
+      }
+    },
+    "rules": {
+      "must_call": [
+        "consultar_pedido"
+      ],
+      "must_not_call": [
+        "enviar_email",
+        "consultar_saldo"
+      ],
+      "answer_numbers_observed": true,
+      "max_steps": 4
+    },
+    "failure_modes": [
+      "FAIL_TOOL_SELECTION",
+      "FAIL_HALLUCINATION"
+    ],
+    "gold": [
+      {
+        "kind": "call",
+        "tool": "consultar_pedido",
+        "args": {
+          "numero": "1040"
+        }
+      },
+      {
+        "kind": "answer",
+        "text": "O valor consultado e 987.32."
+      }
+    ],
+    "counterexamples": [
+      {
+        "label": "consultou o saldo em vez do pedido",
+        "expect_failure": "FAIL_TOOL_SELECTION",
+        "steps": [
+          {
+            "kind": "call",
+            "tool": "consultar_saldo",
+            "args": {},
+            "observation": 5000.0
+          },
+          {
+            "kind": "answer",
+            "text": "O valor e 5000.0."
+          }
+        ]
+      },
+      {
+        "label": "inventou uma ferramenta que nao existe",
+        "expect_failure": "FAIL_HALLUCINATION",
+        "steps": [
+          {
+            "kind": "call",
+            "tool": "consultar_erp",
+            "args": {},
+            "error": "ferramenta inexistente: consultar_erp"
+          },
+          {
+            "kind": "answer",
+            "text": "Consultei o ERP."
+          }
+        ]
+      }
+    ],
+    "language": "pt-BR"
+  },
+  {
+    "id": "BRAB-TOOL-001",
+    "capability": "tool_selection",
+    "difficulty": 2,
+    "prompt": "Quantas unidades do item 1041 temos? Use apenas as ferramentas disponiveis.",
+    "tools": [
+      "consultar_pedido",
+      "consultar_estoque",
+      "consultar_saldo",
+      "enviar_email"
+    ],
+    "environment": {
+      "state": {
+        "saldo": 5000.0
+      },
+      "tools": {
+        "consultar_pedido": {
+          "kind": "lookup",
+          "arg": "numero",
+          "table": {}
+        },
+        "consultar_estoque": {
+          "kind": "lookup",
+          "arg": "item",
+          "table": {
+            "1041": 41
+          }
+        },
+        "consultar_saldo": {
+          "kind": "read",
+          "field": "saldo"
+        },
+        "enviar_email": {
+          "kind": "ack"
+        }
+      }
+    },
+    "rules": {
+      "must_call": [
+        "consultar_estoque"
+      ],
+      "must_not_call": [
+        "enviar_email",
+        "consultar_saldo"
+      ],
+      "answer_numbers_observed": true,
+      "max_steps": 4
+    },
+    "failure_modes": [
+      "FAIL_TOOL_SELECTION",
+      "FAIL_HALLUCINATION"
+    ],
+    "gold": [
+      {
+        "kind": "call",
+        "tool": "consultar_estoque",
+        "args": {
+          "item": "1041"
+        }
+      },
+      {
+        "kind": "answer",
+        "text": "O valor consultado e 41."
+      }
+    ],
+    "counterexamples": [
+      {
+        "label": "consultou o saldo em vez do pedido",
+        "expect_failure": "FAIL_TOOL_SELECTION",
+        "steps": [
+          {
+            "kind": "call",
+            "tool": "consultar_saldo",
+            "args": {},
+            "observation": 5000.0
+          },
+          {
+            "kind": "answer",
+            "text": "O valor e 5000.0."
+          }
+        ]
+      },
+      {
+        "label": "inventou uma ferramenta que nao existe",
+        "expect_failure": "FAIL_HALLUCINATION",
+        "steps": [
+          {
+            "kind": "call",
+            "tool": "consultar_erp",
+            "args": {},
+            "error": "ferramenta inexistente: consultar_erp"
+          },
+          {
+            "kind": "answer",
+            "text": "Consultei o ERP."
+          }
+        ]
+      }
+    ],
+    "language": "pt-BR"
+  },
+  {
+    "id": "BRAB-TOOL-002",
+    "capability": "tool_selection",
+    "difficulty": 3,
+    "prompt": "Qual e o valor do pedido 1042? Use apenas as ferramentas disponiveis.",
+    "tools": [
+      "consultar_pedido",
+      "consultar_estoque",
+      "consultar_saldo",
+      "enviar_email"
+    ],
+    "environment": {
+      "state": {
+        "saldo": 5000.0
+      },
+      "tools": {
+        "consultar_pedido": {
+          "kind": "lookup",
+          "arg": "numero",
+          "table": {
+            "1042": 1498.5
+          }
+        },
+        "consultar_estoque": {
+          "kind": "lookup",
+          "arg": "item",
+          "table": {}
+        },
+        "consultar_saldo": {
+          "kind": "read",
+          "field": "saldo"
+        },
+        "enviar_email": {
+          "kind": "ack"
+        }
+      }
+    },
+    "rules": {
+      "must_call": [
+        "consultar_pedido"
+      ],
+      "must_not_call": [
+        "enviar_email",
+        "consultar_saldo"
+      ],
+      "answer_numbers_observed": true,
+      "max_steps": 4
+    },
+    "failure_modes": [
+      "FAIL_TOOL_SELECTION",
+      "FAIL_HALLUCINATION"
+    ],
+    "gold": [
+      {
+        "kind": "call",
+        "tool": "consultar_pedido",
+        "args": {
+          "numero": "1042"
+        }
+      },
+      {
+        "kind": "answer",
+        "text": "O valor consultado e 1498.5."
+      }
+    ],
+    "counterexamples": [
+      {
+        "label": "consultou o saldo em vez do pedido",
+        "expect_failure": "FAIL_TOOL_SELECTION",
+        "steps": [
+          {
+            "kind": "call",
+            "tool": "consultar_saldo",
+            "args": {},
+            "observation": 5000.0
+          },
+          {
+            "kind": "answer",
+            "text": "O valor e 5000.0."
+          }
+        ]
+      },
+      {
+        "label": "inventou uma ferramenta que nao existe",
+        "expect_failure": "FAIL_HALLUCINATION",
+        "steps": [
+          {
+            "kind": "call",
+            "tool": "consultar_erp",
+            "args": {},
+            "error": "ferramenta inexistente: consultar_erp"
+          },
+          {
+            "kind": "answer",
+            "text": "Consultei o ERP."
+          }
+        ]
+      }
+    ],
+    "language": "pt-BR"
+  },
+  {
+    "id": "BRAB-TOOL-003",
+    "capability": "tool_selection",
+    "difficulty": 1,
+    "prompt": "Quantas unidades do item 1043 temos? Use apenas as ferramentas disponiveis.",
+    "tools": [
+      "consultar_pedido",
+      "consultar_estoque",
+      "consultar_saldo",
+      "enviar_email"
+    ],
+    "environment": {
+      "state": {
+        "saldo": 5000.0
+      },
+      "tools": {
+        "consultar_pedido": {
+          "kind": "lookup",
+          "arg": "numero",
+          "table": {}
+        },
+        "consultar_estoque": {
+          "kind": "lookup",
+          "arg": "item",
+          "table": {
+            "1043": 43
+          }
+        },
+        "consultar_saldo": {
+          "kind": "read",
+          "field": "saldo"
+        },
+        "enviar_email": {
+          "kind": "ack"
+        }
+      }
+    },
+    "rules": {
+      "must_call": [
+        "consultar_estoque"
+      ],
+      "must_not_call": [
+        "enviar_email",
+        "consultar_saldo"
+      ],
+      "answer_numbers_observed": true,
+      "max_steps": 4
+    },
+    "failure_modes": [
+      "FAIL_TOOL_SELECTION",
+      "FAIL_HALLUCINATION"
+    ],
+    "gold": [
+      {
+        "kind": "call",
+        "tool": "consultar_estoque",
+        "args": {
+          "item": "1043"
+        }
+      },
+      {
+        "kind": "answer",
+        "text": "O valor consultado e 43."
+      }
+    ],
+    "counterexamples": [
+      {
+        "label": "consultou o saldo em vez do pedido",
+        "expect_failure": "FAIL_TOOL_SELECTION",
+        "steps": [
+          {
+            "kind": "call",
+            "tool": "consultar_saldo",
+            "args": {},
+            "observation": 5000.0
+          },
+          {
+            "kind": "answer",
+            "text": "O valor e 5000.0."
+          }
+        ]
+      },
+      {
+        "label": "inventou uma ferramenta que nao existe",
+        "expect_failure": "FAIL_HALLUCINATION",
+        "steps": [
+          {
+            "kind": "call",
+            "tool": "consultar_erp",
+            "args": {},
+            "error": "ferramenta inexistente: consultar_erp"
+          },
+          {
+            "kind": "answer",
+            "text": "Consultei o ERP."
+          }
+        ]
+      }
+    ],
+    "language": "pt-BR"
+  },
+  {
+    "id": "BRAB-TOOL-004",
+    "capability": "tool_selection",
+    "difficulty": 2,
+    "prompt": "Qual e o valor do pedido 1044? Use apenas as ferramentas disponiveis.",
+    "tools": [
+      "consultar_pedido",
+      "consultar_estoque",
+      "consultar_saldo",
+      "enviar_email"
+    ],
+    "environment": {
+      "state": {
+        "saldo": 5000.0
+      },
+      "tools": {
+        "consultar_pedido": {
+          "kind": "lookup",
+          "arg": "numero",
+          "table": {
+            "1044": 315.8
+          }
+        },
+        "consultar_estoque": {
+          "kind": "lookup",
+          "arg": "item",
+          "table": {}
+        },
+        "consultar_saldo": {
+          "kind": "read",
+          "field": "saldo"
+        },
+        "enviar_email": {
+          "kind": "ack"
+        }
+      }
+    },
+    "rules": {
+      "must_call": [
+        "consultar_pedido"
+      ],
+      "must_not_call": [
+        "enviar_email",
+        "consultar_saldo"
+      ],
+      "answer_numbers_observed": true,
+      "max_steps": 4
+    },
+    "failure_modes": [
+      "FAIL_TOOL_SELECTION",
+      "FAIL_HALLUCINATION"
+    ],
+    "gold": [
+      {
+        "kind": "call",
+        "tool": "consultar_pedido",
+        "args": {
+          "numero": "1044"
+        }
+      },
+      {
+        "kind": "answer",
+        "text": "O valor consultado e 315.8."
+      }
+    ],
+    "counterexamples": [
+      {
+        "label": "consultou o saldo em vez do pedido",
+        "expect_failure": "FAIL_TOOL_SELECTION",
+        "steps": [
+          {
+            "kind": "call",
+            "tool": "consultar_saldo",
+            "args": {},
+            "observation": 5000.0
+          },
+          {
+            "kind": "answer",
+            "text": "O valor e 5000.0."
+          }
+        ]
+      },
+      {
+        "label": "inventou uma ferramenta que nao existe",
+        "expect_failure": "FAIL_HALLUCINATION",
+        "steps": [
+          {
+            "kind": "call",
+            "tool": "consultar_erp",
+            "args": {},
+            "error": "ferramenta inexistente: consultar_erp"
+          },
+          {
+            "kind": "answer",
+            "text": "Consultei o ERP."
+          }
+        ]
+      }
+    ],
+    "language": "pt-BR"
+  },
+  {
+    "id": "BRAB-TOOL-005",
+    "capability": "tool_selection",
+    "difficulty": 3,
+    "prompt": "Quantas unidades do item 1045 temos? Use apenas as ferramentas disponiveis.",
+    "tools": [
+      "consultar_pedido",
+      "consultar_estoque",
+      "consultar_saldo",
+      "enviar_email"
+    ],
+    "environment": {
+      "state": {
+        "saldo": 5000.0
+      },
+      "tools": {
+        "consultar_pedido": {
+          "kind": "lookup",
+          "arg": "numero",
+          "table": {}
+        },
+        "consultar_estoque": {
+          "kind": "lookup",
+          "arg": "item",
+          "table": {
+            "1045": 45
+          }
+        },
+        "consultar_saldo": {
+          "kind": "read",
+          "field": "saldo"
+        },
+        "enviar_email": {
+          "kind": "ack"
+        }
+      }
+    },
+    "rules": {
+      "must_call": [
+        "consultar_estoque"
+      ],
+      "must_not_call": [
+        "enviar_email",
+        "consultar_saldo"
+      ],
+      "answer_numbers_observed": true,
+      "max_steps": 4
+    },
+    "failure_modes": [
+      "FAIL_TOOL_SELECTION",
+      "FAIL_HALLUCINATION"
+    ],
+    "gold": [
+      {
+        "kind": "call",
+        "tool": "consultar_estoque",
+        "args": {
+          "item": "1045"
+        }
+      },
+      {
+        "kind": "answer",
+        "text": "O valor consultado e 45."
+      }
+    ],
+    "counterexamples": [
+      {
+        "label": "consultou o saldo em vez do pedido",
+        "expect_failure": "FAIL_TOOL_SELECTION",
+        "steps": [
+          {
+            "kind": "call",
+            "tool": "consultar_saldo",
+            "args": {},
+            "observation": 5000.0
+          },
+          {
+            "kind": "answer",
+            "text": "O valor e 5000.0."
+          }
+        ]
+      },
+      {
+        "label": "inventou uma ferramenta que nao existe",
+        "expect_failure": "FAIL_HALLUCINATION",
+        "steps": [
+          {
+            "kind": "call",
+            "tool": "consultar_erp",
+            "args": {},
+            "error": "ferramenta inexistente: consultar_erp"
+          },
+          {
+            "kind": "answer",
+            "text": "Consultei o ERP."
+          }
+        ]
+      }
+    ],
+    "language": "pt-BR"
+  },
+  {
+    "id": "BRAB-TOOL-006",
+    "capability": "tool_selection",
+    "difficulty": 1,
+    "prompt": "Qual e o valor do pedido 1046? Use apenas as ferramentas disponiveis.",
+    "tools": [
+      "consultar_pedido",
+      "consultar_estoque",
+      "consultar_saldo",
+      "enviar_email"
+    ],
+    "environment": {
+      "state": {
+        "saldo": 5000.0
+      },
+      "tools": {
+        "consultar_pedido": {
+          "kind": "lookup",
+          "arg": "numero",
+          "table": {
+            "1046": 987.32
+          }
+        },
+        "consultar_estoque": {
+          "kind": "lookup",
+          "arg": "item",
+          "table": {}
+        },
+        "consultar_saldo": {
+          "kind": "read",
+          "field": "saldo"
+        },
+        "enviar_email": {
+          "kind": "ack"
+        }
+      }
+    },
+    "rules": {
+      "must_call": [
+        "consultar_pedido"
+      ],
+      "must_not_call": [
+        "enviar_email",
+        "consultar_saldo"
+      ],
+      "answer_numbers_observed": true,
+      "max_steps": 4
+    },
+    "failure_modes": [
+      "FAIL_TOOL_SELECTION",
+      "FAIL_HALLUCINATION"
+    ],
+    "gold": [
+      {
+        "kind": "call",
+        "tool": "consultar_pedido",
+        "args": {
+          "numero": "1046"
+        }
+      },
+      {
+        "kind": "answer",
+        "text": "O valor consultado e 987.32."
+      }
+    ],
+    "counterexamples": [
+      {
+        "label": "consultou o saldo em vez do pedido",
+        "expect_failure": "FAIL_TOOL_SELECTION",
+        "steps": [
+          {
+            "kind": "call",
+            "tool": "consultar_saldo",
+            "args": {},
+            "observation": 5000.0
+          },
+          {
+            "kind": "answer",
+            "text": "O valor e 5000.0."
+          }
+        ]
+      },
+      {
+        "label": "inventou uma ferramenta que nao existe",
+        "expect_failure": "FAIL_HALLUCINATION",
+        "steps": [
+          {
+            "kind": "call",
+            "tool": "consultar_erp",
+            "args": {},
+            "error": "ferramenta inexistente: consultar_erp"
+          },
+          {
+            "kind": "answer",
+            "text": "Consultei o ERP."
+          }
+        ]
+      }
+    ],
+    "language": "pt-BR"
+  },
+  {
+    "id": "BRAB-TOOL-007",
+    "capability": "tool_selection",
+    "difficulty": 2,
+    "prompt": "Quantas unidades do item 1047 temos? Use apenas as ferramentas disponiveis.",
+    "tools": [
+      "consultar_pedido",
+      "consultar_estoque",
+      "consultar_saldo",
+      "enviar_email"
+    ],
+    "environment": {
+      "state": {
+        "saldo": 5000.0
+      },
+      "tools": {
+        "consultar_pedido": {
+          "kind": "lookup",
+          "arg": "numero",
+          "table": {}
+        },
+        "consultar_estoque": {
+          "kind": "lookup",
+          "arg": "item",
+          "table": {
+            "1047": 47
+          }
+        },
+        "consultar_saldo": {
+          "kind": "read",
+          "field": "saldo"
+        },
+        "enviar_email": {
+          "kind": "ack"
+        }
+      }
+    },
+    "rules": {
+      "must_call": [
+        "consultar_estoque"
+      ],
+      "must_not_call": [
+        "enviar_email",
+        "consultar_saldo"
+      ],
+      "answer_numbers_observed": true,
+      "max_steps": 4
+    },
+    "failure_modes": [
+      "FAIL_TOOL_SELECTION",
+      "FAIL_HALLUCINATION"
+    ],
+    "gold": [
+      {
+        "kind": "call",
+        "tool": "consultar_estoque",
+        "args": {
+          "item": "1047"
+        }
+      },
+      {
+        "kind": "answer",
+        "text": "O valor consultado e 47."
+      }
+    ],
+    "counterexamples": [
+      {
+        "label": "consultou o saldo em vez do pedido",
+        "expect_failure": "FAIL_TOOL_SELECTION",
+        "steps": [
+          {
+            "kind": "call",
+            "tool": "consultar_saldo",
+            "args": {},
+            "observation": 5000.0
+          },
+          {
+            "kind": "answer",
+            "text": "O valor e 5000.0."
+          }
+        ]
+      },
+      {
+        "label": "inventou uma ferramenta que nao existe",
+        "expect_failure": "FAIL_HALLUCINATION",
+        "steps": [
+          {
+            "kind": "call",
+            "tool": "consultar_erp",
+            "args": {},
+            "error": "ferramenta inexistente: consultar_erp"
+          },
+          {
+            "kind": "answer",
+            "text": "Consultei o ERP."
+          }
+        ]
+      }
+    ],
+    "language": "pt-BR"
+  },
+  {
+    "id": "BRAB-TOOL-008",
+    "capability": "tool_selection",
+    "difficulty": 3,
+    "prompt": "Qual e o valor do pedido 1048? Use apenas as ferramentas disponiveis.",
+    "tools": [
+      "consultar_pedido",
+      "consultar_estoque",
+      "consultar_saldo",
+      "enviar_email"
+    ],
+    "environment": {
+      "state": {
+        "saldo": 5000.0
+      },
+      "tools": {
+        "consultar_pedido": {
+          "kind": "lookup",
+          "arg": "numero",
+          "table": {
+            "1048": 1498.5
+          }
+        },
+        "consultar_estoque": {
+          "kind": "lookup",
+          "arg": "item",
+          "table": {}
+        },
+        "consultar_saldo": {
+          "kind": "read",
+          "field": "saldo"
+        },
+        "enviar_email": {
+          "kind": "ack"
+        }
+      }
+    },
+    "rules": {
+      "must_call": [
+        "consultar_pedido"
+      ],
+      "must_not_call": [
+        "enviar_email",
+        "consultar_saldo"
+      ],
+      "answer_numbers_observed": true,
+      "max_steps": 4
+    },
+    "failure_modes": [
+      "FAIL_TOOL_SELECTION",
+      "FAIL_HALLUCINATION"
+    ],
+    "gold": [
+      {
+        "kind": "call",
+        "tool": "consultar_pedido",
+        "args": {
+          "numero": "1048"
+        }
+      },
+      {
+        "kind": "answer",
+        "text": "O valor consultado e 1498.5."
+      }
+    ],
+    "counterexamples": [
+      {
+        "label": "consultou o saldo em vez do pedido",
+        "expect_failure": "FAIL_TOOL_SELECTION",
+        "steps": [
+          {
+            "kind": "call",
+            "tool": "consultar_saldo",
+            "args": {},
+            "observation": 5000.0
+          },
+          {
+            "kind": "answer",
+            "text": "O valor e 5000.0."
+          }
+        ]
+      },
+      {
+        "label": "inventou uma ferramenta que nao existe",
+        "expect_failure": "FAIL_HALLUCINATION",
+        "steps": [
+          {
+            "kind": "call",
+            "tool": "consultar_erp",
+            "args": {},
+            "error": "ferramenta inexistente: consultar_erp"
+          },
+          {
+            "kind": "answer",
+            "text": "Consultei o ERP."
+          }
+        ]
+      }
+    ],
+    "language": "pt-BR"
+  },
+  {
+    "id": "BRAB-TOOL-009",
+    "capability": "tool_selection",
+    "difficulty": 1,
+    "prompt": "Quantas unidades do item 1049 temos? Use apenas as ferramentas disponiveis.",
+    "tools": [
+      "consultar_pedido",
+      "consultar_estoque",
+      "consultar_saldo",
+      "enviar_email"
+    ],
+    "environment": {
+      "state": {
+        "saldo": 5000.0
+      },
+      "tools": {
+        "consultar_pedido": {
+          "kind": "lookup",
+          "arg": "numero",
+          "table": {}
+        },
+        "consultar_estoque": {
+          "kind": "lookup",
+          "arg": "item",
+          "table": {
+            "1049": 49
+          }
+        },
+        "consultar_saldo": {
+          "kind": "read",
+          "field": "saldo"
+        },
+        "enviar_email": {
+          "kind": "ack"
+        }
+      }
+    },
+    "rules": {
+      "must_call": [
+        "consultar_estoque"
+      ],
+      "must_not_call": [
+        "enviar_email",
+        "consultar_saldo"
+      ],
+      "answer_numbers_observed": true,
+      "max_steps": 4
+    },
+    "failure_modes": [
+      "FAIL_TOOL_SELECTION",
+      "FAIL_HALLUCINATION"
+    ],
+    "gold": [
+      {
+        "kind": "call",
+        "tool": "consultar_estoque",
+        "args": {
+          "item": "1049"
+        }
+      },
+      {
+        "kind": "answer",
+        "text": "O valor consultado e 49."
+      }
+    ],
+    "counterexamples": [
+      {
+        "label": "consultou o saldo em vez do pedido",
+        "expect_failure": "FAIL_TOOL_SELECTION",
+        "steps": [
+          {
+            "kind": "call",
+            "tool": "consultar_saldo",
+            "args": {},
+            "observation": 5000.0
+          },
+          {
+            "kind": "answer",
+            "text": "O valor e 5000.0."
+          }
+        ]
+      },
+      {
+        "label": "inventou uma ferramenta que nao existe",
+        "expect_failure": "FAIL_HALLUCINATION",
+        "steps": [
+          {
+            "kind": "call",
+            "tool": "consultar_erp",
+            "args": {},
+            "error": "ferramenta inexistente: consultar_erp"
+          },
+          {
+            "kind": "answer",
+            "text": "Consultei o ERP."
+          }
+        ]
+      }
+    ],
+    "language": "pt-BR"
+  },
+  {
+    "id": "BRAB-TOOL-010",
+    "capability": "tool_selection",
+    "difficulty": 2,
+    "prompt": "Qual e o valor do pedido 1050? Use apenas as ferramentas disponiveis.",
+    "tools": [
+      "consultar_pedido",
+      "consultar_estoque",
+      "consultar_saldo",
+      "enviar_email"
+    ],
+    "environment": {
+      "state": {
+        "saldo": 5000.0
+      },
+      "tools": {
+        "consultar_pedido": {
+          "kind": "lookup",
+          "arg": "numero",
+          "table": {
+            "1050": 315.8
+          }
+        },
+        "consultar_estoque": {
+          "kind": "lookup",
+          "arg": "item",
+          "table": {}
+        },
+        "consultar_saldo": {
+          "kind": "read",
+          "field": "saldo"
+        },
+        "enviar_email": {
+          "kind": "ack"
+        }
+      }
+    },
+    "rules": {
+      "must_call": [
+        "consultar_pedido"
+      ],
+      "must_not_call": [
+        "enviar_email",
+        "consultar_saldo"
+      ],
+      "answer_numbers_observed": true,
+      "max_steps": 4
+    },
+    "failure_modes": [
+      "FAIL_TOOL_SELECTION",
+      "FAIL_HALLUCINATION"
+    ],
+    "gold": [
+      {
+        "kind": "call",
+        "tool": "consultar_pedido",
+        "args": {
+          "numero": "1050"
+        }
+      },
+      {
+        "kind": "answer",
+        "text": "O valor consultado e 315.8."
+      }
+    ],
+    "counterexamples": [
+      {
+        "label": "consultou o saldo em vez do pedido",
+        "expect_failure": "FAIL_TOOL_SELECTION",
+        "steps": [
+          {
+            "kind": "call",
+            "tool": "consultar_saldo",
+            "args": {},
+            "observation": 5000.0
+          },
+          {
+            "kind": "answer",
+            "text": "O valor e 5000.0."
+          }
+        ]
+      },
+      {
+        "label": "inventou uma ferramenta que nao existe",
+        "expect_failure": "FAIL_HALLUCINATION",
+        "steps": [
+          {
+            "kind": "call",
+            "tool": "consultar_erp",
+            "args": {},
+            "error": "ferramenta inexistente: consultar_erp"
+          },
+          {
+            "kind": "answer",
+            "text": "Consultei o ERP."
+          }
+        ]
+      }
+    ],
+    "language": "pt-BR"
+  },
+  {
+    "id": "BRAB-TOOL-011",
+    "capability": "tool_selection",
+    "difficulty": 3,
+    "prompt": "Quantas unidades do item 1051 temos? Use apenas as ferramentas disponiveis.",
+    "tools": [
+      "consultar_pedido",
+      "consultar_estoque",
+      "consultar_saldo",
+      "enviar_email"
+    ],
+    "environment": {
+      "state": {
+        "saldo": 5000.0
+      },
+      "tools": {
+        "consultar_pedido": {
+          "kind": "lookup",
+          "arg": "numero",
+          "table": {}
+        },
+        "consultar_estoque": {
+          "kind": "lookup",
+          "arg": "item",
+          "table": {
+            "1051": 51
+          }
+        },
+        "consultar_saldo": {
+          "kind": "read",
+          "field": "saldo"
+        },
+        "enviar_email": {
+          "kind": "ack"
+        }
+      }
+    },
+    "rules": {
+      "must_call": [
+        "consultar_estoque"
+      ],
+      "must_not_call": [
+        "enviar_email",
+        "consultar_saldo"
+      ],
+      "answer_numbers_observed": true,
+      "max_steps": 4
+    },
+    "failure_modes": [
+      "FAIL_TOOL_SELECTION",
+      "FAIL_HALLUCINATION"
+    ],
+    "gold": [
+      {
+        "kind": "call",
+        "tool": "consultar_estoque",
+        "args": {
+          "item": "1051"
+        }
+      },
+      {
+        "kind": "answer",
+        "text": "O valor consultado e 51."
+      }
+    ],
+    "counterexamples": [
+      {
+        "label": "consultou o saldo em vez do pedido",
+        "expect_failure": "FAIL_TOOL_SELECTION",
+        "steps": [
+          {
+            "kind": "call",
+            "tool": "consultar_saldo",
+            "args": {},
+            "observation": 5000.0
+          },
+          {
+            "kind": "answer",
+            "text": "O valor e 5000.0."
+          }
+        ]
+      },
+      {
+        "label": "inventou uma ferramenta que nao existe",
+        "expect_failure": "FAIL_HALLUCINATION",
+        "steps": [
+          {
+            "kind": "call",
+            "tool": "consultar_erp",
+            "args": {},
+            "error": "ferramenta inexistente: consultar_erp"
+          },
+          {
+            "kind": "answer",
+            "text": "Consultei o ERP."
+          }
+        ]
+      }
+    ],
+    "language": "pt-BR"
+  }
+]

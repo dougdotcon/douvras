@@ -1,0 +1,63 @@
+{
+  "version": "1.0",
+  "_nota": "PRIORS, nao medicoes. Cada numero e um palpite de engenharia sobre quao ensinavel, quao valiosa, quao cara e quao estavel e a capacidade. Entram no CSS e portanto em qualquer recomendacao de alvo de dataset — motivo pelo qual `css_finding` anexa G-104 a tudo que passa por aqui. Fecham-se com tres casos de desfecho conhecido: capacidade medida antes, dataset construido, capacidade medida depois.",
+  "_escala": "Tudo em [0, 1]. `dataset_cost` ja vem invertido: 1 = barato de construir.",
+  "capabilities": {
+    "tool_selection": {
+      "tractability": 0.85,
+      "value": 0.90,
+      "dataset_cost": 0.80,
+      "stability": 0.75,
+      "_razao": "Poucos exemplos costumam mover muito; o formato do dado e simples e o comportamento varia pouco entre modelos da mesma faixa."
+    },
+    "arguments": {
+      "tractability": 0.80,
+      "value": 0.85,
+      "dataset_cost": 0.75,
+      "stability": 0.60,
+      "_razao": "Erro de argumento e o que mais custa dinheiro em agente financeiro; gerar variacao e barato."
+    },
+    "structured_output": {
+      "tractability": 0.90,
+      "value": 0.70,
+      "dataset_cost": 0.90,
+      "stability": 0.80,
+      "_razao": "A capacidade que mais responde a dado sintetico e a mais barata de gerar — e por isso a que menos diferencia um laboratorio."
+    },
+    "planning": {
+      "tractability": 0.45,
+      "value": 0.80,
+      "dataset_cost": 0.40,
+      "stability": 0.35,
+      "_razao": "Trajetoria longa exige supervisao cara e varia muito entre modelos; e onde modelo pequeno mais quebra."
+    },
+    "error_recovery": {
+      "tractability": 0.60,
+      "value": 0.85,
+      "dataset_cost": 0.55,
+      "stability": 0.30,
+      "_razao": "Injetar falha e barato, mas ensinar a decidir entre insistir e desistir nao e. Alta variabilidade entre modelos."
+    },
+    "hallucination": {
+      "tractability": 0.35,
+      "value": 0.95,
+      "dataset_cost": 0.50,
+      "stability": 0.40,
+      "_razao": "O maior valor comercial e a menor tratabilidade por dado supervisionado — a combinacao que mais engana quem escolhe alvo pelo valor."
+    },
+    "pt_br_numeracy": {
+      "tractability": 0.70,
+      "value": 0.75,
+      "dataset_cost": 0.85,
+      "stability": 0.55,
+      "_razao": "Formato brasileiro de numero e data e regra, nao conhecimento — e o nicho que um laboratorio local ataca melhor que um generalista."
+    },
+    "safety_refusal": {
+      "tractability": 0.65,
+      "value": 0.80,
+      "dataset_cost": 0.70,
+      "stability": 0.45,
+      "_razao": "Recusar bem exige distinguir pedido legitimo de indevido; excesso de recusa e falha tao cara quanto a falta."
+    }
+  }
+}

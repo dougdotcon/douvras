@@ -1,0 +1,42 @@
+[build-system]
+requires = ["setuptools>=68"]
+build-backend = "setuptools.build_meta"
+
+[project]
+name = "douvras"
+version = "0.2.0"
+description = "Monorepo DOUVRAS: core epistemico, Silicon Atlas (hardware readiness) e Model Atlas (capability readiness)"
+readme = "README.md"
+requires-python = ">=3.11"
+license = { text = "Proprietary — DOUVRAS Labs" }
+authors = [{ name = "DOUVRAS Labs" }]
+dependencies = [
+    "numpy>=1.26",
+    "pyyaml>=6.0",
+]
+
+[project.optional-dependencies]
+dev = ["pytest>=8.0"]
+# Importadores de grafo tracado (fecha GAP G-001 do Silicon Atlas). Nao exigido pelo caminho
+# principal (ADR-0001).
+trace = ["torch>=2.4", "onnx>=1.16"]
+# Execucao real de modelos pequenos (fecha G-101/G-102 do Model Atlas). Nao exigido pelo
+# caminho principal (ADR-0006): o ciclo C-002 roda inteiro sem pesos, sem GPU e sem rede.
+run = ["llama-cpp-python>=0.3", "huggingface-hub>=0.25"]
+
+[project.scripts]
+atlas = "silicon_atlas.cli:main"
+matlas = "model_atlas.cli:main"
+
+[tool.setuptools.packages.find]
+where = ["src"]
+
+[tool.pytest.ini_options]
+testpaths = ["tests"]
+pythonpath = ["src"]
+addopts = "-q"
+markers = [
+    "falsifier: teste que implementa um criterio de falha de uma PROBLEM_CHARTER",
+    "network: exige rede (verificacao de proveniencia upstream)",
+    "weights: exige pesos de modelo baixados (fora do caminho principal)",
+]

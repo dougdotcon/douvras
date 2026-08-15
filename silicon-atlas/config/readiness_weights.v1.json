@@ -1,0 +1,72 @@
+{
+  "_meta": {
+    "version": "1.0",
+    "date": "2026-08-03",
+    "status": "ENGINEERING_DECISION",
+    "note": "Pesos conforme Metodo 12.6. Explicitamente NAO universais: sao ponto de partida a ser calibrado com casos reais e versionado (Metodo 12.6, ultimo paragrafo). Toda emissao de score deve vir acompanhada da analise de sensibilidade (C-006 / falsificador F3): se o ranking top-1 trocar sob perturbacao de +-20 por cento, o score nao e decidivel e a recomendacao e retratada.",
+    "calibration_status": "UNCALIBRATED — nenhum caso real de tape-out alimentou estes pesos ainda"
+  },
+  "LHS": {
+    "description": "Layer Hardening Score — prontidao de uma camada ou subgrafo",
+    "weights": {
+      "E": 0.20,
+      "F": 0.15,
+      "R": 0.15,
+      "Q": 0.15,
+      "V": 0.15,
+      "M": 0.10,
+      "L": 0.10
+    },
+    "factors": {
+      "E": "estabilidade estrutural do padrao entre versoes e familias",
+      "F": "fracao do custo total da fase",
+      "R": "regularidade computacional (1 - fracao de controle dinamico)",
+      "Q": "tolerancia a quantizacao",
+      "V": "volume de execucao (instancias por token, escala log)",
+      "M": "previsibilidade de memoria (1 - fracao de enderecamento dependente de dado)",
+      "L": "vida util esperada da estrutura"
+    }
+  },
+  "SRS": {
+    "description": "Silicon Readiness Score — prontidao do caso como um todo",
+    "weights": {
+      "A": 0.15,
+      "H": 0.15,
+      "T": 0.15,
+      "P": 0.15,
+      "Q": 0.10,
+      "D": 0.10,
+      "C": 0.10,
+      "R": 0.10,
+      "O": -0.15,
+      "N": -0.10
+    },
+    "factors": {
+      "A": "estabilidade arquitetural da familia",
+      "H": "concentracao em hotspots",
+      "T": "throughput anual necessario (escala log)",
+      "P": "ganho estimado de performance por watt",
+      "Q": "robustez a baixa precisao",
+      "D": "disponibilidade de dados e benchmarks",
+      "C": "compatibilidade com codesign",
+      "R": "receita ou economia potencial",
+      "O": "risco de obsolescencia (penalidade)",
+      "N": "risco de NRE e fabricacao (penalidade)"
+    },
+    "decision_bands": {
+      "note": "Bandas de recomendacao. Fronteiras sao ENGINEERING_DECISION, nao descoberta.",
+      "software": [-1.0, 0.30],
+      "optimized_kernel": [0.30, 0.45],
+      "fpga": [0.45, 0.58],
+      "ip_block": [0.58, 0.70],
+      "asic_architecture": [0.70, 0.82],
+      "weights_partially_fixed": [0.82, 1.0]
+    }
+  },
+  "sensitivity": {
+    "perturbation": 0.20,
+    "samples": 2000,
+    "seed": 20260803,
+    "rank_stability_threshold": 0.95
+  }
+}

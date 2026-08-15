@@ -1,0 +1,2456 @@
+{
+  "run_id": "20260815T000033Z",
+  "generated_at": "2026-08-15T00:00:33+00:00",
+  "inputs": {
+    "model_id": "phi-3-mini-4k",
+    "device_key": "h100-sxm",
+    "batch": 1,
+    "prompt_len": 2048,
+    "gen_len": 512,
+    "context_len": null,
+    "annual_tokens": 10000000000000.0,
+    "tech_node": "6nm",
+    "target_tokens_per_second": 1000.0,
+    "claimed_gain": 100.0,
+    "mc_samples": 20000,
+    "hardened_only": true
+  },
+  "model": {
+    "id": "phi-3-mini-4k",
+    "family": "phi",
+    "version_label": "3-mini-4k",
+    "architecture": "Phi3ForCausalLM",
+    "hidden_size": 3072,
+    "num_layers": 32,
+    "num_heads": 32,
+    "num_kv_heads": 32,
+    "head_dim": 96,
+    "intermediate_size": 8192,
+    "vocab_size": 32064,
+    "max_position": 4096,
+    "norm_type": "rmsnorm",
+    "norms_per_layer": 2,
+    "mlp_type": "swiglu",
+    "position_type": "rope",
+    "rope_theta": 10000.0,
+    "tie_word_embeddings": false,
+    "qkv_bias": false,
+    "o_bias": false,
+    "mlp_bias": false,
+    "sliding_window": null,
+    "release_date": "2024-04-23",
+    "license": "mit",
+    "published_params": 3821079552,
+    "hf_repo": "microsoft/Phi-3-mini-4k-instruct",
+    "default_dtype": "bf16",
+    "attention_type": "mha",
+    "provenance": {
+      "source_url": "https://huggingface.co/microsoft/Phi-3-mini-4k-instruct/resolve/main/config.json",
+      "provenance": "TRANSCRIBED_UNVERIFIED",
+      "sha256": null,
+      "retrieved_at": null
+    },
+    "moe": null,
+    "derived_params": 3821079552
+  },
+  "device": {
+    "key": "h100-sxm",
+    "name": "NVIDIA H100 SXM 80GB",
+    "class": "gpu",
+    "memory_bandwidth_gbs": 3350.0,
+    "memory_capacity_gb": 80.0,
+    "tdp_watts": 700.0,
+    "wall_power_watts": 1134.0,
+    "hourly_cost_usd": 2.99,
+    "process_node_nm": 4,
+    "source": "picos densos de datasheet do fabricante; eficiencia e custo assumidos"
+  },
+  "fingerprint": {
+    "model": "phi-3-mini-4k",
+    "family": "phi",
+    "version": "3-mini-4k",
+    "release_date": "2024-04-23",
+    "architecture_class": "decoder_transformer",
+    "attention": "mha",
+    "gqa_ratio": 1,
+    "head_dim": 96,
+    "layers": 32,
+    "hidden_size": 3072,
+    "intermediate_size": 8192,
+    "mlp": "swiglu",
+    "mlp_ratio": 2.6667,
+    "normalization": "rmsnorm",
+    "norms_per_layer": 2,
+    "position": "rope",
+    "rope_theta": 10000.0,
+    "routing": "dense",
+    "vocab_size": 32064,
+    "tied_embeddings": false,
+    "sliding_window": null,
+    "params": 3821079552,
+    "quantization_candidates": [
+      "int8",
+      "int4",
+      "ternary"
+    ],
+    "dynamic_regions": [
+      "head"
+    ],
+    "distinct_layer_patterns": 2,
+    "blocks": {
+      "L0.attention": {
+        "role": "attention",
+        "topology": "1b843e6dbe080a7d",
+        "pattern": "bde81064451b7d17",
+        "exact": "1dcca03ba27f9239",
+        "num_nodes": 13,
+        "constants": {
+          "input_layernorm.norm": "rmsnorm",
+          "pv.causal": true,
+          "qk.causal": true,
+          "rope_k.theta": 10000.0,
+          "rope_q.theta": 10000.0,
+          "softmax.causal": true
+        }
+      },
+      "L0.mlp": {
+        "role": "mlp",
+        "topology": "0c8cab6eb751d660",
+        "pattern": "803150f1f591d287",
+        "exact": "39fd2e0eca539b76",
+        "num_nodes": 7,
+        "constants": {
+          "act.fn": "silu",
+          "post_attention_layernorm.norm": "rmsnorm"
+        }
+      },
+      "L1.attention": {
+        "role": "attention",
+        "topology": "1b843e6dbe080a7d",
+        "pattern": "bde81064451b7d17",
+        "exact": "1dcca03ba27f9239",
+        "num_nodes": 13,
+        "constants": {
+          "input_layernorm.norm": "rmsnorm",
+          "pv.causal": true,
+          "qk.causal": true,
+          "rope_k.theta": 10000.0,
+          "rope_q.theta": 10000.0,
+          "softmax.causal": true
+        }
+      },
+      "L1.mlp": {
+        "role": "mlp",
+        "topology": "0c8cab6eb751d660",
+        "pattern": "803150f1f591d287",
+        "exact": "39fd2e0eca539b76",
+        "num_nodes": 7,
+        "constants": {
+          "act.fn": "silu",
+          "post_attention_layernorm.norm": "rmsnorm"
+        }
+      },
+      "L10.attention": {
+        "role": "attention",
+        "topology": "1b843e6dbe080a7d",
+        "pattern": "bde81064451b7d17",
+        "exact": "1dcca03ba27f9239",
+        "num_nodes": 13,
+        "constants": {
+          "input_layernorm.norm": "rmsnorm",
+          "pv.causal": true,
+          "qk.causal": true,
+          "rope_k.theta": 10000.0,
+          "rope_q.theta": 10000.0,
+          "softmax.causal": true
+        }
+      },
+      "L10.mlp": {
+        "role": "mlp",
+        "topology": "0c8cab6eb751d660",
+        "pattern": "803150f1f591d287",
+        "exact": "39fd2e0eca539b76",
+        "num_nodes": 7,
+        "constants": {
+          "act.fn": "silu",
+          "post_attention_layernorm.norm": "rmsnorm"
+        }
+      },
+      "L11.attention": {
+        "role": "attention",
+        "topology": "1b843e6dbe080a7d",
+        "pattern": "bde81064451b7d17",
+        "exact": "1dcca03ba27f9239",
+        "num_nodes": 13,
+        "constants": {
+          "input_layernorm.norm": "rmsnorm",
+          "pv.causal": true,
+          "qk.causal": true,
+          "rope_k.theta": 10000.0,
+          "rope_q.theta": 10000.0,
+          "softmax.causal": true
+        }
+      },
+      "L11.mlp": {
+        "role": "mlp",
+        "topology": "0c8cab6eb751d660",
+        "pattern": "803150f1f591d287",
+        "exact": "39fd2e0eca539b76",
+        "num_nodes": 7,
+        "constants": {
+          "act.fn": "silu",
+          "post_attention_layernorm.norm": "rmsnorm"
+        }
+      },
+      "L12.attention": {
+        "role": "attention",
+        "topology": "1b843e6dbe080a7d",
+        "pattern": "bde81064451b7d17",
+        "exact": "1dcca03ba27f9239",
+        "num_nodes": 13,
+        "constants": {
+          "input_layernorm.norm": "rmsnorm",
+          "pv.causal": true,
+          "qk.causal": true,
+          "rope_k.theta": 10000.0,
+          "rope_q.theta": 10000.0,
+          "softmax.causal": true
+        }
+      },
+      "L12.mlp": {
+        "role": "mlp",
+        "topology": "0c8cab6eb751d660",
+        "pattern": "803150f1f591d287",
+        "exact": "39fd2e0eca539b76",
+        "num_nodes": 7,
+        "constants": {
+          "act.fn": "silu",
+          "post_attention_layernorm.norm": "rmsnorm"
+        }
+      },
+      "L13.attention": {
+        "role": "attention",
+        "topology": "1b843e6dbe080a7d",
+        "pattern": "bde81064451b7d17",
+        "exact": "1dcca03ba27f9239",
+        "num_nodes": 13,
+        "constants": {
+          "input_layernorm.norm": "rmsnorm",
+          "pv.causal": true,
+          "qk.causal": true,
+          "rope_k.theta": 10000.0,
+          "rope_q.theta": 10000.0,
+          "softmax.causal": true
+        }
+      },
+      "L13.mlp": {
+        "role": "mlp",
+        "topology": "0c8cab6eb751d660",
+        "pattern": "803150f1f591d287",
+        "exact": "39fd2e0eca539b76",
+        "num_nodes": 7,
+        "constants": {
+          "act.fn": "silu",
+          "post_attention_layernorm.norm": "rmsnorm"
+        }
+      },
+      "L14.attention": {
+        "role": "attention",
+        "topology": "1b843e6dbe080a7d",
+        "pattern": "bde81064451b7d17",
+        "exact": "1dcca03ba27f9239",
+        "num_nodes": 13,
+        "constants": {
+          "input_layernorm.norm": "rmsnorm",
+          "pv.causal": true,
+          "qk.causal": true,
+          "rope_k.theta": 10000.0,
+          "rope_q.theta": 10000.0,
+          "softmax.causal": true
+        }
+      },
+      "L14.mlp": {
+        "role": "mlp",
+        "topology": "0c8cab6eb751d660",
+        "pattern": "803150f1f591d287",
+        "exact": "39fd2e0eca539b76",
+        "num_nodes": 7,
+        "constants": {
+          "act.fn": "silu",
+          "post_attention_layernorm.norm": "rmsnorm"
+        }
+      },
+      "L15.attention": {
+        "role": "attention",
+        "topology": "1b843e6dbe080a7d",
+        "pattern": "bde81064451b7d17",
+        "exact": "1dcca03ba27f9239",
+        "num_nodes": 13,
+        "constants": {
+          "input_layernorm.norm": "rmsnorm",
+          "pv.causal": true,
+          "qk.causal": true,
+          "rope_k.theta": 10000.0,
+          "rope_q.theta": 10000.0,
+          "softmax.causal": true
+        }
+      },
+      "L15.mlp": {
+        "role": "mlp",
+        "topology": "0c8cab6eb751d660",
+        "pattern": "803150f1f591d287",
+        "exact": "39fd2e0eca539b76",
+        "num_nodes": 7,
+        "constants": {
+          "act.fn": "silu",
+          "post_attention_layernorm.norm": "rmsnorm"
+        }
+      },
+      "L16.attention": {
+        "role": "attention",
+        "topology": "1b843e6dbe080a7d",
+        "pattern": "bde81064451b7d17",
+        "exact": "1dcca03ba27f9239",
+        "num_nodes": 13,
+        "constants": {
+          "input_layernorm.norm": "rmsnorm",
+          "pv.causal": true,
+          "qk.causal": true,
+          "rope_k.theta": 10000.0,
+          "rope_q.theta": 10000.0,
+          "softmax.causal": true
+        }
+      },
+      "L16.mlp": {
+        "role": "mlp",
+        "topology": "0c8cab6eb751d660",
+        "pattern": "803150f1f591d287",
+        "exact": "39fd2e0eca539b76",
+        "num_nodes": 7,
+        "constants": {
+          "act.fn": "silu",
+          "post_attention_layernorm.norm": "rmsnorm"
+        }
+      },
+      "L17.attention": {
+        "role": "attention",
+        "topology": "1b843e6dbe080a7d",
+        "pattern": "bde81064451b7d17",
+        "exact": "1dcca03ba27f9239",
+        "num_nodes": 13,
+        "constants": {
+          "input_layernorm.norm": "rmsnorm",
+          "pv.causal": true,
+          "qk.causal": true,
+          "rope_k.theta": 10000.0,
+          "rope_q.theta": 10000.0,
+          "softmax.causal": true
+        }
+      },
+      "L17.mlp": {
+        "role": "mlp",
+        "topology": "0c8cab6eb751d660",
+        "pattern": "803150f1f591d287",
+        "exact": "39fd2e0eca539b76",
+        "num_nodes": 7,
+        "constants": {
+          "act.fn": "silu",
+          "post_attention_layernorm.norm": "rmsnorm"
+        }
+      },
+      "L18.attention": {
+        "role": "attention",
+        "topology": "1b843e6dbe080a7d",
+        "pattern": "bde81064451b7d17",
+        "exact": "1dcca03ba27f9239",
+        "num_nodes": 13,
+        "constants": {
+          "input_layernorm.norm": "rmsnorm",
+          "pv.causal": true,
+          "qk.causal": true,
+          "rope_k.theta": 10000.0,
+          "rope_q.theta": 10000.0,
+          "softmax.causal": true
+        }
+      },
+      "L18.mlp": {
+        "role": "mlp",
+        "topology": "0c8cab6eb751d660",
+        "pattern": "803150f1f591d287",
+        "exact": "39fd2e0eca539b76",
+        "num_nodes": 7,
+        "constants": {
+          "act.fn": "silu",
+          "post_attention_layernorm.norm": "rmsnorm"
+        }
+      },
+      "L19.attention": {
+        "role": "attention",
+        "topology": "1b843e6dbe080a7d",
+        "pattern": "bde81064451b7d17",
+        "exact": "1dcca03ba27f9239",
+        "num_nodes": 13,
+        "constants": {
+          "input_layernorm.norm": "rmsnorm",
+          "pv.causal": true,
+          "qk.causal": true,
+          "rope_k.theta": 10000.0,
+          "rope_q.theta": 10000.0,
+          "softmax.causal": true
+        }
+      },
+      "L19.mlp": {
+        "role": "mlp",
+        "topology": "0c8cab6eb751d660",
+        "pattern": "803150f1f591d287",
+        "exact": "39fd2e0eca539b76",
+        "num_nodes": 7,
+        "constants": {
+          "act.fn": "silu",
+          "post_attention_layernorm.norm": "rmsnorm"
+        }
+      },
+      "L2.attention": {
+        "role": "attention",
+        "topology": "1b843e6dbe080a7d",
+        "pattern": "bde81064451b7d17",
+        "exact": "1dcca03ba27f9239",
+        "num_nodes": 13,
+        "constants": {
+          "input_layernorm.norm": "rmsnorm",
+          "pv.causal": true,
+          "qk.causal": true,
+          "rope_k.theta": 10000.0,
+          "rope_q.theta": 10000.0,
+          "softmax.causal": true
+        }
+      },
+      "L2.mlp": {
+        "role": "mlp",
+        "topology": "0c8cab6eb751d660",
+        "pattern": "803150f1f591d287",
+        "exact": "39fd2e0eca539b76",
+        "num_nodes": 7,
+        "constants": {
+          "act.fn": "silu",
+          "post_attention_layernorm.norm": "rmsnorm"
+        }
+      },
+      "L20.attention": {
+        "role": "attention",
+        "topology": "1b843e6dbe080a7d",
+        "pattern": "bde81064451b7d17",
+        "exact": "1dcca03ba27f9239",
+        "num_nodes": 13,
+        "constants": {
+          "input_layernorm.norm": "rmsnorm",
+          "pv.causal": true,
+          "qk.causal": true,
+          "rope_k.theta": 10000.0,
+          "rope_q.theta": 10000.0,
+          "softmax.causal": true
+        }
+      },
+      "L20.mlp": {
+        "role": "mlp",
+        "topology": "0c8cab6eb751d660",
+        "pattern": "803150f1f591d287",
+        "exact": "39fd2e0eca539b76",
+        "num_nodes": 7,
+        "constants": {
+          "act.fn": "silu",
+          "post_attention_layernorm.norm": "rmsnorm"
+        }
+      },
+      "L21.attention": {
+        "role": "attention",
+        "topology": "1b843e6dbe080a7d",
+        "pattern": "bde81064451b7d17",
+        "exact": "1dcca03ba27f9239",
+        "num_nodes": 13,
+        "constants": {
+          "input_layernorm.norm": "rmsnorm",
+          "pv.causal": true,
+          "qk.causal": true,
+          "rope_k.theta": 10000.0,
+          "rope_q.theta": 10000.0,
+          "softmax.causal": true
+        }
+      },
+      "L21.mlp": {
+        "role": "mlp",
+        "topology": "0c8cab6eb751d660",
+        "pattern": "803150f1f591d287",
+        "exact": "39fd2e0eca539b76",
+        "num_nodes": 7,
+        "constants": {
+          "act.fn": "silu",
+          "post_attention_layernorm.norm": "rmsnorm"
+        }
+      },
+      "L22.attention": {
+        "role": "attention",
+        "topology": "1b843e6dbe080a7d",
+        "pattern": "bde81064451b7d17",
+        "exact": "1dcca03ba27f9239",
+        "num_nodes": 13,
+        "constants": {
+          "input_layernorm.norm": "rmsnorm",
+          "pv.causal": true,
+          "qk.causal": true,
+          "rope_k.theta": 10000.0,
+          "rope_q.theta": 10000.0,
+          "softmax.causal": true
+        }
+      },
+      "L22.mlp": {
+        "role": "mlp",
+        "topology": "0c8cab6eb751d660",
+        "pattern": "803150f1f591d287",
+        "exact": "39fd2e0eca539b76",
+        "num_nodes": 7,
+        "constants": {
+          "act.fn": "silu",
+          "post_attention_layernorm.norm": "rmsnorm"
+        }
+      },
+      "L23.attention": {
+        "role": "attention",
+        "topology": "1b843e6dbe080a7d",
+        "pattern": "bde81064451b7d17",
+        "exact": "1dcca03ba27f9239",
+        "num_nodes": 13,
+        "constants": {
+          "input_layernorm.norm": "rmsnorm",
+          "pv.causal": true,
+          "qk.causal": true,
+          "rope_k.theta": 10000.0,
+          "rope_q.theta": 10000.0,
+          "softmax.causal": true
+        }
+      },
+      "L23.mlp": {
+        "role": "mlp",
+        "topology": "0c8cab6eb751d660",
+        "pattern": "803150f1f591d287",
+        "exact": "39fd2e0eca539b76",
+        "num_nodes": 7,
+        "constants": {
+          "act.fn": "silu",
+          "post_attention_layernorm.norm": "rmsnorm"
+        }
+      },
+      "L24.attention": {
+        "role": "attention",
+        "topology": "1b843e6dbe080a7d",
+        "pattern": "bde81064451b7d17",
+        "exact": "1dcca03ba27f9239",
+        "num_nodes": 13,
+        "constants": {
+          "input_layernorm.norm": "rmsnorm",
+          "pv.causal": true,
+          "qk.causal": true,
+          "rope_k.theta": 10000.0,
+          "rope_q.theta": 10000.0,
+          "softmax.causal": true
+        }
+      },
+      "L24.mlp": {
+        "role": "mlp",
+        "topology": "0c8cab6eb751d660",
+        "pattern": "803150f1f591d287",
+        "exact": "39fd2e0eca539b76",
+        "num_nodes": 7,
+        "constants": {
+          "act.fn": "silu",
+          "post_attention_layernorm.norm": "rmsnorm"
+        }
+      },
+      "L25.attention": {
+        "role": "attention",
+        "topology": "1b843e6dbe080a7d",
+        "pattern": "bde81064451b7d17",
+        "exact": "1dcca03ba27f9239",
+        "num_nodes": 13,
+        "constants": {
+          "input_layernorm.norm": "rmsnorm",
+          "pv.causal": true,
+          "qk.causal": true,
+          "rope_k.theta": 10000.0,
+          "rope_q.theta": 10000.0,
+          "softmax.causal": true
+        }
+      },
+      "L25.mlp": {
+        "role": "mlp",
+        "topology": "0c8cab6eb751d660",
+        "pattern": "803150f1f591d287",
+        "exact": "39fd2e0eca539b76",
+        "num_nodes": 7,
+        "constants": {
+          "act.fn": "silu",
+          "post_attention_layernorm.norm": "rmsnorm"
+        }
+      },
+      "L26.attention": {
+        "role": "attention",
+        "topology": "1b843e6dbe080a7d",
+        "pattern": "bde81064451b7d17",
+        "exact": "1dcca03ba27f9239",
+        "num_nodes": 13,
+        "constants": {
+          "input_layernorm.norm": "rmsnorm",
+          "pv.causal": true,
+          "qk.causal": true,
+          "rope_k.theta": 10000.0,
+          "rope_q.theta": 10000.0,
+          "softmax.causal": true
+        }
+      },
+      "L26.mlp": {
+        "role": "mlp",
+        "topology": "0c8cab6eb751d660",
+        "pattern": "803150f1f591d287",
+        "exact": "39fd2e0eca539b76",
+        "num_nodes": 7,
+        "constants": {
+          "act.fn": "silu",
+          "post_attention_layernorm.norm": "rmsnorm"
+        }
+      },
+      "L27.attention": {
+        "role": "attention",
+        "topology": "1b843e6dbe080a7d",
+        "pattern": "bde81064451b7d17",
+        "exact": "1dcca03ba27f9239",
+        "num_nodes": 13,
+        "constants": {
+          "input_layernorm.norm": "rmsnorm",
+          "pv.causal": true,
+          "qk.causal": true,
+          "rope_k.theta": 10000.0,
+          "rope_q.theta": 10000.0,
+          "softmax.causal": true
+        }
+      },
+      "L27.mlp": {
+        "role": "mlp",
+        "topology": "0c8cab6eb751d660",
+        "pattern": "803150f1f591d287",
+        "exact": "39fd2e0eca539b76",
+        "num_nodes": 7,
+        "constants": {
+          "act.fn": "silu",
+          "post_attention_layernorm.norm": "rmsnorm"
+        }
+      },
+      "L28.attention": {
+        "role": "attention",
+        "topology": "1b843e6dbe080a7d",
+        "pattern": "bde81064451b7d17",
+        "exact": "1dcca03ba27f9239",
+        "num_nodes": 13,
+        "constants": {
+          "input_layernorm.norm": "rmsnorm",
+          "pv.causal": true,
+          "qk.causal": true,
+          "rope_k.theta": 10000.0,
+          "rope_q.theta": 10000.0,
+          "softmax.causal": true
+        }
+      },
+      "L28.mlp": {
+        "role": "mlp",
+        "topology": "0c8cab6eb751d660",
+        "pattern": "803150f1f591d287",
+        "exact": "39fd2e0eca539b76",
+        "num_nodes": 7,
+        "constants": {
+          "act.fn": "silu",
+          "post_attention_layernorm.norm": "rmsnorm"
+        }
+      },
+      "L29.attention": {
+        "role": "attention",
+        "topology": "1b843e6dbe080a7d",
+        "pattern": "bde81064451b7d17",
+        "exact": "1dcca03ba27f9239",
+        "num_nodes": 13,
+        "constants": {
+          "input_layernorm.norm": "rmsnorm",
+          "pv.causal": true,
+          "qk.causal": true,
+          "rope_k.theta": 10000.0,
+          "rope_q.theta": 10000.0,
+          "softmax.causal": true
+        }
+      },
+      "L29.mlp": {
+        "role": "mlp",
+        "topology": "0c8cab6eb751d660",
+        "pattern": "803150f1f591d287",
+        "exact": "39fd2e0eca539b76",
+        "num_nodes": 7,
+        "constants": {
+          "act.fn": "silu",
+          "post_attention_layernorm.norm": "rmsnorm"
+        }
+      },
+      "L3.attention": {
+        "role": "attention",
+        "topology": "1b843e6dbe080a7d",
+        "pattern": "bde81064451b7d17",
+        "exact": "1dcca03ba27f9239",
+        "num_nodes": 13,
+        "constants": {
+          "input_layernorm.norm": "rmsnorm",
+          "pv.causal": true,
+          "qk.causal": true,
+          "rope_k.theta": 10000.0,
+          "rope_q.theta": 10000.0,
+          "softmax.causal": true
+        }
+      },
+      "L3.mlp": {
+        "role": "mlp",
+        "topology": "0c8cab6eb751d660",
+        "pattern": "803150f1f591d287",
+        "exact": "39fd2e0eca539b76",
+        "num_nodes": 7,
+        "constants": {
+          "act.fn": "silu",
+          "post_attention_layernorm.norm": "rmsnorm"
+        }
+      },
+      "L30.attention": {
+        "role": "attention",
+        "topology": "1b843e6dbe080a7d",
+        "pattern": "bde81064451b7d17",
+        "exact": "1dcca03ba27f9239",
+        "num_nodes": 13,
+        "constants": {
+          "input_layernorm.norm": "rmsnorm",
+          "pv.causal": true,
+          "qk.causal": true,
+          "rope_k.theta": 10000.0,
+          "rope_q.theta": 10000.0,
+          "softmax.causal": true
+        }
+      },
+      "L30.mlp": {
+        "role": "mlp",
+        "topology": "0c8cab6eb751d660",
+        "pattern": "803150f1f591d287",
+        "exact": "39fd2e0eca539b76",
+        "num_nodes": 7,
+        "constants": {
+          "act.fn": "silu",
+          "post_attention_layernorm.norm": "rmsnorm"
+        }
+      },
+      "L31.attention": {
+        "role": "attention",
+        "topology": "1b843e6dbe080a7d",
+        "pattern": "bde81064451b7d17",
+        "exact": "1dcca03ba27f9239",
+        "num_nodes": 13,
+        "constants": {
+          "input_layernorm.norm": "rmsnorm",
+          "pv.causal": true,
+          "qk.causal": true,
+          "rope_k.theta": 10000.0,
+          "rope_q.theta": 10000.0,
+          "softmax.causal": true
+        }
+      },
+      "L31.mlp": {
+        "role": "mlp",
+        "topology": "0c8cab6eb751d660",
+        "pattern": "803150f1f591d287",
+        "exact": "39fd2e0eca539b76",
+        "num_nodes": 7,
+        "constants": {
+          "act.fn": "silu",
+          "post_attention_layernorm.norm": "rmsnorm"
+        }
+      },
+      "L4.attention": {
+        "role": "attention",
+        "topology": "1b843e6dbe080a7d",
+        "pattern": "bde81064451b7d17",
+        "exact": "1dcca03ba27f9239",
+        "num_nodes": 13,
+        "constants": {
+          "input_layernorm.norm": "rmsnorm",
+          "pv.causal": true,
+          "qk.causal": true,
+          "rope_k.theta": 10000.0,
+          "rope_q.theta": 10000.0,
+          "softmax.causal": true
+        }
+      },
+      "L4.mlp": {
+        "role": "mlp",
+        "topology": "0c8cab6eb751d660",
+        "pattern": "803150f1f591d287",
+        "exact": "39fd2e0eca539b76",
+        "num_nodes": 7,
+        "constants": {
+          "act.fn": "silu",
+          "post_attention_layernorm.norm": "rmsnorm"
+        }
+      },
+      "L5.attention": {
+        "role": "attention",
+        "topology": "1b843e6dbe080a7d",
+        "pattern": "bde81064451b7d17",
+        "exact": "1dcca03ba27f9239",
+        "num_nodes": 13,
+        "constants": {
+          "input_layernorm.norm": "rmsnorm",
+          "pv.causal": true,
+          "qk.causal": true,
+          "rope_k.theta": 10000.0,
+          "rope_q.theta": 10000.0,
+          "softmax.causal": true
+        }
+      },
+      "L5.mlp": {
+        "role": "mlp",
+        "topology": "0c8cab6eb751d660",
+        "pattern": "803150f1f591d287",
+        "exact": "39fd2e0eca539b76",
+        "num_nodes": 7,
+        "constants": {
+          "act.fn": "silu",
+          "post_attention_layernorm.norm": "rmsnorm"
+        }
+      },
+      "L6.attention": {
+        "role": "attention",
+        "topology": "1b843e6dbe080a7d",
+        "pattern": "bde81064451b7d17",
+        "exact": "1dcca03ba27f9239",
+        "num_nodes": 13,
+        "constants": {
+          "input_layernorm.norm": "rmsnorm",
+          "pv.causal": true,
+          "qk.causal": true,
+          "rope_k.theta": 10000.0,
+          "rope_q.theta": 10000.0,
+          "softmax.causal": true
+        }
+      },
+      "L6.mlp": {
+        "role": "mlp",
+        "topology": "0c8cab6eb751d660",
+        "pattern": "803150f1f591d287",
+        "exact": "39fd2e0eca539b76",
+        "num_nodes": 7,
+        "constants": {
+          "act.fn": "silu",
+          "post_attention_layernorm.norm": "rmsnorm"
+        }
+      },
+      "L7.attention": {
+        "role": "attention",
+        "topology": "1b843e6dbe080a7d",
+        "pattern": "bde81064451b7d17",
+        "exact": "1dcca03ba27f9239",
+        "num_nodes": 13,
+        "constants": {
+          "input_layernorm.norm": "rmsnorm",
+          "pv.causal": true,
+          "qk.causal": true,
+          "rope_k.theta": 10000.0,
+          "rope_q.theta": 10000.0,
+          "softmax.causal": true
+        }
+      },
+      "L7.mlp": {
+        "role": "mlp",
+        "topology": "0c8cab6eb751d660",
+        "pattern": "803150f1f591d287",
+        "exact": "39fd2e0eca539b76",
+        "num_nodes": 7,
+        "constants": {
+          "act.fn": "silu",
+          "post_attention_layernorm.norm": "rmsnorm"
+        }
+      },
+      "L8.attention": {
+        "role": "attention",
+        "topology": "1b843e6dbe080a7d",
+        "pattern": "bde81064451b7d17",
+        "exact": "1dcca03ba27f9239",
+        "num_nodes": 13,
+        "constants": {
+          "input_layernorm.norm": "rmsnorm",
+          "pv.causal": true,
+          "qk.causal": true,
+          "rope_k.theta": 10000.0,
+          "rope_q.theta": 10000.0,
+          "softmax.causal": true
+        }
+      },
+      "L8.mlp": {
+        "role": "mlp",
+        "topology": "0c8cab6eb751d660",
+        "pattern": "803150f1f591d287",
+        "exact": "39fd2e0eca539b76",
+        "num_nodes": 7,
+        "constants": {
+          "act.fn": "silu",
+          "post_attention_layernorm.norm": "rmsnorm"
+        }
+      },
+      "L9.attention": {
+        "role": "attention",
+        "topology": "1b843e6dbe080a7d",
+        "pattern": "bde81064451b7d17",
+        "exact": "1dcca03ba27f9239",
+        "num_nodes": 13,
+        "constants": {
+          "input_layernorm.norm": "rmsnorm",
+          "pv.causal": true,
+          "qk.causal": true,
+          "rope_k.theta": 10000.0,
+          "rope_q.theta": 10000.0,
+          "softmax.causal": true
+        }
+      },
+      "L9.mlp": {
+        "role": "mlp",
+        "topology": "0c8cab6eb751d660",
+        "pattern": "803150f1f591d287",
+        "exact": "39fd2e0eca539b76",
+        "num_nodes": 7,
+        "constants": {
+          "act.fn": "silu",
+          "post_attention_layernorm.norm": "rmsnorm"
+        }
+      },
+      "embedding": {
+        "role": "embedding",
+        "topology": "6ee389465d8b9a6a",
+        "pattern": "67b0f85271c09ca3",
+        "exact": "3bdbad2c7189a826",
+        "num_nodes": 1,
+        "constants": {}
+      },
+      "head": {
+        "role": "head",
+        "topology": "1a12bd5a3fa9c2fb",
+        "pattern": "67762212602e6d73",
+        "exact": "7ca6606a23c52383",
+        "num_nodes": 3,
+        "constants": {
+          "final_norm.norm": "rmsnorm"
+        }
+      }
+    }
+  },
+  "stability": {
+    "family": "phi",
+    "versions": [
+      "phi-3-mini-4k"
+    ],
+    "transitions": 0,
+    "scale_pairs": [],
+    "level_stability": {
+      "topology": null,
+      "pattern": null,
+      "exact": null
+    },
+    "recent_exact_stability": null,
+    "scope_spread": null,
+    "change_rate_per_year": null,
+    "diffs": []
+  },
+  "serving_profile": {
+    "model": "phi-3-mini-4k",
+    "device": "h100-sxm",
+    "request": "prompt=2048 gen=512 B=1 ctx=2304",
+    "total_time_s": 1.6320138448038468,
+    "decode_time_share": 0.9799766797806022,
+    "generated_tokens_per_second": 313.7228287800081,
+    "energy_per_generated_token_j": 3.61465566407727,
+    "hotspots": {
+      "gate_proj": 0.192,
+      "up_proj": 0.192,
+      "down_proj": 0.192,
+      "kv_read": 0.1063,
+      "q_proj": 0.072,
+      "k_proj": 0.072,
+      "v_proj": 0.072,
+      "o_proj": 0.072,
+      "lm_head": 0.0231,
+      "act": 0.001
+    }
+  },
+  "decode_profile": {
+    "model": "phi-3-mini-4k",
+    "device": "h100-sxm",
+    "workload": "decode B=1 T=2304 act=bf16",
+    "weight_precision": "bf16",
+    "total_time_s": 0.003123702165989939,
+    "tokens_per_second": 320.1329534191003,
+    "total_flops": 8366664576.0,
+    "total_bytes": 8362493184.0,
+    "weight_read_bytes_per_step": 7445164032.0,
+    "resident_weight_bytes": 7642159104.0,
+    "kv_bytes": 906362880.0,
+    "mean_arithmetic_intensity": 1.0004988215724924,
+    "device_ridge_point": 92.30410447761194,
+    "memory_bound_share": 0.9988275664709675,
+    "energy_per_token_j": 3.542278256232591,
+    "fits_in_device_memory": true,
+    "memory_headroom": 0.9044730112,
+    "hotspots_by_role": {
+      "gate_proj": 0.1925,
+      "up_proj": 0.1925,
+      "down_proj": 0.1925,
+      "kv_read": 0.1082,
+      "q_proj": 0.0722,
+      "k_proj": 0.0722,
+      "v_proj": 0.0722,
+      "o_proj": 0.0722,
+      "lm_head": 0.0235,
+      "qk": 0.0006
+    },
+    "hotspots_by_block": {
+      "mlp": 0.578,
+      "attention": 0.3985,
+      "head": 0.0236,
+      "embedding": 0.0
+    }
+  },
+  "prefill_profile": {
+    "model": "phi-3-mini-4k",
+    "device": "h100-sxm",
+    "workload": "prefill B=1 S=2048 act=bf16",
+    "weight_precision": "bf16",
+    "total_time_s": 0.032678335816998055,
+    "tokens_per_second": 62671.49011103272,
+    "total_flops": 15687467724672.0,
+    "total_bytes": 31252161792.0,
+    "weight_read_bytes_per_step": 7457740800.0,
+    "resident_weight_bytes": 7642159104.0,
+    "kv_bytes": 1610612736.0,
+    "mean_arithmetic_intensity": 501.96424263641546,
+    "device_ridge_point": 253.1769722814499,
+    "memory_bound_share": 0.19239523755813925,
+    "energy_per_token_j": 0.018094351961169822,
+    "fits_in_device_memory": true,
+    "memory_headroom": 0.9044730112,
+    "hotspots_by_role": {
+      "gate_proj": 0.17,
+      "up_proj": 0.17,
+      "down_proj": 0.17,
+      "q_proj": 0.0638,
+      "k_proj": 0.0638,
+      "v_proj": 0.0638,
+      "o_proj": 0.0638,
+      "act": 0.042,
+      "glu_mul": 0.042,
+      "residual_add": 0.0315
+    },
+    "hotspots_by_block": {
+      "mlp": 0.6204,
+      "attention": 0.3764,
+      "head": 0.0029,
+      "embedding": 0.0003
+    }
+  },
+  "quantization": {
+    "plan": {
+      "name": "sensitivity",
+      "priors_version": "1.0",
+      "weakest_status": "ASSUMPTION",
+      "by_role": {
+        "embed_tokens": "int8",
+        "q_proj": "int8",
+        "k_proj": "int8",
+        "v_proj": "int8",
+        "o_proj": "int8",
+        "gate_proj": "int8",
+        "up_proj": "int8",
+        "down_proj": "int8",
+        "lm_head": "int8"
+      },
+      "tolerance": {
+        "down_proj": 0.66,
+        "embed_tokens": 0.75,
+        "gate_proj": 0.69,
+        "k_proj": 0.6,
+        "lm_head": 0.7,
+        "o_proj": 0.66,
+        "q_proj": 0.637,
+        "up_proj": 0.69,
+        "v_proj": 0.637
+      }
+    },
+    "weight_gb_before": 7.445164032,
+    "weight_gb_after": 3.722781696,
+    "memory_reduction": 0.5,
+    "time_ms_before": 3.1237021659899393,
+    "time_ms_after": 1.7347535331541182,
+    "speedup": 1.801,
+    "quality_delta": "UNMEASURED (G-002)",
+    "findings": [
+      {
+        "name": "quant.sensitivity.memory_reduction",
+        "value": 0.4999731799058904,
+        "unit": "fracao",
+        "status": "CONDITIONAL_RESULT",
+        "assumptions": [
+          "A-004"
+        ],
+        "gaps": [
+          "G-002",
+          "G-003"
+        ],
+        "parents": [],
+        "note": "aritmetica exata sobre bytes de peso; nao depende de prior"
+      },
+      {
+        "name": "quant.sensitivity.speedup",
+        "value": 1.8006605009245567,
+        "unit": "x sobre baseline",
+        "status": "CONDITIONAL_RESULT",
+        "assumptions": [
+          "A-002",
+          "A-004",
+          "A-005"
+        ],
+        "gaps": [
+          "G-002",
+          "G-003"
+        ],
+        "parents": [],
+        "note": ""
+      },
+      {
+        "name": "quant.sensitivity.quality_delta",
+        "value": null,
+        "unit": "perplexidade / acuracia",
+        "status": "OPEN_GAP",
+        "assumptions": [],
+        "gaps": [
+          "G-002"
+        ],
+        "parents": [],
+        "note": "NAO MEDIDO. Sem isto o plano nao e recomendavel, apenas testavel."
+      }
+    ]
+  },
+  "candidates": [
+    {
+      "role": "q_proj",
+      "block": "attention",
+      "instances_per_token": 32,
+      "cost_share": 0.072,
+      "recommended_precision": "int8",
+      "weight_elems": 301989888,
+      "LHS": 0.5051,
+      "scorecard": {
+        "name": "q_proj",
+        "kind": "LHS",
+        "score": 0.5051,
+        "status": "OPEN_GAP",
+        "factors": {
+          "E": {
+            "value": 0.1111,
+            "weight": 0.2,
+            "contribution": 0.0222,
+            "status": "ASSUMPTION",
+            "note": "familia com uma unica versao no corpus: estabilidade temporal nao observada; usando apenas cobertura de corpus (1/9 modelos)"
+          },
+          "F": {
+            "value": 0.072,
+            "weight": 0.15,
+            "contribution": 0.0108,
+            "status": "CONDITIONAL_RESULT",
+            "note": ""
+          },
+          "R": {
+            "value": 1.0,
+            "weight": 0.15,
+            "contribution": 0.15,
+            "status": "MODEL",
+            "note": "32 nos, 0% dinamicos"
+          },
+          "Q": {
+            "value": 0.85,
+            "weight": 0.15,
+            "contribution": 0.1275,
+            "status": "ASSUMPTION",
+            "note": "melhor precisao aceitavel: int8 (camada representativa 16)"
+          },
+          "V": {
+            "value": 0.6305,
+            "weight": 0.15,
+            "contribution": 0.0946,
+            "status": "MODEL",
+            "note": "32 instancias por token"
+          },
+          "M": {
+            "value": 1.0,
+            "weight": 0.1,
+            "contribution": 0.1,
+            "status": "MODEL",
+            "note": "0% com enderecamento dependente de dado"
+          },
+          "L": {
+            "value": 0.0,
+            "weight": 0.1,
+            "contribution": 0.0,
+            "status": "OPEN_GAP",
+            "note": "sem transicao temporal na familia (0 transicao(oes)): vida util nao estimavel"
+          }
+        }
+      }
+    },
+    {
+      "role": "v_proj",
+      "block": "attention",
+      "instances_per_token": 32,
+      "cost_share": 0.072,
+      "recommended_precision": "int8",
+      "weight_elems": 301989888,
+      "LHS": 0.5051,
+      "scorecard": {
+        "name": "v_proj",
+        "kind": "LHS",
+        "score": 0.5051,
+        "status": "OPEN_GAP",
+        "factors": {
+          "E": {
+            "value": 0.1111,
+            "weight": 0.2,
+            "contribution": 0.0222,
+            "status": "ASSUMPTION",
+            "note": "familia com uma unica versao no corpus: estabilidade temporal nao observada; usando apenas cobertura de corpus (1/9 modelos)"
+          },
+          "F": {
+            "value": 0.072,
+            "weight": 0.15,
+            "contribution": 0.0108,
+            "status": "CONDITIONAL_RESULT",
+            "note": ""
+          },
+          "R": {
+            "value": 1.0,
+            "weight": 0.15,
+            "contribution": 0.15,
+            "status": "MODEL",
+            "note": "32 nos, 0% dinamicos"
+          },
+          "Q": {
+            "value": 0.85,
+            "weight": 0.15,
+            "contribution": 0.1275,
+            "status": "ASSUMPTION",
+            "note": "melhor precisao aceitavel: int8 (camada representativa 16)"
+          },
+          "V": {
+            "value": 0.6305,
+            "weight": 0.15,
+            "contribution": 0.0946,
+            "status": "MODEL",
+            "note": "32 instancias por token"
+          },
+          "M": {
+            "value": 1.0,
+            "weight": 0.1,
+            "contribution": 0.1,
+            "status": "MODEL",
+            "note": "0% com enderecamento dependente de dado"
+          },
+          "L": {
+            "value": 0.0,
+            "weight": 0.1,
+            "contribution": 0.0,
+            "status": "OPEN_GAP",
+            "note": "sem transicao temporal na familia (0 transicao(oes)): vida util nao estimavel"
+          }
+        }
+      }
+    },
+    {
+      "role": "gate_proj",
+      "block": "mlp",
+      "instances_per_token": 32,
+      "cost_share": 0.192,
+      "recommended_precision": "int4",
+      "weight_elems": 805306368,
+      "LHS": 0.5036,
+      "scorecard": {
+        "name": "gate_proj",
+        "kind": "LHS",
+        "score": 0.5036,
+        "status": "OPEN_GAP",
+        "factors": {
+          "E": {
+            "value": 0.1111,
+            "weight": 0.2,
+            "contribution": 0.0222,
+            "status": "ASSUMPTION",
+            "note": "familia com uma unica versao no corpus: estabilidade temporal nao observada; usando apenas cobertura de corpus (1/9 modelos)"
+          },
+          "F": {
+            "value": 0.192,
+            "weight": 0.15,
+            "contribution": 0.0288,
+            "status": "CONDITIONAL_RESULT",
+            "note": ""
+          },
+          "R": {
+            "value": 1.0,
+            "weight": 0.15,
+            "contribution": 0.15,
+            "status": "MODEL",
+            "note": "32 nos, 0% dinamicos"
+          },
+          "Q": {
+            "value": 0.72,
+            "weight": 0.15,
+            "contribution": 0.108,
+            "status": "ASSUMPTION",
+            "note": "melhor precisao aceitavel: int4 (camada representativa 16)"
+          },
+          "V": {
+            "value": 0.6305,
+            "weight": 0.15,
+            "contribution": 0.0946,
+            "status": "MODEL",
+            "note": "32 instancias por token"
+          },
+          "M": {
+            "value": 1.0,
+            "weight": 0.1,
+            "contribution": 0.1,
+            "status": "MODEL",
+            "note": "0% com enderecamento dependente de dado"
+          },
+          "L": {
+            "value": 0.0,
+            "weight": 0.1,
+            "contribution": 0.0,
+            "status": "OPEN_GAP",
+            "note": "sem transicao temporal na familia (0 transicao(oes)): vida util nao estimavel"
+          }
+        }
+      }
+    },
+    {
+      "role": "up_proj",
+      "block": "mlp",
+      "instances_per_token": 32,
+      "cost_share": 0.192,
+      "recommended_precision": "int4",
+      "weight_elems": 805306368,
+      "LHS": 0.5036,
+      "scorecard": {
+        "name": "up_proj",
+        "kind": "LHS",
+        "score": 0.5036,
+        "status": "OPEN_GAP",
+        "factors": {
+          "E": {
+            "value": 0.1111,
+            "weight": 0.2,
+            "contribution": 0.0222,
+            "status": "ASSUMPTION",
+            "note": "familia com uma unica versao no corpus: estabilidade temporal nao observada; usando apenas cobertura de corpus (1/9 modelos)"
+          },
+          "F": {
+            "value": 0.192,
+            "weight": 0.15,
+            "contribution": 0.0288,
+            "status": "CONDITIONAL_RESULT",
+            "note": ""
+          },
+          "R": {
+            "value": 1.0,
+            "weight": 0.15,
+            "contribution": 0.15,
+            "status": "MODEL",
+            "note": "32 nos, 0% dinamicos"
+          },
+          "Q": {
+            "value": 0.72,
+            "weight": 0.15,
+            "contribution": 0.108,
+            "status": "ASSUMPTION",
+            "note": "melhor precisao aceitavel: int4 (camada representativa 16)"
+          },
+          "V": {
+            "value": 0.6305,
+            "weight": 0.15,
+            "contribution": 0.0946,
+            "status": "MODEL",
+            "note": "32 instancias por token"
+          },
+          "M": {
+            "value": 1.0,
+            "weight": 0.1,
+            "contribution": 0.1,
+            "status": "MODEL",
+            "note": "0% com enderecamento dependente de dado"
+          },
+          "L": {
+            "value": 0.0,
+            "weight": 0.1,
+            "contribution": 0.0,
+            "status": "OPEN_GAP",
+            "note": "sem transicao temporal na familia (0 transicao(oes)): vida util nao estimavel"
+          }
+        }
+      }
+    },
+    {
+      "role": "k_proj",
+      "block": "attention",
+      "instances_per_token": 32,
+      "cost_share": 0.072,
+      "recommended_precision": "int8",
+      "weight_elems": 301989888,
+      "LHS": 0.4976,
+      "scorecard": {
+        "name": "k_proj",
+        "kind": "LHS",
+        "score": 0.4976,
+        "status": "OPEN_GAP",
+        "factors": {
+          "E": {
+            "value": 0.1111,
+            "weight": 0.2,
+            "contribution": 0.0222,
+            "status": "ASSUMPTION",
+            "note": "familia com uma unica versao no corpus: estabilidade temporal nao observada; usando apenas cobertura de corpus (1/9 modelos)"
+          },
+          "F": {
+            "value": 0.072,
+            "weight": 0.15,
+            "contribution": 0.0108,
+            "status": "CONDITIONAL_RESULT",
+            "note": ""
+          },
+          "R": {
+            "value": 1.0,
+            "weight": 0.15,
+            "contribution": 0.15,
+            "status": "MODEL",
+            "note": "32 nos, 0% dinamicos"
+          },
+          "Q": {
+            "value": 0.8,
+            "weight": 0.15,
+            "contribution": 0.12,
+            "status": "ASSUMPTION",
+            "note": "melhor precisao aceitavel: int8 (camada representativa 16)"
+          },
+          "V": {
+            "value": 0.6305,
+            "weight": 0.15,
+            "contribution": 0.0946,
+            "status": "MODEL",
+            "note": "32 instancias por token"
+          },
+          "M": {
+            "value": 1.0,
+            "weight": 0.1,
+            "contribution": 0.1,
+            "status": "MODEL",
+            "note": "0% com enderecamento dependente de dado"
+          },
+          "L": {
+            "value": 0.0,
+            "weight": 0.1,
+            "contribution": 0.0,
+            "status": "OPEN_GAP",
+            "note": "sem transicao temporal na familia (0 transicao(oes)): vida util nao estimavel"
+          }
+        }
+      }
+    },
+    {
+      "role": "down_proj",
+      "block": "mlp",
+      "instances_per_token": 32,
+      "cost_share": 0.192,
+      "recommended_precision": "int4",
+      "weight_elems": 805306368,
+      "LHS": 0.4886,
+      "scorecard": {
+        "name": "down_proj",
+        "kind": "LHS",
+        "score": 0.4886,
+        "status": "OPEN_GAP",
+        "factors": {
+          "E": {
+            "value": 0.1111,
+            "weight": 0.2,
+            "contribution": 0.0222,
+            "status": "ASSUMPTION",
+            "note": "familia com uma unica versao no corpus: estabilidade temporal nao observada; usando apenas cobertura de corpus (1/9 modelos)"
+          },
+          "F": {
+            "value": 0.192,
+            "weight": 0.15,
+            "contribution": 0.0288,
+            "status": "CONDITIONAL_RESULT",
+            "note": ""
+          },
+          "R": {
+            "value": 1.0,
+            "weight": 0.15,
+            "contribution": 0.15,
+            "status": "MODEL",
+            "note": "32 nos, 0% dinamicos"
+          },
+          "Q": {
+            "value": 0.62,
+            "weight": 0.15,
+            "contribution": 0.093,
+            "status": "ASSUMPTION",
+            "note": "melhor precisao aceitavel: int4 (camada representativa 16)"
+          },
+          "V": {
+            "value": 0.6305,
+            "weight": 0.15,
+            "contribution": 0.0946,
+            "status": "MODEL",
+            "note": "32 instancias por token"
+          },
+          "M": {
+            "value": 1.0,
+            "weight": 0.1,
+            "contribution": 0.1,
+            "status": "MODEL",
+            "note": "0% com enderecamento dependente de dado"
+          },
+          "L": {
+            "value": 0.0,
+            "weight": 0.1,
+            "contribution": 0.0,
+            "status": "OPEN_GAP",
+            "note": "sem transicao temporal na familia (0 transicao(oes)): vida util nao estimavel"
+          }
+        }
+      }
+    },
+    {
+      "role": "o_proj",
+      "block": "attention",
+      "instances_per_token": 32,
+      "cost_share": 0.072,
+      "recommended_precision": "int4",
+      "weight_elems": 301989888,
+      "LHS": 0.4676,
+      "scorecard": {
+        "name": "o_proj",
+        "kind": "LHS",
+        "score": 0.4676,
+        "status": "OPEN_GAP",
+        "factors": {
+          "E": {
+            "value": 0.1111,
+            "weight": 0.2,
+            "contribution": 0.0222,
+            "status": "ASSUMPTION",
+            "note": "familia com uma unica versao no corpus: estabilidade temporal nao observada; usando apenas cobertura de corpus (1/9 modelos)"
+          },
+          "F": {
+            "value": 0.072,
+            "weight": 0.15,
+            "contribution": 0.0108,
+            "status": "CONDITIONAL_RESULT",
+            "note": ""
+          },
+          "R": {
+            "value": 1.0,
+            "weight": 0.15,
+            "contribution": 0.15,
+            "status": "MODEL",
+            "note": "32 nos, 0% dinamicos"
+          },
+          "Q": {
+            "value": 0.6,
+            "weight": 0.15,
+            "contribution": 0.09,
+            "status": "ASSUMPTION",
+            "note": "melhor precisao aceitavel: int4 (camada representativa 16)"
+          },
+          "V": {
+            "value": 0.6305,
+            "weight": 0.15,
+            "contribution": 0.0946,
+            "status": "MODEL",
+            "note": "32 instancias por token"
+          },
+          "M": {
+            "value": 1.0,
+            "weight": 0.1,
+            "contribution": 0.1,
+            "status": "MODEL",
+            "note": "0% com enderecamento dependente de dado"
+          },
+          "L": {
+            "value": 0.0,
+            "weight": 0.1,
+            "contribution": 0.0,
+            "status": "OPEN_GAP",
+            "note": "sem transicao temporal na familia (0 transicao(oes)): vida util nao estimavel"
+          }
+        }
+      }
+    },
+    {
+      "role": "lm_head",
+      "block": "head",
+      "instances_per_token": 1,
+      "cost_share": 0.0231,
+      "recommended_precision": "int8",
+      "weight_elems": 98500608,
+      "LHS": 0.3994,
+      "scorecard": {
+        "name": "lm_head",
+        "kind": "LHS",
+        "score": 0.3994,
+        "status": "OPEN_GAP",
+        "factors": {
+          "E": {
+            "value": 0.1111,
+            "weight": 0.2,
+            "contribution": 0.0222,
+            "status": "ASSUMPTION",
+            "note": "familia com uma unica versao no corpus: estabilidade temporal nao observada; usando apenas cobertura de corpus (1/9 modelos)"
+          },
+          "F": {
+            "value": 0.0231,
+            "weight": 0.15,
+            "contribution": 0.0035,
+            "status": "CONDITIONAL_RESULT",
+            "note": ""
+          },
+          "R": {
+            "value": 1.0,
+            "weight": 0.15,
+            "contribution": 0.15,
+            "status": "MODEL",
+            "note": "1 nos, 0% dinamicos"
+          },
+          "Q": {
+            "value": 0.7,
+            "weight": 0.15,
+            "contribution": 0.105,
+            "status": "ASSUMPTION",
+            "note": "melhor precisao aceitavel: int8 (sem indice de camada)"
+          },
+          "V": {
+            "value": 0.125,
+            "weight": 0.15,
+            "contribution": 0.0187,
+            "status": "MODEL",
+            "note": "1 instancias por token"
+          },
+          "M": {
+            "value": 1.0,
+            "weight": 0.1,
+            "contribution": 0.1,
+            "status": "MODEL",
+            "note": "0% com enderecamento dependente de dado"
+          },
+          "L": {
+            "value": 0.0,
+            "weight": 0.1,
+            "contribution": 0.0,
+            "status": "OPEN_GAP",
+            "note": "sem transicao temporal na familia (0 transicao(oes)): vida util nao estimavel"
+          }
+        }
+      }
+    },
+    {
+      "role": "kv_read",
+      "block": "attention",
+      "instances_per_token": 32,
+      "cost_share": 0.1063,
+      "recommended_precision": "bf16",
+      "weight_elems": 0,
+      "LHS": 0.3827,
+      "scorecard": {
+        "name": "kv_read",
+        "kind": "LHS",
+        "score": 0.3827,
+        "status": "OPEN_GAP",
+        "factors": {
+          "E": {
+            "value": 0.1111,
+            "weight": 0.2,
+            "contribution": 0.0222,
+            "status": "ASSUMPTION",
+            "note": "familia com uma unica versao no corpus: estabilidade temporal nao observada; usando apenas cobertura de corpus (1/9 modelos)"
+          },
+          "F": {
+            "value": 0.1063,
+            "weight": 0.15,
+            "contribution": 0.0159,
+            "status": "CONDITIONAL_RESULT",
+            "note": ""
+          },
+          "R": {
+            "value": 1.0,
+            "weight": 0.15,
+            "contribution": 0.15,
+            "status": "MODEL",
+            "note": "32 nos, 0% dinamicos"
+          },
+          "Q": {
+            "value": 0.0,
+            "weight": 0.15,
+            "contribution": 0.0,
+            "status": "MODEL",
+            "note": "papel sem pesos: quantizacao de peso nao se aplica"
+          },
+          "V": {
+            "value": 0.6305,
+            "weight": 0.15,
+            "contribution": 0.0946,
+            "status": "MODEL",
+            "note": "32 instancias por token"
+          },
+          "M": {
+            "value": 1.0,
+            "weight": 0.1,
+            "contribution": 0.1,
+            "status": "MODEL",
+            "note": "0% com enderecamento dependente de dado"
+          },
+          "L": {
+            "value": 0.0,
+            "weight": 0.1,
+            "contribution": 0.0,
+            "status": "OPEN_GAP",
+            "note": "sem transicao temporal na familia (0 transicao(oes)): vida util nao estimavel"
+          }
+        }
+      }
+    }
+  ],
+  "partition": {
+    "model": "phi-3-mini-4k",
+    "phase": "serving",
+    "policy_version": "1.0",
+    "level": 3,
+    "level_label": "acelerador por arquitetura",
+    "hardened_share": 0,
+    "amdahl_ceiling": 1.0,
+    "uncovered_share": 0.0064,
+    "blocked_by": {
+      "estabilidade": 0.9936
+    },
+    "regions": {
+      "reconfigurable": {
+        "target": "FPGA/eFPGA",
+        "share": 0.8873,
+        "roles": [
+          {
+            "role": "gate_proj",
+            "share": 0.192,
+            "precision": "int4",
+            "reason": "regular e quantizavel, porem LHS=0.50 < 0.55; E=0.11 < 0.6: prototipar antes de fixar"
+          },
+          {
+            "role": "up_proj",
+            "share": 0.192,
+            "precision": "int4",
+            "reason": "regular e quantizavel, porem LHS=0.50 < 0.55; E=0.11 < 0.6: prototipar antes de fixar"
+          },
+          {
+            "role": "down_proj",
+            "share": 0.192,
+            "precision": "int4",
+            "reason": "regular e quantizavel, porem LHS=0.49 < 0.55; E=0.11 < 0.6: prototipar antes de fixar"
+          },
+          {
+            "role": "q_proj",
+            "share": 0.072,
+            "precision": "int8",
+            "reason": "regular e quantizavel, porem LHS=0.51 < 0.55; E=0.11 < 0.6: prototipar antes de fixar"
+          },
+          {
+            "role": "v_proj",
+            "share": 0.072,
+            "precision": "int8",
+            "reason": "regular e quantizavel, porem LHS=0.51 < 0.55; E=0.11 < 0.6: prototipar antes de fixar"
+          },
+          {
+            "role": "k_proj",
+            "share": 0.072,
+            "precision": "int8",
+            "reason": "regular e quantizavel, porem LHS=0.50 < 0.55; E=0.11 < 0.6: prototipar antes de fixar"
+          },
+          {
+            "role": "o_proj",
+            "share": 0.072,
+            "precision": "int4",
+            "reason": "regular e quantizavel, porem LHS=0.47 < 0.55; E=0.11 < 0.6: prototipar antes de fixar"
+          },
+          {
+            "role": "lm_head",
+            "share": 0.0231,
+            "precision": "int8",
+            "reason": "regular e quantizavel, porem LHS=0.40 < 0.55; E=0.11 < 0.6: prototipar antes de fixar"
+          }
+        ]
+      },
+      "programmable": {
+        "target": "CPU/GPU",
+        "share": 0.1063,
+        "roles": [
+          {
+            "role": "kv_read",
+            "share": 0.1063,
+            "precision": "bf16",
+            "reason": "LHS=0.38 < 0.55; E=0.11 < 0.6; Q=0.00 < 0.6"
+          }
+        ]
+      }
+    }
+  },
+  "economics": {
+    "samples": 0,
+    "tech_node": "6nm",
+    "design_point": {
+      "model": "phi-3-mini-4k",
+      "hardened_roles": [],
+      "hardened_weight_gbit": 0.0,
+      "hardened_precision": "int8",
+      "hardened_flops_per_token": 0.0,
+      "total_flops_per_token": 8366664576.0,
+      "hardened_cost_share": 0,
+      "kv_bytes_at_context_gb": 0.90636288,
+      "batch": 1,
+      "target_tokens_per_second": 1000.0,
+      "is_empty": true
+    },
+    "annual_tokens": 10000000000000.0,
+    "obsolescence_rate_per_year": null,
+    "not_applicable": true,
+    "reason": "regiao fixa vazia (nenhum FLOP endurecido e nenhum peso a fixar): nao ha ponto de projeto a simular",
+    "percentiles": null,
+    "prob_asic_cheaper_per_token": null,
+    "prob_breakeven_within_life": null,
+    "prob_breakeven_before_obsolescence": null,
+    "prob_exceeds_reticle": null,
+    "sensitivity_breakeven": []
+  },
+  "srs": {
+    "name": "phi-3-mini-4k",
+    "kind": "SRS",
+    "score": 0.1856,
+    "status": "OPEN_GAP",
+    "factors": {
+      "A": {
+        "value": 0.0,
+        "weight": 0.15,
+        "contribution": 0.0,
+        "status": "OPEN_GAP",
+        "note": "familia phi sem transicao temporal no corpus (1 versao(oes)): estabilidade nao observada"
+      },
+      "H": {
+        "value": 0.1443,
+        "weight": 0.15,
+        "contribution": 0.0216,
+        "status": "CONDITIONAL_RESULT",
+        "note": "indice de Herfindahl das participacoes por papel em decode"
+      },
+      "T": {
+        "value": 0.6667,
+        "weight": 0.15,
+        "contribution": 0.1,
+        "status": "ASSUMPTION",
+        "note": "1e+13 tokens/ano declarados pelo caso"
+      },
+      "P": {
+        "value": 0.0,
+        "weight": 0.15,
+        "contribution": 0.0,
+        "status": "CONDITIONAL_RESULT",
+        "note": "regiao fixa vazia: sem ponto de projeto nao ha ganho, receita nem NRE"
+      },
+      "Q": {
+        "value": 0.6392,
+        "weight": 0.1,
+        "contribution": 0.0639,
+        "status": "ASSUMPTION",
+        "note": "media dos priors ponderada por custo; nao medido"
+      },
+      "D": {
+        "value": 0.5,
+        "weight": 0.1,
+        "contribution": 0.05,
+        "status": "ASSUMPTION",
+        "note": "licenca permissiva=sim; duas ou mais versoes no corpus=nao; contagem de parametros publicada=sim; proveniencia verificada=nao"
+      },
+      "C": {
+        "value": 1.0,
+        "weight": 0.1,
+        "contribution": 0.1,
+        "status": "MODEL",
+        "note": "media de regularidade e previsibilidade de memoria ponderada por custo"
+      },
+      "R": {
+        "value": 0.0,
+        "weight": 0.1,
+        "contribution": 0.0,
+        "status": "CONDITIONAL_RESULT",
+        "note": "regiao fixa vazia: sem ponto de projeto nao ha ganho, receita nem NRE"
+      },
+      "O": {
+        "value": 1.0,
+        "weight": -0.15,
+        "contribution": -0.15,
+        "status": "OPEN_GAP",
+        "note": "taxa de mudanca estrutural nao estimada: risco tratado como maximo"
+      },
+      "N": {
+        "value": 0.0,
+        "weight": -0.1,
+        "contribution": -0.0,
+        "status": "CONDITIONAL_RESULT",
+        "note": "regiao fixa vazia: sem ponto de projeto nao ha ganho, receita nem NRE"
+      }
+    }
+  },
+  "recommendation": "software",
+  "verdict": "manter em software; nenhuma especializacao se justifica com a evidencia atual",
+  "sensitivity": {
+    "perturbation": 0.2,
+    "samples": 2000,
+    "top1_stability": 0.6815,
+    "top3_stability": 0.6815,
+    "band_stability": 1.0,
+    "threshold": 0.95,
+    "decidable": false,
+    "discriminates": false,
+    "score_spread": 0.12236,
+    "noise_band": 0.02636,
+    "margin": 0.0015,
+    "inert_weight": 0.55,
+    "contenders": [
+      "q_proj",
+      "v_proj",
+      "gate_proj",
+      "up_proj",
+      "k_proj",
+      "down_proj"
+    ],
+    "contender_inert_weight": 0.7,
+    "varying_factors": [
+      "F",
+      "Q",
+      "V"
+    ],
+    "diagnosis": "score NAO discrimina: entre os 6 candidatos que disputam a primeira posicao, 70% do peso esta em fatores identicos; a margem (0.0015) e menor que o ruido (0.0264)",
+    "winners": {
+      "q_proj": 1363,
+      "up_proj": 637
+    },
+    "dominant_factor": "R"
+  },
+  "falsifiers": {
+    "F1": {
+      "criterio": "nenhum padrao com cobertura >= 0.80 entre versoes da familia",
+      "observado": "familia sem transicao temporal no corpus (1 versao(oes)): nao avaliavel",
+      "disparado": null
+    },
+    "F2": {
+      "criterio": "o padrao mais custoso muda de identidade entre versoes",
+      "observado": "bloco mais custoso 'mlp' (papel gate_proj, 19.2% do custo): E = 0.11",
+      "disparado": true
+    },
+    "F3": {
+      "criterio": "top-1 do ranking troca sob perturbacao de +-20% dos pesos, ou vence por margem menor que o ruido (criterio reforcado apos CE-001)",
+      "observado": "estabilidade do top-1 = 0.681 (limite 0.95); margem = 0.0015 contra ruido 0.0264",
+      "disparado": true
+    },
+    "F4": {
+      "criterio": "break-even P50 posterior a vida economica",
+      "observado": "nao avaliavel: regiao fixa vazia (nenhum FLOP endurecido e nenhum peso a fixar): nao ha ponto de projeto a simular",
+      "disparado": null
+    },
+    "F5": {
+      "criterio": "erro de contagem de parametros acima de 5%",
+      "observado": "erro = 0.0000%",
+      "disparado": false
+    }
+  },
+  "findings": {
+    "title": "Silicon Readiness Assessment — phi-3-mini-4k",
+    "weakest_status": "OPEN_GAP",
+    "open_gaps": [
+      "G-001",
+      "G-002",
+      "G-003",
+      "G-004",
+      "G-006",
+      "G-008",
+      "G-009"
+    ],
+    "assumptions": [
+      "A-001",
+      "A-002",
+      "A-003",
+      "A-004",
+      "A-005",
+      "A-007",
+      "A-009"
+    ],
+    "declared_absences": [
+      "quant.sensitivity.quality_delta",
+      "economics.breakeven_years.p50",
+      "economics.p_breakeven_before_obsolescence",
+      "economics.die_area_mm2.p50",
+      "stability.phi.exact"
+    ],
+    "evidence_debt": 0.4,
+    "status_histogram": {
+      "OPEN_GAP": 10,
+      "CONDITIONAL_RESULT": 9,
+      "ASSUMPTION": 1
+    },
+    "findings": [
+      {
+        "name": "phi-3-mini-4k.params",
+        "value": 3821079552,
+        "unit": "params",
+        "status": "ASSUMPTION",
+        "assumptions": [
+          "A-001",
+          "A-009"
+        ],
+        "gaps": [
+          "G-001",
+          "G-008"
+        ],
+        "parents": [],
+        "note": "derivado analiticamente do config; ver ADR-0001"
+      },
+      {
+        "name": "phi-3-mini-4k.serving.decode_time_share",
+        "value": 0.9799766797806022,
+        "unit": "fracao do tempo de requisicao",
+        "status": "CONDITIONAL_RESULT",
+        "assumptions": [
+          "A-002",
+          "A-005"
+        ],
+        "gaps": [
+          "G-003",
+          "G-009"
+        ],
+        "parents": [],
+        "note": "mistura prefill/decode assumida; telemetria real fecharia G-009"
+      },
+      {
+        "name": "phi-3-mini-4k.serving.energy_per_token",
+        "value": 3.61465566407727,
+        "unit": "J/token gerado",
+        "status": "CONDITIONAL_RESULT",
+        "assumptions": [
+          "A-002",
+          "A-003",
+          "A-005"
+        ],
+        "gaps": [
+          "G-003",
+          "G-004",
+          "G-009"
+        ],
+        "parents": [],
+        "note": ""
+      },
+      {
+        "name": "phi-3-mini-4k.decode.tokens_per_s",
+        "value": 320.1329534191003,
+        "unit": "tok/s",
+        "status": "CONDITIONAL_RESULT",
+        "assumptions": [
+          "A-002",
+          "A-005"
+        ],
+        "gaps": [
+          "G-003"
+        ],
+        "parents": [],
+        "note": ""
+      },
+      {
+        "name": "phi-3-mini-4k.decode.memory_bound_share",
+        "value": 0.9988275664709675,
+        "unit": "fracao do tempo",
+        "status": "CONDITIONAL_RESULT",
+        "assumptions": [
+          "A-002",
+          "A-005"
+        ],
+        "gaps": [
+          "G-003"
+        ],
+        "parents": [],
+        "note": ""
+      },
+      {
+        "name": "phi-3-mini-4k.decode.arith_intensity",
+        "value": 1.0004988215724924,
+        "unit": "FLOP/byte",
+        "status": "CONDITIONAL_RESULT",
+        "assumptions": [
+          "A-002",
+          "A-005"
+        ],
+        "gaps": [
+          "G-003"
+        ],
+        "parents": [],
+        "note": ""
+      },
+      {
+        "name": "phi-3-mini-4k.decode.energy_per_token",
+        "value": 3.542278256232591,
+        "unit": "J/token",
+        "status": "CONDITIONAL_RESULT",
+        "assumptions": [
+          "A-002",
+          "A-003",
+          "A-005"
+        ],
+        "gaps": [
+          "G-003",
+          "G-004"
+        ],
+        "parents": [],
+        "note": "tempo roofline x potencia de parede (TDP x overhead x PUE)"
+      },
+      {
+        "name": "quant.sensitivity.memory_reduction",
+        "value": 0.4999731799058904,
+        "unit": "fracao",
+        "status": "CONDITIONAL_RESULT",
+        "assumptions": [
+          "A-004"
+        ],
+        "gaps": [
+          "G-002",
+          "G-003"
+        ],
+        "parents": [],
+        "note": "aritmetica exata sobre bytes de peso; nao depende de prior"
+      },
+      {
+        "name": "quant.sensitivity.speedup",
+        "value": 1.8006605009245567,
+        "unit": "x sobre baseline",
+        "status": "CONDITIONAL_RESULT",
+        "assumptions": [
+          "A-002",
+          "A-004",
+          "A-005"
+        ],
+        "gaps": [
+          "G-002",
+          "G-003"
+        ],
+        "parents": [],
+        "note": ""
+      },
+      {
+        "name": "quant.sensitivity.quality_delta",
+        "value": null,
+        "unit": "perplexidade / acuracia",
+        "status": "OPEN_GAP",
+        "assumptions": [],
+        "gaps": [
+          "G-002"
+        ],
+        "parents": [],
+        "note": "NAO MEDIDO. Sem isto o plano nao e recomendavel, apenas testavel."
+      },
+      {
+        "name": "quant.reachable_cost_share.int4",
+        "value": 0.6496278711055055,
+        "unit": "fracao do tempo",
+        "status": "CONDITIONAL_RESULT",
+        "assumptions": [
+          "A-002",
+          "A-004"
+        ],
+        "gaps": [
+          "G-002",
+          "G-003"
+        ],
+        "parents": [],
+        "note": "papeis alcancados: down_proj, gate_proj, o_proj, up_proj"
+      },
+      {
+        "name": "phi-3-mini-4k.partition.hardened_share",
+        "value": 0,
+        "unit": "fracao do tempo",
+        "status": "OPEN_GAP",
+        "assumptions": [
+          "A-002",
+          "A-004",
+          "A-005",
+          "A-007"
+        ],
+        "gaps": [
+          "G-001",
+          "G-002",
+          "G-003",
+          "G-006"
+        ],
+        "parents": [
+          "LHS.q_proj",
+          "LHS.v_proj",
+          "LHS.gate_proj",
+          "LHS.up_proj",
+          "LHS.k_proj",
+          "LHS.down_proj",
+          "LHS.o_proj",
+          "LHS.lm_head",
+          "LHS.kv_read"
+        ],
+        "note": "regiao fixa sob politica v1.0"
+      },
+      {
+        "name": "phi-3-mini-4k.partition.amdahl_ceiling",
+        "value": 1.0,
+        "unit": "x sobre baseline",
+        "status": "OPEN_GAP",
+        "assumptions": [
+          "A-002",
+          "A-004",
+          "A-005",
+          "A-007"
+        ],
+        "gaps": [
+          "G-001",
+          "G-002",
+          "G-003",
+          "G-006"
+        ],
+        "parents": [
+          "LHS.q_proj",
+          "LHS.v_proj",
+          "LHS.gate_proj",
+          "LHS.up_proj",
+          "LHS.k_proj",
+          "LHS.down_proj",
+          "LHS.o_proj",
+          "LHS.lm_head",
+          "LHS.kv_read"
+        ],
+        "note": "teto com aceleracao infinita na regiao fixa; o resto permanece no host"
+      },
+      {
+        "name": "partition.claim_check",
+        "value": 1.0,
+        "unit": "x (teto do sistema)",
+        "status": "OPEN_GAP",
+        "assumptions": [
+          "A-002",
+          "A-004",
+          "A-005",
+          "A-007"
+        ],
+        "gaps": [
+          "G-001",
+          "G-002",
+          "G-003",
+          "G-006"
+        ],
+        "parents": [
+          "LHS.q_proj",
+          "LHS.v_proj",
+          "LHS.gate_proj",
+          "LHS.up_proj",
+          "LHS.k_proj",
+          "LHS.down_proj",
+          "LHS.o_proj",
+          "LHS.lm_head",
+          "LHS.kv_read"
+        ],
+        "note": "IMPOSSIVEL nesta particao: teto e 1.00x mesmo com aceleracao infinita na regiao fixa (0.0% do custo). Alcancar 100x exigiria mover tambem a regiao programavel para o mesmo silicio."
+      },
+      {
+        "name": "economics.breakeven_years.p50",
+        "value": null,
+        "unit": "anos",
+        "status": "OPEN_GAP",
+        "assumptions": [],
+        "gaps": [
+          "G-001"
+        ],
+        "parents": [],
+        "note": "regiao fixa vazia (nenhum FLOP endurecido e nenhum peso a fixar): nao ha ponto de projeto a simular"
+      },
+      {
+        "name": "economics.p_breakeven_before_obsolescence",
+        "value": null,
+        "unit": "probabilidade",
+        "status": "OPEN_GAP",
+        "assumptions": [],
+        "gaps": [
+          "G-001"
+        ],
+        "parents": [],
+        "note": "regiao fixa vazia (nenhum FLOP endurecido e nenhum peso a fixar): nao ha ponto de projeto a simular"
+      },
+      {
+        "name": "economics.die_area_mm2.p50",
+        "value": null,
+        "unit": "mm2",
+        "status": "OPEN_GAP",
+        "assumptions": [],
+        "gaps": [
+          "G-001"
+        ],
+        "parents": [],
+        "note": "regiao fixa vazia (nenhum FLOP endurecido e nenhum peso a fixar): nao ha ponto de projeto a simular"
+      },
+      {
+        "name": "SRS.phi-3-mini-4k",
+        "value": 0.18555370126081383,
+        "unit": "score SRS",
+        "status": "OPEN_GAP",
+        "assumptions": [
+          "A-002",
+          "A-004",
+          "A-007",
+          "A-009"
+        ],
+        "gaps": [
+          "G-001",
+          "G-002",
+          "G-003",
+          "G-006",
+          "G-008",
+          "G-009"
+        ],
+        "parents": [
+          "A.arch_stability",
+          "H.concentration",
+          "T.throughput",
+          "P.perf_per_watt",
+          "Q.low_precision",
+          "D.data_availability",
+          "C.codesign",
+          "R.revenue_potential",
+          "O.obsolescence_risk",
+          "N.nre_risk"
+        ],
+        "note": "pesos v1.0"
+      },
+      {
+        "name": "readiness.rank_stability",
+        "value": 0.6815,
+        "unit": "fracao das amostras com mesmo top-1",
+        "status": "OPEN_GAP",
+        "assumptions": [
+          "A-002",
+          "A-004",
+          "A-005",
+          "A-007"
+        ],
+        "gaps": [
+          "G-001",
+          "G-002",
+          "G-003",
+          "G-006"
+        ],
+        "parents": [
+          "E.q_proj",
+          "F.q_proj",
+          "R.q_proj",
+          "Q.q_proj",
+          "V.q_proj",
+          "M.q_proj",
+          "L.q_proj",
+          "E.v_proj",
+          "F.v_proj",
+          "R.v_proj",
+          "Q.v_proj",
+          "V.v_proj",
+          "M.v_proj",
+          "L.v_proj",
+          "E.gate_proj",
+          "F.gate_proj",
+          "R.gate_proj",
+          "Q.gate_proj",
+          "V.gate_proj",
+          "M.gate_proj",
+          "L.gate_proj",
+          "E.up_proj",
+          "F.up_proj",
+          "R.up_proj",
+          "Q.up_proj",
+          "V.up_proj",
+          "M.up_proj",
+          "L.up_proj",
+          "E.k_proj",
+          "F.k_proj",
+          "R.k_proj",
+          "Q.k_proj",
+          "V.k_proj",
+          "M.k_proj",
+          "L.k_proj",
+          "E.down_proj",
+          "F.down_proj",
+          "R.down_proj",
+          "Q.down_proj",
+          "V.down_proj",
+          "M.down_proj",
+          "L.down_proj",
+          "E.o_proj",
+          "F.o_proj",
+          "R.o_proj",
+          "Q.o_proj",
+          "V.o_proj",
+          "M.o_proj",
+          "L.o_proj",
+          "E.lm_head",
+          "F.lm_head",
+          "R.lm_head",
+          "Q.lm_head",
+          "V.lm_head",
+          "M.lm_head",
+          "L.lm_head",
+          "E.kv_read",
+          "F.kv_read",
+          "R.kv_read",
+          "Q.kv_read",
+          "V.kv_read",
+          "M.kv_read",
+          "L.kv_read"
+        ],
+        "note": "perturbacao +-20%, 2000 amostras; NAO DECIDIVEL — F3 disparado; score NAO discrimina: entre os 6 candidatos que disputam a primeira posicao, 70% do peso esta em fatores identicos; a margem (0.0015) e menor que o ruido (0.0264)"
+      },
+      {
+        "name": "stability.phi.exact",
+        "value": null,
+        "unit": "fracao de blocos preservados",
+        "status": "OPEN_GAP",
+        "assumptions": [],
+        "gaps": [
+          "G-006"
+        ],
+        "parents": [],
+        "note": "1 versao(oes) sem transicao temporal: estabilidade estrutural nao observada"
+      }
+    ]
+  }
+}

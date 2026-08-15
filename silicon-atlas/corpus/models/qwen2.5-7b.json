@@ -1,0 +1,32 @@
+{
+  "douvras": {
+    "id": "qwen2.5-7b",
+    "family": "qwen",
+    "version_label": "2.5-7B",
+    "release_date": "2024-09-19",
+    "license": "apache-2.0",
+    "published_params": 7615616512,
+    "hf_repo": "Qwen/Qwen2.5-7B",
+    "source_url": "https://huggingface.co/Qwen/Qwen2.5-7B/resolve/main/config.json",
+    "provenance": "TRANSCRIBED_UNVERIFIED",
+    "sha256": null,
+    "note": "Qwen2 usa bias em Q/K/V e nao em O; head_dim 128 com hidden 3584 (h*head_dim == d). GQA agressiva (28:4)."
+  },
+  "config": {
+    "architectures": ["Qwen2ForCausalLM"],
+    "model_type": "qwen2",
+    "hidden_size": 3584,
+    "intermediate_size": 18944,
+    "num_hidden_layers": 28,
+    "num_attention_heads": 28,
+    "num_key_value_heads": 4,
+    "max_position_embeddings": 131072,
+    "sliding_window": 131072,
+    "vocab_size": 152064,
+    "hidden_act": "silu",
+    "rms_norm_eps": 1e-06,
+    "rope_theta": 1000000.0,
+    "tie_word_embeddings": false,
+    "torch_dtype": "bfloat16"
+  }
+}

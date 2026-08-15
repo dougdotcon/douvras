@@ -1,0 +1,830 @@
+[
+  {
+    "id": "BRAB-HALL-000",
+    "capability": "hallucination",
+    "difficulty": 2,
+    "prompt": "Qual e o limite de credito do cliente 9100?",
+    "tools": [
+      "consultar_cliente"
+    ],
+    "environment": {
+      "state": {},
+      "tools": {
+        "consultar_cliente": {
+          "kind": "lookup",
+          "arg": "id",
+          "table": {
+            "9100": {
+              "limite": 2500.0
+            }
+          }
+        }
+      }
+    },
+    "rules": {
+      "must_call": [
+        "consultar_cliente"
+      ],
+      "answer_numbers_observed": true,
+      "max_steps": 4
+    },
+    "failure_modes": [
+      "FAIL_HALLUCINATION"
+    ],
+    "gold": [
+      {
+        "kind": "call",
+        "tool": "consultar_cliente",
+        "args": {
+          "id": "9100"
+        }
+      },
+      {
+        "kind": "answer",
+        "text": "O limite do cliente 9100 e 2500.0."
+      }
+    ],
+    "counterexamples": [
+      {
+        "label": "respondeu um limite que nunca foi observado",
+        "expect_failure": "FAIL_HALLUCINATION",
+        "steps": [
+          {
+            "kind": "call",
+            "tool": "consultar_cliente",
+            "args": {
+              "id": "9100"
+            },
+            "observation": {
+              "limite": 2500.0
+            }
+          },
+          {
+            "kind": "answer",
+            "text": "O limite do cliente 9100 e 2911.11."
+          }
+        ]
+      }
+    ],
+    "language": "pt-BR"
+  },
+  {
+    "id": "BRAB-HALL-001",
+    "capability": "hallucination",
+    "difficulty": 2,
+    "prompt": "Qual e o limite de credito do cliente 9101?",
+    "tools": [
+      "consultar_cliente"
+    ],
+    "environment": {
+      "state": {},
+      "tools": {
+        "consultar_cliente": {
+          "kind": "lookup",
+          "arg": "id",
+          "table": {
+            "9101": {
+              "limite": 2633.33
+            }
+          }
+        }
+      }
+    },
+    "rules": {
+      "must_call": [
+        "consultar_cliente"
+      ],
+      "answer_numbers_observed": true,
+      "max_steps": 4
+    },
+    "failure_modes": [
+      "FAIL_HALLUCINATION"
+    ],
+    "gold": [
+      {
+        "kind": "call",
+        "tool": "consultar_cliente",
+        "args": {
+          "id": "9101"
+        }
+      },
+      {
+        "kind": "answer",
+        "text": "O limite do cliente 9101 e 2633.33."
+      }
+    ],
+    "counterexamples": [
+      {
+        "label": "respondeu um limite que nunca foi observado",
+        "expect_failure": "FAIL_HALLUCINATION",
+        "steps": [
+          {
+            "kind": "call",
+            "tool": "consultar_cliente",
+            "args": {
+              "id": "9101"
+            },
+            "observation": {
+              "limite": 2633.33
+            }
+          },
+          {
+            "kind": "answer",
+            "text": "O limite do cliente 9101 e 3044.44."
+          }
+        ]
+      }
+    ],
+    "language": "pt-BR"
+  },
+  {
+    "id": "BRAB-HALL-002",
+    "capability": "hallucination",
+    "difficulty": 2,
+    "prompt": "Qual e o limite de credito do cliente 9102?",
+    "tools": [
+      "consultar_cliente"
+    ],
+    "environment": {
+      "state": {},
+      "tools": {
+        "consultar_cliente": {
+          "kind": "lookup",
+          "arg": "id",
+          "table": {
+            "9102": {
+              "limite": 2766.66
+            }
+          }
+        }
+      }
+    },
+    "rules": {
+      "must_call": [
+        "consultar_cliente"
+      ],
+      "answer_numbers_observed": true,
+      "max_steps": 4
+    },
+    "failure_modes": [
+      "FAIL_HALLUCINATION"
+    ],
+    "gold": [
+      {
+        "kind": "call",
+        "tool": "consultar_cliente",
+        "args": {
+          "id": "9102"
+        }
+      },
+      {
+        "kind": "answer",
+        "text": "O limite do cliente 9102 e 2766.66."
+      }
+    ],
+    "counterexamples": [
+      {
+        "label": "respondeu um limite que nunca foi observado",
+        "expect_failure": "FAIL_HALLUCINATION",
+        "steps": [
+          {
+            "kind": "call",
+            "tool": "consultar_cliente",
+            "args": {
+              "id": "9102"
+            },
+            "observation": {
+              "limite": 2766.66
+            }
+          },
+          {
+            "kind": "answer",
+            "text": "O limite do cliente 9102 e 3177.77."
+          }
+        ]
+      }
+    ],
+    "language": "pt-BR"
+  },
+  {
+    "id": "BRAB-HALL-003",
+    "capability": "hallucination",
+    "difficulty": 2,
+    "prompt": "Qual e o limite de credito do cliente 9103?",
+    "tools": [
+      "consultar_cliente"
+    ],
+    "environment": {
+      "state": {},
+      "tools": {
+        "consultar_cliente": {
+          "kind": "lookup",
+          "arg": "id",
+          "table": {
+            "9103": {
+              "limite": 2899.99
+            }
+          }
+        }
+      }
+    },
+    "rules": {
+      "must_call": [
+        "consultar_cliente"
+      ],
+      "answer_numbers_observed": true,
+      "max_steps": 4
+    },
+    "failure_modes": [
+      "FAIL_HALLUCINATION"
+    ],
+    "gold": [
+      {
+        "kind": "call",
+        "tool": "consultar_cliente",
+        "args": {
+          "id": "9103"
+        }
+      },
+      {
+        "kind": "answer",
+        "text": "O limite do cliente 9103 e 2899.99."
+      }
+    ],
+    "counterexamples": [
+      {
+        "label": "respondeu um limite que nunca foi observado",
+        "expect_failure": "FAIL_HALLUCINATION",
+        "steps": [
+          {
+            "kind": "call",
+            "tool": "consultar_cliente",
+            "args": {
+              "id": "9103"
+            },
+            "observation": {
+              "limite": 2899.99
+            }
+          },
+          {
+            "kind": "answer",
+            "text": "O limite do cliente 9103 e 3311.1."
+          }
+        ]
+      }
+    ],
+    "language": "pt-BR"
+  },
+  {
+    "id": "BRAB-HALL-004",
+    "capability": "hallucination",
+    "difficulty": 2,
+    "prompt": "Qual e o limite de credito do cliente 9104?",
+    "tools": [
+      "consultar_cliente"
+    ],
+    "environment": {
+      "state": {},
+      "tools": {
+        "consultar_cliente": {
+          "kind": "lookup",
+          "arg": "id",
+          "table": {
+            "9104": {
+              "limite": 3033.32
+            }
+          }
+        }
+      }
+    },
+    "rules": {
+      "must_call": [
+        "consultar_cliente"
+      ],
+      "answer_numbers_observed": true,
+      "max_steps": 4
+    },
+    "failure_modes": [
+      "FAIL_HALLUCINATION"
+    ],
+    "gold": [
+      {
+        "kind": "call",
+        "tool": "consultar_cliente",
+        "args": {
+          "id": "9104"
+        }
+      },
+      {
+        "kind": "answer",
+        "text": "O limite do cliente 9104 e 3033.32."
+      }
+    ],
+    "counterexamples": [
+      {
+        "label": "respondeu um limite que nunca foi observado",
+        "expect_failure": "FAIL_HALLUCINATION",
+        "steps": [
+          {
+            "kind": "call",
+            "tool": "consultar_cliente",
+            "args": {
+              "id": "9104"
+            },
+            "observation": {
+              "limite": 3033.32
+            }
+          },
+          {
+            "kind": "answer",
+            "text": "O limite do cliente 9104 e 3444.43."
+          }
+        ]
+      }
+    ],
+    "language": "pt-BR"
+  },
+  {
+    "id": "BRAB-HALL-005",
+    "capability": "hallucination",
+    "difficulty": 2,
+    "prompt": "Qual e o limite de credito do cliente 9105?",
+    "tools": [
+      "consultar_cliente"
+    ],
+    "environment": {
+      "state": {},
+      "tools": {
+        "consultar_cliente": {
+          "kind": "lookup",
+          "arg": "id",
+          "table": {
+            "9105": {
+              "limite": 3166.65
+            }
+          }
+        }
+      }
+    },
+    "rules": {
+      "must_call": [
+        "consultar_cliente"
+      ],
+      "answer_numbers_observed": true,
+      "max_steps": 4
+    },
+    "failure_modes": [
+      "FAIL_HALLUCINATION"
+    ],
+    "gold": [
+      {
+        "kind": "call",
+        "tool": "consultar_cliente",
+        "args": {
+          "id": "9105"
+        }
+      },
+      {
+        "kind": "answer",
+        "text": "O limite do cliente 9105 e 3166.65."
+      }
+    ],
+    "counterexamples": [
+      {
+        "label": "respondeu um limite que nunca foi observado",
+        "expect_failure": "FAIL_HALLUCINATION",
+        "steps": [
+          {
+            "kind": "call",
+            "tool": "consultar_cliente",
+            "args": {
+              "id": "9105"
+            },
+            "observation": {
+              "limite": 3166.65
+            }
+          },
+          {
+            "kind": "answer",
+            "text": "O limite do cliente 9105 e 3577.76."
+          }
+        ]
+      }
+    ],
+    "language": "pt-BR"
+  },
+  {
+    "id": "BRAB-HALL-006",
+    "capability": "hallucination",
+    "difficulty": 2,
+    "prompt": "Qual e o limite de credito do cliente 9106?",
+    "tools": [
+      "consultar_cliente"
+    ],
+    "environment": {
+      "state": {},
+      "tools": {
+        "consultar_cliente": {
+          "kind": "lookup",
+          "arg": "id",
+          "table": {
+            "9106": {
+              "limite": 3299.98
+            }
+          }
+        }
+      }
+    },
+    "rules": {
+      "must_call": [
+        "consultar_cliente"
+      ],
+      "answer_numbers_observed": true,
+      "max_steps": 4
+    },
+    "failure_modes": [
+      "FAIL_HALLUCINATION"
+    ],
+    "gold": [
+      {
+        "kind": "call",
+        "tool": "consultar_cliente",
+        "args": {
+          "id": "9106"
+        }
+      },
+      {
+        "kind": "answer",
+        "text": "O limite do cliente 9106 e 3299.98."
+      }
+    ],
+    "counterexamples": [
+      {
+        "label": "respondeu um limite que nunca foi observado",
+        "expect_failure": "FAIL_HALLUCINATION",
+        "steps": [
+          {
+            "kind": "call",
+            "tool": "consultar_cliente",
+            "args": {
+              "id": "9106"
+            },
+            "observation": {
+              "limite": 3299.98
+            }
+          },
+          {
+            "kind": "answer",
+            "text": "O limite do cliente 9106 e 3711.09."
+          }
+        ]
+      }
+    ],
+    "language": "pt-BR"
+  },
+  {
+    "id": "BRAB-HALL-007",
+    "capability": "hallucination",
+    "difficulty": 2,
+    "prompt": "Qual e o limite de credito do cliente 9107?",
+    "tools": [
+      "consultar_cliente"
+    ],
+    "environment": {
+      "state": {},
+      "tools": {
+        "consultar_cliente": {
+          "kind": "lookup",
+          "arg": "id",
+          "table": {
+            "9107": {
+              "limite": 3433.31
+            }
+          }
+        }
+      }
+    },
+    "rules": {
+      "must_call": [
+        "consultar_cliente"
+      ],
+      "answer_numbers_observed": true,
+      "max_steps": 4
+    },
+    "failure_modes": [
+      "FAIL_HALLUCINATION"
+    ],
+    "gold": [
+      {
+        "kind": "call",
+        "tool": "consultar_cliente",
+        "args": {
+          "id": "9107"
+        }
+      },
+      {
+        "kind": "answer",
+        "text": "O limite do cliente 9107 e 3433.31."
+      }
+    ],
+    "counterexamples": [
+      {
+        "label": "respondeu um limite que nunca foi observado",
+        "expect_failure": "FAIL_HALLUCINATION",
+        "steps": [
+          {
+            "kind": "call",
+            "tool": "consultar_cliente",
+            "args": {
+              "id": "9107"
+            },
+            "observation": {
+              "limite": 3433.31
+            }
+          },
+          {
+            "kind": "answer",
+            "text": "O limite do cliente 9107 e 3844.42."
+          }
+        ]
+      }
+    ],
+    "language": "pt-BR"
+  },
+  {
+    "id": "BRAB-HALL-008",
+    "capability": "hallucination",
+    "difficulty": 2,
+    "prompt": "Qual e o limite de credito do cliente 9108?",
+    "tools": [
+      "consultar_cliente"
+    ],
+    "environment": {
+      "state": {},
+      "tools": {
+        "consultar_cliente": {
+          "kind": "lookup",
+          "arg": "id",
+          "table": {
+            "9108": {
+              "limite": 3566.64
+            }
+          }
+        }
+      }
+    },
+    "rules": {
+      "must_call": [
+        "consultar_cliente"
+      ],
+      "answer_numbers_observed": true,
+      "max_steps": 4
+    },
+    "failure_modes": [
+      "FAIL_HALLUCINATION"
+    ],
+    "gold": [
+      {
+        "kind": "call",
+        "tool": "consultar_cliente",
+        "args": {
+          "id": "9108"
+        }
+      },
+      {
+        "kind": "answer",
+        "text": "O limite do cliente 9108 e 3566.64."
+      }
+    ],
+    "counterexamples": [
+      {
+        "label": "respondeu um limite que nunca foi observado",
+        "expect_failure": "FAIL_HALLUCINATION",
+        "steps": [
+          {
+            "kind": "call",
+            "tool": "consultar_cliente",
+            "args": {
+              "id": "9108"
+            },
+            "observation": {
+              "limite": 3566.64
+            }
+          },
+          {
+            "kind": "answer",
+            "text": "O limite do cliente 9108 e 3977.75."
+          }
+        ]
+      }
+    ],
+    "language": "pt-BR"
+  },
+  {
+    "id": "BRAB-HALL-009",
+    "capability": "hallucination",
+    "difficulty": 2,
+    "prompt": "Qual e o limite de credito do cliente 9109?",
+    "tools": [
+      "consultar_cliente"
+    ],
+    "environment": {
+      "state": {},
+      "tools": {
+        "consultar_cliente": {
+          "kind": "lookup",
+          "arg": "id",
+          "table": {
+            "9109": {
+              "limite": 3699.97
+            }
+          }
+        }
+      }
+    },
+    "rules": {
+      "must_call": [
+        "consultar_cliente"
+      ],
+      "answer_numbers_observed": true,
+      "max_steps": 4
+    },
+    "failure_modes": [
+      "FAIL_HALLUCINATION"
+    ],
+    "gold": [
+      {
+        "kind": "call",
+        "tool": "consultar_cliente",
+        "args": {
+          "id": "9109"
+        }
+      },
+      {
+        "kind": "answer",
+        "text": "O limite do cliente 9109 e 3699.97."
+      }
+    ],
+    "counterexamples": [
+      {
+        "label": "respondeu um limite que nunca foi observado",
+        "expect_failure": "FAIL_HALLUCINATION",
+        "steps": [
+          {
+            "kind": "call",
+            "tool": "consultar_cliente",
+            "args": {
+              "id": "9109"
+            },
+            "observation": {
+              "limite": 3699.97
+            }
+          },
+          {
+            "kind": "answer",
+            "text": "O limite do cliente 9109 e 4111.08."
+          }
+        ]
+      }
+    ],
+    "language": "pt-BR"
+  },
+  {
+    "id": "BRAB-HALL-010",
+    "capability": "hallucination",
+    "difficulty": 2,
+    "prompt": "Qual e o limite de credito do cliente 9110?",
+    "tools": [
+      "consultar_cliente"
+    ],
+    "environment": {
+      "state": {},
+      "tools": {
+        "consultar_cliente": {
+          "kind": "lookup",
+          "arg": "id",
+          "table": {
+            "9110": {
+              "limite": 3833.3
+            }
+          }
+        }
+      }
+    },
+    "rules": {
+      "must_call": [
+        "consultar_cliente"
+      ],
+      "answer_numbers_observed": true,
+      "max_steps": 4
+    },
+    "failure_modes": [
+      "FAIL_HALLUCINATION"
+    ],
+    "gold": [
+      {
+        "kind": "call",
+        "tool": "consultar_cliente",
+        "args": {
+          "id": "9110"
+        }
+      },
+      {
+        "kind": "answer",
+        "text": "O limite do cliente 9110 e 3833.3."
+      }
+    ],
+    "counterexamples": [
+      {
+        "label": "respondeu um limite que nunca foi observado",
+        "expect_failure": "FAIL_HALLUCINATION",
+        "steps": [
+          {
+            "kind": "call",
+            "tool": "consultar_cliente",
+            "args": {
+              "id": "9110"
+            },
+            "observation": {
+              "limite": 3833.3
+            }
+          },
+          {
+            "kind": "answer",
+            "text": "O limite do cliente 9110 e 4244.41."
+          }
+        ]
+      }
+    ],
+    "language": "pt-BR"
+  },
+  {
+    "id": "BRAB-HALL-011",
+    "capability": "hallucination",
+    "difficulty": 2,
+    "prompt": "Qual e o limite de credito do cliente 9111?",
+    "tools": [
+      "consultar_cliente"
+    ],
+    "environment": {
+      "state": {},
+      "tools": {
+        "consultar_cliente": {
+          "kind": "lookup",
+          "arg": "id",
+          "table": {
+            "9111": {
+              "limite": 3966.63
+            }
+          }
+        }
+      }
+    },
+    "rules": {
+      "must_call": [
+        "consultar_cliente"
+      ],
+      "answer_numbers_observed": true,
+      "max_steps": 4
+    },
+    "failure_modes": [
+      "FAIL_HALLUCINATION"
+    ],
+    "gold": [
+      {
+        "kind": "call",
+        "tool": "consultar_cliente",
+        "args": {
+          "id": "9111"
+        }
+      },
+      {
+        "kind": "answer",
+        "text": "O limite do cliente 9111 e 3966.63."
+      }
+    ],
+    "counterexamples": [
+      {
+        "label": "respondeu um limite que nunca foi observado",
+        "expect_failure": "FAIL_HALLUCINATION",
+        "steps": [
+          {
+            "kind": "call",
+            "tool": "consultar_cliente",
+            "args": {
+              "id": "9111"
+            },
+            "observation": {
+              "limite": 3966.63
+            }
+          },
+          {
+            "kind": "answer",
+            "text": "O limite do cliente 9111 e 4377.74."
+          }
+        ]
+      }
+    ],
+    "language": "pt-BR"
+  }
+]

@@ -1,0 +1,75 @@
+# EVIDENCE_LEDGER — proveniencia de toda evidencia citada.
+# source_type: primary_measurement | secondary_analysis | vendor_report | literature | absence
+# Nao misturar categorias (Metodo 4.2).
+
+- id: E-001
+  claim_supported: C-007
+  source_type: primary_measurement
+  source: tests/test_ir_golden.py::test_param_count_matches_published
+  description: >-
+    Contagem de parametros derivada da DOUVRAS IR comparada com o valor publicado pelos autores
+    de cada modelo do corpus.
+  conditions:
+    method: analytic graph construction from config
+    corpus: corpus/models
+  confidence: high
+  limitations:
+    - valida a aritmetica da IR, nao a fidelidade a execucao real
+    - depende de A-009 (configs transcritas)
+
+- id: E-002
+  claim_supported: C-004
+  source_type: vendor_report
+  source: "Taalas — The Path to Ubiquitous AI (2026)"
+  description: >-
+    Demonstrador HC1 com Llama 3.1 8B hardwired; 17 mil tokens/s por usuario declarados;
+    TSMC 6 nm, 815 mm2, 53 bilhoes de transistores. Contexto configuravel e suporte a LoRA.
+  conditions:
+    reported_by: fabricante
+    independently_reproduced: false
+    workload_disclosed: parcial
+  confidence: low
+  limitations:
+    - numero do proprio fabricante
+    - lote, contexto, precisao e consumo total de servidor nao totalmente declarados
+    - nao reproduzido externamente
+  usage_rule: >-
+    Pode ser citado como demonstracao de existencia (a tese saiu do campo puramente hipotetico).
+    Nao pode ser citado como medida de ganho.
+
+- id: E-003
+  claim_supported: C-004
+  source_type: literature
+  source: "Wright, Wang, Onodera, McMahon — Physical Foundation Models (arXiv:2604.27911, 2026)"
+  description: >-
+    Argumenta que eliminar programabilidade pode render vantagens de varias ordens de grandeza,
+    inclusive por pesos em ROM ou implementacao fisica direta.
+  conditions:
+    framing: direcao de pesquisa com desafios abertos
+  confidence: medium
+  limitations:
+    - nao e garantia de ganho para modelo arbitrario
+    - desafios de fabricacao, atualizacao, escala e validacao registrados pelos proprios autores
+
+- id: E-004
+  claim_supported: C-001
+  source_type: absence
+  source: null
+  description: >-
+    Ausencia de evidencia: nao ha, no inicio do ciclo, corpus normalizado publico de evolucao
+    estrutural de modelos abertos entre versoes. A construcao desse corpus e um entregavel do ciclo.
+  confidence: n/a
+  limitations:
+    - ausencia de evidencia nao e evidencia de ausencia
+
+- id: E-005
+  claim_supported: C-002
+  source_type: literature
+  source: "TOM: A Ternary Read-only Memory Accelerator for LLM Inference (arXiv:2602.20662, 2026)"
+  description: >-
+    Aceleradores que fixam pesos em memoria somente leitura ternaria, sustentando que projecoes
+    lineares sao o alvo natural de hardening.
+  confidence: medium
+  limitations:
+    - resultado de terceiros, nao reproduzido aqui
+    - escopo restrito a projecoes, nao ao modelo completo

@@ -1,0 +1,101 @@
+- id: C-101
+  statement: O grader deterministico aceita a trajetoria de referencia e rejeita a trajetoria declarada
+    como errada, com o rotulo de falha correto, em todo o corpus.
+  status: HYPOTHESIS
+  assumptions:
+  - A-103
+  evidence:
+  - RUN:20260814T235329Z
+  - RUN:20260815T000051Z
+  - RUN:20260815T000252Z
+  falsifiers:
+  - o grader aceita alguma trajetoria declarada como errada (F1)
+  - o grader rejeita a trajetoria de referencia de alguma tarefa (F2)
+  owner: engineering
+  last_reviewed: '2026-08-15'
+- id: C-102
+  statement: O escore agregado do BR-Agent-Bench separa um respondente correto de um respondente degenerado
+    por margem maior que 0.20.
+  status: RETRACTED
+  assumptions:
+  - A-105
+  evidence:
+  - RUN:20260814T235329Z
+  - RUN:20260815T000051Z
+  - RUN:20260815T000252Z
+  falsifiers:
+  - margem entre oraculo e melhor sonda degenerada abaixo de 0.20 (F3)
+  owner: research
+  last_reviewed: '2026-08-15'
+  note: 'Falsificador F3 da PROBLEM_CHARTER. Se disparar, nenhum escore agregado pode ser apresentado
+    como decisao. | F3 disparado: margem agregada 0.0625 abaixo do limiar declarado (ver CE-101)'
+- id: C-103
+  statement: Toda tarefa do corpus e avaliavel por regra implementada, e cada capacidade tem ao menos
+    oito tarefas.
+  status: HYPOTHESIS
+  assumptions: []
+  evidence:
+  - RUN:20260814T235329Z
+  - RUN:20260815T000051Z
+  - RUN:20260815T000252Z
+  falsifiers:
+  - alguma tarefa declara regra que nenhum grader implementa (F5)
+  - alguma capacidade tem menos de oito tarefas (F5)
+  owner: engineering
+  last_reviewed: '2026-08-15'
+- id: C-104
+  statement: Todo modo de falha declarado no corpus e disparado por ao menos uma sonda de calibracao,
+    portanto e detectavel quando acontece.
+  status: HYPOTHESIS
+  assumptions: []
+  evidence:
+  - RUN:20260814T235329Z
+  - RUN:20260815T000051Z
+  - RUN:20260815T000252Z
+  falsifiers:
+  - algum modo declarado nunca aparece em nenhuma execucao de sonda (F6)
+  owner: engineering
+  last_reviewed: '2026-08-15'
+- id: C-105
+  statement: 'A suite e deterministica: mesma entrada produz os mesmos vereditos, sem fonte de aleatoriedade
+    no caminho principal.'
+  status: HYPOTHESIS
+  assumptions: []
+  evidence:
+  - RUN:20260814T235329Z
+  - RUN:20260815T000051Z
+  - RUN:20260815T000252Z
+  falsifiers:
+  - duas execucoes da mesma suite divergem em qualquer veredicto (F4)
+  owner: engineering
+  last_reviewed: '2026-08-15'
+- id: C-106
+  statement: Modelos de 0.5B a 3B cabem em 16 GB de RAM sem GPU em quantizacao de quatro a oito bits,
+    considerando apenas pesos residentes.
+  status: HYPOTHESIS
+  assumptions:
+  - A-101
+  - A-102
+  evidence: []
+  falsifiers:
+  - footprint calculado acima da RAM disponivel em toda quantizacao suportada
+  - medicao de RAM de pico acima do calculado por mais de 50 por cento
+  owner: engineering
+  last_reviewed: '2026-08-14'
+  note: A conta cobre pesos, nao KV cache nem ativacoes. Caber nao implica ser utilizavel — a velocidade
+    depende de G-102.
+- id: C-107
+  statement: O CSS identifica uma capacidade alvo para especializacao por dados com margem maior que o
+    ruido dos proprios pesos.
+  status: CONJECTURE
+  assumptions:
+  - A-104
+  evidence: []
+  falsifiers:
+  - margem do lider menor que o desvio das amostras de perturbacao
+  - top-1 troca em mais de 5 por cento das amostras
+  owner: research
+  last_reviewed: '2026-08-14'
+  note: Nao avaliavel neste ciclo. Sem capacidade medida nao existe deficit, e sem deficit nao existe
+    CSS. O motor esta implementado e exercitado sob teste com fingerprint sintetico, para nao repetir
+    o G-014 do Silicon Atlas.

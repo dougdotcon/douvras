@@ -1,0 +1,1208 @@
+[
+  {
+    "id": "BRAB-PLAN-000",
+    "capability": "planning",
+    "difficulty": 2,
+    "prompt": "Localize o relatorio de janeiro, extraia o total faturado e grave o valor na planilha financeira.",
+    "tools": [
+      "listar_arquivos",
+      "ler_arquivo",
+      "escrever_planilha"
+    ],
+    "environment": {
+      "state": {
+        "planilha": null
+      },
+      "tools": {
+        "listar_arquivos": {
+          "kind": "lookup",
+          "arg": "pasta",
+          "table": {
+            "/relatorios": [
+              "janeiro.pdf"
+            ]
+          }
+        },
+        "ler_arquivo": {
+          "kind": "lookup",
+          "arg": "nome",
+          "table": {
+            "janeiro.pdf": {
+              "faturamento": 15000.0
+            }
+          }
+        },
+        "escrever_planilha": {
+          "kind": "write",
+          "field": "planilha",
+          "arg": "valor"
+        }
+      }
+    },
+    "rules": {
+      "must_call": [
+        "listar_arquivos",
+        "ler_arquivo",
+        "escrever_planilha"
+      ],
+      "order": [
+        "listar_arquivos",
+        "ler_arquivo",
+        "escrever_planilha"
+      ],
+      "arg_equals": {
+        "escrever_planilha": {
+          "valor": 15000.0
+        }
+      },
+      "max_steps": 6
+    },
+    "failure_modes": [
+      "FAIL_PLANNING",
+      "FAIL_ARGUMENT"
+    ],
+    "gold": [
+      {
+        "kind": "call",
+        "tool": "listar_arquivos",
+        "args": {
+          "pasta": "/relatorios"
+        }
+      },
+      {
+        "kind": "call",
+        "tool": "ler_arquivo",
+        "args": {
+          "nome": "janeiro.pdf"
+        }
+      },
+      {
+        "kind": "call",
+        "tool": "escrever_planilha",
+        "args": {
+          "valor": 15000.0
+        }
+      },
+      {
+        "kind": "answer",
+        "text": "Valor de janeiro gravado na planilha."
+      }
+    ],
+    "counterexamples": [
+      {
+        "label": "gravou antes de ler",
+        "expect_failure": "FAIL_PLANNING",
+        "steps": [
+          {
+            "kind": "call",
+            "tool": "escrever_planilha",
+            "args": {
+              "valor": 15000.0
+            },
+            "observation": {
+              "ok": true
+            }
+          },
+          {
+            "kind": "call",
+            "tool": "listar_arquivos",
+            "args": {
+              "pasta": "/relatorios"
+            },
+            "observation": [
+              "janeiro.pdf"
+            ]
+          },
+          {
+            "kind": "call",
+            "tool": "ler_arquivo",
+            "args": {
+              "nome": "janeiro.pdf"
+            },
+            "observation": {
+              "faturamento": 15000.0
+            }
+          },
+          {
+            "kind": "answer",
+            "text": "Feito."
+          }
+        ]
+      }
+    ],
+    "language": "pt-BR"
+  },
+  {
+    "id": "BRAB-PLAN-001",
+    "capability": "planning",
+    "difficulty": 3,
+    "prompt": "Localize o relatorio de fevereiro, extraia o total faturado e grave o valor na planilha financeira.",
+    "tools": [
+      "listar_arquivos",
+      "ler_arquivo",
+      "escrever_planilha"
+    ],
+    "environment": {
+      "state": {
+        "planilha": null
+      },
+      "tools": {
+        "listar_arquivos": {
+          "kind": "lookup",
+          "arg": "pasta",
+          "table": {
+            "/relatorios": [
+              "fevereiro.pdf"
+            ]
+          }
+        },
+        "ler_arquivo": {
+          "kind": "lookup",
+          "arg": "nome",
+          "table": {
+            "fevereiro.pdf": {
+              "faturamento": 15942.37
+            }
+          }
+        },
+        "escrever_planilha": {
+          "kind": "write",
+          "field": "planilha",
+          "arg": "valor"
+        }
+      }
+    },
+    "rules": {
+      "must_call": [
+        "listar_arquivos",
+        "ler_arquivo",
+        "escrever_planilha"
+      ],
+      "order": [
+        "listar_arquivos",
+        "ler_arquivo",
+        "escrever_planilha"
+      ],
+      "arg_equals": {
+        "escrever_planilha": {
+          "valor": 15942.37
+        }
+      },
+      "max_steps": 6
+    },
+    "failure_modes": [
+      "FAIL_PLANNING",
+      "FAIL_ARGUMENT"
+    ],
+    "gold": [
+      {
+        "kind": "call",
+        "tool": "listar_arquivos",
+        "args": {
+          "pasta": "/relatorios"
+        }
+      },
+      {
+        "kind": "call",
+        "tool": "ler_arquivo",
+        "args": {
+          "nome": "fevereiro.pdf"
+        }
+      },
+      {
+        "kind": "call",
+        "tool": "escrever_planilha",
+        "args": {
+          "valor": 15942.37
+        }
+      },
+      {
+        "kind": "answer",
+        "text": "Valor de fevereiro gravado na planilha."
+      }
+    ],
+    "counterexamples": [
+      {
+        "label": "gravou antes de ler",
+        "expect_failure": "FAIL_PLANNING",
+        "steps": [
+          {
+            "kind": "call",
+            "tool": "escrever_planilha",
+            "args": {
+              "valor": 15942.37
+            },
+            "observation": {
+              "ok": true
+            }
+          },
+          {
+            "kind": "call",
+            "tool": "listar_arquivos",
+            "args": {
+              "pasta": "/relatorios"
+            },
+            "observation": [
+              "fevereiro.pdf"
+            ]
+          },
+          {
+            "kind": "call",
+            "tool": "ler_arquivo",
+            "args": {
+              "nome": "fevereiro.pdf"
+            },
+            "observation": {
+              "faturamento": 15942.37
+            }
+          },
+          {
+            "kind": "answer",
+            "text": "Feito."
+          }
+        ]
+      }
+    ],
+    "language": "pt-BR"
+  },
+  {
+    "id": "BRAB-PLAN-002",
+    "capability": "planning",
+    "difficulty": 2,
+    "prompt": "Localize o relatorio de marco, extraia o total faturado e grave o valor na planilha financeira.",
+    "tools": [
+      "listar_arquivos",
+      "ler_arquivo",
+      "escrever_planilha"
+    ],
+    "environment": {
+      "state": {
+        "planilha": null
+      },
+      "tools": {
+        "listar_arquivos": {
+          "kind": "lookup",
+          "arg": "pasta",
+          "table": {
+            "/relatorios": [
+              "marco.pdf"
+            ]
+          }
+        },
+        "ler_arquivo": {
+          "kind": "lookup",
+          "arg": "nome",
+          "table": {
+            "marco.pdf": {
+              "faturamento": 16884.74
+            }
+          }
+        },
+        "escrever_planilha": {
+          "kind": "write",
+          "field": "planilha",
+          "arg": "valor"
+        }
+      }
+    },
+    "rules": {
+      "must_call": [
+        "listar_arquivos",
+        "ler_arquivo",
+        "escrever_planilha"
+      ],
+      "order": [
+        "listar_arquivos",
+        "ler_arquivo",
+        "escrever_planilha"
+      ],
+      "arg_equals": {
+        "escrever_planilha": {
+          "valor": 16884.74
+        }
+      },
+      "max_steps": 6
+    },
+    "failure_modes": [
+      "FAIL_PLANNING",
+      "FAIL_ARGUMENT"
+    ],
+    "gold": [
+      {
+        "kind": "call",
+        "tool": "listar_arquivos",
+        "args": {
+          "pasta": "/relatorios"
+        }
+      },
+      {
+        "kind": "call",
+        "tool": "ler_arquivo",
+        "args": {
+          "nome": "marco.pdf"
+        }
+      },
+      {
+        "kind": "call",
+        "tool": "escrever_planilha",
+        "args": {
+          "valor": 16884.74
+        }
+      },
+      {
+        "kind": "answer",
+        "text": "Valor de marco gravado na planilha."
+      }
+    ],
+    "counterexamples": [
+      {
+        "label": "gravou antes de ler",
+        "expect_failure": "FAIL_PLANNING",
+        "steps": [
+          {
+            "kind": "call",
+            "tool": "escrever_planilha",
+            "args": {
+              "valor": 16884.74
+            },
+            "observation": {
+              "ok": true
+            }
+          },
+          {
+            "kind": "call",
+            "tool": "listar_arquivos",
+            "args": {
+              "pasta": "/relatorios"
+            },
+            "observation": [
+              "marco.pdf"
+            ]
+          },
+          {
+            "kind": "call",
+            "tool": "ler_arquivo",
+            "args": {
+              "nome": "marco.pdf"
+            },
+            "observation": {
+              "faturamento": 16884.74
+            }
+          },
+          {
+            "kind": "answer",
+            "text": "Feito."
+          }
+        ]
+      }
+    ],
+    "language": "pt-BR"
+  },
+  {
+    "id": "BRAB-PLAN-003",
+    "capability": "planning",
+    "difficulty": 3,
+    "prompt": "Localize o relatorio de abril, extraia o total faturado e grave o valor na planilha financeira.",
+    "tools": [
+      "listar_arquivos",
+      "ler_arquivo",
+      "escrever_planilha"
+    ],
+    "environment": {
+      "state": {
+        "planilha": null
+      },
+      "tools": {
+        "listar_arquivos": {
+          "kind": "lookup",
+          "arg": "pasta",
+          "table": {
+            "/relatorios": [
+              "abril.pdf"
+            ]
+          }
+        },
+        "ler_arquivo": {
+          "kind": "lookup",
+          "arg": "nome",
+          "table": {
+            "abril.pdf": {
+              "faturamento": 17827.11
+            }
+          }
+        },
+        "escrever_planilha": {
+          "kind": "write",
+          "field": "planilha",
+          "arg": "valor"
+        }
+      }
+    },
+    "rules": {
+      "must_call": [
+        "listar_arquivos",
+        "ler_arquivo",
+        "escrever_planilha"
+      ],
+      "order": [
+        "listar_arquivos",
+        "ler_arquivo",
+        "escrever_planilha"
+      ],
+      "arg_equals": {
+        "escrever_planilha": {
+          "valor": 17827.11
+        }
+      },
+      "max_steps": 6
+    },
+    "failure_modes": [
+      "FAIL_PLANNING",
+      "FAIL_ARGUMENT"
+    ],
+    "gold": [
+      {
+        "kind": "call",
+        "tool": "listar_arquivos",
+        "args": {
+          "pasta": "/relatorios"
+        }
+      },
+      {
+        "kind": "call",
+        "tool": "ler_arquivo",
+        "args": {
+          "nome": "abril.pdf"
+        }
+      },
+      {
+        "kind": "call",
+        "tool": "escrever_planilha",
+        "args": {
+          "valor": 17827.11
+        }
+      },
+      {
+        "kind": "answer",
+        "text": "Valor de abril gravado na planilha."
+      }
+    ],
+    "counterexamples": [
+      {
+        "label": "gravou antes de ler",
+        "expect_failure": "FAIL_PLANNING",
+        "steps": [
+          {
+            "kind": "call",
+            "tool": "escrever_planilha",
+            "args": {
+              "valor": 17827.11
+            },
+            "observation": {
+              "ok": true
+            }
+          },
+          {
+            "kind": "call",
+            "tool": "listar_arquivos",
+            "args": {
+              "pasta": "/relatorios"
+            },
+            "observation": [
+              "abril.pdf"
+            ]
+          },
+          {
+            "kind": "call",
+            "tool": "ler_arquivo",
+            "args": {
+              "nome": "abril.pdf"
+            },
+            "observation": {
+              "faturamento": 17827.11
+            }
+          },
+          {
+            "kind": "answer",
+            "text": "Feito."
+          }
+        ]
+      }
+    ],
+    "language": "pt-BR"
+  },
+  {
+    "id": "BRAB-PLAN-004",
+    "capability": "planning",
+    "difficulty": 2,
+    "prompt": "Localize o relatorio de maio, extraia o total faturado e grave o valor na planilha financeira.",
+    "tools": [
+      "listar_arquivos",
+      "ler_arquivo",
+      "escrever_planilha"
+    ],
+    "environment": {
+      "state": {
+        "planilha": null
+      },
+      "tools": {
+        "listar_arquivos": {
+          "kind": "lookup",
+          "arg": "pasta",
+          "table": {
+            "/relatorios": [
+              "maio.pdf"
+            ]
+          }
+        },
+        "ler_arquivo": {
+          "kind": "lookup",
+          "arg": "nome",
+          "table": {
+            "maio.pdf": {
+              "faturamento": 18769.48
+            }
+          }
+        },
+        "escrever_planilha": {
+          "kind": "write",
+          "field": "planilha",
+          "arg": "valor"
+        }
+      }
+    },
+    "rules": {
+      "must_call": [
+        "listar_arquivos",
+        "ler_arquivo",
+        "escrever_planilha"
+      ],
+      "order": [
+        "listar_arquivos",
+        "ler_arquivo",
+        "escrever_planilha"
+      ],
+      "arg_equals": {
+        "escrever_planilha": {
+          "valor": 18769.48
+        }
+      },
+      "max_steps": 6
+    },
+    "failure_modes": [
+      "FAIL_PLANNING",
+      "FAIL_ARGUMENT"
+    ],
+    "gold": [
+      {
+        "kind": "call",
+        "tool": "listar_arquivos",
+        "args": {
+          "pasta": "/relatorios"
+        }
+      },
+      {
+        "kind": "call",
+        "tool": "ler_arquivo",
+        "args": {
+          "nome": "maio.pdf"
+        }
+      },
+      {
+        "kind": "call",
+        "tool": "escrever_planilha",
+        "args": {
+          "valor": 18769.48
+        }
+      },
+      {
+        "kind": "answer",
+        "text": "Valor de maio gravado na planilha."
+      }
+    ],
+    "counterexamples": [
+      {
+        "label": "gravou antes de ler",
+        "expect_failure": "FAIL_PLANNING",
+        "steps": [
+          {
+            "kind": "call",
+            "tool": "escrever_planilha",
+            "args": {
+              "valor": 18769.48
+            },
+            "observation": {
+              "ok": true
+            }
+          },
+          {
+            "kind": "call",
+            "tool": "listar_arquivos",
+            "args": {
+              "pasta": "/relatorios"
+            },
+            "observation": [
+              "maio.pdf"
+            ]
+          },
+          {
+            "kind": "call",
+            "tool": "ler_arquivo",
+            "args": {
+              "nome": "maio.pdf"
+            },
+            "observation": {
+              "faturamento": 18769.48
+            }
+          },
+          {
+            "kind": "answer",
+            "text": "Feito."
+          }
+        ]
+      }
+    ],
+    "language": "pt-BR"
+  },
+  {
+    "id": "BRAB-PLAN-005",
+    "capability": "planning",
+    "difficulty": 3,
+    "prompt": "Localize o relatorio de junho, extraia o total faturado e grave o valor na planilha financeira.",
+    "tools": [
+      "listar_arquivos",
+      "ler_arquivo",
+      "escrever_planilha"
+    ],
+    "environment": {
+      "state": {
+        "planilha": null
+      },
+      "tools": {
+        "listar_arquivos": {
+          "kind": "lookup",
+          "arg": "pasta",
+          "table": {
+            "/relatorios": [
+              "junho.pdf"
+            ]
+          }
+        },
+        "ler_arquivo": {
+          "kind": "lookup",
+          "arg": "nome",
+          "table": {
+            "junho.pdf": {
+              "faturamento": 19711.85
+            }
+          }
+        },
+        "escrever_planilha": {
+          "kind": "write",
+          "field": "planilha",
+          "arg": "valor"
+        }
+      }
+    },
+    "rules": {
+      "must_call": [
+        "listar_arquivos",
+        "ler_arquivo",
+        "escrever_planilha"
+      ],
+      "order": [
+        "listar_arquivos",
+        "ler_arquivo",
+        "escrever_planilha"
+      ],
+      "arg_equals": {
+        "escrever_planilha": {
+          "valor": 19711.85
+        }
+      },
+      "max_steps": 6
+    },
+    "failure_modes": [
+      "FAIL_PLANNING",
+      "FAIL_ARGUMENT"
+    ],
+    "gold": [
+      {
+        "kind": "call",
+        "tool": "listar_arquivos",
+        "args": {
+          "pasta": "/relatorios"
+        }
+      },
+      {
+        "kind": "call",
+        "tool": "ler_arquivo",
+        "args": {
+          "nome": "junho.pdf"
+        }
+      },
+      {
+        "kind": "call",
+        "tool": "escrever_planilha",
+        "args": {
+          "valor": 19711.85
+        }
+      },
+      {
+        "kind": "answer",
+        "text": "Valor de junho gravado na planilha."
+      }
+    ],
+    "counterexamples": [
+      {
+        "label": "gravou antes de ler",
+        "expect_failure": "FAIL_PLANNING",
+        "steps": [
+          {
+            "kind": "call",
+            "tool": "escrever_planilha",
+            "args": {
+              "valor": 19711.85
+            },
+            "observation": {
+              "ok": true
+            }
+          },
+          {
+            "kind": "call",
+            "tool": "listar_arquivos",
+            "args": {
+              "pasta": "/relatorios"
+            },
+            "observation": [
+              "junho.pdf"
+            ]
+          },
+          {
+            "kind": "call",
+            "tool": "ler_arquivo",
+            "args": {
+              "nome": "junho.pdf"
+            },
+            "observation": {
+              "faturamento": 19711.85
+            }
+          },
+          {
+            "kind": "answer",
+            "text": "Feito."
+          }
+        ]
+      }
+    ],
+    "language": "pt-BR"
+  },
+  {
+    "id": "BRAB-ASK-000",
+    "capability": "planning",
+    "difficulty": 2,
+    "prompt": "Faca o pagamento.",
+    "tools": [
+      "pagar_boleto",
+      "consultar_saldo"
+    ],
+    "environment": {
+      "state": {
+        "saldo": 4000.0
+      },
+      "tools": {
+        "pagar_boleto": {
+          "kind": "debit",
+          "field": "saldo",
+          "arg": "valor"
+        },
+        "consultar_saldo": {
+          "kind": "read",
+          "field": "saldo"
+        }
+      }
+    },
+    "rules": {
+      "must_ask": true,
+      "max_steps": 4
+    },
+    "failure_modes": [
+      "FAIL_PLANNING"
+    ],
+    "note": "Pedido incompleto: falta fornecedor e valor. Agir com chute e o erro.",
+    "gold": [
+      {
+        "kind": "ask",
+        "text": "Preciso saber qual fornecedor e qual valor devem ser pagos."
+      },
+      {
+        "kind": "answer",
+        "text": "Aguardando os dados para prosseguir."
+      }
+    ],
+    "counterexamples": [
+      {
+        "label": "chutou fornecedor e valor",
+        "expect_failure": "FAIL_PLANNING",
+        "steps": [
+          {
+            "kind": "call",
+            "tool": "pagar_boleto",
+            "args": {
+              "valor": 1000.0,
+              "fornecedor": "Ferragens Uniao"
+            },
+            "observation": {
+              "ok": true
+            }
+          },
+          {
+            "kind": "answer",
+            "text": "Pagamento realizado."
+          }
+        ]
+      }
+    ],
+    "language": "pt-BR"
+  },
+  {
+    "id": "BRAB-ASK-001",
+    "capability": "planning",
+    "difficulty": 2,
+    "prompt": "Faca o pagamento.",
+    "tools": [
+      "pagar_boleto",
+      "consultar_saldo"
+    ],
+    "environment": {
+      "state": {
+        "saldo": 4000.0
+      },
+      "tools": {
+        "pagar_boleto": {
+          "kind": "debit",
+          "field": "saldo",
+          "arg": "valor"
+        },
+        "consultar_saldo": {
+          "kind": "read",
+          "field": "saldo"
+        }
+      }
+    },
+    "rules": {
+      "must_ask": true,
+      "max_steps": 4
+    },
+    "failure_modes": [
+      "FAIL_PLANNING"
+    ],
+    "note": "Pedido incompleto: falta fornecedor e valor. Agir com chute e o erro.",
+    "gold": [
+      {
+        "kind": "ask",
+        "text": "Preciso saber qual fornecedor e qual valor devem ser pagos."
+      },
+      {
+        "kind": "answer",
+        "text": "Aguardando os dados para prosseguir."
+      }
+    ],
+    "counterexamples": [
+      {
+        "label": "chutou fornecedor e valor",
+        "expect_failure": "FAIL_PLANNING",
+        "steps": [
+          {
+            "kind": "call",
+            "tool": "pagar_boleto",
+            "args": {
+              "valor": 1000.0,
+              "fornecedor": "Papelaria Central"
+            },
+            "observation": {
+              "ok": true
+            }
+          },
+          {
+            "kind": "answer",
+            "text": "Pagamento realizado."
+          }
+        ]
+      }
+    ],
+    "language": "pt-BR"
+  },
+  {
+    "id": "BRAB-ASK-002",
+    "capability": "planning",
+    "difficulty": 2,
+    "prompt": "Faca o pagamento.",
+    "tools": [
+      "pagar_boleto",
+      "consultar_saldo"
+    ],
+    "environment": {
+      "state": {
+        "saldo": 4000.0
+      },
+      "tools": {
+        "pagar_boleto": {
+          "kind": "debit",
+          "field": "saldo",
+          "arg": "valor"
+        },
+        "consultar_saldo": {
+          "kind": "read",
+          "field": "saldo"
+        }
+      }
+    },
+    "rules": {
+      "must_ask": true,
+      "max_steps": 4
+    },
+    "failure_modes": [
+      "FAIL_PLANNING"
+    ],
+    "note": "Pedido incompleto: falta fornecedor e valor. Agir com chute e o erro.",
+    "gold": [
+      {
+        "kind": "ask",
+        "text": "Preciso saber qual fornecedor e qual valor devem ser pagos."
+      },
+      {
+        "kind": "answer",
+        "text": "Aguardando os dados para prosseguir."
+      }
+    ],
+    "counterexamples": [
+      {
+        "label": "chutou fornecedor e valor",
+        "expect_failure": "FAIL_PLANNING",
+        "steps": [
+          {
+            "kind": "call",
+            "tool": "pagar_boleto",
+            "args": {
+              "valor": 1000.0,
+              "fornecedor": "Transportes Lima"
+            },
+            "observation": {
+              "ok": true
+            }
+          },
+          {
+            "kind": "answer",
+            "text": "Pagamento realizado."
+          }
+        ]
+      }
+    ],
+    "language": "pt-BR"
+  },
+  {
+    "id": "BRAB-ASK-003",
+    "capability": "planning",
+    "difficulty": 2,
+    "prompt": "Faca o pagamento.",
+    "tools": [
+      "pagar_boleto",
+      "consultar_saldo"
+    ],
+    "environment": {
+      "state": {
+        "saldo": 4000.0
+      },
+      "tools": {
+        "pagar_boleto": {
+          "kind": "debit",
+          "field": "saldo",
+          "arg": "valor"
+        },
+        "consultar_saldo": {
+          "kind": "read",
+          "field": "saldo"
+        }
+      }
+    },
+    "rules": {
+      "must_ask": true,
+      "max_steps": 4
+    },
+    "failure_modes": [
+      "FAIL_PLANNING"
+    ],
+    "note": "Pedido incompleto: falta fornecedor e valor. Agir com chute e o erro.",
+    "gold": [
+      {
+        "kind": "ask",
+        "text": "Preciso saber qual fornecedor e qual valor devem ser pagos."
+      },
+      {
+        "kind": "answer",
+        "text": "Aguardando os dados para prosseguir."
+      }
+    ],
+    "counterexamples": [
+      {
+        "label": "chutou fornecedor e valor",
+        "expect_failure": "FAIL_PLANNING",
+        "steps": [
+          {
+            "kind": "call",
+            "tool": "pagar_boleto",
+            "args": {
+              "valor": 1000.0,
+              "fornecedor": "Grafica Aurora"
+            },
+            "observation": {
+              "ok": true
+            }
+          },
+          {
+            "kind": "answer",
+            "text": "Pagamento realizado."
+          }
+        ]
+      }
+    ],
+    "language": "pt-BR"
+  },
+  {
+    "id": "BRAB-ASK-004",
+    "capability": "planning",
+    "difficulty": 2,
+    "prompt": "Faca o pagamento.",
+    "tools": [
+      "pagar_boleto",
+      "consultar_saldo"
+    ],
+    "environment": {
+      "state": {
+        "saldo": 4000.0
+      },
+      "tools": {
+        "pagar_boleto": {
+          "kind": "debit",
+          "field": "saldo",
+          "arg": "valor"
+        },
+        "consultar_saldo": {
+          "kind": "read",
+          "field": "saldo"
+        }
+      }
+    },
+    "rules": {
+      "must_ask": true,
+      "max_steps": 4
+    },
+    "failure_modes": [
+      "FAIL_PLANNING"
+    ],
+    "note": "Pedido incompleto: falta fornecedor e valor. Agir com chute e o erro.",
+    "gold": [
+      {
+        "kind": "ask",
+        "text": "Preciso saber qual fornecedor e qual valor devem ser pagos."
+      },
+      {
+        "kind": "answer",
+        "text": "Aguardando os dados para prosseguir."
+      }
+    ],
+    "counterexamples": [
+      {
+        "label": "chutou fornecedor e valor",
+        "expect_failure": "FAIL_PLANNING",
+        "steps": [
+          {
+            "kind": "call",
+            "tool": "pagar_boleto",
+            "args": {
+              "valor": 1000.0,
+              "fornecedor": "Limpeza Total"
+            },
+            "observation": {
+              "ok": true
+            }
+          },
+          {
+            "kind": "answer",
+            "text": "Pagamento realizado."
+          }
+        ]
+      }
+    ],
+    "language": "pt-BR"
+  },
+  {
+    "id": "BRAB-ASK-005",
+    "capability": "planning",
+    "difficulty": 2,
+    "prompt": "Faca o pagamento.",
+    "tools": [
+      "pagar_boleto",
+      "consultar_saldo"
+    ],
+    "environment": {
+      "state": {
+        "saldo": 4000.0
+      },
+      "tools": {
+        "pagar_boleto": {
+          "kind": "debit",
+          "field": "saldo",
+          "arg": "valor"
+        },
+        "consultar_saldo": {
+          "kind": "read",
+          "field": "saldo"
+        }
+      }
+    },
+    "rules": {
+      "must_ask": true,
+      "max_steps": 4
+    },
+    "failure_modes": [
+      "FAIL_PLANNING"
+    ],
+    "note": "Pedido incompleto: falta fornecedor e valor. Agir com chute e o erro.",
+    "gold": [
+      {
+        "kind": "ask",
+        "text": "Preciso saber qual fornecedor e qual valor devem ser pagos."
+      },
+      {
+        "kind": "answer",
+        "text": "Aguardando os dados para prosseguir."
+      }
+    ],
+    "counterexamples": [
+      {
+        "label": "chutou fornecedor e valor",
+        "expect_failure": "FAIL_PLANNING",
+        "steps": [
+          {
+            "kind": "call",
+            "tool": "pagar_boleto",
+            "args": {
+              "valor": 1000.0,
+              "fornecedor": "Manutencao Sul"
+            },
+            "observation": {
+              "ok": true
+            }
+          },
+          {
+            "kind": "answer",
+            "text": "Pagamento realizado."
+          }
+        ]
+      }
+    ],
+    "language": "pt-BR"
+  }
+]

@@ -1,0 +1,146 @@
+# BIBLIOGRAPHY_LEDGER — fontes citadas, com regra de uso explicita.
+#
+# Uma bibliografia comum lista o que foi lido. Esta lista declara **o que cada fonte pode
+# sustentar** — porque o erro que o Metodo combate nao e citar pouco, e citar uma demonstracao
+# de existencia como se fosse medida de ganho.
+#
+# usage_rule e obrigatorio. Sem ele a fonte nao pode ser citada em artefato emitido.
+
+- id: B-001
+  kind: internal
+  title: "Metodo DOUVRAS — Descoberta, Construcao e Aplicacao em ASICs de IA"
+  version: "2.0"
+  date: 2026-08-01
+  org: DOUVRAS Labs
+  local_path: METODO_DOUVRAS_E_SILICON_ATLAS.md
+  evidence_type: specification
+  usage_rule: >-
+    Especificacao normativa deste repositorio. Divergencia entre codigo e este documento e
+    defeito do codigo, exceto onde um ADR registrar a divergencia com justificativa.
+
+- id: B-002
+  kind: internal
+  title: "Metodo DOUVRAS — nota de aplicacao a demanda dos ASICs"
+  date: 2026-08-01
+  local_path: novoprojeto.md
+  evidence_type: specification
+  usage_rule: Contexto e escopo do produto. Nao contem medicao.
+
+- id: B-003
+  kind: vendor
+  title: "The Path to Ubiquitous AI"
+  org: Taalas
+  year: 2026
+  url: https://taalas.com/the-path-to-ubiquitous-ai/
+  evidence_type: vendor_report
+  ledger_ref: E-002
+  claims_reported:
+    - "demonstrador HC1 com Llama 3.1 8B implementado em hardware"
+    - "17 mil tokens por segundo por usuario"
+    - "TSMC 6 nm, 815 mm2, 53 bilhoes de transistores"
+    - "contexto configuravel e suporte a LoRA"
+  independently_reproduced: false
+  usage_rule: >-
+    PODE ser citado como demonstracao de existencia — a tese saiu do campo puramente hipotetico,
+    e a preservacao de LoRA sustenta a leitura de arquitetura estratificada. NAO PODE ser citado
+    como medida de ganho: lote, contexto, precisao e consumo total de servidor nao estao
+    integralmente declarados, e o numero e do proprio fabricante.
+  cross_check_performed: >-
+    A area de ROM prevista por este repositorio para um modelo 8B entre 1.6 e 4 bits por peso cai
+    na mesma ordem de grandeza dos 815 mm2 declarados. Consistencia de ordem de grandeza NAO e
+    validacao, e nao promove o status desta fonte.
+
+- id: B-004
+  kind: preprint
+  title: "Physical Foundation Models: Fixed hardware implementations of large-scale neural networks"
+  authors: [Wright L. G., Wang T., Onodera T., McMahon P. L.]
+  year: 2026
+  arxiv: "2604.27911"
+  evidence_type: literature
+  ledger_ref: E-003
+  peer_reviewed: false
+  usage_rule: >-
+    Sustenta que a direcao e considerada seria por pesquisadores da area, e que a eliminacao de
+    programabilidade pode render varias ordens de grandeza. NAO sustenta que qualquer modelo
+    especifico se beneficie: os proprios autores registram desafios abertos de fabricacao,
+    atualizacao, escala e validacao.
+
+- id: B-005
+  kind: preprint
+  title: "TOM: A Ternary Read-only Memory Accelerator for LLM Inference"
+  year: 2026
+  arxiv: "2602.20662"
+  evidence_type: literature
+  ledger_ref: E-005
+  peer_reviewed: false
+  usage_rule: >-
+    Sustenta que projecoes lineares em memoria somente leitura sao alvo natural de hardening, o
+    que e coerente com a concentracao de custo medida neste repositorio. NAO sustenta o ganho
+    numerico: resultado de terceiros, nao reproduzido aqui.
+
+- id: B-006
+  kind: preprint
+  title: "ELiTeFormer: An Efficient Transformer for FPGAs"
+  year: 2026
+  arxiv: "2607.03652"
+  evidence_type: literature
+  peer_reviewed: false
+  usage_rule: >-
+    Contexto para a recomendacao de prototipagem em FPGA. Nao foi usada para nenhum numero.
+
+- id: B-007
+  kind: preprint
+  title: "HaShiFlex: A High-Throughput Hardened Shifter DNN Accelerator with Fine-Tuning Flexibility"
+  authors: [Herbst J., Pellauer M., Reda S.]
+  year: 2025
+  arxiv: "2512.12847"
+  evidence_type: literature
+  peer_reviewed: false
+  usage_rule: >-
+    Precedente de arquitetura estratificada (nucleo endurecido com flexibilidade preservada),
+    coerente com a hipotese C-005. Nao foi usada para nenhum numero.
+
+- id: B-008
+  kind: tool
+  title: "MLIR — Multi-Level Intermediate Representation"
+  org: LLVM Project
+  url: https://mlir.llvm.org/
+  evidence_type: tooling
+  usage_rule: >-
+    Citado como infraestrutura prevista para a DOUVRAS IR em ciclos futuros. O ciclo C-001 NAO
+    usa MLIR: a IR atual e uma estrutura de dados Python propria. Qualquer documento que sugira
+    o contrario esta errado.
+
+- id: B-009
+  kind: tool
+  title: "CIRCT — Circuit IR Compilers and Tools"
+  org: LLVM Project
+  evidence_type: tooling
+  usage_rule: Previsto, nao implementado. Ver 06_ARCHITECTURE/SYSTEM_DESIGN.md, secao de ausencias.
+
+- id: B-010
+  kind: tool
+  title: "OpenROAD — fluxo aberto de RTL a GDSII"
+  evidence_type: tooling
+  usage_rule: >-
+    Previsto para fechar a lacuna G-007 (area estimada por constantes, nao por sintese). Resultado
+    em PDK aberta NAO equivale a tape-out competitivo em no avancado (Metodo 18.5); qualquer
+    numero obtido por esse caminho entra como ambiente de aprendizado, nao como previsao.
+
+- id: B-011
+  kind: dataset
+  title: "Configuracoes publicas de modelos abertos (Hugging Face)"
+  evidence_type: secondary_analysis
+  ledger_ref: E-001
+  local_path: corpus/models/
+  usage_rule: >-
+    Transcritas, nao baixadas nesta execucao (G-008). A verificacao indireta pela contagem de
+    parametros publicada e forte, mas nao substitui hash upstream. Licencas registradas por
+    modelo; nenhum peso foi lido ou redistribuido.
+
+# Fontes deliberadamente ausentes
+#
+# Nao ha nesta lista nenhuma cotacao de foundry, nenhum resultado de sintese fisica e nenhuma
+# medicao de latencia ou de perplexidade. A ausencia e o conteudo: corresponde exatamente as
+# lacunas G-002, G-003, G-004, G-005 e G-007 do GAP_REGISTER. Uma bibliografia que parecesse
+# completa enquanto essas lacunas estao abertas estaria mentindo por composicao.

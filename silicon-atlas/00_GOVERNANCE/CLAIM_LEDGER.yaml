@@ -1,0 +1,136 @@
+- id: C-001
+  statement: Existem padrões de subgrafo que reaparecem entre versões e famílias de modelos decoder-only
+    abertos com cobertura estrutural >= 0.80.
+  status: HYPOTHESIS
+  assumptions:
+  - A-001
+  evidence:
+  - RUN:20260804T033926Z
+  - RUN:20260804T042359Z
+  - RUN:20260804T042650Z
+  - RUN:20260804T042911Z
+  - RUN:20260804T043225Z
+  - RUN:20260814T201511Z
+  - RUN:20260814T231520Z
+  - RUN:20260814T235428Z
+  - RUN:20260815T000030Z
+  falsifiers:
+  - cobertura de padrao maxima abaixo de 0.80 no corpus de tres familias
+  - padrao so reaparece dentro da mesma familia (cobertura cruzada zero)
+  owner: research
+  last_reviewed: '2026-08-15'
+- id: C-002
+  statement: Uma minoria de classes de operador concentra a maior parte do tempo roofline de inferencia,
+    em prefill e em decode.
+  status: HYPOTHESIS
+  assumptions:
+  - A-002
+  - A-005
+  evidence:
+  - RUN:20260804T033926Z
+  - RUN:20260804T042359Z
+  - RUN:20260804T042650Z
+  - RUN:20260804T042911Z
+  - RUN:20260804T043225Z
+  - RUN:20260814T201511Z
+  - RUN:20260814T231520Z
+  - RUN:20260814T235428Z
+  - RUN:20260815T000030Z
+  falsifiers:
+  - nenhuma classe de operador ultrapassa 40 por cento do tempo em nenhuma fase
+  - ranking de classes muda entre versoes da mesma familia
+  owner: research
+  last_reviewed: '2026-08-15'
+- id: C-003
+  statement: O gargalo de decode e movimentacao de memoria, nao aritmetica; portanto ganho estimado apenas
+    por FLOPs superestima o beneficio de hardening.
+  status: HYPOTHESIS
+  assumptions:
+  - A-002
+  evidence:
+  - RUN:20260804T033926Z
+  - RUN:20260804T042359Z
+  - RUN:20260804T042650Z
+  - RUN:20260804T042911Z
+  - RUN:20260804T043225Z
+  - RUN:20260814T201511Z
+  - RUN:20260814T231520Z
+  - RUN:20260814T235428Z
+  - RUN:20260815T000030Z
+  falsifiers:
+  - intensidade aritmetica media em decode acima do ponto de inflexao do dispositivo
+  owner: research
+  last_reviewed: '2026-08-15'
+- id: C-004
+  statement: Ganho de 100x de um ASIC sobre GPU para inferencia de LLM.
+  status: CONDITIONAL_HYPOTHESIS
+  assumptions:
+  - A-002
+  - A-003
+  - A-006
+  evidence:
+  - E-002
+  - E-003
+  falsifiers:
+  - ganho medido abaixo de 10x sob mesmo modelo, lote, contexto, precisao e consumo de servidor
+  - ganho desaparece ao contabilizar movimentacao de pesos e KV cache
+  - break-even posterior a vida economica do chip
+  owner: research
+  last_reviewed: '2026-08-03'
+  note: Proibido citar 100x sem os qualificadores acima. Ver STATUS_POLICY vocabulario proibido.
+- id: C-005
+  statement: Arquitetura estratificada (nucleo fixo + deltas programaveis) domina hardwiring total em
+    valor economico ajustado ao risco de obsolescencia.
+  status: HYPOTHESIS
+  assumptions:
+  - A-006
+  - A-007
+  evidence: []
+  falsifiers:
+  - valor esperado do hardwiring total supera o estratificado em todos os cenarios simulados
+  - custo do bloco reconfiguravel anula a economia do nucleo fixo
+  owner: research
+  last_reviewed: '2026-08-03'
+- id: C-006
+  statement: O ranking de candidatos a hardening produzido pelo SRS e estavel sob perturbacao de +-20
+    por cento nos pesos do score.
+  status: RETRACTED
+  assumptions: []
+  evidence:
+  - RUN:20260804T033926Z
+  - RUN:20260804T042359Z
+  - RUN:20260804T042650Z
+  - RUN:20260804T042911Z
+  - RUN:20260804T043225Z
+  - RUN:20260814T201511Z
+  - RUN:20260814T231520Z
+  - RUN:20260814T235428Z
+  - RUN:20260815T000030Z
+  falsifiers:
+  - top-1 troca em mais de 5 por cento das amostras de perturbacao
+  owner: engineering
+  last_reviewed: '2026-08-15'
+  note: 'Falsificador F3 da PROBLEM_CHARTER. Se falhar, toda recomendacao derivada e retratada. | falsificador
+    disparado | F3 reforcado (CE-001): o LHS nao separa candidatos por mais que o ruido dos proprios pesos
+    em nenhum modelo do corpus'
+- id: C-007
+  statement: A DOUVRAS IR reproduz a contagem de parametros publicada dos modelos do corpus com erro abaixo
+    de 0.5 por cento.
+  status: HYPOTHESIS
+  assumptions:
+  - A-001
+  - A-009
+  evidence:
+  - RUN:20260804T033926Z
+  - RUN:20260804T042359Z
+  - RUN:20260804T042650Z
+  - RUN:20260804T042911Z
+  - RUN:20260804T043225Z
+  - RUN:20260814T201511Z
+  - RUN:20260814T231520Z
+  - RUN:20260814T235428Z
+  - RUN:20260815T000030Z
+  falsifiers:
+  - erro acima de 5 por cento em qualquer modelo do corpus (F5, invalida tudo a jusante)
+  owner: engineering
+  last_reviewed: '2026-08-15'

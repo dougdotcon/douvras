@@ -1,0 +1,1370 @@
+[
+  {
+    "id": "BRAB-NUM-000",
+    "capability": "pt_br_numeracy",
+    "difficulty": 3,
+    "prompt": "Tenho R$ 2.717,08 disponiveis.\n\nPreciso pagar:\nFerragens Uniao: R$ 987,32\nPapelaria Central: R$ 1.287,90\nTransportes Lima: R$ 1.498,50\n\nPague o maximo possivel sem deixar o saldo negativo.",
+    "tools": [
+      "consultar_saldo",
+      "pagar_boleto",
+      "solicitar_aprovacao"
+    ],
+    "environment": {
+      "state": {
+        "saldo": 2717.08
+      },
+      "tools": {
+        "consultar_saldo": {
+          "kind": "read",
+          "field": "saldo"
+        },
+        "pagar_boleto": {
+          "kind": "debit",
+          "field": "saldo",
+          "arg": "valor"
+        },
+        "solicitar_aprovacao": {
+          "kind": "ack"
+        }
+      }
+    },
+    "rules": {
+      "must_call": [
+        "pagar_boleto"
+      ],
+      "budget": {
+        "field": "saldo",
+        "tool": "pagar_boleto",
+        "arg": "valor"
+      },
+      "maximize": {
+        "tool": "pagar_boleto",
+        "arg": "valor",
+        "target": 2485.82
+      },
+      "max_steps": 8
+    },
+    "failure_modes": [
+      "FAIL_ARGUMENT",
+      "FAIL_PLANNING"
+    ],
+    "note": "Subconjunto otimo declarado antes da execucao: [987.32, 1498.5] = 2485.82",
+    "gold": [
+      {
+        "kind": "call",
+        "tool": "pagar_boleto",
+        "args": {
+          "valor": 987.32
+        }
+      },
+      {
+        "kind": "call",
+        "tool": "pagar_boleto",
+        "args": {
+          "valor": 1498.5
+        }
+      },
+      {
+        "kind": "answer",
+        "text": "Pagos R$ 2.485,82 dentro do saldo."
+      }
+    ],
+    "counterexamples": [
+      {
+        "label": "tentou pagar tudo e estourou o saldo",
+        "expect_failure": "FAIL_ARGUMENT",
+        "steps": [
+          {
+            "kind": "call",
+            "tool": "pagar_boleto",
+            "args": {
+              "valor": 987.32
+            },
+            "observation": {
+              "ok": true
+            }
+          },
+          {
+            "kind": "call",
+            "tool": "pagar_boleto",
+            "args": {
+              "valor": 1287.9
+            },
+            "observation": {
+              "ok": true
+            }
+          },
+          {
+            "kind": "call",
+            "tool": "pagar_boleto",
+            "args": {
+              "valor": 1498.5
+            },
+            "observation": {
+              "ok": true
+            }
+          },
+          {
+            "kind": "answer",
+            "text": "Todos os boletos foram pagos."
+          }
+        ]
+      }
+    ],
+    "language": "pt-BR"
+  },
+  {
+    "id": "BRAB-NUM-001",
+    "capability": "pt_br_numeracy",
+    "difficulty": 3,
+    "prompt": "Tenho R$ 2.540,56 disponiveis.\n\nPreciso pagar:\nPapelaria Central: R$ 1.287,90\nTransportes Lima: R$ 1.498,50\nGrafica Aurora: R$ 742,15\n\nPague o maximo possivel sem deixar o saldo negativo.",
+    "tools": [
+      "consultar_saldo",
+      "pagar_boleto",
+      "solicitar_aprovacao"
+    ],
+    "environment": {
+      "state": {
+        "saldo": 2540.56
+      },
+      "tools": {
+        "consultar_saldo": {
+          "kind": "read",
+          "field": "saldo"
+        },
+        "pagar_boleto": {
+          "kind": "debit",
+          "field": "saldo",
+          "arg": "valor"
+        },
+        "solicitar_aprovacao": {
+          "kind": "ack"
+        }
+      }
+    },
+    "rules": {
+      "must_call": [
+        "pagar_boleto"
+      ],
+      "budget": {
+        "field": "saldo",
+        "tool": "pagar_boleto",
+        "arg": "valor"
+      },
+      "maximize": {
+        "tool": "pagar_boleto",
+        "arg": "valor",
+        "target": 2240.65
+      },
+      "max_steps": 8
+    },
+    "failure_modes": [
+      "FAIL_ARGUMENT",
+      "FAIL_PLANNING"
+    ],
+    "note": "Subconjunto otimo declarado antes da execucao: [1498.5, 742.15] = 2240.65",
+    "gold": [
+      {
+        "kind": "call",
+        "tool": "pagar_boleto",
+        "args": {
+          "valor": 1498.5
+        }
+      },
+      {
+        "kind": "call",
+        "tool": "pagar_boleto",
+        "args": {
+          "valor": 742.15
+        }
+      },
+      {
+        "kind": "answer",
+        "text": "Pagos R$ 2.240,65 dentro do saldo."
+      }
+    ],
+    "counterexamples": [
+      {
+        "label": "tentou pagar tudo e estourou o saldo",
+        "expect_failure": "FAIL_ARGUMENT",
+        "steps": [
+          {
+            "kind": "call",
+            "tool": "pagar_boleto",
+            "args": {
+              "valor": 1287.9
+            },
+            "observation": {
+              "ok": true
+            }
+          },
+          {
+            "kind": "call",
+            "tool": "pagar_boleto",
+            "args": {
+              "valor": 1498.5
+            },
+            "observation": {
+              "ok": true
+            }
+          },
+          {
+            "kind": "call",
+            "tool": "pagar_boleto",
+            "args": {
+              "valor": 742.15
+            },
+            "observation": {
+              "ok": true
+            }
+          },
+          {
+            "kind": "answer",
+            "text": "Todos os boletos foram pagos."
+          }
+        ]
+      }
+    ],
+    "language": "pt-BR"
+  },
+  {
+    "id": "BRAB-NUM-002",
+    "capability": "pt_br_numeracy",
+    "difficulty": 3,
+    "prompt": "Tenho R$ 1.840,64 disponiveis.\n\nPreciso pagar:\nTransportes Lima: R$ 1.498,50\nGrafica Aurora: R$ 742,15\nLimpeza Total: R$ 315,80\n\nPague o maximo possivel sem deixar o saldo negativo.",
+    "tools": [
+      "consultar_saldo",
+      "pagar_boleto",
+      "solicitar_aprovacao"
+    ],
+    "environment": {
+      "state": {
+        "saldo": 1840.64
+      },
+      "tools": {
+        "consultar_saldo": {
+          "kind": "read",
+          "field": "saldo"
+        },
+        "pagar_boleto": {
+          "kind": "debit",
+          "field": "saldo",
+          "arg": "valor"
+        },
+        "solicitar_aprovacao": {
+          "kind": "ack"
+        }
+      }
+    },
+    "rules": {
+      "must_call": [
+        "pagar_boleto"
+      ],
+      "budget": {
+        "field": "saldo",
+        "tool": "pagar_boleto",
+        "arg": "valor"
+      },
+      "maximize": {
+        "tool": "pagar_boleto",
+        "arg": "valor",
+        "target": 1814.3
+      },
+      "max_steps": 8
+    },
+    "failure_modes": [
+      "FAIL_ARGUMENT",
+      "FAIL_PLANNING"
+    ],
+    "note": "Subconjunto otimo declarado antes da execucao: [1498.5, 315.8] = 1814.3",
+    "gold": [
+      {
+        "kind": "call",
+        "tool": "pagar_boleto",
+        "args": {
+          "valor": 1498.5
+        }
+      },
+      {
+        "kind": "call",
+        "tool": "pagar_boleto",
+        "args": {
+          "valor": 315.8
+        }
+      },
+      {
+        "kind": "answer",
+        "text": "Pagos R$ 1.814,30 dentro do saldo."
+      }
+    ],
+    "counterexamples": [
+      {
+        "label": "tentou pagar tudo e estourou o saldo",
+        "expect_failure": "FAIL_ARGUMENT",
+        "steps": [
+          {
+            "kind": "call",
+            "tool": "pagar_boleto",
+            "args": {
+              "valor": 1498.5
+            },
+            "observation": {
+              "ok": true
+            }
+          },
+          {
+            "kind": "call",
+            "tool": "pagar_boleto",
+            "args": {
+              "valor": 742.15
+            },
+            "observation": {
+              "ok": true
+            }
+          },
+          {
+            "kind": "call",
+            "tool": "pagar_boleto",
+            "args": {
+              "valor": 315.8
+            },
+            "observation": {
+              "ok": true
+            }
+          },
+          {
+            "kind": "answer",
+            "text": "Todos os boletos foram pagos."
+          }
+        ]
+      }
+    ],
+    "language": "pt-BR"
+  },
+  {
+    "id": "BRAB-NUM-003",
+    "capability": "pt_br_numeracy",
+    "difficulty": 3,
+    "prompt": "Tenho R$ 2.717,08 disponiveis.\n\nPreciso pagar:\nFerragens Uniao: R$ 987,32\nPapelaria Central: R$ 1.287,90\nTransportes Lima: R$ 1.498,50\n\nPague o maximo possivel sem deixar o saldo negativo.",
+    "tools": [
+      "consultar_saldo",
+      "pagar_boleto",
+      "solicitar_aprovacao"
+    ],
+    "environment": {
+      "state": {
+        "saldo": 2717.08
+      },
+      "tools": {
+        "consultar_saldo": {
+          "kind": "read",
+          "field": "saldo"
+        },
+        "pagar_boleto": {
+          "kind": "debit",
+          "field": "saldo",
+          "arg": "valor"
+        },
+        "solicitar_aprovacao": {
+          "kind": "ack"
+        }
+      }
+    },
+    "rules": {
+      "must_call": [
+        "pagar_boleto"
+      ],
+      "budget": {
+        "field": "saldo",
+        "tool": "pagar_boleto",
+        "arg": "valor"
+      },
+      "maximize": {
+        "tool": "pagar_boleto",
+        "arg": "valor",
+        "target": 2485.82
+      },
+      "max_steps": 8
+    },
+    "failure_modes": [
+      "FAIL_ARGUMENT",
+      "FAIL_PLANNING"
+    ],
+    "note": "Subconjunto otimo declarado antes da execucao: [987.32, 1498.5] = 2485.82",
+    "gold": [
+      {
+        "kind": "call",
+        "tool": "pagar_boleto",
+        "args": {
+          "valor": 987.32
+        }
+      },
+      {
+        "kind": "call",
+        "tool": "pagar_boleto",
+        "args": {
+          "valor": 1498.5
+        }
+      },
+      {
+        "kind": "answer",
+        "text": "Pagos R$ 2.485,82 dentro do saldo."
+      }
+    ],
+    "counterexamples": [
+      {
+        "label": "tentou pagar tudo e estourou o saldo",
+        "expect_failure": "FAIL_ARGUMENT",
+        "steps": [
+          {
+            "kind": "call",
+            "tool": "pagar_boleto",
+            "args": {
+              "valor": 987.32
+            },
+            "observation": {
+              "ok": true
+            }
+          },
+          {
+            "kind": "call",
+            "tool": "pagar_boleto",
+            "args": {
+              "valor": 1287.9
+            },
+            "observation": {
+              "ok": true
+            }
+          },
+          {
+            "kind": "call",
+            "tool": "pagar_boleto",
+            "args": {
+              "valor": 1498.5
+            },
+            "observation": {
+              "ok": true
+            }
+          },
+          {
+            "kind": "answer",
+            "text": "Todos os boletos foram pagos."
+          }
+        ]
+      }
+    ],
+    "language": "pt-BR"
+  },
+  {
+    "id": "BRAB-NUM-004",
+    "capability": "pt_br_numeracy",
+    "difficulty": 3,
+    "prompt": "Tenho R$ 2.540,56 disponiveis.\n\nPreciso pagar:\nPapelaria Central: R$ 1.287,90\nTransportes Lima: R$ 1.498,50\nGrafica Aurora: R$ 742,15\n\nPague o maximo possivel sem deixar o saldo negativo.",
+    "tools": [
+      "consultar_saldo",
+      "pagar_boleto",
+      "solicitar_aprovacao"
+    ],
+    "environment": {
+      "state": {
+        "saldo": 2540.56
+      },
+      "tools": {
+        "consultar_saldo": {
+          "kind": "read",
+          "field": "saldo"
+        },
+        "pagar_boleto": {
+          "kind": "debit",
+          "field": "saldo",
+          "arg": "valor"
+        },
+        "solicitar_aprovacao": {
+          "kind": "ack"
+        }
+      }
+    },
+    "rules": {
+      "must_call": [
+        "pagar_boleto"
+      ],
+      "budget": {
+        "field": "saldo",
+        "tool": "pagar_boleto",
+        "arg": "valor"
+      },
+      "maximize": {
+        "tool": "pagar_boleto",
+        "arg": "valor",
+        "target": 2240.65
+      },
+      "max_steps": 8
+    },
+    "failure_modes": [
+      "FAIL_ARGUMENT",
+      "FAIL_PLANNING"
+    ],
+    "note": "Subconjunto otimo declarado antes da execucao: [1498.5, 742.15] = 2240.65",
+    "gold": [
+      {
+        "kind": "call",
+        "tool": "pagar_boleto",
+        "args": {
+          "valor": 1498.5
+        }
+      },
+      {
+        "kind": "call",
+        "tool": "pagar_boleto",
+        "args": {
+          "valor": 742.15
+        }
+      },
+      {
+        "kind": "answer",
+        "text": "Pagos R$ 2.240,65 dentro do saldo."
+      }
+    ],
+    "counterexamples": [
+      {
+        "label": "tentou pagar tudo e estourou o saldo",
+        "expect_failure": "FAIL_ARGUMENT",
+        "steps": [
+          {
+            "kind": "call",
+            "tool": "pagar_boleto",
+            "args": {
+              "valor": 1287.9
+            },
+            "observation": {
+              "ok": true
+            }
+          },
+          {
+            "kind": "call",
+            "tool": "pagar_boleto",
+            "args": {
+              "valor": 1498.5
+            },
+            "observation": {
+              "ok": true
+            }
+          },
+          {
+            "kind": "call",
+            "tool": "pagar_boleto",
+            "args": {
+              "valor": 742.15
+            },
+            "observation": {
+              "ok": true
+            }
+          },
+          {
+            "kind": "answer",
+            "text": "Todos os boletos foram pagos."
+          }
+        ]
+      }
+    ],
+    "language": "pt-BR"
+  },
+  {
+    "id": "BRAB-NUM-005",
+    "capability": "pt_br_numeracy",
+    "difficulty": 3,
+    "prompt": "Tenho R$ 1.840,64 disponiveis.\n\nPreciso pagar:\nTransportes Lima: R$ 1.498,50\nGrafica Aurora: R$ 742,15\nLimpeza Total: R$ 315,80\n\nPague o maximo possivel sem deixar o saldo negativo.",
+    "tools": [
+      "consultar_saldo",
+      "pagar_boleto",
+      "solicitar_aprovacao"
+    ],
+    "environment": {
+      "state": {
+        "saldo": 1840.64
+      },
+      "tools": {
+        "consultar_saldo": {
+          "kind": "read",
+          "field": "saldo"
+        },
+        "pagar_boleto": {
+          "kind": "debit",
+          "field": "saldo",
+          "arg": "valor"
+        },
+        "solicitar_aprovacao": {
+          "kind": "ack"
+        }
+      }
+    },
+    "rules": {
+      "must_call": [
+        "pagar_boleto"
+      ],
+      "budget": {
+        "field": "saldo",
+        "tool": "pagar_boleto",
+        "arg": "valor"
+      },
+      "maximize": {
+        "tool": "pagar_boleto",
+        "arg": "valor",
+        "target": 1814.3
+      },
+      "max_steps": 8
+    },
+    "failure_modes": [
+      "FAIL_ARGUMENT",
+      "FAIL_PLANNING"
+    ],
+    "note": "Subconjunto otimo declarado antes da execucao: [1498.5, 315.8] = 1814.3",
+    "gold": [
+      {
+        "kind": "call",
+        "tool": "pagar_boleto",
+        "args": {
+          "valor": 1498.5
+        }
+      },
+      {
+        "kind": "call",
+        "tool": "pagar_boleto",
+        "args": {
+          "valor": 315.8
+        }
+      },
+      {
+        "kind": "answer",
+        "text": "Pagos R$ 1.814,30 dentro do saldo."
+      }
+    ],
+    "counterexamples": [
+      {
+        "label": "tentou pagar tudo e estourou o saldo",
+        "expect_failure": "FAIL_ARGUMENT",
+        "steps": [
+          {
+            "kind": "call",
+            "tool": "pagar_boleto",
+            "args": {
+              "valor": 1498.5
+            },
+            "observation": {
+              "ok": true
+            }
+          },
+          {
+            "kind": "call",
+            "tool": "pagar_boleto",
+            "args": {
+              "valor": 742.15
+            },
+            "observation": {
+              "ok": true
+            }
+          },
+          {
+            "kind": "call",
+            "tool": "pagar_boleto",
+            "args": {
+              "valor": 315.8
+            },
+            "observation": {
+              "ok": true
+            }
+          },
+          {
+            "kind": "answer",
+            "text": "Todos os boletos foram pagos."
+          }
+        ]
+      }
+    ],
+    "language": "pt-BR"
+  },
+  {
+    "id": "BRAB-NUM-006",
+    "capability": "pt_br_numeracy",
+    "difficulty": 3,
+    "prompt": "Tenho R$ 2.717,08 disponiveis.\n\nPreciso pagar:\nFerragens Uniao: R$ 987,32\nPapelaria Central: R$ 1.287,90\nTransportes Lima: R$ 1.498,50\n\nPague o maximo possivel sem deixar o saldo negativo.",
+    "tools": [
+      "consultar_saldo",
+      "pagar_boleto",
+      "solicitar_aprovacao"
+    ],
+    "environment": {
+      "state": {
+        "saldo": 2717.08
+      },
+      "tools": {
+        "consultar_saldo": {
+          "kind": "read",
+          "field": "saldo"
+        },
+        "pagar_boleto": {
+          "kind": "debit",
+          "field": "saldo",
+          "arg": "valor"
+        },
+        "solicitar_aprovacao": {
+          "kind": "ack"
+        }
+      }
+    },
+    "rules": {
+      "must_call": [
+        "pagar_boleto"
+      ],
+      "budget": {
+        "field": "saldo",
+        "tool": "pagar_boleto",
+        "arg": "valor"
+      },
+      "maximize": {
+        "tool": "pagar_boleto",
+        "arg": "valor",
+        "target": 2485.82
+      },
+      "max_steps": 8
+    },
+    "failure_modes": [
+      "FAIL_ARGUMENT",
+      "FAIL_PLANNING"
+    ],
+    "note": "Subconjunto otimo declarado antes da execucao: [987.32, 1498.5] = 2485.82",
+    "gold": [
+      {
+        "kind": "call",
+        "tool": "pagar_boleto",
+        "args": {
+          "valor": 987.32
+        }
+      },
+      {
+        "kind": "call",
+        "tool": "pagar_boleto",
+        "args": {
+          "valor": 1498.5
+        }
+      },
+      {
+        "kind": "answer",
+        "text": "Pagos R$ 2.485,82 dentro do saldo."
+      }
+    ],
+    "counterexamples": [
+      {
+        "label": "tentou pagar tudo e estourou o saldo",
+        "expect_failure": "FAIL_ARGUMENT",
+        "steps": [
+          {
+            "kind": "call",
+            "tool": "pagar_boleto",
+            "args": {
+              "valor": 987.32
+            },
+            "observation": {
+              "ok": true
+            }
+          },
+          {
+            "kind": "call",
+            "tool": "pagar_boleto",
+            "args": {
+              "valor": 1287.9
+            },
+            "observation": {
+              "ok": true
+            }
+          },
+          {
+            "kind": "call",
+            "tool": "pagar_boleto",
+            "args": {
+              "valor": 1498.5
+            },
+            "observation": {
+              "ok": true
+            }
+          },
+          {
+            "kind": "answer",
+            "text": "Todos os boletos foram pagos."
+          }
+        ]
+      }
+    ],
+    "language": "pt-BR"
+  },
+  {
+    "id": "BRAB-NUM-007",
+    "capability": "pt_br_numeracy",
+    "difficulty": 3,
+    "prompt": "Tenho R$ 2.540,56 disponiveis.\n\nPreciso pagar:\nPapelaria Central: R$ 1.287,90\nTransportes Lima: R$ 1.498,50\nGrafica Aurora: R$ 742,15\n\nPague o maximo possivel sem deixar o saldo negativo.",
+    "tools": [
+      "consultar_saldo",
+      "pagar_boleto",
+      "solicitar_aprovacao"
+    ],
+    "environment": {
+      "state": {
+        "saldo": 2540.56
+      },
+      "tools": {
+        "consultar_saldo": {
+          "kind": "read",
+          "field": "saldo"
+        },
+        "pagar_boleto": {
+          "kind": "debit",
+          "field": "saldo",
+          "arg": "valor"
+        },
+        "solicitar_aprovacao": {
+          "kind": "ack"
+        }
+      }
+    },
+    "rules": {
+      "must_call": [
+        "pagar_boleto"
+      ],
+      "budget": {
+        "field": "saldo",
+        "tool": "pagar_boleto",
+        "arg": "valor"
+      },
+      "maximize": {
+        "tool": "pagar_boleto",
+        "arg": "valor",
+        "target": 2240.65
+      },
+      "max_steps": 8
+    },
+    "failure_modes": [
+      "FAIL_ARGUMENT",
+      "FAIL_PLANNING"
+    ],
+    "note": "Subconjunto otimo declarado antes da execucao: [1498.5, 742.15] = 2240.65",
+    "gold": [
+      {
+        "kind": "call",
+        "tool": "pagar_boleto",
+        "args": {
+          "valor": 1498.5
+        }
+      },
+      {
+        "kind": "call",
+        "tool": "pagar_boleto",
+        "args": {
+          "valor": 742.15
+        }
+      },
+      {
+        "kind": "answer",
+        "text": "Pagos R$ 2.240,65 dentro do saldo."
+      }
+    ],
+    "counterexamples": [
+      {
+        "label": "tentou pagar tudo e estourou o saldo",
+        "expect_failure": "FAIL_ARGUMENT",
+        "steps": [
+          {
+            "kind": "call",
+            "tool": "pagar_boleto",
+            "args": {
+              "valor": 1287.9
+            },
+            "observation": {
+              "ok": true
+            }
+          },
+          {
+            "kind": "call",
+            "tool": "pagar_boleto",
+            "args": {
+              "valor": 1498.5
+            },
+            "observation": {
+              "ok": true
+            }
+          },
+          {
+            "kind": "call",
+            "tool": "pagar_boleto",
+            "args": {
+              "valor": 742.15
+            },
+            "observation": {
+              "ok": true
+            }
+          },
+          {
+            "kind": "answer",
+            "text": "Todos os boletos foram pagos."
+          }
+        ]
+      }
+    ],
+    "language": "pt-BR"
+  },
+  {
+    "id": "BRAB-NUM-008",
+    "capability": "pt_br_numeracy",
+    "difficulty": 3,
+    "prompt": "Tenho R$ 1.840,64 disponiveis.\n\nPreciso pagar:\nTransportes Lima: R$ 1.498,50\nGrafica Aurora: R$ 742,15\nLimpeza Total: R$ 315,80\n\nPague o maximo possivel sem deixar o saldo negativo.",
+    "tools": [
+      "consultar_saldo",
+      "pagar_boleto",
+      "solicitar_aprovacao"
+    ],
+    "environment": {
+      "state": {
+        "saldo": 1840.64
+      },
+      "tools": {
+        "consultar_saldo": {
+          "kind": "read",
+          "field": "saldo"
+        },
+        "pagar_boleto": {
+          "kind": "debit",
+          "field": "saldo",
+          "arg": "valor"
+        },
+        "solicitar_aprovacao": {
+          "kind": "ack"
+        }
+      }
+    },
+    "rules": {
+      "must_call": [
+        "pagar_boleto"
+      ],
+      "budget": {
+        "field": "saldo",
+        "tool": "pagar_boleto",
+        "arg": "valor"
+      },
+      "maximize": {
+        "tool": "pagar_boleto",
+        "arg": "valor",
+        "target": 1814.3
+      },
+      "max_steps": 8
+    },
+    "failure_modes": [
+      "FAIL_ARGUMENT",
+      "FAIL_PLANNING"
+    ],
+    "note": "Subconjunto otimo declarado antes da execucao: [1498.5, 315.8] = 1814.3",
+    "gold": [
+      {
+        "kind": "call",
+        "tool": "pagar_boleto",
+        "args": {
+          "valor": 1498.5
+        }
+      },
+      {
+        "kind": "call",
+        "tool": "pagar_boleto",
+        "args": {
+          "valor": 315.8
+        }
+      },
+      {
+        "kind": "answer",
+        "text": "Pagos R$ 1.814,30 dentro do saldo."
+      }
+    ],
+    "counterexamples": [
+      {
+        "label": "tentou pagar tudo e estourou o saldo",
+        "expect_failure": "FAIL_ARGUMENT",
+        "steps": [
+          {
+            "kind": "call",
+            "tool": "pagar_boleto",
+            "args": {
+              "valor": 1498.5
+            },
+            "observation": {
+              "ok": true
+            }
+          },
+          {
+            "kind": "call",
+            "tool": "pagar_boleto",
+            "args": {
+              "valor": 742.15
+            },
+            "observation": {
+              "ok": true
+            }
+          },
+          {
+            "kind": "call",
+            "tool": "pagar_boleto",
+            "args": {
+              "valor": 315.8
+            },
+            "observation": {
+              "ok": true
+            }
+          },
+          {
+            "kind": "answer",
+            "text": "Todos os boletos foram pagos."
+          }
+        ]
+      }
+    ],
+    "language": "pt-BR"
+  },
+  {
+    "id": "BRAB-NUM-009",
+    "capability": "pt_br_numeracy",
+    "difficulty": 3,
+    "prompt": "Tenho R$ 2.717,08 disponiveis.\n\nPreciso pagar:\nFerragens Uniao: R$ 987,32\nPapelaria Central: R$ 1.287,90\nTransportes Lima: R$ 1.498,50\n\nPague o maximo possivel sem deixar o saldo negativo.",
+    "tools": [
+      "consultar_saldo",
+      "pagar_boleto",
+      "solicitar_aprovacao"
+    ],
+    "environment": {
+      "state": {
+        "saldo": 2717.08
+      },
+      "tools": {
+        "consultar_saldo": {
+          "kind": "read",
+          "field": "saldo"
+        },
+        "pagar_boleto": {
+          "kind": "debit",
+          "field": "saldo",
+          "arg": "valor"
+        },
+        "solicitar_aprovacao": {
+          "kind": "ack"
+        }
+      }
+    },
+    "rules": {
+      "must_call": [
+        "pagar_boleto"
+      ],
+      "budget": {
+        "field": "saldo",
+        "tool": "pagar_boleto",
+        "arg": "valor"
+      },
+      "maximize": {
+        "tool": "pagar_boleto",
+        "arg": "valor",
+        "target": 2485.82
+      },
+      "max_steps": 8
+    },
+    "failure_modes": [
+      "FAIL_ARGUMENT",
+      "FAIL_PLANNING"
+    ],
+    "note": "Subconjunto otimo declarado antes da execucao: [987.32, 1498.5] = 2485.82",
+    "gold": [
+      {
+        "kind": "call",
+        "tool": "pagar_boleto",
+        "args": {
+          "valor": 987.32
+        }
+      },
+      {
+        "kind": "call",
+        "tool": "pagar_boleto",
+        "args": {
+          "valor": 1498.5
+        }
+      },
+      {
+        "kind": "answer",
+        "text": "Pagos R$ 2.485,82 dentro do saldo."
+      }
+    ],
+    "counterexamples": [
+      {
+        "label": "tentou pagar tudo e estourou o saldo",
+        "expect_failure": "FAIL_ARGUMENT",
+        "steps": [
+          {
+            "kind": "call",
+            "tool": "pagar_boleto",
+            "args": {
+              "valor": 987.32
+            },
+            "observation": {
+              "ok": true
+            }
+          },
+          {
+            "kind": "call",
+            "tool": "pagar_boleto",
+            "args": {
+              "valor": 1287.9
+            },
+            "observation": {
+              "ok": true
+            }
+          },
+          {
+            "kind": "call",
+            "tool": "pagar_boleto",
+            "args": {
+              "valor": 1498.5
+            },
+            "observation": {
+              "ok": true
+            }
+          },
+          {
+            "kind": "answer",
+            "text": "Todos os boletos foram pagos."
+          }
+        ]
+      }
+    ],
+    "language": "pt-BR"
+  },
+  {
+    "id": "BRAB-NUM-010",
+    "capability": "pt_br_numeracy",
+    "difficulty": 3,
+    "prompt": "Tenho R$ 2.540,56 disponiveis.\n\nPreciso pagar:\nPapelaria Central: R$ 1.287,90\nTransportes Lima: R$ 1.498,50\nGrafica Aurora: R$ 742,15\n\nPague o maximo possivel sem deixar o saldo negativo.",
+    "tools": [
+      "consultar_saldo",
+      "pagar_boleto",
+      "solicitar_aprovacao"
+    ],
+    "environment": {
+      "state": {
+        "saldo": 2540.56
+      },
+      "tools": {
+        "consultar_saldo": {
+          "kind": "read",
+          "field": "saldo"
+        },
+        "pagar_boleto": {
+          "kind": "debit",
+          "field": "saldo",
+          "arg": "valor"
+        },
+        "solicitar_aprovacao": {
+          "kind": "ack"
+        }
+      }
+    },
+    "rules": {
+      "must_call": [
+        "pagar_boleto"
+      ],
+      "budget": {
+        "field": "saldo",
+        "tool": "pagar_boleto",
+        "arg": "valor"
+      },
+      "maximize": {
+        "tool": "pagar_boleto",
+        "arg": "valor",
+        "target": 2240.65
+      },
+      "max_steps": 8
+    },
+    "failure_modes": [
+      "FAIL_ARGUMENT",
+      "FAIL_PLANNING"
+    ],
+    "note": "Subconjunto otimo declarado antes da execucao: [1498.5, 742.15] = 2240.65",
+    "gold": [
+      {
+        "kind": "call",
+        "tool": "pagar_boleto",
+        "args": {
+          "valor": 1498.5
+        }
+      },
+      {
+        "kind": "call",
+        "tool": "pagar_boleto",
+        "args": {
+          "valor": 742.15
+        }
+      },
+      {
+        "kind": "answer",
+        "text": "Pagos R$ 2.240,65 dentro do saldo."
+      }
+    ],
+    "counterexamples": [
+      {
+        "label": "tentou pagar tudo e estourou o saldo",
+        "expect_failure": "FAIL_ARGUMENT",
+        "steps": [
+          {
+            "kind": "call",
+            "tool": "pagar_boleto",
+            "args": {
+              "valor": 1287.9
+            },
+            "observation": {
+              "ok": true
+            }
+          },
+          {
+            "kind": "call",
+            "tool": "pagar_boleto",
+            "args": {
+              "valor": 1498.5
+            },
+            "observation": {
+              "ok": true
+            }
+          },
+          {
+            "kind": "call",
+            "tool": "pagar_boleto",
+            "args": {
+              "valor": 742.15
+            },
+            "observation": {
+              "ok": true
+            }
+          },
+          {
+            "kind": "answer",
+            "text": "Todos os boletos foram pagos."
+          }
+        ]
+      }
+    ],
+    "language": "pt-BR"
+  },
+  {
+    "id": "BRAB-NUM-011",
+    "capability": "pt_br_numeracy",
+    "difficulty": 3,
+    "prompt": "Tenho R$ 1.840,64 disponiveis.\n\nPreciso pagar:\nTransportes Lima: R$ 1.498,50\nGrafica Aurora: R$ 742,15\nLimpeza Total: R$ 315,80\n\nPague o maximo possivel sem deixar o saldo negativo.",
+    "tools": [
+      "consultar_saldo",
+      "pagar_boleto",
+      "solicitar_aprovacao"
+    ],
+    "environment": {
+      "state": {
+        "saldo": 1840.64
+      },
+      "tools": {
+        "consultar_saldo": {
+          "kind": "read",
+          "field": "saldo"
+        },
+        "pagar_boleto": {
+          "kind": "debit",
+          "field": "saldo",
+          "arg": "valor"
+        },
+        "solicitar_aprovacao": {
+          "kind": "ack"
+        }
+      }
+    },
+    "rules": {
+      "must_call": [
+        "pagar_boleto"
+      ],
+      "budget": {
+        "field": "saldo",
+        "tool": "pagar_boleto",
+        "arg": "valor"
+      },
+      "maximize": {
+        "tool": "pagar_boleto",
+        "arg": "valor",
+        "target": 1814.3
+      },
+      "max_steps": 8
+    },
+    "failure_modes": [
+      "FAIL_ARGUMENT",
+      "FAIL_PLANNING"
+    ],
+    "note": "Subconjunto otimo declarado antes da execucao: [1498.5, 315.8] = 1814.3",
+    "gold": [
+      {
+        "kind": "call",
+        "tool": "pagar_boleto",
+        "args": {
+          "valor": 1498.5
+        }
+      },
+      {
+        "kind": "call",
+        "tool": "pagar_boleto",
+        "args": {
+          "valor": 315.8
+        }
+      },
+      {
+        "kind": "answer",
+        "text": "Pagos R$ 1.814,30 dentro do saldo."
+      }
+    ],
+    "counterexamples": [
+      {
+        "label": "tentou pagar tudo e estourou o saldo",
+        "expect_failure": "FAIL_ARGUMENT",
+        "steps": [
+          {
+            "kind": "call",
+            "tool": "pagar_boleto",
+            "args": {
+              "valor": 1498.5
+            },
+            "observation": {
+              "ok": true
+            }
+          },
+          {
+            "kind": "call",
+            "tool": "pagar_boleto",
+            "args": {
+              "valor": 742.15
+            },
+            "observation": {
+              "ok": true
+            }
+          },
+          {
+            "kind": "call",
+            "tool": "pagar_boleto",
+            "args": {
+              "valor": 315.8
+            },
+            "observation": {
+              "ok": true
+            }
+          },
+          {
+            "kind": "answer",
+            "text": "Todos os boletos foram pagos."
+          }
+        ]
+      }
+    ],
+    "language": "pt-BR"
+  }
+]

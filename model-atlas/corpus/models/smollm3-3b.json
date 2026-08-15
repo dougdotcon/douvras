@@ -1,0 +1,16 @@
+{
+  "douvras": {
+    "id": "smollm3-3b",
+    "repo": "HuggingFaceTB/SmolLM3-3B",
+    "family": "smollm",
+    "params_b": 3.0,
+    "architecture": "",
+    "context_len": null,
+    "license": "",
+    "quantizations": ["f16", "q8", "q6", "q5", "q4", "q3"],
+    "weights_local": false,
+    "provenance": "DOCUMENT_SECONDARY",
+    "source": "docs/01_TESE_LABORATORIO_DE_DADOS_E_EVALS.md secao 11",
+    "note": "Entra no corpus como teto de tamanho da maquina de referencia, nao como concorrente: em 16 GB sem GPU ele cabe quantizado e serve para testar se o instrumento separa modelos de portes diferentes."
+  }
+}

@@ -1,0 +1,16 @@
+{
+  "douvras": {
+    "id": "tucano2-0.5b",
+    "repo": "Polygl0t/Tucano2-qwen-0.5B-Base",
+    "family": "tucano",
+    "params_b": 0.5,
+    "architecture": "Qwen2ForCausalLM",
+    "context_len": null,
+    "license": "",
+    "quantizations": ["f16", "q8", "q6", "q5", "q4"],
+    "weights_local": false,
+    "provenance": "DOCUMENT_SECONDARY",
+    "source": "docs/01_TESE_LABORATORIO_DE_DADOS_E_EVALS.md secao 5.1",
+    "note": "Familia aberta focada em portugues. `params_b` e aproximado: a fonte fala em faixa de ~0,5B a 3,7B, nao em contagem exata. `context_len` e `license` ficam nulos porque a fonte nao os afirma — preencher por plausibilidade seria inventar proveniencia."
+  }
+}

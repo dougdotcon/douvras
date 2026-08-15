@@ -1,0 +1,195 @@
+"""Registro de modelos reais do Hub, com proveniencia declarada.
+
+A diferenca em relacao ao `registry` do Silicon Atlas nao e estrutural, e de honestidade sobre
+a fonte. La, um `config.json` transcrito podia ser conferido contra a contagem de parametros
+publicada — havia um falsificador barato. Aqui, os numeros vieram de documentos internos
+(`docs/01`, `docs/02`), que por sua vez citam posts e cards de modelo. Sao **aproximados por
+construcao**: "cerca de 0,5B" nao vira `500_000_000` sem alguem inventar sete digitos.
+
+Por isso:
+
+- `params_b` e declaradamente aproximado e carrega `A-101`;
+- campos que a fonte nao afirma ficam `None`, nunca preenchidos por plausibilidade;
+- `provenance` distingue o que foi conferido no upstream do que foi transcrito;
+- enquanto nada for conferido, `G-108` fica aberta e todo derivado para em
+  `CONDITIONAL_RESULT`.
+
+`matlas registry verify` fecha `G-108` — e exige rede, portanto esta fora do caminho principal.
+"""
+
+from __future__ import annotations
+
+import json
+from dataclasses import dataclass
+from enum import StrEnum
+from pathlib import Path
+from typing import Any, Iterator, Sequence
+
+from douvras_core.paths import project_root
+from douvras_core.status import Finding, Status
+
+MODELS_DIR = project_root("model-atlas") / "corpus" / "models"
+
+
+class Provenance(StrEnum):
+    """De onde veio a ficha do modelo. Nunca inferida: declarada no corpus."""
+
+    DOCUMENT_SECONDARY = "DOCUMENT_SECONDARY"
+    UPSTREAM_VERIFIED = "UPSTREAM_VERIFIED"
+    CLIENT_SUPPLIED = "CLIENT_SUPPLIED"
+
+
+#: Bytes por parametro por esquema de quantizacao (media efetiva, incluindo escalas).
+#: Valores de engenharia do formato GGUF, nao medicao — carregam `A-102`.
+BYTES_PER_PARAM: dict[str, float] = {
+    "f16": 2.0,
+    "q8": 1.06,
+    "q6": 0.82,
+    "q5": 0.69,
+    "q4": 0.56,
+    "q3": 0.44,
+}
+
+
+class UnknownQuantization(KeyError):
+    """Esquema de quantizacao fora da tabela declarada."""
+
+
+@dataclass(frozen=True)
+class HFModelSpec:
+    id: str
+    repo: str
+    family: str
+    provenance: Provenance
+    source: str
+    revision: str = "main"
+    params_b: float | None = None
+    architecture: str = ""
+    context_len: int | None = None
+    license: str = ""
+    quantizations: tuple[str, ...] = ()
+    weights_local: bool = False
+    note: str = ""
+
+    @property
+    def params(self) -> int | None:
+        """Contagem absoluta de parametros, quando a fonte permite. Aproximada (`A-101`)."""
+        return int(self.params_b * 1e9) if self.params_b is not None else None
+
+    def weights_bytes(self, quant: str) -> float | None:
+        """Footprint dos pesos residentes. Nao inclui KV cache nem ativacoes.
+
+        A omissao e deliberada e declarada: estimar KV cache exige numero de camadas e de
+        cabecas KV, que este corpus nao tem com proveniencia. Publicar o total como se fosse
+        o consumo real do processo seria o erro que o Silicon Atlas cometeu com `embed_tokens`
+        e levou um ciclo para achar.
+        """
+        if quant not in BYTES_PER_PARAM:
+            raise UnknownQuantization(quant)
+        p = self.params
+        return None if p is None else p * BYTES_PER_PARAM[quant]
+
+    def as_dict(self) -> dict[str, Any]:
+        return {
+            "id": self.id,
+            "repo": self.repo,
+            "revision": self.revision,
+            "family": self.family,
+            "params_b": self.params_b,
+            "architecture": self.architecture,
+            "context_len": self.context_len,
+            "license": self.license,
+            "provenance": str(self.provenance),
+            "quantizations": list(self.quantizations),
+            "weights_local": self.weights_local,
+            "source": self.source,
+        }
+
+
+def _parse(doc: dict[str, Any]) -> HFModelSpec:
+    d = doc.get("douvras", doc)
+    return HFModelSpec(
+        id=str(d["id"]),
+        repo=str(d.get("repo", "")),
+        family=str(d.get("family", "")),
+        provenance=Provenance(d.get("provenance", "DOCUMENT_SECONDARY")),
+        source=str(d.get("source", "")),
+        revision=str(d.get("revision", "main")),
+        params_b=(None if d.get("params_b") is None else float(d["params_b"])),
+        architecture=str(d.get("architecture", "")),
+        context_len=(None if d.get("context_len") is None else int(d["context_len"])),
+        license=str(d.get("license", "")),
+        quantizations=tuple(d.get("quantizations", ())),
+        weights_local=bool(d.get("weights_local", False)),
+        note=str(d.get("note", "")),
+    )
+
+
+class Registry:
+    def __init__(self, specs: Sequence[HFModelSpec]):
+        self.specs = list(specs)
+
+    @classmethod
+    def load(cls, directory: Path | None = None) -> "Registry":
+        d = Path(directory or MODELS_DIR)
+        return cls([_parse(json.loads(f.read_text(encoding="utf-8")))
+                    for f in sorted(d.glob("*.json"))])
+
+    def __len__(self) -> int:
+        return len(self.specs)
+
+    def __iter__(self) -> Iterator[HFModelSpec]:
+        return iter(self.specs)
+
+    def __getitem__(self, model_id: str) -> HFModelSpec:
+        for s in self.specs:
+            if s.id == model_id:
+                return s
+        raise KeyError(model_id)
+
+
+def corpus_provenance(reg: Registry) -> Finding:
+    """Fracao do corpus conferida contra o upstream.
+
+    Devolve `0.0` **declarado**, nao ausencia: zero verificado e um fato sobre o corpus, e o
+    numero que deve envergonhar o proximo ciclo ate subir.
+    """
+    if not len(reg):
+        return Finding("proveniencia_verificada", None, Status.OPEN_GAP, gaps=("G-108",))
+    verificados = sum(1 for s in reg if s.provenance is Provenance.UPSTREAM_VERIFIED)
+    frac = verificados / len(reg)
+    return Finding(
+        "proveniencia_verificada",
+        round(frac, 4),
+        Status.OBSERVATION if frac == 1.0 else Status.CONDITIONAL_RESULT,
+        gaps=() if frac == 1.0 else ("G-108",),
+        note=f"{verificados}/{len(reg)} fichas conferidas na fonte",
+    )
+
+
+def weights_available(reg: Registry) -> Finding:
+    """Ha pesos baixados para executar alguma coisa?
+
+    E o `Finding` do qual todo o resto depende: sem pesos, nenhuma capacidade e medida, e o
+    assessment inteiro sai como ausencia declarada em vez de numero bonito.
+    """
+    n = sum(1 for s in reg if s.weights_local)
+    return Finding(
+        "modelos_com_pesos_locais",
+        n,
+        Status.OBSERVATION,
+        unit="modelos",
+        note="execucao real exige o extra [run] e download; ver ADR-0006",
+    )
+
+
+__all__ = [
+    "HFModelSpec",
+    "Registry",
+    "Provenance",
+    "BYTES_PER_PARAM",
+    "UnknownQuantization",
+    "corpus_provenance",
+    "weights_available",
+    "MODELS_DIR",
+]

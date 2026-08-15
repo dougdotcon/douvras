@@ -1,0 +1,59 @@
+# Registro de evidencia do Model Atlas.
+# Nao misturar categorias (Metodo 4.2): construcao propria, documento secundario, constante de
+# engenharia e prior declarado autorizam status maximos diferentes, e uma media entre eles nao
+# significa nada.
+
+- id: E-101
+  kind: OWN_CONSTRUCTION
+  title: "BR-Agent-Bench v0.1 — 96 tarefas, 132 contraexemplos"
+  produced_by: scripts/build_task_corpus.py
+  max_status: COMPUTATIONAL_EVIDENCE
+  scope: "Autoriza afirmacao sobre o instrumento. Nao autoriza nenhuma afirmacao sobre o mundo:
+    o corpus e sintetico e sua validade externa esta aberta em G-107."
+
+- id: E-102
+  kind: OWN_CONSTRUCTION
+  title: "Verificacao do instrumento — gabarito, contraexemplo, rotulo, determinismo"
+  produced_by: model_atlas.instrument.evaluate_instrument
+  max_status: COMPUTATIONAL_EVIDENCE
+  scope: "Mede acuracia do grader contra exemplos declarados. Nao mede se os exemplos declarados
+    cobrem o espaco de falhas reais (A-106, G-110)."
+
+- id: E-103
+  kind: SECONDARY_DOCUMENT
+  title: "Fichas de Tucano2 0.5B, Qwen3.5 0.8B e SmolLM3 3B"
+  source: docs/01_TESE_LABORATORIO_DE_DADOS_E_EVALS.md
+  max_status: ASSUMPTION
+  scope: "Contagem de parametros aproximada (A-101). Dois saltos de proveniencia: o documento
+    cita posts e colecoes, nao os cards. G-108 fecha com verificacao no Hub."
+
+- id: E-104
+  kind: ENGINEERING_CONSTANT
+  title: "Bytes por parametro por esquema de quantizacao GGUF"
+  source: model_atlas.registry.BYTES_PER_PARAM
+  max_status: ASSUMPTION
+  scope: "Constante de formato, nao medicao de arquivo (A-102). Entra no orcamento de memoria e
+    portanto na resposta 'cabe?'."
+
+- id: E-105
+  kind: DECLARED_PRIOR
+  title: "Priors de capacidade: tratabilidade, valor, custo, estabilidade"
+  source: config/capability_priors.v1.json
+  max_status: ASSUMPTION
+  scope: "Palpite de engenharia (A-104). Entra direto no CSS e portanto em qualquer alvo de
+    dataset. G-104 fecha com tres casos de desfecho conhecido."
+
+- id: E-106
+  kind: ABSENT
+  title: "Execucao de modelo real"
+  source: null
+  max_status: OPEN_GAP
+  scope: "Nao existe. G-101. Enquanto for assim, nenhuma capacidade e medida e o CSS nao tem
+    entrada."
+
+- id: E-107
+  kind: ABSENT
+  title: "Revisao adversarial externa"
+  source: null
+  max_status: OPEN_GAP
+  scope: "Nao existe. G-110. Portao V3 fechado tambem por este motivo, alem de F3."

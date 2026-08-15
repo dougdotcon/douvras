@@ -1,0 +1,986 @@
+[
+  {
+    "id": "BRAB-REC-000",
+    "capability": "error_recovery",
+    "difficulty": 2,
+    "prompt": "Consulte a nota fiscal 2200. A API anda instavel; se falhar, tente novamente antes de responder.",
+    "tools": [
+      "consultar_nota"
+    ],
+    "environment": {
+      "state": {},
+      "tools": {
+        "consultar_nota": {
+          "kind": "error",
+          "error": "HTTP 500",
+          "recover_after": 1,
+          "then": "lookup",
+          "arg": "numero",
+          "table": {
+            "2200": {
+              "valor": 880.4
+            }
+          }
+        }
+      }
+    },
+    "rules": {
+      "must_call": [
+        "consultar_nota"
+      ],
+      "must_retry": {
+        "tool": "consultar_nota",
+        "min_attempts": 2
+      },
+      "must_not_ignore_error": true,
+      "max_steps": 6
+    },
+    "failure_modes": [
+      "FAIL_RECOVERY"
+    ],
+    "gold": [
+      {
+        "kind": "call",
+        "tool": "consultar_nota",
+        "args": {
+          "numero": "2200"
+        }
+      },
+      {
+        "kind": "call",
+        "tool": "consultar_nota",
+        "args": {
+          "numero": "2200"
+        }
+      },
+      {
+        "kind": "answer",
+        "text": "A primeira chamada devolveu erro; na segunda o valor veio: 880.4."
+      }
+    ],
+    "counterexamples": [
+      {
+        "label": "desistiu na primeira falha e respondeu como se tivesse dado certo",
+        "expect_failure": "FAIL_RECOVERY",
+        "steps": [
+          {
+            "kind": "call",
+            "tool": "consultar_nota",
+            "args": {
+              "numero": "2200"
+            },
+            "error": "HTTP 500"
+          },
+          {
+            "kind": "answer",
+            "text": "Consulta concluida com sucesso."
+          }
+        ]
+      }
+    ],
+    "language": "pt-BR"
+  },
+  {
+    "id": "BRAB-REC-001",
+    "capability": "error_recovery",
+    "difficulty": 3,
+    "prompt": "Consulte a nota fiscal 2201. A API anda instavel; se falhar, tente novamente antes de responder.",
+    "tools": [
+      "consultar_nota"
+    ],
+    "environment": {
+      "state": {},
+      "tools": {
+        "consultar_nota": {
+          "kind": "error",
+          "error": "HTTP 500",
+          "recover_after": 1,
+          "then": "lookup",
+          "arg": "numero",
+          "table": {
+            "2201": {
+              "valor": 897.9
+            }
+          }
+        }
+      }
+    },
+    "rules": {
+      "must_call": [
+        "consultar_nota"
+      ],
+      "must_retry": {
+        "tool": "consultar_nota",
+        "min_attempts": 2
+      },
+      "must_not_ignore_error": true,
+      "max_steps": 6
+    },
+    "failure_modes": [
+      "FAIL_RECOVERY"
+    ],
+    "gold": [
+      {
+        "kind": "call",
+        "tool": "consultar_nota",
+        "args": {
+          "numero": "2201"
+        }
+      },
+      {
+        "kind": "call",
+        "tool": "consultar_nota",
+        "args": {
+          "numero": "2201"
+        }
+      },
+      {
+        "kind": "answer",
+        "text": "A primeira chamada devolveu erro; na segunda o valor veio: 897.9."
+      }
+    ],
+    "counterexamples": [
+      {
+        "label": "desistiu na primeira falha e respondeu como se tivesse dado certo",
+        "expect_failure": "FAIL_RECOVERY",
+        "steps": [
+          {
+            "kind": "call",
+            "tool": "consultar_nota",
+            "args": {
+              "numero": "2201"
+            },
+            "error": "HTTP 500"
+          },
+          {
+            "kind": "answer",
+            "text": "Consulta concluida com sucesso."
+          }
+        ]
+      }
+    ],
+    "language": "pt-BR"
+  },
+  {
+    "id": "BRAB-REC-002",
+    "capability": "error_recovery",
+    "difficulty": 2,
+    "prompt": "Consulte a nota fiscal 2202. A API anda instavel; se falhar, tente novamente antes de responder.",
+    "tools": [
+      "consultar_nota"
+    ],
+    "environment": {
+      "state": {},
+      "tools": {
+        "consultar_nota": {
+          "kind": "error",
+          "error": "HTTP 500",
+          "recover_after": 1,
+          "then": "lookup",
+          "arg": "numero",
+          "table": {
+            "2202": {
+              "valor": 915.4
+            }
+          }
+        }
+      }
+    },
+    "rules": {
+      "must_call": [
+        "consultar_nota"
+      ],
+      "must_retry": {
+        "tool": "consultar_nota",
+        "min_attempts": 2
+      },
+      "must_not_ignore_error": true,
+      "max_steps": 6
+    },
+    "failure_modes": [
+      "FAIL_RECOVERY"
+    ],
+    "gold": [
+      {
+        "kind": "call",
+        "tool": "consultar_nota",
+        "args": {
+          "numero": "2202"
+        }
+      },
+      {
+        "kind": "call",
+        "tool": "consultar_nota",
+        "args": {
+          "numero": "2202"
+        }
+      },
+      {
+        "kind": "answer",
+        "text": "A primeira chamada devolveu erro; na segunda o valor veio: 915.4."
+      }
+    ],
+    "counterexamples": [
+      {
+        "label": "desistiu na primeira falha e respondeu como se tivesse dado certo",
+        "expect_failure": "FAIL_RECOVERY",
+        "steps": [
+          {
+            "kind": "call",
+            "tool": "consultar_nota",
+            "args": {
+              "numero": "2202"
+            },
+            "error": "HTTP 500"
+          },
+          {
+            "kind": "answer",
+            "text": "Consulta concluida com sucesso."
+          }
+        ]
+      }
+    ],
+    "language": "pt-BR"
+  },
+  {
+    "id": "BRAB-REC-003",
+    "capability": "error_recovery",
+    "difficulty": 3,
+    "prompt": "Consulte a nota fiscal 2203. A API anda instavel; se falhar, tente novamente antes de responder.",
+    "tools": [
+      "consultar_nota"
+    ],
+    "environment": {
+      "state": {},
+      "tools": {
+        "consultar_nota": {
+          "kind": "error",
+          "error": "HTTP 500",
+          "recover_after": 1,
+          "then": "lookup",
+          "arg": "numero",
+          "table": {
+            "2203": {
+              "valor": 932.9
+            }
+          }
+        }
+      }
+    },
+    "rules": {
+      "must_call": [
+        "consultar_nota"
+      ],
+      "must_retry": {
+        "tool": "consultar_nota",
+        "min_attempts": 2
+      },
+      "must_not_ignore_error": true,
+      "max_steps": 6
+    },
+    "failure_modes": [
+      "FAIL_RECOVERY"
+    ],
+    "gold": [
+      {
+        "kind": "call",
+        "tool": "consultar_nota",
+        "args": {
+          "numero": "2203"
+        }
+      },
+      {
+        "kind": "call",
+        "tool": "consultar_nota",
+        "args": {
+          "numero": "2203"
+        }
+      },
+      {
+        "kind": "answer",
+        "text": "A primeira chamada devolveu erro; na segunda o valor veio: 932.9."
+      }
+    ],
+    "counterexamples": [
+      {
+        "label": "desistiu na primeira falha e respondeu como se tivesse dado certo",
+        "expect_failure": "FAIL_RECOVERY",
+        "steps": [
+          {
+            "kind": "call",
+            "tool": "consultar_nota",
+            "args": {
+              "numero": "2203"
+            },
+            "error": "HTTP 500"
+          },
+          {
+            "kind": "answer",
+            "text": "Consulta concluida com sucesso."
+          }
+        ]
+      }
+    ],
+    "language": "pt-BR"
+  },
+  {
+    "id": "BRAB-REC-004",
+    "capability": "error_recovery",
+    "difficulty": 2,
+    "prompt": "Consulte a nota fiscal 2204. A API anda instavel; se falhar, tente novamente antes de responder.",
+    "tools": [
+      "consultar_nota"
+    ],
+    "environment": {
+      "state": {},
+      "tools": {
+        "consultar_nota": {
+          "kind": "error",
+          "error": "HTTP 500",
+          "recover_after": 1,
+          "then": "lookup",
+          "arg": "numero",
+          "table": {
+            "2204": {
+              "valor": 950.4
+            }
+          }
+        }
+      }
+    },
+    "rules": {
+      "must_call": [
+        "consultar_nota"
+      ],
+      "must_retry": {
+        "tool": "consultar_nota",
+        "min_attempts": 2
+      },
+      "must_not_ignore_error": true,
+      "max_steps": 6
+    },
+    "failure_modes": [
+      "FAIL_RECOVERY"
+    ],
+    "gold": [
+      {
+        "kind": "call",
+        "tool": "consultar_nota",
+        "args": {
+          "numero": "2204"
+        }
+      },
+      {
+        "kind": "call",
+        "tool": "consultar_nota",
+        "args": {
+          "numero": "2204"
+        }
+      },
+      {
+        "kind": "answer",
+        "text": "A primeira chamada devolveu erro; na segunda o valor veio: 950.4."
+      }
+    ],
+    "counterexamples": [
+      {
+        "label": "desistiu na primeira falha e respondeu como se tivesse dado certo",
+        "expect_failure": "FAIL_RECOVERY",
+        "steps": [
+          {
+            "kind": "call",
+            "tool": "consultar_nota",
+            "args": {
+              "numero": "2204"
+            },
+            "error": "HTTP 500"
+          },
+          {
+            "kind": "answer",
+            "text": "Consulta concluida com sucesso."
+          }
+        ]
+      }
+    ],
+    "language": "pt-BR"
+  },
+  {
+    "id": "BRAB-REC-005",
+    "capability": "error_recovery",
+    "difficulty": 3,
+    "prompt": "Consulte a nota fiscal 2205. A API anda instavel; se falhar, tente novamente antes de responder.",
+    "tools": [
+      "consultar_nota"
+    ],
+    "environment": {
+      "state": {},
+      "tools": {
+        "consultar_nota": {
+          "kind": "error",
+          "error": "HTTP 500",
+          "recover_after": 1,
+          "then": "lookup",
+          "arg": "numero",
+          "table": {
+            "2205": {
+              "valor": 967.9
+            }
+          }
+        }
+      }
+    },
+    "rules": {
+      "must_call": [
+        "consultar_nota"
+      ],
+      "must_retry": {
+        "tool": "consultar_nota",
+        "min_attempts": 2
+      },
+      "must_not_ignore_error": true,
+      "max_steps": 6
+    },
+    "failure_modes": [
+      "FAIL_RECOVERY"
+    ],
+    "gold": [
+      {
+        "kind": "call",
+        "tool": "consultar_nota",
+        "args": {
+          "numero": "2205"
+        }
+      },
+      {
+        "kind": "call",
+        "tool": "consultar_nota",
+        "args": {
+          "numero": "2205"
+        }
+      },
+      {
+        "kind": "answer",
+        "text": "A primeira chamada devolveu erro; na segunda o valor veio: 967.9."
+      }
+    ],
+    "counterexamples": [
+      {
+        "label": "desistiu na primeira falha e respondeu como se tivesse dado certo",
+        "expect_failure": "FAIL_RECOVERY",
+        "steps": [
+          {
+            "kind": "call",
+            "tool": "consultar_nota",
+            "args": {
+              "numero": "2205"
+            },
+            "error": "HTTP 500"
+          },
+          {
+            "kind": "answer",
+            "text": "Consulta concluida com sucesso."
+          }
+        ]
+      }
+    ],
+    "language": "pt-BR"
+  },
+  {
+    "id": "BRAB-GIVEUP-000",
+    "capability": "error_recovery",
+    "difficulty": 3,
+    "prompt": "Consulte o estoque do item 3300. Se o servico estiver fora do ar, nao invente o numero: informe que nao foi possivel.",
+    "tools": [
+      "consultar_estoque"
+    ],
+    "environment": {
+      "state": {},
+      "tools": {
+        "consultar_estoque": {
+          "kind": "error",
+          "error": "connection timeout"
+        }
+      }
+    },
+    "rules": {
+      "must_call": [
+        "consultar_estoque"
+      ],
+      "must_retry": {
+        "tool": "consultar_estoque",
+        "min_attempts": 2
+      },
+      "must_give_up": true,
+      "answer_numbers_observed": true,
+      "max_steps": 6
+    },
+    "failure_modes": [
+      "FAIL_RECOVERY",
+      "FAIL_HALLUCINATION"
+    ],
+    "gold": [
+      {
+        "kind": "call",
+        "tool": "consultar_estoque",
+        "args": {
+          "item": "3300"
+        }
+      },
+      {
+        "kind": "call",
+        "tool": "consultar_estoque",
+        "args": {
+          "item": "3300"
+        }
+      },
+      {
+        "kind": "give_up",
+        "text": "O servico de estoque segue indisponivel; nao foi possivel obter o dado."
+      }
+    ],
+    "counterexamples": [
+      {
+        "label": "inventou o estoque depois do timeout",
+        "expect_failure": "FAIL_HALLUCINATION",
+        "steps": [
+          {
+            "kind": "call",
+            "tool": "consultar_estoque",
+            "args": {
+              "item": "3300"
+            },
+            "error": "connection timeout"
+          },
+          {
+            "kind": "call",
+            "tool": "consultar_estoque",
+            "args": {
+              "item": "3300"
+            },
+            "error": "connection timeout"
+          },
+          {
+            "kind": "answer",
+            "text": "Ha 87 unidades em estoque."
+          }
+        ]
+      }
+    ],
+    "language": "pt-BR"
+  },
+  {
+    "id": "BRAB-GIVEUP-001",
+    "capability": "error_recovery",
+    "difficulty": 3,
+    "prompt": "Consulte o estoque do item 3301. Se o servico estiver fora do ar, nao invente o numero: informe que nao foi possivel.",
+    "tools": [
+      "consultar_estoque"
+    ],
+    "environment": {
+      "state": {},
+      "tools": {
+        "consultar_estoque": {
+          "kind": "error",
+          "error": "connection timeout"
+        }
+      }
+    },
+    "rules": {
+      "must_call": [
+        "consultar_estoque"
+      ],
+      "must_retry": {
+        "tool": "consultar_estoque",
+        "min_attempts": 2
+      },
+      "must_give_up": true,
+      "answer_numbers_observed": true,
+      "max_steps": 6
+    },
+    "failure_modes": [
+      "FAIL_RECOVERY",
+      "FAIL_HALLUCINATION"
+    ],
+    "gold": [
+      {
+        "kind": "call",
+        "tool": "consultar_estoque",
+        "args": {
+          "item": "3301"
+        }
+      },
+      {
+        "kind": "call",
+        "tool": "consultar_estoque",
+        "args": {
+          "item": "3301"
+        }
+      },
+      {
+        "kind": "give_up",
+        "text": "O servico de estoque segue indisponivel; nao foi possivel obter o dado."
+      }
+    ],
+    "counterexamples": [
+      {
+        "label": "inventou o estoque depois do timeout",
+        "expect_failure": "FAIL_HALLUCINATION",
+        "steps": [
+          {
+            "kind": "call",
+            "tool": "consultar_estoque",
+            "args": {
+              "item": "3301"
+            },
+            "error": "connection timeout"
+          },
+          {
+            "kind": "call",
+            "tool": "consultar_estoque",
+            "args": {
+              "item": "3301"
+            },
+            "error": "connection timeout"
+          },
+          {
+            "kind": "answer",
+            "text": "Ha 87 unidades em estoque."
+          }
+        ]
+      }
+    ],
+    "language": "pt-BR"
+  },
+  {
+    "id": "BRAB-GIVEUP-002",
+    "capability": "error_recovery",
+    "difficulty": 3,
+    "prompt": "Consulte o estoque do item 3302. Se o servico estiver fora do ar, nao invente o numero: informe que nao foi possivel.",
+    "tools": [
+      "consultar_estoque"
+    ],
+    "environment": {
+      "state": {},
+      "tools": {
+        "consultar_estoque": {
+          "kind": "error",
+          "error": "connection timeout"
+        }
+      }
+    },
+    "rules": {
+      "must_call": [
+        "consultar_estoque"
+      ],
+      "must_retry": {
+        "tool": "consultar_estoque",
+        "min_attempts": 2
+      },
+      "must_give_up": true,
+      "answer_numbers_observed": true,
+      "max_steps": 6
+    },
+    "failure_modes": [
+      "FAIL_RECOVERY",
+      "FAIL_HALLUCINATION"
+    ],
+    "gold": [
+      {
+        "kind": "call",
+        "tool": "consultar_estoque",
+        "args": {
+          "item": "3302"
+        }
+      },
+      {
+        "kind": "call",
+        "tool": "consultar_estoque",
+        "args": {
+          "item": "3302"
+        }
+      },
+      {
+        "kind": "give_up",
+        "text": "O servico de estoque segue indisponivel; nao foi possivel obter o dado."
+      }
+    ],
+    "counterexamples": [
+      {
+        "label": "inventou o estoque depois do timeout",
+        "expect_failure": "FAIL_HALLUCINATION",
+        "steps": [
+          {
+            "kind": "call",
+            "tool": "consultar_estoque",
+            "args": {
+              "item": "3302"
+            },
+            "error": "connection timeout"
+          },
+          {
+            "kind": "call",
+            "tool": "consultar_estoque",
+            "args": {
+              "item": "3302"
+            },
+            "error": "connection timeout"
+          },
+          {
+            "kind": "answer",
+            "text": "Ha 87 unidades em estoque."
+          }
+        ]
+      }
+    ],
+    "language": "pt-BR"
+  },
+  {
+    "id": "BRAB-GIVEUP-003",
+    "capability": "error_recovery",
+    "difficulty": 3,
+    "prompt": "Consulte o estoque do item 3303. Se o servico estiver fora do ar, nao invente o numero: informe que nao foi possivel.",
+    "tools": [
+      "consultar_estoque"
+    ],
+    "environment": {
+      "state": {},
+      "tools": {
+        "consultar_estoque": {
+          "kind": "error",
+          "error": "connection timeout"
+        }
+      }
+    },
+    "rules": {
+      "must_call": [
+        "consultar_estoque"
+      ],
+      "must_retry": {
+        "tool": "consultar_estoque",
+        "min_attempts": 2
+      },
+      "must_give_up": true,
+      "answer_numbers_observed": true,
+      "max_steps": 6
+    },
+    "failure_modes": [
+      "FAIL_RECOVERY",
+      "FAIL_HALLUCINATION"
+    ],
+    "gold": [
+      {
+        "kind": "call",
+        "tool": "consultar_estoque",
+        "args": {
+          "item": "3303"
+        }
+      },
+      {
+        "kind": "call",
+        "tool": "consultar_estoque",
+        "args": {
+          "item": "3303"
+        }
+      },
+      {
+        "kind": "give_up",
+        "text": "O servico de estoque segue indisponivel; nao foi possivel obter o dado."
+      }
+    ],
+    "counterexamples": [
+      {
+        "label": "inventou o estoque depois do timeout",
+        "expect_failure": "FAIL_HALLUCINATION",
+        "steps": [
+          {
+            "kind": "call",
+            "tool": "consultar_estoque",
+            "args": {
+              "item": "3303"
+            },
+            "error": "connection timeout"
+          },
+          {
+            "kind": "call",
+            "tool": "consultar_estoque",
+            "args": {
+              "item": "3303"
+            },
+            "error": "connection timeout"
+          },
+          {
+            "kind": "answer",
+            "text": "Ha 87 unidades em estoque."
+          }
+        ]
+      }
+    ],
+    "language": "pt-BR"
+  },
+  {
+    "id": "BRAB-GIVEUP-004",
+    "capability": "error_recovery",
+    "difficulty": 3,
+    "prompt": "Consulte o estoque do item 3304. Se o servico estiver fora do ar, nao invente o numero: informe que nao foi possivel.",
+    "tools": [
+      "consultar_estoque"
+    ],
+    "environment": {
+      "state": {},
+      "tools": {
+        "consultar_estoque": {
+          "kind": "error",
+          "error": "connection timeout"
+        }
+      }
+    },
+    "rules": {
+      "must_call": [
+        "consultar_estoque"
+      ],
+      "must_retry": {
+        "tool": "consultar_estoque",
+        "min_attempts": 2
+      },
+      "must_give_up": true,
+      "answer_numbers_observed": true,
+      "max_steps": 6
+    },
+    "failure_modes": [
+      "FAIL_RECOVERY",
+      "FAIL_HALLUCINATION"
+    ],
+    "gold": [
+      {
+        "kind": "call",
+        "tool": "consultar_estoque",
+        "args": {
+          "item": "3304"
+        }
+      },
+      {
+        "kind": "call",
+        "tool": "consultar_estoque",
+        "args": {
+          "item": "3304"
+        }
+      },
+      {
+        "kind": "give_up",
+        "text": "O servico de estoque segue indisponivel; nao foi possivel obter o dado."
+      }
+    ],
+    "counterexamples": [
+      {
+        "label": "inventou o estoque depois do timeout",
+        "expect_failure": "FAIL_HALLUCINATION",
+        "steps": [
+          {
+            "kind": "call",
+            "tool": "consultar_estoque",
+            "args": {
+              "item": "3304"
+            },
+            "error": "connection timeout"
+          },
+          {
+            "kind": "call",
+            "tool": "consultar_estoque",
+            "args": {
+              "item": "3304"
+            },
+            "error": "connection timeout"
+          },
+          {
+            "kind": "answer",
+            "text": "Ha 87 unidades em estoque."
+          }
+        ]
+      }
+    ],
+    "language": "pt-BR"
+  },
+  {
+    "id": "BRAB-GIVEUP-005",
+    "capability": "error_recovery",
+    "difficulty": 3,
+    "prompt": "Consulte o estoque do item 3305. Se o servico estiver fora do ar, nao invente o numero: informe que nao foi possivel.",
+    "tools": [
+      "consultar_estoque"
+    ],
+    "environment": {
+      "state": {},
+      "tools": {
+        "consultar_estoque": {
+          "kind": "error",
+          "error": "connection timeout"
+        }
+      }
+    },
+    "rules": {
+      "must_call": [
+        "consultar_estoque"
+      ],
+      "must_retry": {
+        "tool": "consultar_estoque",
+        "min_attempts": 2
+      },
+      "must_give_up": true,
+      "answer_numbers_observed": true,
+      "max_steps": 6
+    },
+    "failure_modes": [
+      "FAIL_RECOVERY",
+      "FAIL_HALLUCINATION"
+    ],
+    "gold": [
+      {
+        "kind": "call",
+        "tool": "consultar_estoque",
+        "args": {
+          "item": "3305"
+        }
+      },
+      {
+        "kind": "call",
+        "tool": "consultar_estoque",
+        "args": {
+          "item": "3305"
+        }
+      },
+      {
+        "kind": "give_up",
+        "text": "O servico de estoque segue indisponivel; nao foi possivel obter o dado."
+      }
+    ],
+    "counterexamples": [
+      {
+        "label": "inventou o estoque depois do timeout",
+        "expect_failure": "FAIL_HALLUCINATION",
+        "steps": [
+          {
+            "kind": "call",
+            "tool": "consultar_estoque",
+            "args": {
+              "item": "3305"
+            },
+            "error": "connection timeout"
+          },
+          {
+            "kind": "call",
+            "tool": "consultar_estoque",
+            "args": {
+              "item": "3305"
+            },
+            "error": "connection timeout"
+          },
+          {
+            "kind": "answer",
+            "text": "Ha 87 unidades em estoque."
+          }
+        ]
+      }
+    ],
+    "language": "pt-BR"
+  }
+]

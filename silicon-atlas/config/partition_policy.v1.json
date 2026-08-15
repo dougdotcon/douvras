@@ -1,0 +1,37 @@
+{
+  "_meta": {
+    "version": "1.0",
+    "date": "2026-08-04",
+    "status": "ENGINEERING_DECISION",
+    "note": "Limiares de particionamento. Sao decisao de projeto versionada, NAO descoberta. Existem como arquivo — e nao como constante no codigo — porque afrouxa-los e a forma mais provavel de o sistema ser corrompido sob pressao comercial: baixar min_stability ate a regiao fixa aparecer. Com o arquivo sob git, `git diff config/` expoe a manobra. Ver 06_ARCHITECTURE/THREAT_MODEL.md, ameaca E-005, e 07_SYSTEMATIZATION/OBSERVABILITY.md.",
+    "change_policy": "Alterar qualquer limiar exige entrada no DECISION_LOG com justificativa e reexecucao de todos os assessments publicados."
+  },
+  "fixed": {
+    "_note": "Todas as condicoes precisam ser satisfeitas para um papel entrar na regiao fixa.",
+    "min_lhs": 0.55,
+    "min_regularity": 0.9,
+    "min_memory_predictability": 0.9,
+    "min_quant_tolerance": 0.6,
+    "min_stability": 0.6,
+    "_rationale": {
+      "min_stability": "0.6 significa: o circuito precisa sobreviver a maioria das transicoes de versao observadas. Abaixo disso, a probabilidade de a mascara ficar obsoleta antes do break-even domina qualquer ganho.",
+      "min_quant_tolerance": "0.6 e o limiar de aceitacao dos priors de quantizacao. Como os priors nao sao medidos (G-002), este limiar herda a mesma incerteza.",
+      "min_regularity": "0.9 exclui qualquer papel com controle dinamico relevante. Logica fixa nao tem para onde ramificar.",
+      "min_memory_predictability": "0.9 exclui enderecamento dependente de dado, que impede o dataflow estatico que justifica o endurecimento.",
+      "min_lhs": "0.55 e o unico limiar sem justificativa empirica. Ver CE-001: o LHS nao discrimina dentro de um modelo, entao este limiar funciona como corte grosseiro, nao como ordenacao."
+    }
+  },
+  "reconfigurable": {
+    "max_regularity": 0.9,
+    "or_data_dependent": true,
+    "_rationale": "Operador regular e quantizavel mas instavel vai para logica reprogramavel: prototipar mede o ganho real sem comprometer mascara."
+  },
+  "programmable_roles": [
+    "sampling",
+    "expert_combine",
+    "router",
+    "expert_dispatch"
+  ],
+  "_programmable_rationale": "Papeis cuja politica muda em runtime ou cujo roteamento depende do token. Fixa-los em silicio exigiria congelar decisoes que o sistema precisa alterar sem refabricar.",
+  "configurable_note": "Todo bloco fixo recebe sobreposicao de delta (LoRA/adapters) — e o que preserva adaptabilidade sobre uma base endurecida. Tabelas indexadas estaveis entram como ROM; instaveis entram como memoria carregavel."
+}

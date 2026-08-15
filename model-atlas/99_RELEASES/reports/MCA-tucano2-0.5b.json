@@ -1,0 +1,618 @@
+{
+  "artifact": "MODEL_CAPABILITY_ASSESSMENT",
+  "run_id": "20260815T000252Z",
+  "generated_at": "2026-08-15T00:02:52+00:00",
+  "cycle": "C-002",
+  "model": {
+    "id": "tucano2-0.5b",
+    "repo": "Polygl0t/Tucano2-qwen-0.5B-Base",
+    "revision": "main",
+    "family": "tucano",
+    "params_b": 0.5,
+    "architecture": "Qwen2ForCausalLM",
+    "context_len": null,
+    "license": "",
+    "provenance": "DOCUMENT_SECONDARY",
+    "quantizations": [
+      "f16",
+      "q8",
+      "q6",
+      "q5",
+      "q4"
+    ],
+    "weights_local": false,
+    "source": "docs/01_TESE_LABORATORIO_DE_DADOS_E_EVALS.md secao 5.1"
+  },
+  "evaluable": false,
+  "capabilities": {
+    "model": "tucano2-0.5b",
+    "measured": false,
+    "source": "nenhuma execucao",
+    "capabilities": {
+      "arguments": null,
+      "error_recovery": null,
+      "hallucination": null,
+      "planning": null,
+      "pt_br_numeracy": null,
+      "safety_refusal": null,
+      "structured_output": null,
+      "tool_selection": null
+    },
+    "weakest": null
+  },
+  "failure_atlas": {
+    "source": "sondas de calibracao",
+    "synthetic": true,
+    "per_capability": {
+      "arguments": {
+        "FAIL_TOOL_SELECTION": {
+          "count": 24,
+          "rate": 0.25
+        },
+        "FAIL_ARGUMENT": {
+          "count": 12,
+          "rate": 0.125
+        }
+      },
+      "error_recovery": {
+        "FAIL_RECOVERY": {
+          "count": 42,
+          "rate": 0.4375
+        },
+        "FAIL_TOOL_SELECTION": {
+          "count": 12,
+          "rate": 0.125
+        },
+        "FAIL_HALLUCINATION": {
+          "count": 6,
+          "rate": 0.0625
+        }
+      },
+      "hallucination": {
+        "FAIL_TOOL_SELECTION": {
+          "count": 12,
+          "rate": 0.125
+        },
+        "FAIL_HALLUCINATION": {
+          "count": 12,
+          "rate": 0.125
+        }
+      },
+      "planning": {
+        "FAIL_PLANNING": {
+          "count": 18,
+          "rate": 0.1875
+        },
+        "FAIL_TOOL_SELECTION": {
+          "count": 12,
+          "rate": 0.125
+        },
+        "FAIL_ARGUMENT": {
+          "count": 6,
+          "rate": 0.0625
+        }
+      },
+      "pt_br_numeracy": {
+        "FAIL_PLANNING": {
+          "count": 36,
+          "rate": 0.375
+        },
+        "FAIL_TOOL_SELECTION": {
+          "count": 24,
+          "rate": 0.25
+        },
+        "FAIL_ARGUMENT": {
+          "count": 4,
+          "rate": 0.0417
+        }
+      },
+      "safety_refusal": {
+        "FAIL_SAFETY": {
+          "count": 48,
+          "rate": 0.5
+        },
+        "FAIL_TOOL_SELECTION": {
+          "count": 24,
+          "rate": 0.25
+        }
+      },
+      "structured_output": {
+        "FAIL_FORMAT": {
+          "count": 36,
+          "rate": 0.375
+        },
+        "FAIL_TOOL_SELECTION": {
+          "count": 12,
+          "rate": 0.125
+        }
+      },
+      "tool_selection": {
+        "FAIL_TOOL_SELECTION": {
+          "count": 24,
+          "rate": 0.25
+        },
+        "FAIL_HALLUCINATION": {
+          "count": 24,
+          "rate": 0.25
+        }
+      }
+    },
+    "attempts": {
+      "arguments": 96,
+      "error_recovery": 96,
+      "hallucination": 96,
+      "planning": 96,
+      "pt_br_numeracy": 96,
+      "safety_refusal": 96,
+      "structured_output": 96,
+      "tool_selection": 96
+    }
+  },
+  "css": {
+    "ranking": [],
+    "leader": null,
+    "top1_stability": 0.0,
+    "leader_margin": 0.0,
+    "weight_noise": 0.0,
+    "discriminates": false,
+    "samples": 0
+  },
+  "instrument": {
+    "tasks": 96,
+    "coverage": {
+      "arguments": 12,
+      "error_recovery": 12,
+      "hallucination": 12,
+      "planning": 12,
+      "pt_br_numeracy": 12,
+      "safety_refusal": 12,
+      "structured_output": 12,
+      "tool_selection": 12
+    },
+    "gold_acceptance": 1.0,
+    "counterexample_rejection": 1.0,
+    "label_precision": 1.0,
+    "discrimination_margin": 0.0625,
+    "falsifiers": {
+      "F1": {
+        "criterio": "o grader aceita alguma trajetoria declarada como errada",
+        "disparado": false,
+        "medido": 1.0
+      },
+      "F2": {
+        "criterio": "o grader rejeita a trajetoria de referencia de alguma tarefa",
+        "disparado": false,
+        "medido": 1.0
+      },
+      "F3": {
+        "criterio": "o escore separa o oraculo da melhor sonda degenerada por menos de 0.20",
+        "disparado": true,
+        "medido": 0.0625
+      },
+      "F4": {
+        "criterio": "duas execucoes da mesma suite produzem resultados diferentes",
+        "disparado": false,
+        "medido": true
+      },
+      "F5": {
+        "criterio": "alguma tarefa nao e avaliavel, ou alguma capacidade tem menos de 8 tarefas",
+        "disparado": false,
+        "medido": {
+          "sem_grader": [],
+          "cobertura_fina": []
+        }
+      },
+      "F6": {
+        "criterio": "algum modo de falha declarado nunca e disparado por nenhuma sonda",
+        "disparado": false,
+        "medido": []
+      }
+    }
+  },
+  "findings": {
+    "title": "MODEL CAPABILITY ASSESSMENT — tucano2-0.5b",
+    "weakest_status": "ASSUMPTION",
+    "open_gaps": [
+      "G-101",
+      "G-102",
+      "G-105",
+      "G-108"
+    ],
+    "assumptions": [
+      "A-101",
+      "A-102"
+    ],
+    "declared_absences": [
+      "ttft",
+      "tokens_por_segundo",
+      "ram_de_pico",
+      "capacidade.arguments",
+      "capacidade.error_recovery",
+      "capacidade.hallucination",
+      "capacidade.planning",
+      "capacidade.pt_br_numeracy",
+      "capacidade.safety_refusal",
+      "capacidade.structured_output",
+      "capacidade.tool_selection",
+      "css_alvo"
+    ],
+    "evidence_debt": 0.4706,
+    "status_histogram": {
+      "OPEN_GAP": 12,
+      "ASSUMPTION": 8,
+      "COMPUTATIONAL_EVIDENCE": 7,
+      "CONDITIONAL_RESULT": 1,
+      "OBSERVATION": 1
+    },
+    "findings": [
+      {
+        "name": "proveniencia_verificada",
+        "value": 0.0,
+        "unit": "",
+        "status": "CONDITIONAL_RESULT",
+        "assumptions": [],
+        "gaps": [
+          "G-108"
+        ],
+        "parents": [],
+        "note": "0/3 fichas conferidas na fonte"
+      },
+      {
+        "name": "parametros",
+        "value": 500000000,
+        "unit": "parametros",
+        "status": "ASSUMPTION",
+        "assumptions": [
+          "A-101"
+        ],
+        "gaps": [],
+        "parents": [],
+        "note": "aproximado — a fonte diz 'cerca de', nao um inteiro"
+      },
+      {
+        "name": "footprint_pesos.f16",
+        "value": 1.0,
+        "unit": "GB",
+        "status": "ASSUMPTION",
+        "assumptions": [
+          "A-101",
+          "A-102"
+        ],
+        "gaps": [],
+        "parents": [
+          "parametros",
+          "bytes_por_parametro.f16"
+        ],
+        "note": "somente pesos residentes; nao inclui KV cache nem ativacoes"
+      },
+      {
+        "name": "footprint_pesos.q8",
+        "value": 0.53,
+        "unit": "GB",
+        "status": "ASSUMPTION",
+        "assumptions": [
+          "A-101",
+          "A-102"
+        ],
+        "gaps": [],
+        "parents": [
+          "parametros",
+          "bytes_por_parametro.q8"
+        ],
+        "note": "somente pesos residentes; nao inclui KV cache nem ativacoes"
+      },
+      {
+        "name": "footprint_pesos.q6",
+        "value": 0.41,
+        "unit": "GB",
+        "status": "ASSUMPTION",
+        "assumptions": [
+          "A-101",
+          "A-102"
+        ],
+        "gaps": [],
+        "parents": [
+          "parametros",
+          "bytes_por_parametro.q6"
+        ],
+        "note": "somente pesos residentes; nao inclui KV cache nem ativacoes"
+      },
+      {
+        "name": "footprint_pesos.q5",
+        "value": 0.345,
+        "unit": "GB",
+        "status": "ASSUMPTION",
+        "assumptions": [
+          "A-101",
+          "A-102"
+        ],
+        "gaps": [],
+        "parents": [
+          "parametros",
+          "bytes_por_parametro.q5"
+        ],
+        "note": "somente pesos residentes; nao inclui KV cache nem ativacoes"
+      },
+      {
+        "name": "footprint_pesos.q4",
+        "value": 0.28,
+        "unit": "GB",
+        "status": "ASSUMPTION",
+        "assumptions": [
+          "A-101",
+          "A-102"
+        ],
+        "gaps": [],
+        "parents": [
+          "parametros",
+          "bytes_por_parametro.q4"
+        ],
+        "note": "somente pesos residentes; nao inclui KV cache nem ativacoes"
+      },
+      {
+        "name": "footprint_pesos.q3",
+        "value": 0.22,
+        "unit": "GB",
+        "status": "ASSUMPTION",
+        "assumptions": [
+          "A-101",
+          "A-102"
+        ],
+        "gaps": [],
+        "parents": [
+          "parametros",
+          "bytes_por_parametro.q3"
+        ],
+        "note": "somente pesos residentes; nao inclui KV cache nem ativacoes"
+      },
+      {
+        "name": "quantizacoes_que_cabem",
+        "value": [
+          "f16",
+          "q8",
+          "q6",
+          "q5",
+          "q4",
+          "q3"
+        ],
+        "unit": "",
+        "status": "ASSUMPTION",
+        "assumptions": [
+          "A-101",
+          "A-102"
+        ],
+        "gaps": [],
+        "parents": [],
+        "note": "com folga de runtime de 1.20x sobre 16 GB; caber nao implica ser utilizavel"
+      },
+      {
+        "name": "ttft",
+        "value": null,
+        "unit": "",
+        "status": "OPEN_GAP",
+        "assumptions": [],
+        "gaps": [
+          "G-102"
+        ],
+        "parents": [],
+        "note": "nenhuma execucao real; ver ADR-0006"
+      },
+      {
+        "name": "tokens_por_segundo",
+        "value": null,
+        "unit": "",
+        "status": "OPEN_GAP",
+        "assumptions": [],
+        "gaps": [
+          "G-102"
+        ],
+        "parents": [],
+        "note": "nenhuma execucao real; ver ADR-0006"
+      },
+      {
+        "name": "ram_de_pico",
+        "value": null,
+        "unit": "",
+        "status": "OPEN_GAP",
+        "assumptions": [],
+        "gaps": [
+          "G-102"
+        ],
+        "parents": [],
+        "note": "nenhuma execucao real; ver ADR-0006"
+      },
+      {
+        "name": "capacidade.arguments",
+        "value": null,
+        "unit": "",
+        "status": "OPEN_GAP",
+        "assumptions": [],
+        "gaps": [
+          "G-101"
+        ],
+        "parents": [],
+        "note": "nenhum peso local; ver ADR-0006 e G-101"
+      },
+      {
+        "name": "capacidade.error_recovery",
+        "value": null,
+        "unit": "",
+        "status": "OPEN_GAP",
+        "assumptions": [],
+        "gaps": [
+          "G-101"
+        ],
+        "parents": [],
+        "note": "nenhum peso local; ver ADR-0006 e G-101"
+      },
+      {
+        "name": "capacidade.hallucination",
+        "value": null,
+        "unit": "",
+        "status": "OPEN_GAP",
+        "assumptions": [],
+        "gaps": [
+          "G-101"
+        ],
+        "parents": [],
+        "note": "nenhum peso local; ver ADR-0006 e G-101"
+      },
+      {
+        "name": "capacidade.planning",
+        "value": null,
+        "unit": "",
+        "status": "OPEN_GAP",
+        "assumptions": [],
+        "gaps": [
+          "G-101"
+        ],
+        "parents": [],
+        "note": "nenhum peso local; ver ADR-0006 e G-101"
+      },
+      {
+        "name": "capacidade.pt_br_numeracy",
+        "value": null,
+        "unit": "",
+        "status": "OPEN_GAP",
+        "assumptions": [],
+        "gaps": [
+          "G-101"
+        ],
+        "parents": [],
+        "note": "nenhum peso local; ver ADR-0006 e G-101"
+      },
+      {
+        "name": "capacidade.safety_refusal",
+        "value": null,
+        "unit": "",
+        "status": "OPEN_GAP",
+        "assumptions": [],
+        "gaps": [
+          "G-101"
+        ],
+        "parents": [],
+        "note": "nenhum peso local; ver ADR-0006 e G-101"
+      },
+      {
+        "name": "capacidade.structured_output",
+        "value": null,
+        "unit": "",
+        "status": "OPEN_GAP",
+        "assumptions": [],
+        "gaps": [
+          "G-101"
+        ],
+        "parents": [],
+        "note": "nenhum peso local; ver ADR-0006 e G-101"
+      },
+      {
+        "name": "capacidade.tool_selection",
+        "value": null,
+        "unit": "",
+        "status": "OPEN_GAP",
+        "assumptions": [],
+        "gaps": [
+          "G-101"
+        ],
+        "parents": [],
+        "note": "nenhum peso local; ver ADR-0006 e G-101"
+      },
+      {
+        "name": "tarefas_no_corpus",
+        "value": 96,
+        "unit": "tarefas",
+        "status": "OBSERVATION",
+        "assumptions": [],
+        "gaps": [],
+        "parents": [],
+        "note": ""
+      },
+      {
+        "name": "aceitacao_do_gabarito",
+        "value": 1.0,
+        "unit": "",
+        "status": "COMPUTATIONAL_EVIDENCE",
+        "assumptions": [],
+        "gaps": [],
+        "parents": [],
+        "note": "96/96 trajetorias de referencia aprovadas"
+      },
+      {
+        "name": "rejeicao_de_contraexemplo",
+        "value": 1.0,
+        "unit": "",
+        "status": "COMPUTATIONAL_EVIDENCE",
+        "assumptions": [],
+        "gaps": [],
+        "parents": [],
+        "note": "132 contraexemplos declarados no corpus"
+      },
+      {
+        "name": "precisao_do_rotulo",
+        "value": 1.0,
+        "unit": "",
+        "status": "COMPUTATIONAL_EVIDENCE",
+        "assumptions": [],
+        "gaps": [],
+        "parents": [],
+        "note": "fracao dos contraexemplos rejeitados com o modo de falha correto"
+      },
+      {
+        "name": "margem_de_discriminacao",
+        "value": 0.0625,
+        "unit": "",
+        "status": "COMPUTATIONAL_EVIDENCE",
+        "assumptions": [],
+        "gaps": [],
+        "parents": [],
+        "note": "oraculo 1.000 contra melhor sonda degenerada 0.938"
+      },
+      {
+        "name": "instrumento_discrimina",
+        "value": false,
+        "unit": "",
+        "status": "COMPUTATIONAL_EVIDENCE",
+        "assumptions": [],
+        "gaps": [
+          "G-105"
+        ],
+        "parents": [
+          "margem_de_discriminacao"
+        ],
+        "note": "limiar 0.2 sem base empirica (G-105)"
+      },
+      {
+        "name": "queda_no_alvo_minima",
+        "value": 0.25,
+        "unit": "",
+        "status": "COMPUTATIONAL_EVIDENCE",
+        "assumptions": [],
+        "gaps": [],
+        "parents": [],
+        "note": "menor queda de escore no subconjunto que a sonda declarou atacar; diagnostico de CE-101, nao criterio — F3 segue declarado sobre a margem agregada"
+      },
+      {
+        "name": "modos_de_falha_sem_sonda",
+        "value": [],
+        "unit": "",
+        "status": "COMPUTATIONAL_EVIDENCE",
+        "assumptions": [],
+        "gaps": [],
+        "parents": [],
+        "note": "modo declarado no corpus que nenhuma sonda consegue provocar"
+      },
+      {
+        "name": "css_alvo",
+        "value": null,
+        "unit": "",
+        "status": "OPEN_GAP",
+        "assumptions": [],
+        "gaps": [
+          "G-101"
+        ],
+        "parents": [],
+        "note": "sem capacidade medida nao existe deficit, e sem deficit nao existe CSS"
+      }
+    ]
+  }
+}

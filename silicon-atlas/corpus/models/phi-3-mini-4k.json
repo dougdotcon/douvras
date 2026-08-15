@@ -1,0 +1,31 @@
+{
+  "douvras": {
+    "id": "phi-3-mini-4k",
+    "family": "phi",
+    "version_label": "3-mini-4k",
+    "release_date": "2024-04-23",
+    "license": "mit",
+    "published_params": 3821079552,
+    "hf_repo": "microsoft/Phi-3-mini-4k-instruct",
+    "source_url": "https://huggingface.co/microsoft/Phi-3-mini-4k-instruct/resolve/main/config.json",
+    "provenance": "TRANSCRIBED_UNVERIFIED",
+    "sha256": null,
+    "note": "MHA (kv == heads) com head_dim 96, QKV e gate/up fundidos no checkpoint. A IR canonica desfaz a fusao: fusao e decisao de implementacao, nao de arquitetura."
+  },
+  "config": {
+    "architectures": ["Phi3ForCausalLM"],
+    "model_type": "phi3",
+    "hidden_size": 3072,
+    "intermediate_size": 8192,
+    "num_hidden_layers": 32,
+    "num_attention_heads": 32,
+    "num_key_value_heads": 32,
+    "max_position_embeddings": 4096,
+    "vocab_size": 32064,
+    "hidden_act": "silu",
+    "rms_norm_eps": 1e-05,
+    "rope_theta": 10000.0,
+    "tie_word_embeddings": false,
+    "torch_dtype": "bfloat16"
+  }
+}

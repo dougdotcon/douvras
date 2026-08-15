@@ -1,0 +1,21 @@
+{
+  "version": "1.0",
+  "seed": 20260814,
+  "perturbation": 0.20,
+  "factors": {
+    "D": 0.30,
+    "T": 0.25,
+    "V": 0.20,
+    "C": 0.15,
+    "S": 0.10
+  },
+  "_significado": {
+    "D": "deficit — quanto falta para o teto na capacidade medida",
+    "T": "tratabilidade — quao ensinavel a capacidade e por dados supervisionados",
+    "V": "valor — peso da capacidade no uso comercial declarado",
+    "C": "custo do dataset, ja invertido (1 = barato de construir)",
+    "S": "estabilidade — a capacidade se comporta de forma parecida entre modelos"
+  },
+  "_nota": "Estes pesos nunca foram calibrados contra desfecho conhecido (G-104). O ciclo C-001 do Silicon Atlas mostrou que um score bem-comportado pode nao discriminar nada, e que reponderar ate o ranking estabilizar e ajustar o instrumento ao resultado. Por isso os pesos moram aqui, versionados: mexer neles aparece no diff.",
+  "_perturbacao": "A analise de sensibilidade perturba cada peso em +-20% com a semente acima e mede se o top-1 sobrevive e por quanto o lider vence. Margem menor que o ruido significa que o score nao decide."
+}

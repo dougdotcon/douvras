@@ -1,0 +1,1178 @@
+[
+  {
+    "id": "BRAB-JSON-000",
+    "capability": "structured_output",
+    "difficulty": 1,
+    "prompt": "Consulte o chamado 7000 e devolva um JSON com as chaves `ticket`, `departamento` e `prioridade`.",
+    "tools": [
+      "consultar_chamado"
+    ],
+    "environment": {
+      "state": {},
+      "tools": {
+        "consultar_chamado": {
+          "kind": "lookup",
+          "arg": "id",
+          "table": {
+            "7000": {
+              "departamento": "financeiro",
+              "prioridade": "baixa"
+            }
+          }
+        }
+      }
+    },
+    "rules": {
+      "must_call": [
+        "consultar_chamado"
+      ],
+      "answer_json": {
+        "required_keys": [
+          "ticket",
+          "departamento",
+          "prioridade"
+        ]
+      },
+      "max_steps": 4
+    },
+    "failure_modes": [
+      "FAIL_FORMAT",
+      "FAIL_TOOL_SELECTION"
+    ],
+    "gold": [
+      {
+        "kind": "call",
+        "tool": "consultar_chamado",
+        "args": {
+          "id": "7000"
+        }
+      },
+      {
+        "kind": "answer",
+        "text": "{\"ticket\": \"7000\", \"departamento\": \"financeiro\", \"prioridade\": \"baixa\"}"
+      }
+    ],
+    "counterexamples": [
+      {
+        "label": "respondeu em prosa em vez de JSON",
+        "expect_failure": "FAIL_FORMAT",
+        "steps": [
+          {
+            "kind": "call",
+            "tool": "consultar_chamado",
+            "args": {
+              "id": "7000"
+            },
+            "observation": {
+              "departamento": "financeiro",
+              "prioridade": "baixa"
+            }
+          },
+          {
+            "kind": "answer",
+            "text": "O chamado 7000 e do financeiro com prioridade baixa."
+          }
+        ]
+      },
+      {
+        "label": "JSON valido sem uma das chaves exigidas",
+        "expect_failure": "FAIL_FORMAT",
+        "steps": [
+          {
+            "kind": "call",
+            "tool": "consultar_chamado",
+            "args": {
+              "id": "7000"
+            },
+            "observation": {
+              "departamento": "financeiro"
+            }
+          },
+          {
+            "kind": "answer",
+            "text": "{\"ticket\": \"7000\", \"departamento\": \"financeiro\"}"
+          }
+        ]
+      }
+    ],
+    "language": "pt-BR"
+  },
+  {
+    "id": "BRAB-JSON-001",
+    "capability": "structured_output",
+    "difficulty": 2,
+    "prompt": "Consulte o chamado 7001 e devolva um JSON com as chaves `ticket`, `departamento` e `prioridade`.",
+    "tools": [
+      "consultar_chamado"
+    ],
+    "environment": {
+      "state": {},
+      "tools": {
+        "consultar_chamado": {
+          "kind": "lookup",
+          "arg": "id",
+          "table": {
+            "7001": {
+              "departamento": "compras",
+              "prioridade": "media"
+            }
+          }
+        }
+      }
+    },
+    "rules": {
+      "must_call": [
+        "consultar_chamado"
+      ],
+      "answer_json": {
+        "required_keys": [
+          "ticket",
+          "departamento",
+          "prioridade"
+        ]
+      },
+      "max_steps": 4
+    },
+    "failure_modes": [
+      "FAIL_FORMAT",
+      "FAIL_TOOL_SELECTION"
+    ],
+    "gold": [
+      {
+        "kind": "call",
+        "tool": "consultar_chamado",
+        "args": {
+          "id": "7001"
+        }
+      },
+      {
+        "kind": "answer",
+        "text": "{\"ticket\": \"7001\", \"departamento\": \"compras\", \"prioridade\": \"media\"}"
+      }
+    ],
+    "counterexamples": [
+      {
+        "label": "respondeu em prosa em vez de JSON",
+        "expect_failure": "FAIL_FORMAT",
+        "steps": [
+          {
+            "kind": "call",
+            "tool": "consultar_chamado",
+            "args": {
+              "id": "7001"
+            },
+            "observation": {
+              "departamento": "compras",
+              "prioridade": "media"
+            }
+          },
+          {
+            "kind": "answer",
+            "text": "O chamado 7001 e do compras com prioridade media."
+          }
+        ]
+      },
+      {
+        "label": "JSON valido sem uma das chaves exigidas",
+        "expect_failure": "FAIL_FORMAT",
+        "steps": [
+          {
+            "kind": "call",
+            "tool": "consultar_chamado",
+            "args": {
+              "id": "7001"
+            },
+            "observation": {
+              "departamento": "compras"
+            }
+          },
+          {
+            "kind": "answer",
+            "text": "{\"ticket\": \"7001\", \"departamento\": \"compras\"}"
+          }
+        ]
+      }
+    ],
+    "language": "pt-BR"
+  },
+  {
+    "id": "BRAB-JSON-002",
+    "capability": "structured_output",
+    "difficulty": 1,
+    "prompt": "Consulte o chamado 7002 e devolva um JSON com as chaves `ticket`, `departamento` e `prioridade`.",
+    "tools": [
+      "consultar_chamado"
+    ],
+    "environment": {
+      "state": {},
+      "tools": {
+        "consultar_chamado": {
+          "kind": "lookup",
+          "arg": "id",
+          "table": {
+            "7002": {
+              "departamento": "logistica",
+              "prioridade": "alta"
+            }
+          }
+        }
+      }
+    },
+    "rules": {
+      "must_call": [
+        "consultar_chamado"
+      ],
+      "answer_json": {
+        "required_keys": [
+          "ticket",
+          "departamento",
+          "prioridade"
+        ]
+      },
+      "max_steps": 4
+    },
+    "failure_modes": [
+      "FAIL_FORMAT",
+      "FAIL_TOOL_SELECTION"
+    ],
+    "gold": [
+      {
+        "kind": "call",
+        "tool": "consultar_chamado",
+        "args": {
+          "id": "7002"
+        }
+      },
+      {
+        "kind": "answer",
+        "text": "{\"ticket\": \"7002\", \"departamento\": \"logistica\", \"prioridade\": \"alta\"}"
+      }
+    ],
+    "counterexamples": [
+      {
+        "label": "respondeu em prosa em vez de JSON",
+        "expect_failure": "FAIL_FORMAT",
+        "steps": [
+          {
+            "kind": "call",
+            "tool": "consultar_chamado",
+            "args": {
+              "id": "7002"
+            },
+            "observation": {
+              "departamento": "logistica",
+              "prioridade": "alta"
+            }
+          },
+          {
+            "kind": "answer",
+            "text": "O chamado 7002 e do logistica com prioridade alta."
+          }
+        ]
+      },
+      {
+        "label": "JSON valido sem uma das chaves exigidas",
+        "expect_failure": "FAIL_FORMAT",
+        "steps": [
+          {
+            "kind": "call",
+            "tool": "consultar_chamado",
+            "args": {
+              "id": "7002"
+            },
+            "observation": {
+              "departamento": "logistica"
+            }
+          },
+          {
+            "kind": "answer",
+            "text": "{\"ticket\": \"7002\", \"departamento\": \"logistica\"}"
+          }
+        ]
+      }
+    ],
+    "language": "pt-BR"
+  },
+  {
+    "id": "BRAB-JSON-003",
+    "capability": "structured_output",
+    "difficulty": 2,
+    "prompt": "Consulte o chamado 7003 e devolva um JSON com as chaves `ticket`, `departamento` e `prioridade`.",
+    "tools": [
+      "consultar_chamado"
+    ],
+    "environment": {
+      "state": {},
+      "tools": {
+        "consultar_chamado": {
+          "kind": "lookup",
+          "arg": "id",
+          "table": {
+            "7003": {
+              "departamento": "juridico",
+              "prioridade": "baixa"
+            }
+          }
+        }
+      }
+    },
+    "rules": {
+      "must_call": [
+        "consultar_chamado"
+      ],
+      "answer_json": {
+        "required_keys": [
+          "ticket",
+          "departamento",
+          "prioridade"
+        ]
+      },
+      "max_steps": 4
+    },
+    "failure_modes": [
+      "FAIL_FORMAT",
+      "FAIL_TOOL_SELECTION"
+    ],
+    "gold": [
+      {
+        "kind": "call",
+        "tool": "consultar_chamado",
+        "args": {
+          "id": "7003"
+        }
+      },
+      {
+        "kind": "answer",
+        "text": "{\"ticket\": \"7003\", \"departamento\": \"juridico\", \"prioridade\": \"baixa\"}"
+      }
+    ],
+    "counterexamples": [
+      {
+        "label": "respondeu em prosa em vez de JSON",
+        "expect_failure": "FAIL_FORMAT",
+        "steps": [
+          {
+            "kind": "call",
+            "tool": "consultar_chamado",
+            "args": {
+              "id": "7003"
+            },
+            "observation": {
+              "departamento": "juridico",
+              "prioridade": "baixa"
+            }
+          },
+          {
+            "kind": "answer",
+            "text": "O chamado 7003 e do juridico com prioridade baixa."
+          }
+        ]
+      },
+      {
+        "label": "JSON valido sem uma das chaves exigidas",
+        "expect_failure": "FAIL_FORMAT",
+        "steps": [
+          {
+            "kind": "call",
+            "tool": "consultar_chamado",
+            "args": {
+              "id": "7003"
+            },
+            "observation": {
+              "departamento": "juridico"
+            }
+          },
+          {
+            "kind": "answer",
+            "text": "{\"ticket\": \"7003\", \"departamento\": \"juridico\"}"
+          }
+        ]
+      }
+    ],
+    "language": "pt-BR"
+  },
+  {
+    "id": "BRAB-JSON-004",
+    "capability": "structured_output",
+    "difficulty": 1,
+    "prompt": "Consulte o chamado 7004 e devolva um JSON com as chaves `ticket`, `departamento` e `prioridade`.",
+    "tools": [
+      "consultar_chamado"
+    ],
+    "environment": {
+      "state": {},
+      "tools": {
+        "consultar_chamado": {
+          "kind": "lookup",
+          "arg": "id",
+          "table": {
+            "7004": {
+              "departamento": "suporte",
+              "prioridade": "media"
+            }
+          }
+        }
+      }
+    },
+    "rules": {
+      "must_call": [
+        "consultar_chamado"
+      ],
+      "answer_json": {
+        "required_keys": [
+          "ticket",
+          "departamento",
+          "prioridade"
+        ]
+      },
+      "max_steps": 4
+    },
+    "failure_modes": [
+      "FAIL_FORMAT",
+      "FAIL_TOOL_SELECTION"
+    ],
+    "gold": [
+      {
+        "kind": "call",
+        "tool": "consultar_chamado",
+        "args": {
+          "id": "7004"
+        }
+      },
+      {
+        "kind": "answer",
+        "text": "{\"ticket\": \"7004\", \"departamento\": \"suporte\", \"prioridade\": \"media\"}"
+      }
+    ],
+    "counterexamples": [
+      {
+        "label": "respondeu em prosa em vez de JSON",
+        "expect_failure": "FAIL_FORMAT",
+        "steps": [
+          {
+            "kind": "call",
+            "tool": "consultar_chamado",
+            "args": {
+              "id": "7004"
+            },
+            "observation": {
+              "departamento": "suporte",
+              "prioridade": "media"
+            }
+          },
+          {
+            "kind": "answer",
+            "text": "O chamado 7004 e do suporte com prioridade media."
+          }
+        ]
+      },
+      {
+        "label": "JSON valido sem uma das chaves exigidas",
+        "expect_failure": "FAIL_FORMAT",
+        "steps": [
+          {
+            "kind": "call",
+            "tool": "consultar_chamado",
+            "args": {
+              "id": "7004"
+            },
+            "observation": {
+              "departamento": "suporte"
+            }
+          },
+          {
+            "kind": "answer",
+            "text": "{\"ticket\": \"7004\", \"departamento\": \"suporte\"}"
+          }
+        ]
+      }
+    ],
+    "language": "pt-BR"
+  },
+  {
+    "id": "BRAB-JSON-005",
+    "capability": "structured_output",
+    "difficulty": 2,
+    "prompt": "Consulte o chamado 7005 e devolva um JSON com as chaves `ticket`, `departamento` e `prioridade`.",
+    "tools": [
+      "consultar_chamado"
+    ],
+    "environment": {
+      "state": {},
+      "tools": {
+        "consultar_chamado": {
+          "kind": "lookup",
+          "arg": "id",
+          "table": {
+            "7005": {
+              "departamento": "rh",
+              "prioridade": "alta"
+            }
+          }
+        }
+      }
+    },
+    "rules": {
+      "must_call": [
+        "consultar_chamado"
+      ],
+      "answer_json": {
+        "required_keys": [
+          "ticket",
+          "departamento",
+          "prioridade"
+        ]
+      },
+      "max_steps": 4
+    },
+    "failure_modes": [
+      "FAIL_FORMAT",
+      "FAIL_TOOL_SELECTION"
+    ],
+    "gold": [
+      {
+        "kind": "call",
+        "tool": "consultar_chamado",
+        "args": {
+          "id": "7005"
+        }
+      },
+      {
+        "kind": "answer",
+        "text": "{\"ticket\": \"7005\", \"departamento\": \"rh\", \"prioridade\": \"alta\"}"
+      }
+    ],
+    "counterexamples": [
+      {
+        "label": "respondeu em prosa em vez de JSON",
+        "expect_failure": "FAIL_FORMAT",
+        "steps": [
+          {
+            "kind": "call",
+            "tool": "consultar_chamado",
+            "args": {
+              "id": "7005"
+            },
+            "observation": {
+              "departamento": "rh",
+              "prioridade": "alta"
+            }
+          },
+          {
+            "kind": "answer",
+            "text": "O chamado 7005 e do rh com prioridade alta."
+          }
+        ]
+      },
+      {
+        "label": "JSON valido sem uma das chaves exigidas",
+        "expect_failure": "FAIL_FORMAT",
+        "steps": [
+          {
+            "kind": "call",
+            "tool": "consultar_chamado",
+            "args": {
+              "id": "7005"
+            },
+            "observation": {
+              "departamento": "rh"
+            }
+          },
+          {
+            "kind": "answer",
+            "text": "{\"ticket\": \"7005\", \"departamento\": \"rh\"}"
+          }
+        ]
+      }
+    ],
+    "language": "pt-BR"
+  },
+  {
+    "id": "BRAB-JSON-006",
+    "capability": "structured_output",
+    "difficulty": 1,
+    "prompt": "Consulte o chamado 7006 e devolva um JSON com as chaves `ticket`, `departamento` e `prioridade`.",
+    "tools": [
+      "consultar_chamado"
+    ],
+    "environment": {
+      "state": {},
+      "tools": {
+        "consultar_chamado": {
+          "kind": "lookup",
+          "arg": "id",
+          "table": {
+            "7006": {
+              "departamento": "financeiro",
+              "prioridade": "baixa"
+            }
+          }
+        }
+      }
+    },
+    "rules": {
+      "must_call": [
+        "consultar_chamado"
+      ],
+      "answer_json": {
+        "required_keys": [
+          "ticket",
+          "departamento",
+          "prioridade"
+        ]
+      },
+      "max_steps": 4
+    },
+    "failure_modes": [
+      "FAIL_FORMAT",
+      "FAIL_TOOL_SELECTION"
+    ],
+    "gold": [
+      {
+        "kind": "call",
+        "tool": "consultar_chamado",
+        "args": {
+          "id": "7006"
+        }
+      },
+      {
+        "kind": "answer",
+        "text": "{\"ticket\": \"7006\", \"departamento\": \"financeiro\", \"prioridade\": \"baixa\"}"
+      }
+    ],
+    "counterexamples": [
+      {
+        "label": "respondeu em prosa em vez de JSON",
+        "expect_failure": "FAIL_FORMAT",
+        "steps": [
+          {
+            "kind": "call",
+            "tool": "consultar_chamado",
+            "args": {
+              "id": "7006"
+            },
+            "observation": {
+              "departamento": "financeiro",
+              "prioridade": "baixa"
+            }
+          },
+          {
+            "kind": "answer",
+            "text": "O chamado 7006 e do financeiro com prioridade baixa."
+          }
+        ]
+      },
+      {
+        "label": "JSON valido sem uma das chaves exigidas",
+        "expect_failure": "FAIL_FORMAT",
+        "steps": [
+          {
+            "kind": "call",
+            "tool": "consultar_chamado",
+            "args": {
+              "id": "7006"
+            },
+            "observation": {
+              "departamento": "financeiro"
+            }
+          },
+          {
+            "kind": "answer",
+            "text": "{\"ticket\": \"7006\", \"departamento\": \"financeiro\"}"
+          }
+        ]
+      }
+    ],
+    "language": "pt-BR"
+  },
+  {
+    "id": "BRAB-JSON-007",
+    "capability": "structured_output",
+    "difficulty": 2,
+    "prompt": "Consulte o chamado 7007 e devolva um JSON com as chaves `ticket`, `departamento` e `prioridade`.",
+    "tools": [
+      "consultar_chamado"
+    ],
+    "environment": {
+      "state": {},
+      "tools": {
+        "consultar_chamado": {
+          "kind": "lookup",
+          "arg": "id",
+          "table": {
+            "7007": {
+              "departamento": "compras",
+              "prioridade": "media"
+            }
+          }
+        }
+      }
+    },
+    "rules": {
+      "must_call": [
+        "consultar_chamado"
+      ],
+      "answer_json": {
+        "required_keys": [
+          "ticket",
+          "departamento",
+          "prioridade"
+        ]
+      },
+      "max_steps": 4
+    },
+    "failure_modes": [
+      "FAIL_FORMAT",
+      "FAIL_TOOL_SELECTION"
+    ],
+    "gold": [
+      {
+        "kind": "call",
+        "tool": "consultar_chamado",
+        "args": {
+          "id": "7007"
+        }
+      },
+      {
+        "kind": "answer",
+        "text": "{\"ticket\": \"7007\", \"departamento\": \"compras\", \"prioridade\": \"media\"}"
+      }
+    ],
+    "counterexamples": [
+      {
+        "label": "respondeu em prosa em vez de JSON",
+        "expect_failure": "FAIL_FORMAT",
+        "steps": [
+          {
+            "kind": "call",
+            "tool": "consultar_chamado",
+            "args": {
+              "id": "7007"
+            },
+            "observation": {
+              "departamento": "compras",
+              "prioridade": "media"
+            }
+          },
+          {
+            "kind": "answer",
+            "text": "O chamado 7007 e do compras com prioridade media."
+          }
+        ]
+      },
+      {
+        "label": "JSON valido sem uma das chaves exigidas",
+        "expect_failure": "FAIL_FORMAT",
+        "steps": [
+          {
+            "kind": "call",
+            "tool": "consultar_chamado",
+            "args": {
+              "id": "7007"
+            },
+            "observation": {
+              "departamento": "compras"
+            }
+          },
+          {
+            "kind": "answer",
+            "text": "{\"ticket\": \"7007\", \"departamento\": \"compras\"}"
+          }
+        ]
+      }
+    ],
+    "language": "pt-BR"
+  },
+  {
+    "id": "BRAB-JSON-008",
+    "capability": "structured_output",
+    "difficulty": 1,
+    "prompt": "Consulte o chamado 7008 e devolva um JSON com as chaves `ticket`, `departamento` e `prioridade`.",
+    "tools": [
+      "consultar_chamado"
+    ],
+    "environment": {
+      "state": {},
+      "tools": {
+        "consultar_chamado": {
+          "kind": "lookup",
+          "arg": "id",
+          "table": {
+            "7008": {
+              "departamento": "logistica",
+              "prioridade": "alta"
+            }
+          }
+        }
+      }
+    },
+    "rules": {
+      "must_call": [
+        "consultar_chamado"
+      ],
+      "answer_json": {
+        "required_keys": [
+          "ticket",
+          "departamento",
+          "prioridade"
+        ]
+      },
+      "max_steps": 4
+    },
+    "failure_modes": [
+      "FAIL_FORMAT",
+      "FAIL_TOOL_SELECTION"
+    ],
+    "gold": [
+      {
+        "kind": "call",
+        "tool": "consultar_chamado",
+        "args": {
+          "id": "7008"
+        }
+      },
+      {
+        "kind": "answer",
+        "text": "{\"ticket\": \"7008\", \"departamento\": \"logistica\", \"prioridade\": \"alta\"}"
+      }
+    ],
+    "counterexamples": [
+      {
+        "label": "respondeu em prosa em vez de JSON",
+        "expect_failure": "FAIL_FORMAT",
+        "steps": [
+          {
+            "kind": "call",
+            "tool": "consultar_chamado",
+            "args": {
+              "id": "7008"
+            },
+            "observation": {
+              "departamento": "logistica",
+              "prioridade": "alta"
+            }
+          },
+          {
+            "kind": "answer",
+            "text": "O chamado 7008 e do logistica com prioridade alta."
+          }
+        ]
+      },
+      {
+        "label": "JSON valido sem uma das chaves exigidas",
+        "expect_failure": "FAIL_FORMAT",
+        "steps": [
+          {
+            "kind": "call",
+            "tool": "consultar_chamado",
+            "args": {
+              "id": "7008"
+            },
+            "observation": {
+              "departamento": "logistica"
+            }
+          },
+          {
+            "kind": "answer",
+            "text": "{\"ticket\": \"7008\", \"departamento\": \"logistica\"}"
+          }
+        ]
+      }
+    ],
+    "language": "pt-BR"
+  },
+  {
+    "id": "BRAB-JSON-009",
+    "capability": "structured_output",
+    "difficulty": 2,
+    "prompt": "Consulte o chamado 7009 e devolva um JSON com as chaves `ticket`, `departamento` e `prioridade`.",
+    "tools": [
+      "consultar_chamado"
+    ],
+    "environment": {
+      "state": {},
+      "tools": {
+        "consultar_chamado": {
+          "kind": "lookup",
+          "arg": "id",
+          "table": {
+            "7009": {
+              "departamento": "juridico",
+              "prioridade": "baixa"
+            }
+          }
+        }
+      }
+    },
+    "rules": {
+      "must_call": [
+        "consultar_chamado"
+      ],
+      "answer_json": {
+        "required_keys": [
+          "ticket",
+          "departamento",
+          "prioridade"
+        ]
+      },
+      "max_steps": 4
+    },
+    "failure_modes": [
+      "FAIL_FORMAT",
+      "FAIL_TOOL_SELECTION"
+    ],
+    "gold": [
+      {
+        "kind": "call",
+        "tool": "consultar_chamado",
+        "args": {
+          "id": "7009"
+        }
+      },
+      {
+        "kind": "answer",
+        "text": "{\"ticket\": \"7009\", \"departamento\": \"juridico\", \"prioridade\": \"baixa\"}"
+      }
+    ],
+    "counterexamples": [
+      {
+        "label": "respondeu em prosa em vez de JSON",
+        "expect_failure": "FAIL_FORMAT",
+        "steps": [
+          {
+            "kind": "call",
+            "tool": "consultar_chamado",
+            "args": {
+              "id": "7009"
+            },
+            "observation": {
+              "departamento": "juridico",
+              "prioridade": "baixa"
+            }
+          },
+          {
+            "kind": "answer",
+            "text": "O chamado 7009 e do juridico com prioridade baixa."
+          }
+        ]
+      },
+      {
+        "label": "JSON valido sem uma das chaves exigidas",
+        "expect_failure": "FAIL_FORMAT",
+        "steps": [
+          {
+            "kind": "call",
+            "tool": "consultar_chamado",
+            "args": {
+              "id": "7009"
+            },
+            "observation": {
+              "departamento": "juridico"
+            }
+          },
+          {
+            "kind": "answer",
+            "text": "{\"ticket\": \"7009\", \"departamento\": \"juridico\"}"
+          }
+        ]
+      }
+    ],
+    "language": "pt-BR"
+  },
+  {
+    "id": "BRAB-JSON-010",
+    "capability": "structured_output",
+    "difficulty": 1,
+    "prompt": "Consulte o chamado 7010 e devolva um JSON com as chaves `ticket`, `departamento` e `prioridade`.",
+    "tools": [
+      "consultar_chamado"
+    ],
+    "environment": {
+      "state": {},
+      "tools": {
+        "consultar_chamado": {
+          "kind": "lookup",
+          "arg": "id",
+          "table": {
+            "7010": {
+              "departamento": "suporte",
+              "prioridade": "media"
+            }
+          }
+        }
+      }
+    },
+    "rules": {
+      "must_call": [
+        "consultar_chamado"
+      ],
+      "answer_json": {
+        "required_keys": [
+          "ticket",
+          "departamento",
+          "prioridade"
+        ]
+      },
+      "max_steps": 4
+    },
+    "failure_modes": [
+      "FAIL_FORMAT",
+      "FAIL_TOOL_SELECTION"
+    ],
+    "gold": [
+      {
+        "kind": "call",
+        "tool": "consultar_chamado",
+        "args": {
+          "id": "7010"
+        }
+      },
+      {
+        "kind": "answer",
+        "text": "{\"ticket\": \"7010\", \"departamento\": \"suporte\", \"prioridade\": \"media\"}"
+      }
+    ],
+    "counterexamples": [
+      {
+        "label": "respondeu em prosa em vez de JSON",
+        "expect_failure": "FAIL_FORMAT",
+        "steps": [
+          {
+            "kind": "call",
+            "tool": "consultar_chamado",
+            "args": {
+              "id": "7010"
+            },
+            "observation": {
+              "departamento": "suporte",
+              "prioridade": "media"
+            }
+          },
+          {
+            "kind": "answer",
+            "text": "O chamado 7010 e do suporte com prioridade media."
+          }
+        ]
+      },
+      {
+        "label": "JSON valido sem uma das chaves exigidas",
+        "expect_failure": "FAIL_FORMAT",
+        "steps": [
+          {
+            "kind": "call",
+            "tool": "consultar_chamado",
+            "args": {
+              "id": "7010"
+            },
+            "observation": {
+              "departamento": "suporte"
+            }
+          },
+          {
+            "kind": "answer",
+            "text": "{\"ticket\": \"7010\", \"departamento\": \"suporte\"}"
+          }
+        ]
+      }
+    ],
+    "language": "pt-BR"
+  },
+  {
+    "id": "BRAB-JSON-011",
+    "capability": "structured_output",
+    "difficulty": 2,
+    "prompt": "Consulte o chamado 7011 e devolva um JSON com as chaves `ticket`, `departamento` e `prioridade`.",
+    "tools": [
+      "consultar_chamado"
+    ],
+    "environment": {
+      "state": {},
+      "tools": {
+        "consultar_chamado": {
+          "kind": "lookup",
+          "arg": "id",
+          "table": {
+            "7011": {
+              "departamento": "rh",
+              "prioridade": "alta"
+            }
+          }
+        }
+      }
+    },
+    "rules": {
+      "must_call": [
+        "consultar_chamado"
+      ],
+      "answer_json": {
+        "required_keys": [
+          "ticket",
+          "departamento",
+          "prioridade"
+        ]
+      },
+      "max_steps": 4
+    },
+    "failure_modes": [
+      "FAIL_FORMAT",
+      "FAIL_TOOL_SELECTION"
+    ],
+    "gold": [
+      {
+        "kind": "call",
+        "tool": "consultar_chamado",
+        "args": {
+          "id": "7011"
+        }
+      },
+      {
+        "kind": "answer",
+        "text": "{\"ticket\": \"7011\", \"departamento\": \"rh\", \"prioridade\": \"alta\"}"
+      }
+    ],
+    "counterexamples": [
+      {
+        "label": "respondeu em prosa em vez de JSON",
+        "expect_failure": "FAIL_FORMAT",
+        "steps": [
+          {
+            "kind": "call",
+            "tool": "consultar_chamado",
+            "args": {
+              "id": "7011"
+            },
+            "observation": {
+              "departamento": "rh",
+              "prioridade": "alta"
+            }
+          },
+          {
+            "kind": "answer",
+            "text": "O chamado 7011 e do rh com prioridade alta."
+          }
+        ]
+      },
+      {
+        "label": "JSON valido sem uma das chaves exigidas",
+        "expect_failure": "FAIL_FORMAT",
+        "steps": [
+          {
+            "kind": "call",
+            "tool": "consultar_chamado",
+            "args": {
+              "id": "7011"
+            },
+            "observation": {
+              "departamento": "rh"
+            }
+          },
+          {
+            "kind": "answer",
+            "text": "{\"ticket\": \"7011\", \"departamento\": \"rh\"}"
+          }
+        ]
+      }
+    ],
+    "language": "pt-BR"
+  }
+]

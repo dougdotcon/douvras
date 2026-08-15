@@ -1,0 +1,45 @@
+{
+  "_meta": {
+    "version": "1.0",
+    "date": "2026-08-03",
+    "status": "ASSUMPTION",
+    "assumptions": ["A-004"],
+    "gaps": ["G-002"],
+    "note": "PRIORS, NAO MEDICOES. Tolerancia em [0,1] onde 1 = quantizar este papel nesta precisao raramente degrada qualidade de forma perceptivel, e 0 = degrada. Derivados do consenso da literatura de quantizacao pos-treino, NAO de medicao neste projeto. Enquanto G-002 estiver aberta, nenhuma recomendacao de precisao pode passar de CONDITIONAL_RESULT. Sobrescrever com medicao via `atlas quantize --evidence medidas.json`.",
+    "falsifier": "perplexidade medida degradando acima do limite declarado em qualquer papel com prior >= 0.7"
+  },
+  "roles": {
+    "q_proj":            {"int8": 0.85, "int4": 0.55, "ternary": 0.20},
+    "k_proj":            {"int8": 0.80, "int4": 0.45, "ternary": 0.15},
+    "v_proj":            {"int8": 0.85, "int4": 0.55, "ternary": 0.20},
+    "o_proj":            {"int8": 0.88, "int4": 0.60, "ternary": 0.25},
+    "gate_proj":         {"int8": 0.92, "int4": 0.72, "ternary": 0.35},
+    "up_proj":           {"int8": 0.92, "int4": 0.72, "ternary": 0.35},
+    "down_proj":         {"int8": 0.88, "int4": 0.62, "ternary": 0.28},
+    "expert_gate_proj":  {"int8": 0.88, "int4": 0.62, "ternary": 0.25},
+    "expert_up_proj":    {"int8": 0.88, "int4": 0.62, "ternary": 0.25},
+    "expert_down_proj":  {"int8": 0.84, "int4": 0.54, "ternary": 0.20},
+    "lm_head":           {"int8": 0.70, "int4": 0.30, "ternary": 0.05},
+    "embed_tokens":      {"int8": 0.75, "int4": 0.35, "ternary": 0.05},
+    "router":            {"int8": 0.30, "int4": 0.10, "ternary": 0.02},
+    "input_layernorm":   {"int8": 0.20, "int4": 0.05, "ternary": 0.01},
+    "post_attention_layernorm": {"int8": 0.20, "int4": 0.05, "ternary": 0.01},
+    "pre_feedforward_layernorm": {"int8": 0.20, "int4": 0.05, "ternary": 0.01},
+    "post_feedforward_layernorm": {"int8": 0.20, "int4": 0.05, "ternary": 0.01},
+    "final_norm":        {"int8": 0.15, "int4": 0.03, "ternary": 0.01}
+  },
+  "position_penalty": {
+    "note": "Primeiras e ultimas camadas sao empiricamente mais sensiveis a quantizacao agressiva.",
+    "first_layers": 2,
+    "last_layers": 2,
+    "factor": 0.75
+  },
+  "moe_penalty": {
+    "note": "Roteamento esparso amplifica erro de quantizacao: um token mal roteado nao e recuperavel a jusante.",
+    "factor": 0.90
+  },
+  "acceptance_threshold": {
+    "note": "Tolerancia minima para considerar um papel candidato naquela precisao.",
+    "value": 0.60
+  }
+}
