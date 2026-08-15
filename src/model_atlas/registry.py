@@ -238,6 +238,13 @@ def verify_spec(spec: HFModelSpec) -> dict[str, Any]:
                 divergencias[campo] = {
                     "local": local, "upstream": valor_up, "erro_relativo": round(erro, 4)
                 }
+            elif float(local) != float(valor_up):
+                # Dentro da tolerancia, mas **diferente**: a tolerancia decide se e erro de
+                # transcricao, nao se vale gravar a contagem real. Deixar `3.0` na ficha de um
+                # checkpoint com 3.0751 B mantinha o footprint 2,5 % abaixo do verdadeiro, e
+                # marcado como conferido — a mesma direcao perigosa de `COR-102`, so que menor
+                # e sem ninguem para notar. Conferido passa a significar exato.
+                descobertos[campo] = valor_up
         elif str(local) != str(valor_up):
             divergencias[campo] = {"local": local, "upstream": valor_up}
 

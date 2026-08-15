@@ -18,7 +18,7 @@
     "provenance": "UPSTREAM_VERIFIED",
     "source": "https://huggingface.co/api/models/Polygl0t/Tucano2-qwen-0.5B-Base",
     "note": "Familia aberta focada em portugues. A ficha transcrita dizia `Qwen2ForCausalLM`, inferido do nome do repositorio; o checkpoint declara `Qwen3ForCausalLM`. Contagem real: 490.799.104 parametros. Corrigido em 2026-08-15 pela verificacao que fecha G-108 — ver correcao COR-101 em RETRACTIONS_AND_CORRECTIONS.",
-    "sha256": "9b410ca437403dd37215244d5cd0387c5c5edecaa7f42c212b708968b4fe0eb6",
-    "retrieved_at": "2026-08-15T00:41:54+00:00"
+    "sha256": "9399f0642c4b952f9af58206487e9bc550a22eff881f1a032a6a8fd4c7107aad",
+    "retrieved_at": "2026-08-15T09:53:50+00:00"
   }
 }

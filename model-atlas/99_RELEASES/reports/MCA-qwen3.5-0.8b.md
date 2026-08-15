@@ -1,8 +1,8 @@
 ---
 artifact: MODEL_CAPABILITY_ASSESSMENT
 model: qwen3.5-0.8b
-run_id: 20260815T024411Z
-generated_at: 2026-08-15T02:44:11+00:00
+run_id: 20260815T095603Z
+generated_at: 2026-08-15T09:56:03+00:00
 method: DOUVRAS 2.0
 cycle: C-002
 weakest_status: ASSUMPTION

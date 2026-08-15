@@ -192,34 +192,69 @@ class Assessment:
 
         if self.evaluable and self.measurement is not None:
             m = self.measurement
+            fortes = [c for c, f in self.fingerprint.scores.items() if (f.value or 0) > 0]
+
+            # O diagnostico e derivado da contagem, nao escrito ao lado dela: texto fixo
+            # convivendo com numero calculado ja produziu uma incoerencia neste relatorio
+            # (ver `COHERENCE_RULES`), e a licao vale para toda secao.
+            if m.tool_calls == 0:
+                diagnostico = [
+                    "Nao e que ele erre a ferramenta: ele **nunca chega a chamar uma**. Toda "
+                    "trajetoria termina no primeiro passo, com um objeto JSON que tem a forma "
+                    "do contrato e valores de exemplo — `\"ferramenta\": \"nome_da_ferramenta\"` "
+                    "copiado literalmente. O modelo descreve o protocolo em vez de executa-lo.",
+                    "",
+                    "Isso **nao** significa que o modelo seja incapaz de portugues ou de "
+                    "instrucao: fora do protocolo de acao ele responde bem. Significa que, "
+                    "nesta quantizacao e com este prompt, ele nao instancia um schema de "
+                    "chamada de ferramenta.",
+                ]
+            else:
+                diagnostico = [
+                    f"O modelo **executa** o protocolo: {m.tool_calls} chamadas de ferramenta "
+                    f"em {m.tasks} tarefas, com trajetorias de multiplos passos. O que falha "
+                    f"nao e a forma da acao, e a **escolha** dela.",
+                ]
+                if fortes:
+                    lista = ", ".join(f"`{c}` ({self.fingerprint.scores[c].value:.0%})" for c in fortes)
+                    diagnostico += [
+                        "",
+                        f"Onde ele passa: {lista}. Nas demais capacidades o escore e zero, e o "
+                        f"perfil por capacidade — nao o agregado — e o que torna essa diferenca "
+                        f"legivel (`C-109`).",
+                    ]
+
             resposta = [
                 f"**Nao — e o motivo e especifico.** Executado sobre **{m.tasks} tarefas** do "
-                f"BR-Agent-Bench, `{self.spec.id}` acertou **{100 * self.measurement_score:.1f} %** "
-                f"e emitiu **{m.tool_calls} chamadas de ferramenta**.",
+                f"BR-Agent-Bench, `{self.spec.id}` acertou "
+                f"**{100 * self.measurement_score:.1f} %** e emitiu **{m.tool_calls} chamadas "
+                f"de ferramenta**.",
                 "",
-                "Nao e que ele erre a ferramenta: ele **nunca chega a chamar uma**. Toda "
-                "trajetoria termina no primeiro passo, com um objeto JSON que tem a forma do "
-                "contrato e valores de exemplo — `\"ferramenta\": \"nome_da_ferramenta\"` copiado "
-                "literalmente. O modelo descreve o protocolo em vez de executa-lo.",
-                "",
-                "Isso **nao** significa que o modelo seja incapaz de portugues ou de instrucao: "
-                "fora do protocolo de acao ele responde bem. Significa que, nesta quantizacao e "
-                "com este prompt, ele nao instancia um schema de chamada de ferramenta.",
+                *diagnostico,
                 "",
                 "**Os qualificadores fazem parte do resultado**, e sem eles o numero engana:",
                 "",
-                f"| Qualificador | Valor |",
-                f"|---|---|",
+                "| Qualificador | Valor |",
+                "|---|---|",
                 f"| prompt | `{m.prompt_version}`, zero-shot |",
                 f"| quantizacao | `{m.quantization}` ({m.model_file}) |",
-                f"| runtime | llama.cpp em CPU, temperatura 0 |",
+                f"| formato de conversa | `{m.conversation_format or 'raw-instruction'}` |",
+                f"| modo | `{m.system_mode or 'padrao do modelo'}` |",
+                "| runtime | llama.cpp em CPU, temperatura 0 |",
                 f"| teto de passos | {m.max_steps} |",
-                "",
-                "**A hipotese obvia foi testada e rejeitada.** Um exemplo demonstrado injetado no "
-                "prompt (`G-112`, modo diagnostico) manteve o escore em 0,0 % e as chamadas de "
-                "ferramenta em zero, em 16 tarefas cobrindo as oito capacidades. O zero-shot nao "
-                "estava medindo falta de exemplo.",
             ]
+
+            diag = Measurement.load_diagnostic(self.spec.id)
+            if diag is not None:
+                aprovou = sum(1 for g in diag.grades if g.passed)
+                resposta += [
+                    "",
+                    "**A hipotese obvia foi testada e rejeitada.** Um exemplo demonstrado "
+                    f"injetado no prompt (`G-112`, modo diagnostico) manteve o escore em "
+                    f"{aprovou / len(diag.grades):.1%} e as chamadas de ferramenta em "
+                    f"{diag.tool_calls}, em {diag.tasks} tarefas cobrindo as oito capacidades. "
+                    "O zero-shot nao estava medindo falta de exemplo.",
+                ]
         else:
             resposta = [
                 "**Ainda nao da para responder, e o motivo e verificavel.** Nao ha pesos "

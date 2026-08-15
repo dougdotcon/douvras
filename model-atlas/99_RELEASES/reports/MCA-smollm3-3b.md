@@ -1,12 +1,12 @@
 ---
 artifact: MODEL_CAPABILITY_ASSESSMENT
 model: smollm3-3b
-run_id: 20260815T024411Z
-generated_at: 2026-08-15T02:44:11+00:00
+run_id: 20260815T095603Z
+generated_at: 2026-08-15T09:56:03+00:00
 method: DOUVRAS 2.0
 cycle: C-002
 weakest_status: ASSUMPTION
-evaluable: false
+evaluable: true
 ---
 
 # Model Capability Assessment — `smollm3-3b`
@@ -17,9 +17,22 @@ evaluable: false
 
 > **`smollm3-3b` esta pronto para ser especializado por dados, e em qual capacidade?**
 
-**Ainda nao da para responder, e o motivo e verificavel.** Nao ha pesos locais para este modelo, portanto **nenhuma execucao real ocorreu** e **nenhuma capacidade foi medida**. Um assessment que respondesse mesmo assim estaria reportando o comportamento das sondas de calibracao como se fosse o do modelo.
+**Nao — e o motivo e especifico.** Executado sobre **96 tarefas** do BR-Agent-Bench, `smollm3-3b` acertou **10.4 %** e emitiu **78 chamadas de ferramenta**.
 
-O que **sim** foi estabelecido esta na secao 9: o instrumento que fara a medicao foi verificado contra gabaritos e contraexemplos.
+O modelo **executa** o protocolo: 78 chamadas de ferramenta em 96 tarefas, com trajetorias de multiplos passos. O que falha nao e a forma da acao, e a **escolha** dela.
+
+Onde ele passa: `arguments` (50%), `error_recovery` (33%). Nas demais capacidades o escore e zero, e o perfil por capacidade — nao o agregado — e o que torna essa diferenca legivel (`C-109`).
+
+**Os qualificadores fazem parte do resultado**, e sem eles o numero engana:
+
+| Qualificador | Valor |
+|---|---|
+| prompt | `agent-ptbr-v2`, zero-shot |
+| quantizacao | `q4` (smollm3-3b-q4_k_m.gguf) |
+| formato de conversa | `chat-template` |
+| modo | `/no_think` |
+| runtime | llama.cpp em CPU, temperatura 0 |
+| teto de passos | 6 |
 
 ## 2 · Ficha e proveniencia
 
@@ -29,11 +42,11 @@ O que **sim** foi estabelecido esta na secao 9: o instrumento que fara a medicao
 | repositorio | `HuggingFaceTB/SmolLM3-3B` |
 | revisao | `main` |
 | familia | smollm |
-| parametros | ≈ 3.0 B |
+| parametros | ≈ 3.0751 B |
 | contexto | 65536 |
 | licenca | apache-2.0 |
 | proveniencia | `UPSTREAM_VERIFIED` |
-| pesos locais | **nao** |
+| pesos locais | sim |
 | fonte | https://huggingface.co/api/models/HuggingFaceTB/SmolLM3-3B |
 
 Ficha **conferida na fonte** com hash e data (`G-108` fechada): a contagem de parametros e a do checkpoint, nao a do nome comercial, e por isso entra como `OBSERVATION` em vez de `ASSUMPTION`.
@@ -44,12 +57,12 @@ Maquina de referencia: **16 GB de RAM, sem GPU dedicada**.
 
 | Quantizacao | Pesos | Com folga de runtime | Cabe? | Qualidade |
 |---|---:|---:|:---:|:---:|
-| `f16` | 6.00 GB | 7.20 GB | sim | — |
-| `q8` | 3.18 GB | 3.82 GB | sim | — |
-| `q6` | 2.46 GB | 2.95 GB | sim | — |
-| `q5` | 2.07 GB | 2.48 GB | sim | — |
-| `q4` | 1.68 GB | 2.02 GB | sim | — |
-| `q3` | 1.32 GB | 1.58 GB | sim | — |
+| `f16` | 6.15 GB | 7.38 GB | sim | — |
+| `q8` | 3.26 GB | 3.91 GB | sim | — |
+| `q6` | 2.52 GB | 3.03 GB | sim | — |
+| `q5` | 2.12 GB | 2.55 GB | sim | — |
+| `q4` | 1.72 GB | 2.07 GB | sim | — |
+| `q3` | 1.35 GB | 1.62 GB | sim | — |
 
 A coluna **Qualidade** esta vazia porque nenhuma perplexidade foi medida (`G-103`).
 E a coluna que decide a escolha de quantizacao, e a unica que a aritmetica nao da.
@@ -58,100 +71,93 @@ Isto e aritmetica, nao medicao: parametros x bytes por parametro, com folga de r
 
 ## 4 · Latencia e vazao
 
+Medido em CPU, quantizacao `q4`, 96 tarefas.
+
 | Metrica | Valor | Status |
-|---|---|---|
-| TTFT | — | `OPEN_GAP` |
-| tokens/s | — | `OPEN_GAP` |
+|---|---:|---|
+| tokens/s (geracao) | 8.26 | `OBSERVATION` |
+| TTFT medio | 9.086 s | `OBSERVATION` |
+| tokens gerados | 8708 | `OBSERVATION` |
+| tempo total de modelo | 2916.5 s | `OBSERVATION` |
 | RAM de pico | — | `OPEN_GAP` |
 
-Nao existe formula honesta para latencia numa maquina que nunca executou o modelo. `G-102` fecha com uma execucao instrumentada; ate la a ausencia e declarada em vez de estimada.
+O TTFT aqui e o tempo de processamento do prompt reportado pelo servidor, nao um cronometro ate o primeiro token em streaming. E uma boa aproximacao e uma medida ruim se lida como outra coisa — por isso esta dito.
+
+RAM de pico continua `OPEN_GAP`: exige instrumentar o processo, que este harness nao faz.
 
 ## 5 · Capacidades
 
 | Capacidade | Escore | Status |
 |---|---:|---|
-| `arguments` | — | `OPEN_GAP` |
-| `error_recovery` | — | `OPEN_GAP` |
-| `hallucination` | — | `OPEN_GAP` |
-| `planning` | — | `OPEN_GAP` |
-| `pt_br_numeracy` | — | `OPEN_GAP` |
-| `safety_refusal` | — | `OPEN_GAP` |
-| `structured_output` | — | `OPEN_GAP` |
-| `tool_selection` | — | `OPEN_GAP` |
-
-Nenhuma capacidade foi medida: o corpus nao tem pesos locais e nenhuma execucao real ocorreu. Os tracos nao sao zeros — sao ausencias declaradas.
+| `arguments` | 50.0% | `OBSERVATION` |
+| `error_recovery` | 33.3% | `OBSERVATION` |
+| `hallucination` | 0.0% | `OBSERVATION` |
+| `planning` | 0.0% | `OBSERVATION` |
+| `pt_br_numeracy` | 0.0% | `OBSERVATION` |
+| `safety_refusal` | 0.0% | `OBSERVATION` |
+| `structured_output` | 0.0% | `OBSERVATION` |
+| `tool_selection` | 0.0% | `OBSERVATION` |
 
 ## 6 · Modos de falha
 
 ```text
-FONTE  sondas de calibracao  (sintetica)
+FONTE  smollm3-3b
 │
 ├── ARGUMENTS
-│   ├── tool_selection      25.0%
-│   └── argument            12.5%
+│   ├── argument            50.0%
+│   └── planning            50.0%
 │
 ├── ERROR_RECOVERY
-│   ├── recovery            43.8%
-│   ├── tool_selection      12.5%
-│   └── hallucination        6.2%
+│   └── recovery            66.7%
 │
 ├── HALLUCINATION
-│   ├── tool_selection      12.5%
-│   └── hallucination       12.5%
+│   └── tool_selection     100.0%
 │
 ├── PLANNING
-│   ├── planning            18.8%
-│   ├── tool_selection      12.5%
-│   └── argument             6.2%
+│   ├── tool_selection      50.0%
+│   └── planning            50.0%
 │
 ├── PT_BR_NUMERACY
-│   ├── planning            37.5%
-│   ├── tool_selection      25.0%
-│   └── argument             4.2%
+│   ├── tool_selection     100.0%
+│   └── planning           100.0%
 │
 ├── SAFETY_REFUSAL
-│   ├── safety              50.0%
-│   └── tool_selection      25.0%
+│   ├── tool_selection     100.0%
+│   └── safety             100.0%
 │
 ├── STRUCTURED_OUTPUT
-│   ├── format              37.5%
-│   └── tool_selection      12.5%
+│   └── format             100.0%
 │
 └── TOOL_SELECTION
-    ├── tool_selection      25.0%
-    └── hallucination       25.0%
-
-Estas taxas descrevem as sondas de calibracao, nao um modelo. Elas mostram que
-a taxonomia esta viva — cada celula preenchida e um modo que o grader consegue
-detectar quando acontece.
+    └── tool_selection     100.0%
 ```
 
 Celulas mais quentes das sondas — a leitura correta e "o grader detecta isto", nao "o modelo erra isto":
 
 | Capacidade | Modo | Taxa |
 |---|---|---:|
-| `safety_refusal` | `FAIL_SAFETY` | 50.0% |
-| `error_recovery` | `FAIL_RECOVERY` | 43.8% |
-| `pt_br_numeracy` | `FAIL_PLANNING` | 37.5% |
-| `structured_output` | `FAIL_FORMAT` | 37.5% |
-| `arguments` | `FAIL_TOOL_SELECTION` | 25.0% |
-| `pt_br_numeracy` | `FAIL_TOOL_SELECTION` | 25.0% |
-| `safety_refusal` | `FAIL_TOOL_SELECTION` | 25.0% |
-| `tool_selection` | `FAIL_TOOL_SELECTION` | 25.0% |
+| `hallucination` | `FAIL_TOOL_SELECTION` | 100.0% |
+| `pt_br_numeracy` | `FAIL_TOOL_SELECTION` | 100.0% |
+| `pt_br_numeracy` | `FAIL_PLANNING` | 100.0% |
+| `safety_refusal` | `FAIL_TOOL_SELECTION` | 100.0% |
+| `safety_refusal` | `FAIL_SAFETY` | 100.0% |
+| `structured_output` | `FAIL_FORMAT` | 100.0% |
+| `tool_selection` | `FAIL_TOOL_SELECTION` | 100.0% |
+| `error_recovery` | `FAIL_RECOVERY` | 66.7% |
 
 ## 7 · Alvo de especializacao (CSS)
 
-Sem capacidade medida nao existe deficit, e sem deficit nao existe CSS. O motor esta implementado e exercitado sob teste com fingerprint sintetico — a licao do `G-014` do Silicon Atlas, onde todo o caminho economico atravessou um ciclo sem nunca ter sido executado.
+Alvo: **`tool_selection`** (margem 0.00750 contra ruido 0.00457).
 
 ## 8 · Oportunidades de dataset
 
 Derivadas dos modos que o instrumento **consegue** detectar. Sao hipoteses de produto, nao achados sobre este modelo:
 
-- `FAIL_SAFETY` em `safety_refusal` — dataset dirigido a esse par, medido antes e depois pelo mesmo grader
-- `FAIL_RECOVERY` em `error_recovery` — dataset dirigido a esse par, medido antes e depois pelo mesmo grader
+- `FAIL_TOOL_SELECTION` em `hallucination` — dataset dirigido a esse par, medido antes e depois pelo mesmo grader
+- `FAIL_TOOL_SELECTION` em `pt_br_numeracy` — dataset dirigido a esse par, medido antes e depois pelo mesmo grader
 - `FAIL_PLANNING` em `pt_br_numeracy` — dataset dirigido a esse par, medido antes e depois pelo mesmo grader
-- `FAIL_FORMAT` em `structured_output` — dataset dirigido a esse par, medido antes e depois pelo mesmo grader
-- `FAIL_TOOL_SELECTION` em `arguments` — dataset dirigido a esse par, medido antes e depois pelo mesmo grader
+- `FAIL_TOOL_SELECTION` em `safety_refusal` — dataset dirigido a esse par, medido antes e depois pelo mesmo grader
+- `FAIL_SAFETY` em `safety_refusal` — dataset dirigido a esse par, medido antes e depois pelo mesmo grader
 
 A ordem so vira prioridade quando houver medicao real: hoje ela reflete a cobertura do corpus de tarefas, nao a fraqueza de nenhum modelo.
 
@@ -199,25 +205,25 @@ Lacunas abertas mantem todo derivado em `CONDITIONAL_RESULT` ou abaixo. Elo mais
 | Resultado | Valor | Status | Premissas | Lacunas |
 |---|---|---|---|---|
 | `proveniencia_verificada` | 1 | `OBSERVATION` | — | — |
-| `parametros` | 3000000000 parametros | `OBSERVATION` | — | — |
-| `footprint_pesos.f16` | 6 GB | `ASSUMPTION` | A-102 | — |
-| `footprint_pesos.q8` | 3.18 GB | `ASSUMPTION` | A-102 | — |
-| `footprint_pesos.q6` | 2.46 GB | `ASSUMPTION` | A-102 | — |
-| `footprint_pesos.q5` | 2.07 GB | `ASSUMPTION` | A-102 | — |
-| `footprint_pesos.q4` | 1.68 GB | `ASSUMPTION` | A-102 | — |
-| `footprint_pesos.q3` | 1.32 GB | `ASSUMPTION` | A-102 | — |
+| `parametros` | 3075100000 parametros | `OBSERVATION` | — | — |
+| `footprint_pesos.f16` | 6.15 GB | `ASSUMPTION` | A-102 | — |
+| `footprint_pesos.q8` | 3.26 GB | `ASSUMPTION` | A-102 | — |
+| `footprint_pesos.q6` | 2.522 GB | `ASSUMPTION` | A-102 | — |
+| `footprint_pesos.q5` | 2.122 GB | `ASSUMPTION` | A-102 | — |
+| `footprint_pesos.q4` | 1.722 GB | `ASSUMPTION` | A-102 | — |
+| `footprint_pesos.q3` | 1.353 GB | `ASSUMPTION` | A-102 | — |
 | `quantizacoes_que_cabem` | ['f16', 'q8', 'q6', 'q5', 'q4', 'q3'] | `ASSUMPTION` | A-101, A-102 | — |
-| `ttft` | — *(ausencia declarada)* | `OPEN_GAP` | — | G-102 |
-| `tokens_por_segundo` | — *(ausencia declarada)* | `OPEN_GAP` | — | G-102 |
+| `ttft` | 9.086 s | `OBSERVATION` | — | — |
+| `tokens_por_segundo` | 8.26 tok/s | `OBSERVATION` | — | — |
 | `ram_de_pico` | — *(ausencia declarada)* | `OPEN_GAP` | — | G-102 |
-| `capacidade.arguments` | — *(ausencia declarada)* | `OPEN_GAP` | — | G-101 |
-| `capacidade.error_recovery` | — *(ausencia declarada)* | `OPEN_GAP` | — | G-101 |
-| `capacidade.hallucination` | — *(ausencia declarada)* | `OPEN_GAP` | — | G-101 |
-| `capacidade.planning` | — *(ausencia declarada)* | `OPEN_GAP` | — | G-101 |
-| `capacidade.pt_br_numeracy` | — *(ausencia declarada)* | `OPEN_GAP` | — | G-101 |
-| `capacidade.safety_refusal` | — *(ausencia declarada)* | `OPEN_GAP` | — | G-101 |
-| `capacidade.structured_output` | — *(ausencia declarada)* | `OPEN_GAP` | — | G-101 |
-| `capacidade.tool_selection` | — *(ausencia declarada)* | `OPEN_GAP` | — | G-101 |
+| `capacidade.arguments` | 0.5 | `OBSERVATION` | — | — |
+| `capacidade.error_recovery` | 0.3333 | `OBSERVATION` | — | — |
+| `capacidade.hallucination` | 0 | `OBSERVATION` | — | — |
+| `capacidade.planning` | 0 | `OBSERVATION` | — | — |
+| `capacidade.pt_br_numeracy` | 0 | `OBSERVATION` | — | — |
+| `capacidade.safety_refusal` | 0 | `OBSERVATION` | — | — |
+| `capacidade.structured_output` | 0 | `OBSERVATION` | — | — |
+| `capacidade.tool_selection` | 0 | `OBSERVATION` | — | — |
 | `tarefas_no_corpus` | 96 tarefas | `OBSERVATION` | — | — |
 | `aceitacao_do_gabarito` | 1 | `COMPUTATIONAL_EVIDENCE` | — | — |
 | `rejeicao_de_contraexemplo` | 1 | `COMPUTATIONAL_EVIDENCE` | — | — |
@@ -226,6 +232,6 @@ Lacunas abertas mantem todo derivado em `CONDITIONAL_RESULT` ou abaixo. Elo mais
 | `instrumento_discrimina` | False | `COMPUTATIONAL_EVIDENCE` | — | G-105 |
 | `queda_no_alvo_minima` | 0.25 | `COMPUTATIONAL_EVIDENCE` | — | — |
 | `modos_de_falha_sem_sonda` | [] | `COMPUTATIONAL_EVIDENCE` | — | — |
-| `css_alvo` | — *(ausencia declarada)* | `OPEN_GAP` | — | G-101 |
+| `css_alvo` | tool_selection | `COMPUTATIONAL_EVIDENCE` | — | G-104 |
 
-Elo mais fraco do conjunto: **`ASSUMPTION`**. Divida de evidencia: **41.2%**.
+Elo mais fraco do conjunto: **`ASSUMPTION`**. Divida de evidencia: **25.0%**.

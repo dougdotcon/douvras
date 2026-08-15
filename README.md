@@ -6,7 +6,7 @@
 para virar silício, e o que num modelo de IA está maduro para ser medido.**
 
 [![Método](https://img.shields.io/badge/m%C3%A9todo-DOUVRAS%202.0-1f2937)](METODO_DOUVRAS.md)
-[![Testes](https://img.shields.io/badge/testes-240%20verdes-16a34a)](tests/)
+[![Testes](https://img.shields.io/badge/testes-263%20verdes-16a34a)](tests/)
 [![Ciclos](https://img.shields.io/badge/ciclos-C--001%20%C2%B7%20C--002%20%C2%B7%20C--003-0d9488)](#os-dois-eixos)
 [![Portões](https://img.shields.io/badge/port%C3%B5es-6%2F7%20em%20ambos%20os%20eixos-f59e0b)](#estado-dos-portões)
 [![Retratações](https://img.shields.io/badge/retrata%C3%A7%C3%B5es-6%20%C2%B7%20corre%C3%A7%C3%B5es-3-b91c1c)](#o-que-o-sistema-retratou-de-si-mesmo)
@@ -69,7 +69,7 @@ acoplamento sem conteúdo.
 
 ```bash
 pip install -e ".[dev]"        # numpy, pyyaml, pytest — nada mais
-python -m pytest tests         # 240 testes
+python -m pytest tests         # 263 testes
 ```
 
 Nenhum dos dois eixos exige GPU, pesos de modelo, `torch` ou rede no caminho principal
@@ -144,22 +144,32 @@ O grader aceita todo gabarito e rejeita todo contraexemplo com o rótulo certo. 
 agregado**, porém, não separa um respondente correto de um degenerado: cada sonda ataca uma
 família e o agregado dilui o dano pelo corpus inteiro. `C-102` foi retratada.
 
-**A primeira capacidade medida** — `tucano-2b4-instruct` Q4_K_M, CPU, 96 tarefas:
+**Dois modelos medidos**, mesmas 96 tarefas, mesmo prompt, mesma quantização, mesma máquina:
 
-| Medida | Valor |
-|---|---:|
-| escore geral | **0,0 %** |
-| chamadas de ferramenta emitidas | **0** |
-| tokens/s (geração) | 12,14 |
-| TTFT médio | 6,42 s |
+| | `tucano-2b4-instruct` | `smollm3-3b` |
+|---|---:|---:|
+| chamadas de ferramenta | **0** | **78** |
+| passos numa mesma tarefa | sempre 1 | até 6 |
+| escore geral | 0,0 % | **10,4 %** |
+| `arguments` | 0,0 % | **50,0 %** |
+| `error_recovery` | 0,0 % | **33,3 %** |
 
-O modelo não erra a ferramenta: **nunca chega a chamar uma**. Devolve o schema com valores de
-exemplo — `"ferramenta": "nome_da_ferramenta"` copiado literalmente — e descreve o protocolo em
-vez de executá-lo. Um exemplo demonstrado injetado no prompt não mudou nada, então o zero não
-media falta de elicitação.
+O Tucano não erra a ferramenta: **nunca chega a chamar uma**. Devolve o schema com valores de
+exemplo — `"ferramenta": "nome_da_ferramenta"` copiado literalmente. O SmolLM3 executa o
+protocolo; o que falha nele é a **escolha** da ferramenta, não a forma da ação.
 
-No caminho, o eixo encontrou um defeito no artefato publicado do modelo: **o template de chat
-embutido no GGUF está errado** e faz qualquer ferramenta padrão receber saída degenerada.
+Com isso, `C-108` — *"modelos de 2B a 3B não instanciam chamada de ferramenta"* — foi
+**retratada no mesmo ciclo em que foi registrada**, pelo falsificador que ela própria declarou.
+Porte não era a variável.
+
+**E a segunda medição não desfez a primeira retratação.** A margem agregada entre os dois
+modelos é **0,104**, ainda abaixo do limiar de 0,20 — entre um modelo que nunca chama ferramenta
+e um que chama 78 vezes. O sinal está no perfil por capacidade (+0,500 em `arguments`), não no
+agregado. Isso **reforça** `R-101` em vez de enfraquecê-la.
+
+No caminho, o eixo encontrou um defeito no artefato publicado de um dos modelos: **o template de
+chat embutido no GGUF do Tucano está errado** e faz qualquer ferramenta padrão receber saída
+degenerada.
 
 Detalhes em [model-atlas/README.md](model-atlas/README.md).
 
@@ -247,7 +257,7 @@ DOUVRAS/
 └── tests/
     ├── core/                  27 testes — o contrato, sem nenhum domínio
     ├── silicon/               149 testes
-    └── model/                 64 testes
+    └── model/                 87 testes
 ```
 
 Arquivos marcados **[GERADOS]** dentro dos projetos não devem ser editados: são saída, não
@@ -268,8 +278,8 @@ parciais.**
 
 **No eixo de capacidade** — o corpus é sintético e até prova em contrário mede o gerador, não o
 mundo; as sondas foram escritas por quem escreveu o grader; os priors do CSS nunca foram
-calibrados; a única medição real cobre **um** modelo, **uma** quantização e **uma** versão de
-prompt. **11 lacunas abertas e 2 parciais.**
+calibrados; as medições cobrem **dois** modelos, **uma** quantização e **uma** versão de prompt,
+e a diferença entre eles não tem explicação medida. **13 lacunas abertas e 2 parciais.**
 
 **Nos dois** — o limiar que produz a conclusão do ciclo não tem base empírica. No silício é
 `min_stability = 0,60`; na capacidade é a margem de `0,20`. Nos dois casos, afrouxar o limiar é

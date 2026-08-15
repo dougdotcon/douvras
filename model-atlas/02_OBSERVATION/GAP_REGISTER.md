@@ -15,8 +15,8 @@ lacuna é sempre lacuna *de alguma coisa*.
 
 | Gap | Por que importa | Evidência necessária | Bloqueia | Status |
 |---|---|---|---|---|
-| G-101 | Nenhum modelo real foi executado: todas as capacidades são ausência declarada | Pesos locais + suíte executada com o extra `[run]` | qualquer afirmação sobre capacidade de modelo; CSS | **PARCIAL** — `tucano-2b4-instruct` executado nas 96 tarefas em 2026-08-15 ([RUN](../99_RELEASES/runs/)). Os outros 3 do corpus continuam sem pesos |
-| G-102 | Sem telemetria: TTFT, tokens/s e RAM de pico não foram observados | Execução instrumentada em quantização declarada | recomendação de quantização operacional | **PARCIAL** — tokens/s e TTFT medidos na execução do `tucano-2b4-instruct`; RAM de pico continua sem instrumentação |
+| G-101 | Nenhum modelo real foi executado: todas as capacidades são ausência declarada | Pesos locais + suíte executada com o extra `[run]` | qualquer afirmação sobre capacidade de modelo; CSS | **PARCIAL** — `tucano-2b4-instruct` e `smollm3-3b` executados nas 96 tarefas em 2026-08-15 ([RUN](../99_RELEASES/runs/)). Os outros 2 do corpus continuam sem pesos |
+| G-102 | Sem telemetria: TTFT, tokens/s e RAM de pico não foram observados | Execução instrumentada em quantização declarada | recomendação de quantização operacional | **PARCIAL** — tokens/s e TTFT medidos nas duas execuções; RAM de pico continua sem instrumentação |
 | G-103 | Precision cliff não medido: a coluna Qualidade da tabela de quantização está vazia | Perplexidade ou escore de capacidade por precisão, na mesma suíte | escolha de quantização; fecha junto com G-101 | OPEN |
 | G-104 | Priors de capacidade (tratabilidade, valor, custo, estabilidade) nunca calibrados | Três casos com desfecho conhecido: medir, construir dataset, medir de novo | fator do CSS; qualquer alvo de especialização | OPEN |
 | G-105 | O limiar de discriminação de 0,20 do `F3` não tem base empírica | Replicação contra benchmarks públicos de agente com desfecho conhecido | veredicto de `F3`; portão V3 | OPEN |
@@ -29,6 +29,8 @@ lacuna é sempre lacuna *de alguma coisa*.
 | G-112 | O escore depende do prompt tanto quanto do modelo, e o prompt (`agent-ptbr-v2`) é zero-shot, sem exemplo demonstrado, e nunca foi ablacionado | Mesma suíte com few-shot e com ao menos três variantes de prompt, comparadas | qualquer leitura de "o modelo não sabe fazer X" | OPEN |
 | G-113 | Só a quantização Q4_K_M foi executada: parte do escore pode ser perda de quantização, não limite do modelo | Mesma suíte em fp16 e em Q8, mesmo prompt | atribuição do escore ao modelo; alimenta `G-103` | OPEN |
 | G-114 | O template de chat publicado no GGUF do `tucano-2b4-instruct` está **errado** e produz saída degenerada; o formato correto foi descoberto por experimento nesta máquina | Confirmação junto aos autores, ou comparação com o checkpoint `safetensors` original | validade externa de qualquer escore deste modelo | OPEN |
+| G-115 | Dois modelos de porte quase igual (2,44 B e 3,08 B) diferem em 78 chamadas de ferramenta contra zero, e **não se sabe por quê**. Porte não explica | Ablação da variável candidata: corpus de instrução, presença de dados de tool-call no treino, quantização (`G-113`) | qualquer previsão sobre um modelo ainda não executado; aberta por `R-102` | OPEN |
+| G-116 | O `smollm3-3b` foi medido em `/no_think`; o modo padrão dele é `/think`, e o padrão não foi medido por custo de CPU | Mesma suíte em `/think`, com teto de tokens suficiente | leitura do escore do `smollm3-3b` como capacidade do modelo | OPEN |
 
 ## Dívida de evidência (§6.3)
 

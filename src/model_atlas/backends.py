@@ -33,6 +33,7 @@ import time
 import urllib.error
 import urllib.request
 from dataclasses import dataclass, field
+from enum import Enum
 from pathlib import Path
 from typing import Any, Mapping, Sequence
 
@@ -214,6 +215,32 @@ class LlamaServer:
             self.timings.add(doc["timings"])
         return doc.get("content") or ""
 
+    def chat(self, messages: Sequence[Mapping[str, str]], max_tokens: int = 256) -> str:
+        """Deixa o servidor aplicar o template do proprio GGUF.
+
+        So e legitimo para modelos cujo template foi **verificado** (`RB-102`). Para o Tucano
+        este caminho produz repeticao degenerada, e o escore mediria o template, nao o modelo.
+        """
+        corpo = json.dumps(
+            {
+                "messages": list(messages),
+                "max_tokens": max_tokens,
+                "temperature": 0.0,
+                "seed": 20260815,
+                "cache_prompt": True,
+            }
+        ).encode("utf-8")
+        req = urllib.request.Request(
+            f"{self.url}/v1/chat/completions",
+            data=corpo,
+            headers={"Content-Type": "application/json"},
+        )
+        with urllib.request.urlopen(req, timeout=300) as r:
+            doc = json.loads(r.read().decode("utf-8"))
+        if doc.get("timings"):
+            self.timings.add(doc["timings"])
+        return doc["choices"][0]["message"]["content"] or ""
+
 
 # --------------------------------------------------------------------------------------
 # Prompt e parser
@@ -322,6 +349,60 @@ def strip_closing_tag(texto: str) -> str:
     return t[len("</instruction>"):].lstrip() if t.startswith("</instruction>") else t
 
 
+def build_messages(
+    task: EvalTask, history: Sequence[Step], fewshot: bool = False, sistema: str = ""
+) -> list[dict[str, str]]:
+    """Conversa em `role`/`content`, para modelos cujo template embutido funciona.
+
+    O conteudo do prompt e **o mesmo** do caminho cru — mesmo `CABECALHO`, mesmo `CONTRATO`,
+    mesma ordem. So o envelope muda. Isso e o que torna dois modelos comparaveis: o formato de
+    conversa e imposto pelo treino de cada um e nao ha escolha, mas o texto dentro dele e
+    identico e versionado por `PROMPT_VERSION`.
+    """
+    ferramentas = "\n".join(f"- {t}" for t in task.tools) or "- (nenhuma)"
+    exemplo = f"{EXEMPLO_DEMONSTRADO}\n\n" if fewshot else ""
+    msgs: list[dict[str, str]] = []
+    if sistema:
+        msgs.append({"role": "system", "content": sistema})
+    msgs.append(
+        {
+            "role": "user",
+            "content": f"{CABECALHO}\n\n{exemplo}Tarefa:\n{task.prompt}\n\n"
+            f"Ferramentas disponiveis:\n{ferramentas}\n\n{CONTRATO}",
+        }
+    )
+    for s in history:
+        if s.kind is StepKind.CALL:
+            msgs.append(
+                {
+                    "role": "assistant",
+                    "content": json.dumps(
+                        {"acao": "chamar", "ferramenta": s.tool, "argumentos": dict(s.args)},
+                        ensure_ascii=False,
+                    ),
+                }
+            )
+            obs = f"ERRO: {s.error}" if s.error else json.dumps(s.observation, ensure_ascii=False)
+            msgs.append({"role": "user", "content": f"Observacao: {obs}\n\n{CONTRATO}"})
+        else:
+            msgs.append({"role": "assistant", "content": s.text})
+    return msgs
+
+
+class ConversationFormat(str, Enum):
+    """Como a conversa chega ao modelo. E parte do instrumento, e por isso e declarado.
+
+    Nao ha um formato certo universal: cada modelo aprendeu o seu, e usar o errado produz
+    repeticao degenerada em vez de capacidade baixa (ver `TUCANO_FORMAT_NOTE`). Antes de medir
+    qualquer modelo novo, o `RB-102` manda verificar qual dos dois se aplica.
+    """
+
+    #: Prompt cru montado a mao. Necessario quando o template publicado esta **errado**.
+    RAW_INSTRUCTION = "raw-instruction"
+    #: `/v1/chat/completions` com `--jinja`: o servidor aplica o template do proprio GGUF.
+    CHAT_TEMPLATE = "chat-template"
+
+
 _JSON_RE = re.compile(r"\{.*\}", re.DOTALL)
 
 _ACOES = {
@@ -368,9 +449,23 @@ class LlamaCppRespondent:
     #: Modo diagnostico de `G-112`: injeta um exemplo demonstrado. O escore resultante nao e
     #: publicavel como capacidade do modelo — serve para saber o que o zero-shot mediu.
     fewshot: bool = False
+    #: Qual envelope de conversa este modelo entende. Ver `ConversationFormat`.
+    fmt: ConversationFormat = ConversationFormat.RAW_INSTRUCTION
+    #: Mensagem de sistema, quando o template do modelo aceita uma. Vazia por padrao: o
+    #: conteudo do prompt vive no turno de usuario, igual nos dois caminhos.
+    system: str = ""
+    #: Teto de tokens por passo. Modelos de raciocinio hibrido gastam boa parte do orcamento
+    #: pensando antes de responder; com teto baixo a acao seria cortada e o grader registraria
+    #: `FAIL_FORMAT` por truncamento do harness, nao por defeito do modelo.
+    max_tokens: int = 256
 
     def act(self, task: EvalTask, history: Sequence[Step]) -> Step:
-        bruto = self.server.complete(render_tucano_prompt(task, history, self.fewshot))
+        if self.fmt is ConversationFormat.CHAT_TEMPLATE:
+            msgs = build_messages(task, history, self.fewshot, self.system)
+            return parse_action(self.server.chat(msgs, self.max_tokens))
+        bruto = self.server.complete(
+            render_tucano_prompt(task, history, self.fewshot), self.max_tokens
+        )
         return parse_action(strip_closing_tag(bruto))
 
 
@@ -382,6 +477,8 @@ __all__ = [
     "PROMPT_VERSION",
     "SYSTEM_PROMPT",
     "TUCANO_FORMAT_NOTE",
+    "ConversationFormat",
+    "build_messages",
     "render_tucano_prompt",
     "strip_closing_tag",
     "parse_action",

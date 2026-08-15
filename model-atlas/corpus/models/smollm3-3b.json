@@ -3,7 +3,7 @@
     "id": "smollm3-3b",
     "repo": "HuggingFaceTB/SmolLM3-3B",
     "family": "smollm",
-    "params_b": 3.0,
+    "params_b": 3.0751,
     "architecture": "SmolLM3ForCausalLM",
     "context_len": 65536,
     "license": "apache-2.0",
@@ -15,11 +15,11 @@
       "q4",
       "q3"
     ],
-    "weights_local": false,
+    "weights_local": true,
     "provenance": "UPSTREAM_VERIFIED",
     "source": "https://huggingface.co/api/models/HuggingFaceTB/SmolLM3-3B",
-    "note": "Entra no corpus como teto de tamanho da maquina de referencia, nao como concorrente: em 16 GB sem GPU ele cabe quantizado e serve para testar se o instrumento separa modelos de portes diferentes.",
-    "sha256": "358ff25755458e2e6da0ee9792bb5208d6372ecd33a4fdcd385fda02135cea59",
-    "retrieved_at": "2026-08-15T00:41:53+00:00"
+    "note": "Entra no corpus como teto de tamanho da maquina de referencia, nao como concorrente: em 16 GB sem GPU ele cabe quantizado e serve para testar se o instrumento separa modelos de portes diferentes — e no ciclo C-003 foi exatamente isso que ele fez. GGUF usado: ggml-org/SmolLM3-3B-GGUF, arquivo SmolLM3-Q4_K_M.gguf, 1,78 GB, conversao do proprio time do llama.cpp. Template de chat verificado pelo RB-102 e CORRETO, ao contrario do Tucano: marcadores sao tokens especiais unicos e a saida e coerente. Modelo de raciocinio hibrido — o modo (`/think` ou `/no_think`) faz parte do instrumento e esta declarado em cada medicao.",
+    "sha256": "5dd81c09c8e383172758097d959f0ceacdc24892ee6c47f107c38bb6826f2000",
+    "retrieved_at": "2026-08-15T09:53:49+00:00"
   }
 }

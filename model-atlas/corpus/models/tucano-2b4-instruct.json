@@ -14,7 +14,7 @@
     "provenance": "UPSTREAM_VERIFIED",
     "source": "https://huggingface.co/api/models/TucanoBR/Tucano-2b4-Instruct",
     "note": "Primeiro modelo do corpus com pesos locais. Entrou no ciclo C-003 porque e o unico Tucano com GGUF publicado — o Tucano2-0.5B, citado no documento de tese, so tem safetensors e e um modelo base, portanto nao mede capacidade de agente. GGUF usado: GuilhermeAumo/Tucano-2b4-Instruct-Q4_K_M-GGUF, arquivo tucano-2b4-instruct-q4_k_m.gguf, 1,48 GB, executado por llama.cpp b10435 em CPU. IMPORTANTE: o template de chat embutido nesse GGUF esta errado — fecha `</instruction>` dentro do prompt, e o modelo foi treinado para emitir essa tag. Ver `backends.TUCANO_FORMAT_NOTE` e a lacuna G-114.",
-    "sha256": "2bc3109fec140e564c2b79002f5bdd2a02040b51a5d555d084c88b9fe0018191",
-    "retrieved_at": "2026-08-15T01:45:03+00:00"
+    "sha256": "aef67b810e9d827946ea177fe8a8642b29e51b4708b9bc313ccd213a8c41baf9",
+    "retrieved_at": "2026-08-15T09:53:49+00:00"
   }
 }

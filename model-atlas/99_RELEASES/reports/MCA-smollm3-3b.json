@@ -1,14 +1,14 @@
 {
   "artifact": "MODEL_CAPABILITY_ASSESSMENT",
-  "run_id": "20260815T024411Z",
-  "generated_at": "2026-08-15T02:44:11+00:00",
+  "run_id": "20260815T095603Z",
+  "generated_at": "2026-08-15T09:56:03+00:00",
   "cycle": "C-002",
   "model": {
     "id": "smollm3-3b",
     "repo": "HuggingFaceTB/SmolLM3-3B",
     "revision": "main",
     "family": "smollm",
-    "params_b": 3.0,
+    "params_b": 3.0751,
     "architecture": "SmolLM3ForCausalLM",
     "context_len": 65536,
     "license": "apache-2.0",
@@ -21,142 +21,147 @@
       "q4",
       "q3"
     ],
-    "weights_local": false,
+    "weights_local": true,
     "source": "https://huggingface.co/api/models/HuggingFaceTB/SmolLM3-3B"
   },
-  "evaluable": false,
+  "evaluable": true,
   "capabilities": {
     "model": "smollm3-3b",
-    "measured": false,
-    "source": "nenhuma execucao",
+    "measured": true,
+    "source": "smollm3-3b",
     "capabilities": {
-      "arguments": null,
-      "error_recovery": null,
-      "hallucination": null,
-      "planning": null,
-      "pt_br_numeracy": null,
-      "safety_refusal": null,
-      "structured_output": null,
-      "tool_selection": null
+      "arguments": 0.5,
+      "error_recovery": 0.3333,
+      "hallucination": 0.0,
+      "planning": 0.0,
+      "pt_br_numeracy": 0.0,
+      "safety_refusal": 0.0,
+      "structured_output": 0.0,
+      "tool_selection": 0.0
     },
-    "weakest": null
+    "weakest": "tool_selection"
   },
   "failure_atlas": {
-    "source": "sondas de calibracao",
-    "synthetic": true,
+    "source": "smollm3-3b",
+    "synthetic": false,
     "per_capability": {
       "arguments": {
-        "FAIL_TOOL_SELECTION": {
-          "count": 24,
-          "rate": 0.25
-        },
         "FAIL_ARGUMENT": {
-          "count": 12,
-          "rate": 0.125
+          "count": 6,
+          "rate": 0.5
+        },
+        "FAIL_PLANNING": {
+          "count": 6,
+          "rate": 0.5
         }
       },
       "error_recovery": {
         "FAIL_RECOVERY": {
-          "count": 42,
-          "rate": 0.4375
-        },
-        "FAIL_TOOL_SELECTION": {
-          "count": 12,
-          "rate": 0.125
-        },
-        "FAIL_HALLUCINATION": {
-          "count": 6,
-          "rate": 0.0625
+          "count": 8,
+          "rate": 0.6667
         }
       },
       "hallucination": {
         "FAIL_TOOL_SELECTION": {
           "count": 12,
-          "rate": 0.125
-        },
-        "FAIL_HALLUCINATION": {
-          "count": 12,
-          "rate": 0.125
+          "rate": 1.0
         }
       },
       "planning": {
-        "FAIL_PLANNING": {
-          "count": 18,
-          "rate": 0.1875
-        },
         "FAIL_TOOL_SELECTION": {
-          "count": 12,
-          "rate": 0.125
-        },
-        "FAIL_ARGUMENT": {
           "count": 6,
-          "rate": 0.0625
+          "rate": 0.5
+        },
+        "FAIL_PLANNING": {
+          "count": 6,
+          "rate": 0.5
         }
       },
       "pt_br_numeracy": {
-        "FAIL_PLANNING": {
-          "count": 36,
-          "rate": 0.375
-        },
         "FAIL_TOOL_SELECTION": {
-          "count": 24,
-          "rate": 0.25
+          "count": 12,
+          "rate": 1.0
         },
-        "FAIL_ARGUMENT": {
-          "count": 4,
-          "rate": 0.0417
+        "FAIL_PLANNING": {
+          "count": 12,
+          "rate": 1.0
         }
       },
       "safety_refusal": {
-        "FAIL_SAFETY": {
-          "count": 48,
-          "rate": 0.5
-        },
         "FAIL_TOOL_SELECTION": {
-          "count": 24,
-          "rate": 0.25
+          "count": 12,
+          "rate": 1.0
+        },
+        "FAIL_SAFETY": {
+          "count": 12,
+          "rate": 1.0
         }
       },
       "structured_output": {
         "FAIL_FORMAT": {
-          "count": 36,
-          "rate": 0.375
-        },
-        "FAIL_TOOL_SELECTION": {
           "count": 12,
-          "rate": 0.125
+          "rate": 1.0
         }
       },
       "tool_selection": {
         "FAIL_TOOL_SELECTION": {
-          "count": 24,
-          "rate": 0.25
-        },
-        "FAIL_HALLUCINATION": {
-          "count": 24,
-          "rate": 0.25
+          "count": 12,
+          "rate": 1.0
         }
       }
     },
     "attempts": {
-      "arguments": 96,
-      "error_recovery": 96,
-      "hallucination": 96,
-      "planning": 96,
-      "pt_br_numeracy": 96,
-      "safety_refusal": 96,
-      "structured_output": 96,
-      "tool_selection": 96
+      "arguments": 12,
+      "error_recovery": 12,
+      "hallucination": 12,
+      "planning": 12,
+      "pt_br_numeracy": 12,
+      "safety_refusal": 12,
+      "structured_output": 12,
+      "tool_selection": 12
     }
   },
   "css": {
-    "ranking": [],
-    "leader": null,
-    "top1_stability": 0.0,
-    "leader_margin": 0.0,
-    "weight_noise": 0.0,
-    "discriminates": false,
-    "samples": 0
+    "ranking": [
+      [
+        "tool_selection",
+        0.8875
+      ],
+      [
+        "structured_output",
+        0.88
+      ],
+      [
+        "pt_br_numeracy",
+        0.8075
+      ],
+      [
+        "safety_refusal",
+        0.7725
+      ],
+      [
+        "arguments",
+        0.6925
+      ],
+      [
+        "hallucination",
+        0.6925
+      ],
+      [
+        "planning",
+        0.6675
+      ],
+      [
+        "error_recovery",
+        0.6325
+      ]
+    ],
+    "leader": "tool_selection",
+    "top1_stability": 0.9273,
+    "leader_margin": 0.0075,
+    "weight_noise": 0.00457,
+    "discriminates": true,
+    "samples": 4000
   },
   "instrument": {
     "tasks": 96,
@@ -214,8 +219,8 @@
     "title": "MODEL CAPABILITY ASSESSMENT — smollm3-3b",
     "weakest_status": "ASSUMPTION",
     "open_gaps": [
-      "G-101",
       "G-102",
+      "G-104",
       "G-105"
     ],
     "assumptions": [
@@ -223,25 +228,14 @@
       "A-102"
     ],
     "declared_absences": [
-      "ttft",
-      "tokens_por_segundo",
-      "ram_de_pico",
-      "capacidade.arguments",
-      "capacidade.error_recovery",
-      "capacidade.hallucination",
-      "capacidade.planning",
-      "capacidade.pt_br_numeracy",
-      "capacidade.safety_refusal",
-      "capacidade.structured_output",
-      "capacidade.tool_selection",
-      "css_alvo"
+      "ram_de_pico"
     ],
-    "evidence_debt": 0.4118,
+    "evidence_debt": 0.25,
     "status_histogram": {
-      "OPEN_GAP": 12,
+      "OBSERVATION": 13,
+      "COMPUTATIONAL_EVIDENCE": 8,
       "ASSUMPTION": 7,
-      "COMPUTATIONAL_EVIDENCE": 7,
-      "OBSERVATION": 3
+      "OPEN_GAP": 1
     },
     "findings": [
       {
@@ -256,7 +250,7 @@
       },
       {
         "name": "parametros",
-        "value": 3000000000,
+        "value": 3075100000,
         "unit": "parametros",
         "status": "OBSERVATION",
         "assumptions": [],
@@ -266,7 +260,7 @@
       },
       {
         "name": "footprint_pesos.f16",
-        "value": 6.0,
+        "value": 6.15,
         "unit": "GB",
         "status": "ASSUMPTION",
         "assumptions": [
@@ -281,7 +275,7 @@
       },
       {
         "name": "footprint_pesos.q8",
-        "value": 3.18,
+        "value": 3.26,
         "unit": "GB",
         "status": "ASSUMPTION",
         "assumptions": [
@@ -296,7 +290,7 @@
       },
       {
         "name": "footprint_pesos.q6",
-        "value": 2.46,
+        "value": 2.522,
         "unit": "GB",
         "status": "ASSUMPTION",
         "assumptions": [
@@ -311,7 +305,7 @@
       },
       {
         "name": "footprint_pesos.q5",
-        "value": 2.07,
+        "value": 2.122,
         "unit": "GB",
         "status": "ASSUMPTION",
         "assumptions": [
@@ -326,7 +320,7 @@
       },
       {
         "name": "footprint_pesos.q4",
-        "value": 1.68,
+        "value": 1.722,
         "unit": "GB",
         "status": "ASSUMPTION",
         "assumptions": [
@@ -341,7 +335,7 @@
       },
       {
         "name": "footprint_pesos.q3",
-        "value": 1.32,
+        "value": 1.353,
         "unit": "GB",
         "status": "ASSUMPTION",
         "assumptions": [
@@ -376,27 +370,23 @@
       },
       {
         "name": "ttft",
-        "value": null,
-        "unit": "",
-        "status": "OPEN_GAP",
+        "value": 9.086,
+        "unit": "s",
+        "status": "OBSERVATION",
         "assumptions": [],
-        "gaps": [
-          "G-102"
-        ],
+        "gaps": [],
         "parents": [],
-        "note": "nenhuma execucao real; ver ADR-0006"
+        "note": "medido em q4"
       },
       {
         "name": "tokens_por_segundo",
-        "value": null,
-        "unit": "",
-        "status": "OPEN_GAP",
+        "value": 8.26,
+        "unit": "tok/s",
+        "status": "OBSERVATION",
         "assumptions": [],
-        "gaps": [
-          "G-102"
-        ],
+        "gaps": [],
         "parents": [],
-        "note": "nenhuma execucao real; ver ADR-0006"
+        "note": "medido em q4"
       },
       {
         "name": "ram_de_pico",
@@ -412,99 +402,83 @@
       },
       {
         "name": "capacidade.arguments",
-        "value": null,
+        "value": 0.5,
         "unit": "",
-        "status": "OPEN_GAP",
+        "status": "OBSERVATION",
         "assumptions": [],
-        "gaps": [
-          "G-101"
-        ],
+        "gaps": [],
         "parents": [],
-        "note": "nenhum peso local; ver ADR-0006 e G-101"
+        "note": "medido em smollm3-3b sobre o corpus BR-Agent-Bench"
       },
       {
         "name": "capacidade.error_recovery",
-        "value": null,
+        "value": 0.3333,
         "unit": "",
-        "status": "OPEN_GAP",
+        "status": "OBSERVATION",
         "assumptions": [],
-        "gaps": [
-          "G-101"
-        ],
+        "gaps": [],
         "parents": [],
-        "note": "nenhum peso local; ver ADR-0006 e G-101"
+        "note": "medido em smollm3-3b sobre o corpus BR-Agent-Bench"
       },
       {
         "name": "capacidade.hallucination",
-        "value": null,
+        "value": 0.0,
         "unit": "",
-        "status": "OPEN_GAP",
+        "status": "OBSERVATION",
         "assumptions": [],
-        "gaps": [
-          "G-101"
-        ],
+        "gaps": [],
         "parents": [],
-        "note": "nenhum peso local; ver ADR-0006 e G-101"
+        "note": "medido em smollm3-3b sobre o corpus BR-Agent-Bench"
       },
       {
         "name": "capacidade.planning",
-        "value": null,
+        "value": 0.0,
         "unit": "",
-        "status": "OPEN_GAP",
+        "status": "OBSERVATION",
         "assumptions": [],
-        "gaps": [
-          "G-101"
-        ],
+        "gaps": [],
         "parents": [],
-        "note": "nenhum peso local; ver ADR-0006 e G-101"
+        "note": "medido em smollm3-3b sobre o corpus BR-Agent-Bench"
       },
       {
         "name": "capacidade.pt_br_numeracy",
-        "value": null,
+        "value": 0.0,
         "unit": "",
-        "status": "OPEN_GAP",
+        "status": "OBSERVATION",
         "assumptions": [],
-        "gaps": [
-          "G-101"
-        ],
+        "gaps": [],
         "parents": [],
-        "note": "nenhum peso local; ver ADR-0006 e G-101"
+        "note": "medido em smollm3-3b sobre o corpus BR-Agent-Bench"
       },
       {
         "name": "capacidade.safety_refusal",
-        "value": null,
+        "value": 0.0,
         "unit": "",
-        "status": "OPEN_GAP",
+        "status": "OBSERVATION",
         "assumptions": [],
-        "gaps": [
-          "G-101"
-        ],
+        "gaps": [],
         "parents": [],
-        "note": "nenhum peso local; ver ADR-0006 e G-101"
+        "note": "medido em smollm3-3b sobre o corpus BR-Agent-Bench"
       },
       {
         "name": "capacidade.structured_output",
-        "value": null,
+        "value": 0.0,
         "unit": "",
-        "status": "OPEN_GAP",
+        "status": "OBSERVATION",
         "assumptions": [],
-        "gaps": [
-          "G-101"
-        ],
+        "gaps": [],
         "parents": [],
-        "note": "nenhum peso local; ver ADR-0006 e G-101"
+        "note": "medido em smollm3-3b sobre o corpus BR-Agent-Bench"
       },
       {
         "name": "capacidade.tool_selection",
-        "value": null,
+        "value": 0.0,
         "unit": "",
-        "status": "OPEN_GAP",
+        "status": "OBSERVATION",
         "assumptions": [],
-        "gaps": [
-          "G-101"
-        ],
+        "gaps": [],
         "parents": [],
-        "note": "nenhum peso local; ver ADR-0006 e G-101"
+        "note": "medido em smollm3-3b sobre o corpus BR-Agent-Bench"
       },
       {
         "name": "tarefas_no_corpus",
@@ -592,15 +566,17 @@
       },
       {
         "name": "css_alvo",
-        "value": null,
+        "value": "tool_selection",
         "unit": "",
-        "status": "OPEN_GAP",
+        "status": "COMPUTATIONAL_EVIDENCE",
         "assumptions": [],
         "gaps": [
-          "G-101"
+          "G-104"
         ],
-        "parents": [],
-        "note": "sem capacidade medida nao existe deficit, e sem deficit nao existe CSS"
+        "parents": [
+          "css_lider_bruto"
+        ],
+        "note": "margem 0.00750 contra ruido 0.00457; discrimina"
       }
     ]
   }

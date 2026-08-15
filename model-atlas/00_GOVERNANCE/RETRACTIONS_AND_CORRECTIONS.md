@@ -37,6 +37,80 @@ agregado como decisão.
 
 ---
 
+## R-102 — `C-108` retratada: modelos de 2B a 3B **sim** chamam ferramentas
+
+**O que se afirmava.** Que modelos instruídos de porte 2B a 3B não instanciam um protocolo de
+chamada de ferramenta em português sem fine-tuning específico — que reconheceriam a forma do
+contrato e devolveriam o schema com valores de exemplo.
+
+**O que derrubou.** O primeiro dos falsificadores declarados junto com a alegação: *"qualquer
+modelo dessa faixa emitir chamada de ferramenta válida em mais de 10 % das tarefas, com prompt
+declarado antes"*. `smollm3-3b` (3,08 B, Q4_K_M, mesmo prompt `agent-ptbr-v2`, mesma máquina)
+executado nas mesmas 96 tarefas:
+
+| | `tucano-2b4-instruct` | `smollm3-3b` |
+|---|---:|---:|
+| chamadas de ferramenta | **0** | **78** |
+| passos totais | 96 | 205 |
+| passos numa mesma tarefa | sempre 1 | até 6 |
+| tipos de ação emitidos | só `responder` | as quatro |
+| escore geral | 0,0 % | 10,4 % |
+
+Não é margem apertada: são 78 chamadas contra zero. `C-108` cai por contraexemplo direto.
+
+**Diagnóstico.** A alegação generalizava **uma** observação para uma faixa inteira de tamanho.
+O que o Tucano mostrou era verdade sobre o Tucano; a ponte para "modelos de 2B a 3B" foi feita
+por analogia de porte, e porte não é a variável que decide. A alegação nasceu marcada como
+`CONJECTURE` justamente por isso, e o falsificador que a derrubou foi escrito antes da execução
+que a derrubou — o que funcionou como devia.
+
+**O que sobrevive.** A medição do Tucano continua íntegra: 0,0 % com zero chamadas, sob os
+qualificadores declarados. O que cai é a **generalização**, não a observação. Também sobrevive,
+e fica mais forte, `G-114`: o defeito do template é específico daquele GGUF, e o SmolLM3 —
+cujo template foi verificado pelo `RB-102` e está correto — mostra que rodar modelo local não
+é intrinsecamente frágil.
+
+**O que a retratação abre.** Se o porte não explica, o que explica? Fica registrado como `G-115`,
+sem resposta neste ciclo. Candidatos não testados: a composição do corpus de instrução, a
+presença de dados de chamada de ferramenta no treino, e a perda de quantização (`G-113`, agora
+mais urgente porque os dois modelos foram medidos só em Q4).
+
+**Consequência aplicada.** `C-108` marcada `RETRACTED` no ledger antes de qualquer outra
+mudança neste ciclo. Nenhum relatório apresenta a generalização por porte.
+
+---
+
+## O que a segunda medição **não** desfez
+
+Com dois modelos reais medidos, a tentação óbvia era reabrir `C-102` — a alegação de que o
+escore agregado discrimina, retratada em `R-101` por margem de 0,062. A tentação foi verificada
+e recusada pelos próprios números:
+
+> margem agregada entre `smollm3-3b` e `tucano-2b4-instruct`: **0,104**
+
+Ainda **abaixo** do limiar declarado de 0,20, entre um modelo que nunca chama ferramenta e um
+que chama 78 vezes. A segunda medição portanto **reforça** `R-101` em vez de enfraquecê-la.
+
+O perfil **por capacidade**, no mesmo par, separa com folga onde o agregado não separa:
+
+| Capacidade | `tucano` | `smollm3` | margem |
+|---|---:|---:|---:|
+| `arguments` | 0,0 % | 50,0 % | **+0,500** |
+| `error_recovery` | 0,0 % | 33,3 % | **+0,333** |
+| as outras seis | 0,0 % | 0,0 % | 0,000 |
+
+É exatamente o diagnóstico de [CE-101](../04_VALIDATION/COUNTEREXAMPLES/CE-101-margem-agregada-diluida.md):
+a agregação divide o sinal pelo corpus inteiro. Duas capacidades com diferença enorme viram
+0,104 quando somadas a seis empatadas em zero.
+
+Isso não ressuscita `C-102`, e a distinção importa: `C-102` falava de separar um respondente
+correto de um **degenerado**, e `F3` mede aquilo. Que dois modelos reais se separem por
+capacidade é outra afirmação, e está registrada como `C-109` — nova, com falsificador próprio.
+Desretratar trocando o significado da frase seria o defeito que este documento existe para
+impedir.
+
+---
+
 ## COR-101 e COR-102 — duas fichas do corpus estavam erradas
 
 Encontradas ao fechar `G-108` em 2026-08-15, pela primeira execução de

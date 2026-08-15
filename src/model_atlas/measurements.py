@@ -47,6 +47,12 @@ class Measurement:
     tasks: int
     tool_calls: int
     wall_s: float
+    #: Envelope de conversa usado (ver `backends.ConversationFormat`). Dois modelos so sao
+    #: comparaveis com o envelope declarado: cada um so entende o formato que aprendeu.
+    conversation_format: str = ""
+    #: Mensagem de sistema efetiva. Em modelo de raciocinio hibrido isto decide se ele pensa
+    #: antes de responder, e portanto decide boa parte do escore.
+    system_mode: str = ""
     telemetry: dict[str, Any] = field(default_factory=dict)
     grades: list[GradeResult] = field(default_factory=list)
     note: str = ""
@@ -75,6 +81,22 @@ class Measurement:
         return cls.from_doc(candidatos[-1]) if candidatos else None
 
     @classmethod
+    def load_diagnostic(cls, model_id: str, directory: Path | None = None) -> "Measurement | None":
+        """A execucao em modo diagnostico do modelo, se houver.
+
+        Ela nunca vira escore publicado; serve para dizer o que o escore publicado **nao**
+        estava medindo. Sem isso, um zero fica indistinguivel de um zero por elicitacao ruim.
+        """
+        d = Path(directory or RUNS_DIR)
+        if not d.is_dir():
+            return None
+        for f in sorted(d.glob("RUN-*.json")):
+            doc = json.loads(f.read_text(encoding="utf-8"))
+            if doc.get("model_id") == model_id and doc.get("fewshot"):
+                return cls.from_doc(doc)
+        return None
+
+    @classmethod
     def from_doc(cls, doc: dict[str, Any]) -> "Measurement":
         for campo in ("model_id", "prompt_version", "model_file", "grades"):
             if campo not in doc:
@@ -99,6 +121,8 @@ class Measurement:
             tasks=int(doc.get("tasks", len(notas))),
             tool_calls=int(doc.get("tool_calls", 0)),
             wall_s=float(doc.get("wall_s", 0.0)),
+            conversation_format=str(doc.get("conversation_format", "")),
+            system_mode=str(doc.get("system_mode", "")),
             telemetry=dict(doc.get("telemetry") or {}),
             grades=notas,
             note=str(doc.get("note", "")),
@@ -119,6 +143,8 @@ class Measurement:
             "prompt_version": self.prompt_version,
             "model_file": self.model_file,
             "quantization": self.quantization,
+            "conversation_format": self.conversation_format,
+            "system_mode": self.system_mode,
             "fewshot": self.fewshot,
             "tasks": self.tasks,
             "tool_calls": self.tool_calls,

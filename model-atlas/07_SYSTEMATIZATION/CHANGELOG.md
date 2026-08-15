@@ -7,6 +7,63 @@ artifact: CHANGELOG
 Registra mudanças de **código, corpus, priors e alegações**. Uma mudança de prior que altera
 uma recomendação é tão relevante quanto uma mudança de código, e por isso entra aqui.
 
+## [0.3.0] — 2026-08-15 — Segundo modelo medido, e `C-108` retratada no mesmo ciclo
+
+`smollm3-3b` Q4_K_M executado nas mesmas 96 tarefas, mesmo prompt, mesma máquina. A alegação
+registrada horas antes não sobreviveu ao próprio falsificador.
+
+### O contraexemplo
+
+| | `tucano-2b4-instruct` | `smollm3-3b` |
+|---|---:|---:|
+| chamadas de ferramenta | **0** | **78** |
+| passos totais | 96 | 205 |
+| passos numa mesma tarefa | sempre 1 | até 6 |
+| tipos de ação emitidos | só `responder` | as quatro |
+| escore geral | 0,0 % | **10,4 %** |
+| `arguments` | 0,0 % | **50,0 %** |
+| `error_recovery` | 0,0 % | **33,3 %** |
+| tokens/s | 12,14 | 8,26 |
+
+`C-108` — *"modelos instruídos de 2B a 3B não instanciam protocolo de chamada de ferramenta"* —
+**retratada** por `R-102`. Porte não era a variável. O que é fica em `G-115`, sem resposta.
+
+### O que a segunda medição não desfez
+
+A margem agregada entre os dois modelos reais é **0,104** — ainda abaixo do limiar de 0,20 de
+`F3`, entre um modelo que nunca chama ferramenta e um que chama 78 vezes. A segunda medição
+portanto **reforça** a retratação `R-101` em vez de enfraquecê-la. O sinal está no perfil por
+capacidade (+0,500 em `arguments`), não no agregado — registrado como `C-109`, conjectura nova
+com falsificador próprio, e **não** como ressurreição de `C-102`.
+
+### Adicionado
+
+- `ConversationFormat` — o envelope de conversa vira campo declarado do instrumento, não
+  pressuposto embutido. `raw-instruction` para o Tucano (template publicado quebrado),
+  `chat-template` para o SmolLM3 (template verificado e correto).
+- `system_mode` e `conversation_format` no artefato de medição.
+- `smollm3-3b` com pesos locais e template verificado pelo `RB-102` antes de qualquer medição.
+- 20 testes para `backends.py`, que tinha **zero** — a peça que decide todo escore
+  (`parse_action`) é função pura e estava sem cobertura por hábito, não por necessidade.
+- 3 testes fixando o contraexemplo e a margem que sustenta `R-101`.
+
+### Corrigido
+
+- `registry verify` deixava `params_b` arredondado quando a diferença cabia na tolerância:
+  `smollm3-3b` ficava com `3.0` num checkpoint de 3,0751 B, marcado como conferido, com o
+  footprint 2,5 % abaixo do real. A tolerância decide se é **erro de transcrição**, não se vale
+  gravar a contagem real. Conferido passa a significar exato.
+- A seção 1 do assessment tinha texto fixo ("nunca chega a chamar uma") ao lado de número
+  calculado — falso para o SmolLM3. O diagnóstico passa a derivar da contagem.
+- `publish_run.py` carregava o GGUF inteiro na RAM para o hash e estourava a partir de ~1,5 GB.
+- Um artefato de medição foi gravado com `fewshot: true` para uma execução zero-shot e removido
+  antes de qualquer publicação: rótulo errado em proveniência é pior que artefato ausente.
+
+### Lacunas novas
+
+`G-115` (porte não explica a diferença; o que explica não foi medido), `G-116` (`smollm3-3b`
+medido em `/no_think`, e o padrão dele é `/think`).
+
 ## [0.2.0] — 2026-08-15 — Primeira execução real: `G-101` e `G-102` parciais
 
 `tucano-2b4-instruct` Q4_K_M executado nas 96 tarefas do BR-Agent-Bench, em CPU, via llama.cpp

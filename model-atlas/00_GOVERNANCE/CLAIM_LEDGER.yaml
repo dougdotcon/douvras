@@ -12,6 +12,8 @@
   - RUN:20260815T004820Z
   - RUN:20260815T024202Z
   - RUN:20260815T024411Z
+  - RUN:20260815T095359Z
+  - RUN:20260815T095603Z
   falsifiers:
   - o grader aceita alguma trajetoria declarada como errada (F1)
   - o grader rejeita a trajetoria de referencia de alguma tarefa (F2)
@@ -31,6 +33,8 @@
   - RUN:20260815T004820Z
   - RUN:20260815T024202Z
   - RUN:20260815T024411Z
+  - RUN:20260815T095359Z
+  - RUN:20260815T095603Z
   falsifiers:
   - margem entre oraculo e melhor sonda degenerada abaixo de 0.20 (F3)
   owner: research
@@ -50,6 +54,8 @@
   - RUN:20260815T004820Z
   - RUN:20260815T024202Z
   - RUN:20260815T024411Z
+  - RUN:20260815T095359Z
+  - RUN:20260815T095603Z
   falsifiers:
   - alguma tarefa declara regra que nenhum grader implementa (F5)
   - alguma capacidade tem menos de oito tarefas (F5)
@@ -68,6 +74,8 @@
   - RUN:20260815T004820Z
   - RUN:20260815T024202Z
   - RUN:20260815T024411Z
+  - RUN:20260815T095359Z
+  - RUN:20260815T095603Z
   falsifiers:
   - algum modo declarado nunca aparece em nenhuma execucao de sonda (F6)
   owner: engineering
@@ -85,6 +93,8 @@
   - RUN:20260815T004820Z
   - RUN:20260815T024202Z
   - RUN:20260815T024411Z
+  - RUN:20260815T095359Z
+  - RUN:20260815T095603Z
   falsifiers:
   - duas execucoes da mesma suite divergem em qualquer veredicto (F4)
   owner: engineering
@@ -108,7 +118,7 @@
   statement: 'Modelos instruidos de porte 2B a 3B nao instanciam um protocolo de chamada de ferramenta
     em portugues sem fine-tuning especifico: reconhecem a forma do contrato e devolvem o schema com valores
     de exemplo.'
-  status: CONJECTURE
+  status: RETRACTED
   assumptions:
   - A-103
   - A-107
@@ -119,8 +129,29 @@
   - o mesmo modelo em fp16 emitir chamadas validas, indicando perda de quantizacao e nao limite do modelo
   owner: research
   last_reviewed: '2026-08-15'
-  note: Generalizacao de UMA observacao (tucano-2b4-instruct, q4, agent-ptbr-v2). E conjectura, nao resultado.
-    Falsificar exige um segundo modelo, e e a razao de G-113 e G-112 existirem.
+  note: 'RETRATADA em 2026-08-15 por R-102, no mesmo ciclo em que foi registrada. O primeiro falsificador
+    disparou: smollm3-3b emitiu 78 chamadas de ferramenta validas em 96 tarefas, contra zero do tucano-2b4-instruct,
+    com o mesmo prompt e a mesma quantizacao. A alegacao generalizava UMA observacao para uma faixa de
+    tamanho inteira; porte nao e a variavel que decide. O que decide fica em G-115, sem resposta neste
+    ciclo.'
+- id: C-109
+  statement: O perfil por capacidade separa dois modelos reais com margem maior que 0.20 em ao menos uma
+    capacidade, mesmo quando o escore agregado dos dois fica abaixo desse limiar.
+  status: CONJECTURE
+  assumptions:
+  - A-103
+  - A-107
+  evidence: []
+  falsifiers:
+  - um par de modelos com comportamento claramente diferente cujo perfil por capacidade nao separe em
+    nenhuma capacidade acima de 0.20
+  - a separacao por capacidade nao se sustentar ao trocar a versao de prompt (G-112)
+  owner: research
+  last_reviewed: '2026-08-15'
+  note: 'Observado em UM par de modelos: margem agregada 0.104, abaixo do limiar, mas arguments +0.500
+    e error_recovery +0.333. E o diagnostico de CE-101 visto em modelos reais em vez de sondas. NAO ressuscita
+    C-102, que falava de separar respondente correto de degenerado — outra afirmacao, outro falsificador.
+    Dois modelos nao fazem uma tendencia, e por isso CONJECTURE.'
 - id: C-107
   statement: O CSS identifica uma capacidade alvo para especializacao por dados com margem maior que o
     ruido dos proprios pesos.

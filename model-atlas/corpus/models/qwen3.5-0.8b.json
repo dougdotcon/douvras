@@ -19,7 +19,7 @@
     "provenance": "UPSTREAM_VERIFIED",
     "source": "https://huggingface.co/api/models/Qwen/Qwen3.5-0.8B",
     "note": "Apontado pela fonte para prototipagem, fine-tuning de tarefa e pesquisa — o segundo baseline do laboratorio. O nome comercial diz 0,8B; o checkpoint tem 873.438.784 parametros (0,8734 B), erro de 8,4 % contra a ficha transcrita. Corrigido em 2026-08-15 pela verificacao que fecha G-108 — ver correcao COR-102 em RETRACTIONS_AND_CORRECTIONS.",
-    "sha256": "ad1c6a7111632d84d5a41e45432655ecb83257c08db7ffe5432715bfa753c323",
-    "retrieved_at": "2026-08-15T00:41:53+00:00"
+    "sha256": "99845aa3f8d84cbbedb3d12f8b5eda408d2b749c9401625e5392e83b47f25a13",
+    "retrieved_at": "2026-08-15T09:53:48+00:00"
   }
 }
