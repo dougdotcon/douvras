@@ -1203,5 +1203,6 @@
         "nao chamou ['consultar_estoque']"
       ]
     }
-  ]
+  ],
+  "role": "primary"
 }

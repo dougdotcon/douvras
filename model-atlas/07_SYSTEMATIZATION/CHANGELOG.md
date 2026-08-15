@@ -7,6 +7,39 @@ artifact: CHANGELOG
 Registra mudanças de **código, corpus, priors e alegações**. Uma mudança de prior que altera
 uma recomendação é tão relevante quanto uma mudança de código, e por isso entra aqui.
 
+## [0.3.1] — 2026-08-15 — O modo de raciocínio vale +18,8 pontos, e o escore publicado vira piso
+
+`smollm3-3b` executado em `/think` — o modo **padrão** dele — em 16 tarefas, 2 por capacidade,
+pareadas contra as mesmas 16 da execução publicada em `/no_think`.
+
+| | `/no_think` (publicado) | `/think` (padrão do modelo) |
+|---|---:|---:|
+| escore nas mesmas 16 tarefas | 12,5 % | **31,2 %** |
+| chamadas de ferramenta | 14 | **14** |
+| `tool_selection` | 0 % | **100 %** |
+| `hallucination` | 0 % | **100 %** |
+| `error_recovery` | 50 % | 0 % |
+| custo por tarefa | ~30 s | 109 s |
+
+**As chamadas de ferramenta são idênticas.** Raciocinar não faz o modelo agir mais — faz ele
+**escolher melhor**. É a confirmação direta do que a seção 1 do assessment já dizia sobre esse
+modelo: o que falha não é a forma da ação, é a escolha dela.
+
+Consequência: **os 10,4 % publicados são piso, não capacidade.** O assessment passa a dizer
+isso, derivado da comparação pareada e não afirmado à mão. `G-116` vai a **PARCIAL** — fechar
+exige as 96 tarefas em `/think`, ≈ 2,9 h de CPU.
+
+### Adicionado
+
+- `MeasurementRole` — `role` (publicável ou diagnóstica) separado de `fewshot` (descreve o
+  prompt). Eram o mesmo campo fazendo dois trabalhos, e foi por isso que uma execução zero-shot
+  quase foi gravada como `fewshot: true` só para não virar escore. `role` gravado
+  explicitamente nos quatro artefatos; a regra de compatibilidade serve só a artefato antigo.
+- O assessment lista **todos** os diagnósticos numa tabela pareada, comparando com o escore das
+  mesmas tarefas na execução publicada — não contra o agregado, que seria comparação torta.
+- `G-117` — nenhum modelo do corpus foi comparado sob orçamento de tempo igual, e `/think`
+  custa 3,6× por tarefa. Qualquer ranking entre modelo com e sem raciocínio depende disso.
+
 ## [0.3.0] — 2026-08-15 — Segundo modelo medido, e `C-108` retratada no mesmo ciclo
 
 `smollm3-3b` Q4_K_M executado nas mesmas 96 tarefas, mesmo prompt, mesma máquina. A alegação

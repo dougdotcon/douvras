@@ -15,7 +15,12 @@ import pytest
 from douvras_core.status import Status
 from model_atlas.assessment import Assessment, AssessmentInputs
 from model_atlas.capability import GAP_NO_EXECUTION
-from model_atlas.measurements import Measurement, MeasurementError, available
+from model_atlas.measurements import (
+    Measurement,
+    MeasurementError,
+    MeasurementRole,
+    available,
+)
 
 
 #: Modelo do corpus sem pesos locais. Fixar um id aqui é frágil por natureza — a primeira versão
@@ -40,10 +45,44 @@ def test_modelo_sem_execucao_nao_tem_medicao() -> None:
 
 
 def test_execucao_diagnostica_nao_e_carregada_como_medicao() -> None:
-    """`ADR-0007` do lado do few-shot: modo diagnóstico não vira escore publicado."""
+    """`ADR-0007` do lado da execução real: diagnóstico não vira escore publicado."""
     m = Measurement.load("tucano-2b4-instruct")
     assert m is not None
-    assert m.fewshot is False
+    assert m.role is MeasurementRole.PRIMARY
+    assert m.diagnostic is False
+
+
+def test_papel_e_fewshot_sao_campos_diferentes() -> None:
+    """Uma execução pode ser diagnóstica **sem** ser few-shot — é o caso do modo `/think`.
+
+    Enquanto os dois eram o mesmo campo, marcar uma execução como "não publicável" exigia
+    mentir sobre o prompt dela. Este teste trava a separação.
+    """
+    diags = Measurement.diagnostics("smollm3-3b")
+    assert diags, "o corpus precisa de ao menos um diagnóstico não-few-shot"
+    assert any(d.diagnostic and not d.fewshot for d in diags)
+
+
+def test_todo_artefato_declara_papel_explicitamente() -> None:
+    """A regra de compatibilidade existe para artefato antigo, não para artefato novo."""
+    from model_atlas.measurements import RUNS_DIR
+
+    for f in sorted(RUNS_DIR.glob("RUN-*.json")):
+        doc = json.loads(f.read_text(encoding="utf-8"))
+        assert doc.get("role") in {"primary", "diagnostic"}, f"{f.name} sem `role`"
+
+
+def test_diagnostico_nunca_entra_em_available() -> None:
+    from model_atlas.measurements import RUNS_DIR
+
+    ids_diag = {
+        json.loads(f.read_text(encoding="utf-8")).get("model_id")
+        for f in RUNS_DIR.glob("RUN-*.json")
+        if json.loads(f.read_text(encoding="utf-8")).get("role") == "diagnostic"
+    }
+    for mid in ids_diag:
+        # Só aparece em `available` se tiver TAMBÉM uma execução publicável.
+        assert (mid in available()) == (Measurement.load(mid) is not None)
 
 
 def test_medicao_sem_proveniencia_e_recusada() -> None:
@@ -131,6 +170,31 @@ def test_a_margem_agregada_entre_os_dois_modelos_reais_continua_abaixo_do_limiar
         sum(cb[c]) / len(cb[c]) - sum(ca[c]) / len(ca[c]) for c in cb if c in ca and ca[c] and cb[c]
     ]
     assert max(margens) > 0.20, "alguma capacidade tem de separar, ou C-109 cai"
+
+
+def test_o_modo_de_raciocinio_muda_o_escore_e_o_assessment_diz_isso(registry, tasks_corpus) -> None:
+    """`G-116`: o número publicado do `smollm3-3b` é piso, e o relatório precisa dizer.
+
+    Medido: nas mesmas 16 tarefas, `/no_think` faz 12,5 % e o modo padrão faz 31,2 %. As
+    chamadas de ferramenta são **idênticas** nos dois — raciocinar não faz o modelo agir mais,
+    faz ele escolher melhor.
+    """
+    diags = [d for d in Measurement.diagnostics("smollm3-3b") if not d.fewshot]
+    assert diags, "sem o diagnóstico de modo, o escore publicado fica sem limite de leitura"
+    d = diags[0]
+    primaria = Measurement.load("smollm3-3b")
+
+    ids = {g.task_id for g in d.grades}
+    pares = [g for g in primaria.grades if g.task_id in ids]
+    base = sum(1 for g in pares if g.passed) / len(pares)
+    alvo = sum(1 for g in d.grades if g.passed) / len(d.grades)
+    assert alvo > base, "se cair, o modo deixou de importar e G-116 muda de resposta"
+
+    texto = Assessment.build(
+        AssessmentInputs(model_id="smollm3-3b", run_id="20260815T000000Z"), registry, tasks_corpus
+    ).render()
+    assert "piso" in texto
+    assert f"{100 * (alvo - base):+.1f} pontos" in texto
 
 
 def test_o_artefato_publicado_carrega_a_proveniencia_da_execucao() -> None:

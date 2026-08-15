@@ -244,17 +244,73 @@ class Assessment:
                 f"| teto de passos | {m.max_steps} |",
             ]
 
-            diag = Measurement.load_diagnostic(self.spec.id)
-            if diag is not None:
-                aprovou = sum(1 for g in diag.grades if g.passed)
+            diags = Measurement.diagnostics(self.spec.id)
+            if diags:
                 resposta += [
                     "",
-                    "**A hipotese obvia foi testada e rejeitada.** Um exemplo demonstrado "
-                    f"injetado no prompt (`G-112`, modo diagnostico) manteve o escore em "
-                    f"{aprovou / len(diag.grades):.1%} e as chamadas de ferramenta em "
-                    f"{diag.tool_calls}, em {diag.tasks} tarefas cobrindo as oito capacidades. "
-                    "O zero-shot nao estava medindo falta de exemplo.",
+                    "### O que este numero **nao** mede",
+                    "",
+                    "Cada linha e uma execucao declarada como diagnostica: mesma suite, uma "
+                    "variavel trocada de proposito. Nenhuma delas e escore publicado — elas "
+                    "existem para limitar a leitura do escore que e.",
+                    "",
+                    "| Variavel trocada | Tarefas | Escore | Chamadas | Comparar com |",
+                    "|---|---:|---:|---:|---:|",
                 ]
+                for d in diags:
+                    aprovou = sum(1 for g in d.grades if g.passed) / max(len(d.grades), 1)
+                    ids = {g.task_id for g in d.grades}
+                    pares = [g for g in m.grades if g.task_id in ids]
+                    base = (
+                        f"{sum(1 for g in pares if g.passed) / len(pares):.1%}" if pares else "—"
+                    )
+                    rotulo = (
+                        "exemplo demonstrado no prompt"
+                        if d.fewshot
+                        else f"modo `{d.system_mode}`"
+                        if d.system_mode
+                        else "modo padrao do modelo (raciocinio ligado)"
+                    )
+                    resposta.append(
+                        f"| {rotulo} | {d.tasks} | {aprovou:.1%} | {d.tool_calls} | {base} |"
+                    )
+                resposta += [
+                    "",
+                    "A ultima coluna e o escore **das mesmas tarefas** na execucao publicada, "
+                    "para que a comparacao seja pareada e nao contra o agregado de "
+                    f"{m.tasks}.",
+                ]
+
+                # Um diagnostico que supera a execucao publicada no proprio recorte pareado
+                # muda a leitura do numero de cima: ele deixa de ser "a capacidade" e vira
+                # piso. Derivado da comparacao, e nao afirmado a mao, para nao repetir o
+                # defeito de texto fixo ao lado de numero calculado.
+                melhores = []
+                for d in diags:
+                    ids = {g.task_id for g in d.grades}
+                    pares = [g for g in m.grades if g.task_id in ids]
+                    if not pares:
+                        continue
+                    alvo = sum(1 for g in d.grades if g.passed) / len(d.grades)
+                    base = sum(1 for g in pares if g.passed) / len(pares)
+                    if alvo > base:
+                        melhores.append((d, alvo - base))
+                if melhores:
+                    d, delta = max(melhores, key=lambda p: p[1])
+                    rotulo = (
+                        "Com exemplo demonstrado no prompt"
+                        if d.fewshot
+                        else f"No modo `{d.system_mode}`"
+                        if d.system_mode
+                        else "No modo padrao do modelo"
+                    )
+                    resposta += [
+                        "",
+                        f"**O escore publicado e portanto um piso, nao a capacidade.** "
+                        f"{rotulo}, o modelo ganha **{100 * delta:+.1f} pontos** no mesmo "
+                        f"recorte de {d.tasks} tarefas. Um ranking construido sobre o numero "
+                        f"de cima classificaria este modelo abaixo do que ele faz por padrao.",
+                    ]
         else:
             resposta = [
                 "**Ainda nao da para responder, e o motivo e verificavel.** Nao ha pesos "

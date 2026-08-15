@@ -6,7 +6,7 @@
 para virar silício, e o que num modelo de IA está maduro para ser medido.**
 
 [![Método](https://img.shields.io/badge/m%C3%A9todo-DOUVRAS%202.0-1f2937)](METODO_DOUVRAS.md)
-[![Testes](https://img.shields.io/badge/testes-263%20verdes-16a34a)](tests/)
+[![Testes](https://img.shields.io/badge/testes-267%20verdes-16a34a)](tests/)
 [![Ciclos](https://img.shields.io/badge/ciclos-C--001%20%C2%B7%20C--002%20%C2%B7%20C--003-0d9488)](#os-dois-eixos)
 [![Portões](https://img.shields.io/badge/port%C3%B5es-6%2F7%20em%20ambos%20os%20eixos-f59e0b)](#estado-dos-portões)
 [![Retratações](https://img.shields.io/badge/retrata%C3%A7%C3%B5es-6%20%C2%B7%20corre%C3%A7%C3%B5es-3-b91c1c)](#o-que-o-sistema-retratou-de-si-mesmo)
@@ -69,7 +69,7 @@ acoplamento sem conteúdo.
 
 ```bash
 pip install -e ".[dev]"        # numpy, pyyaml, pytest — nada mais
-python -m pytest tests         # 263 testes
+python -m pytest tests         # 267 testes
 ```
 
 Nenhum dos dois eixos exige GPU, pesos de modelo, `torch` ou rede no caminho principal
@@ -157,6 +157,11 @@ família e o agregado dilui o dano pelo corpus inteiro. `C-102` foi retratada.
 O Tucano não erra a ferramenta: **nunca chega a chamar uma**. Devolve o schema com valores de
 exemplo — `"ferramenta": "nome_da_ferramenta"` copiado literalmente. O SmolLM3 executa o
 protocolo; o que falha nele é a **escolha** da ferramenta, não a forma da ação.
+
+**E os 10,4 % do SmolLM3 são piso, não capacidade.** Ele foi medido em `/no_think`, mas o modo
+padrão dele é `/think`. Nas mesmas 16 tarefas, pareadas: **12,5 % → 31,2 %**. As chamadas de
+ferramenta são **idênticas** nos dois modos (14 e 14) — raciocinar não faz o modelo agir mais,
+faz ele escolher melhor. `tool_selection` e `hallucination` saltam de 0 % para 100 %.
 
 Com isso, `C-108` — *"modelos de 2B a 3B não instanciam chamada de ferramenta"* — foi
 **retratada no mesmo ciclo em que foi registrada**, pelo falsificador que ela própria declarou.
@@ -257,7 +262,7 @@ DOUVRAS/
 └── tests/
     ├── core/                  27 testes — o contrato, sem nenhum domínio
     ├── silicon/               149 testes
-    └── model/                 87 testes
+    └── model/                 91 testes
 ```
 
 Arquivos marcados **[GERADOS]** dentro dos projetos não devem ser editados: são saída, não
@@ -279,7 +284,7 @@ parciais.**
 **No eixo de capacidade** — o corpus é sintético e até prova em contrário mede o gerador, não o
 mundo; as sondas foram escritas por quem escreveu o grader; os priors do CSS nunca foram
 calibrados; as medições cobrem **dois** modelos, **uma** quantização e **uma** versão de prompt,
-e a diferença entre eles não tem explicação medida. **13 lacunas abertas e 2 parciais.**
+e a diferença entre eles não tem explicação medida. **13 lacunas abertas e 3 parciais.**
 
 **Nos dois** — o limiar que produz a conclusão do ciclo não tem base empírica. No silício é
 `min_stability = 0,60`; na capacidade é a margem de `0,20`. Nos dois casos, afrouxar o limiar é

@@ -8,6 +8,7 @@
   "quantization": "q4",
   "conversation_format": "chat-template",
   "system_mode": "/no_think",
+  "role": "primary",
   "runtime": "llama.cpp b10435 (win-cpu-x64)",
   "host": "CPU, sem GPU",
   "max_steps": 6,

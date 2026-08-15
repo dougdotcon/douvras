@@ -18,6 +18,7 @@ from __future__ import annotations
 
 import json
 from dataclasses import dataclass, field
+from enum import Enum
 from pathlib import Path
 from typing import Any
 
@@ -32,6 +33,23 @@ RUNS_DIR = project_root("model-atlas") / "99_RELEASES" / "runs"
 
 class MeasurementError(ValueError):
     """Artefato de medicao malformado ou sem proveniencia suficiente para ser interpretado."""
+
+
+class MeasurementRole(str, Enum):
+    """Para que serve esta execucao. Campo separado de `fewshot` **de proposito**.
+
+    `fewshot` descreve o prompt: houve exemplo demonstrado ou nao. `role` declara a funcao:
+    virar escore publicado ou limitar a leitura do escore publicado. Os dois coincidiram na
+    primeira execucao diagnostica e a coincidencia virou atalho — uma execucao `/think`, que e
+    diagnostica e zero-shot, chegou a ser gravada com `fewshot: true` so para nao virar escore.
+    Rotulo errado em proveniencia e pior que artefato ausente, e o artefato foi removido; o
+    conserto de verdade e este campo.
+    """
+
+    #: Vira capacidade publicada. Precisa cobrir o corpus inteiro.
+    PRIMARY = "primary"
+    #: Nunca vira capacidade. Existe para dizer o que o escore publicado **nao** mede.
+    DIAGNOSTIC = "diagnostic"
 
 
 @dataclass
@@ -53,48 +71,51 @@ class Measurement:
     #: Mensagem de sistema efetiva. Em modelo de raciocinio hibrido isto decide se ele pensa
     #: antes de responder, e portanto decide boa parte do escore.
     system_mode: str = ""
+    #: Publicavel ou diagnostica. Ver `MeasurementRole`.
+    role: MeasurementRole = MeasurementRole.PRIMARY
     telemetry: dict[str, Any] = field(default_factory=dict)
     grades: list[GradeResult] = field(default_factory=list)
     note: str = ""
 
     @property
     def diagnostic(self) -> bool:
-        """Execucao em modo diagnostico nao publica capacidade (ver `G-112`)."""
-        return self.fewshot
+        return self.role is MeasurementRole.DIAGNOSTIC
+
+    @staticmethod
+    def _docs(model_id: str, directory: Path | None = None) -> list[dict[str, Any]]:
+        d = Path(directory or RUNS_DIR)
+        if not d.is_dir():
+            return []
+        achados = []
+        for f in sorted(d.glob("RUN-*.json")):
+            doc = json.loads(f.read_text(encoding="utf-8"))
+            if doc.get("model_id") == model_id:
+                achados.append(doc)
+        return achados
 
     @classmethod
     def load(cls, model_id: str, directory: Path | None = None) -> "Measurement | None":
-        """A medicao publicavel mais recente do modelo, ou `None`.
+        """A medicao **publicavel** mais recente do modelo, ou `None`.
 
-        Execucoes em modo diagnostico sao ignoradas aqui — elas existem para interpretar o
-        escore, nao para virar escore. O filtro le o campo `fewshot` do proprio artefato, e nao
-        o nome do arquivo: nome e convencao, campo e declaracao.
+        O filtro le o campo do proprio artefato, nao o nome do arquivo: nome e convencao,
+        campo e declaracao.
         """
-        d = Path(directory or RUNS_DIR)
-        if not d.is_dir():
-            return None
-        candidatos = []
-        for f in sorted(d.glob("RUN-*.json")):
-            doc = json.loads(f.read_text(encoding="utf-8"))
-            if doc.get("model_id") == model_id and not doc.get("fewshot"):
-                candidatos.append(doc)
-        return cls.from_doc(candidatos[-1]) if candidatos else None
+        docs = [d for d in cls._docs(model_id, directory) if _papel(d) is MeasurementRole.PRIMARY]
+        return cls.from_doc(docs[-1]) if docs else None
 
     @classmethod
-    def load_diagnostic(cls, model_id: str, directory: Path | None = None) -> "Measurement | None":
-        """A execucao em modo diagnostico do modelo, se houver.
+    def diagnostics(cls, model_id: str, directory: Path | None = None) -> list["Measurement"]:
+        """Execucoes diagnosticas do modelo, em ordem estavel.
 
-        Ela nunca vira escore publicado; serve para dizer o que o escore publicado **nao**
-        estava medindo. Sem isso, um zero fica indistinguivel de um zero por elicitacao ruim.
+        Nenhuma vira escore. Existem para dizer o que o escore publicado **nao** mede: sem
+        elas, um zero fica indistinguivel de um zero por elicitacao ruim, e um numero colhido
+        em modo reduzido fica indistinguivel do comportamento padrao do modelo.
         """
-        d = Path(directory or RUNS_DIR)
-        if not d.is_dir():
-            return None
-        for f in sorted(d.glob("RUN-*.json")):
-            doc = json.loads(f.read_text(encoding="utf-8"))
-            if doc.get("model_id") == model_id and doc.get("fewshot"):
-                return cls.from_doc(doc)
-        return None
+        return [
+            cls.from_doc(d)
+            for d in cls._docs(model_id, directory)
+            if _papel(d) is MeasurementRole.DIAGNOSTIC
+        ]
 
     @classmethod
     def from_doc(cls, doc: dict[str, Any]) -> "Measurement":
@@ -123,6 +144,7 @@ class Measurement:
             wall_s=float(doc.get("wall_s", 0.0)),
             conversation_format=str(doc.get("conversation_format", "")),
             system_mode=str(doc.get("system_mode", "")),
+            role=_papel(doc),
             telemetry=dict(doc.get("telemetry") or {}),
             grades=notas,
             note=str(doc.get("note", "")),
@@ -145,6 +167,7 @@ class Measurement:
             "quantization": self.quantization,
             "conversation_format": self.conversation_format,
             "system_mode": self.system_mode,
+            "role": str(self.role.value),
             "fewshot": self.fewshot,
             "tasks": self.tasks,
             "tool_calls": self.tool_calls,
@@ -152,6 +175,18 @@ class Measurement:
             "wall_s": self.wall_s,
             "telemetry": self.telemetry,
         }
+
+
+def _papel(doc: dict[str, Any]) -> MeasurementRole:
+    """Papel do artefato, com compatibilidade para os gravados antes do campo existir.
+
+    Antes de `role`, `fewshot` fazia os dois trabalhos. Artefato sem `role` e lido pela regra
+    antiga — o que preserva a leitura correta dos que ja estavam no repositorio.
+    """
+    bruto = doc.get("role")
+    if bruto:
+        return MeasurementRole(str(bruto))
+    return MeasurementRole.DIAGNOSTIC if doc.get("fewshot") else MeasurementRole.PRIMARY
 
 
 def available(directory: Path | None = None) -> list[str]:
@@ -162,9 +197,15 @@ def available(directory: Path | None = None) -> list[str]:
     ids = set()
     for f in d.glob("RUN-*.json"):
         doc = json.loads(f.read_text(encoding="utf-8"))
-        if not doc.get("fewshot"):
+        if _papel(doc) is MeasurementRole.PRIMARY:
             ids.add(str(doc.get("model_id", "")))
     return sorted(i for i in ids if i)
 
 
-__all__ = ["Measurement", "MeasurementError", "RUNS_DIR", "available"]
+__all__ = [
+    "Measurement",
+    "MeasurementError",
+    "MeasurementRole",
+    "RUNS_DIR",
+    "available",
+]

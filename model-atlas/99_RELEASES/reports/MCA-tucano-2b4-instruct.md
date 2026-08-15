@@ -1,8 +1,8 @@
 ---
 artifact: MODEL_CAPABILITY_ASSESSMENT
 model: tucano-2b4-instruct
-run_id: 20260815T095603Z
-generated_at: 2026-08-15T09:56:03+00:00
+run_id: 20260815T113727Z
+generated_at: 2026-08-15T11:37:27+00:00
 method: DOUVRAS 2.0
 cycle: C-002
 weakest_status: ASSUMPTION
@@ -34,7 +34,15 @@ Isso **nao** significa que o modelo seja incapaz de portugues ou de instrucao: f
 | runtime | llama.cpp em CPU, temperatura 0 |
 | teto de passos | 6 |
 
-**A hipotese obvia foi testada e rejeitada.** Um exemplo demonstrado injetado no prompt (`G-112`, modo diagnostico) manteve o escore em 0.0% e as chamadas de ferramenta em 0, em 16 tarefas cobrindo as oito capacidades. O zero-shot nao estava medindo falta de exemplo.
+### O que este numero **nao** mede
+
+Cada linha e uma execucao declarada como diagnostica: mesma suite, uma variavel trocada de proposito. Nenhuma delas e escore publicado — elas existem para limitar a leitura do escore que e.
+
+| Variavel trocada | Tarefas | Escore | Chamadas | Comparar com |
+|---|---:|---:|---:|---:|
+| exemplo demonstrado no prompt | 16 | 0.0% | 0 | 0.0% |
+
+A ultima coluna e o escore **das mesmas tarefas** na execucao publicada, para que a comparacao seja pareada e nao contra o agregado de 96.
 
 ## 2 · Ficha e proveniencia
 

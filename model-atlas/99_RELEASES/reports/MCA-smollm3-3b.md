@@ -1,8 +1,8 @@
 ---
 artifact: MODEL_CAPABILITY_ASSESSMENT
 model: smollm3-3b
-run_id: 20260815T095603Z
-generated_at: 2026-08-15T09:56:03+00:00
+run_id: 20260815T113727Z
+generated_at: 2026-08-15T11:37:27+00:00
 method: DOUVRAS 2.0
 cycle: C-002
 weakest_status: ASSUMPTION
@@ -33,6 +33,18 @@ Onde ele passa: `arguments` (50%), `error_recovery` (33%). Nas demais capacidade
 | modo | `/no_think` |
 | runtime | llama.cpp em CPU, temperatura 0 |
 | teto de passos | 6 |
+
+### O que este numero **nao** mede
+
+Cada linha e uma execucao declarada como diagnostica: mesma suite, uma variavel trocada de proposito. Nenhuma delas e escore publicado — elas existem para limitar a leitura do escore que e.
+
+| Variavel trocada | Tarefas | Escore | Chamadas | Comparar com |
+|---|---:|---:|---:|---:|
+| modo padrao do modelo (raciocinio ligado) | 16 | 31.2% | 14 | 12.5% |
+
+A ultima coluna e o escore **das mesmas tarefas** na execucao publicada, para que a comparacao seja pareada e nao contra o agregado de 96.
+
+**O escore publicado e portanto um piso, nao a capacidade.** No modo padrao do modelo, o modelo ganha **+18.8 pontos** no mesmo recorte de 16 tarefas. Um ranking construido sobre o numero de cima classificaria este modelo abaixo do que ele faz por padrao.
 
 ## 2 · Ficha e proveniencia
 
