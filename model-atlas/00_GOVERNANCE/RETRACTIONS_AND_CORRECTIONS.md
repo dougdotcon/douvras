@@ -80,6 +80,48 @@ mudança neste ciclo. Nenhum relatório apresenta a generalização por porte.
 
 ---
 
+## R-103 — "as chamadas de ferramenta são idênticas entre `/think` e `/no_think`" retratada
+
+**O que se afirmava.** Que raciocinar não muda o que o modelo *faz* — só a *escolha*. A base era
+uma amostra pareada de 16 tarefas (2 por capacidade) do `smollm3-3b`, onde as duas execuções
+produziram exatamente 14 chamadas de ferramenta cada. Publicado no changelog, no README e no
+commit `2fbac50` como conclusão.
+
+**O que derrubou.** A execução completa das 96 tarefas em `/think` — interrompida por `G-118`
+antes de terminar, mas chegando a **71/96** tarefas graduadas antes disso, mais de quatro vezes
+a amostra original. Nas mesmas 71 tarefas:
+
+| | `/no_think` (publicado) | `/think` |
+|---|---:|---:|
+| chamadas de ferramenta por tarefa | 0,81 (78/96) | **0,49** (35/71) |
+| `hallucination` | 0,0 % | **83,3 %** |
+| `arguments` | 50,0 % | **41,7 %** |
+| `error_recovery` | 33,3 % | **0,0 %** |
+
+As chamadas de ferramenta **caem** com raciocínio ligado, não ficam iguais. E o efeito por
+capacidade não é uniformemente positivo: `hallucination` melhora muito, `arguments` e
+`error_recovery` **pioram**. "Mesma ação, julgamento melhor" era uma leitura limpa demais para
+uma amostra de 16 tarefas — 2 por capacidade é o suficiente para detectar direção, não para
+caracterizar o efeito.
+
+**Diagnóstico.** Clássico erro de amostra pequena: 14 chamadas em 16 tarefas e 14 em 16 tarefas
+é uma coincidência plausível em amostra desse tamanho, não uma lei do comportamento do modelo.
+O texto generalizou uma coincidência numérica em afirmação mecanística ("raciocinar não faz o
+modelo agir mais") sem testar se ela sobrevivia a mais dados. A tabela do assessment que gera
+esse número (`assessment.py`, seção "O que este número não mede") sempre foi derivada da
+contagem real — o defeito não estava no código, estava na prosa escrita por cima dele num
+commit anterior, que não foi atualizada quando a amostra cresceu.
+
+**O que sobrevive.** O achado principal do `R-101`/commit `2fbac50` continua de pé: o escore
+publicado em `/no_think` é **piso, não capacidade** — `/think` ainda vence no agregado pareado
+(14,1 % → 21,1 %, +7,0 pontos). O que cai é só a explicação mecanística de *por que*.
+
+**Consequência aplicada.** README corrigido com os números de 71 tarefas e a direção mista por
+capacidade. `G-116` permanece `PARCIAL` — agora com melhor evidência (71/96 em vez de 16/96),
+mas ainda não fechada.
+
+---
+
 ## O que a segunda medição **não** desfez
 
 Com dois modelos reais medidos, a tentação óbvia era reabrir `C-102` — a alegação de que o

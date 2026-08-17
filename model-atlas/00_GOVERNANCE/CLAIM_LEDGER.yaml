@@ -15,11 +15,12 @@
   - RUN:20260815T095359Z
   - RUN:20260815T095603Z
   - RUN:20260815T113727Z
+  - RUN:20260817T141542Z
   falsifiers:
   - o grader aceita alguma trajetoria declarada como errada (F1)
   - o grader rejeita a trajetoria de referencia de alguma tarefa (F2)
   owner: engineering
-  last_reviewed: '2026-08-15'
+  last_reviewed: '2026-08-17'
 - id: C-102
   statement: O escore agregado do BR-Agent-Bench separa um respondente correto de um respondente degenerado
     por margem maior que 0.20.
@@ -37,10 +38,11 @@
   - RUN:20260815T095359Z
   - RUN:20260815T095603Z
   - RUN:20260815T113727Z
+  - RUN:20260817T141542Z
   falsifiers:
   - margem entre oraculo e melhor sonda degenerada abaixo de 0.20 (F3)
   owner: research
-  last_reviewed: '2026-08-15'
+  last_reviewed: '2026-08-17'
   note: 'Falsificador F3 da PROBLEM_CHARTER. Se disparar, nenhum escore agregado pode ser apresentado
     como decisao. | F3 disparado: margem agregada 0.0625 abaixo do limiar declarado (ver CE-101)'
 - id: C-103
@@ -59,11 +61,12 @@
   - RUN:20260815T095359Z
   - RUN:20260815T095603Z
   - RUN:20260815T113727Z
+  - RUN:20260817T141542Z
   falsifiers:
   - alguma tarefa declara regra que nenhum grader implementa (F5)
   - alguma capacidade tem menos de oito tarefas (F5)
   owner: engineering
-  last_reviewed: '2026-08-15'
+  last_reviewed: '2026-08-17'
 - id: C-104
   statement: Todo modo de falha declarado no corpus e disparado por ao menos uma sonda de calibracao,
     portanto e detectavel quando acontece.
@@ -80,10 +83,11 @@
   - RUN:20260815T095359Z
   - RUN:20260815T095603Z
   - RUN:20260815T113727Z
+  - RUN:20260817T141542Z
   falsifiers:
   - algum modo declarado nunca aparece em nenhuma execucao de sonda (F6)
   owner: engineering
-  last_reviewed: '2026-08-15'
+  last_reviewed: '2026-08-17'
 - id: C-105
   statement: 'A suite e deterministica: mesma entrada produz os mesmos vereditos, sem fonte de aleatoriedade
     no caminho principal.'
@@ -100,10 +104,11 @@
   - RUN:20260815T095359Z
   - RUN:20260815T095603Z
   - RUN:20260815T113727Z
+  - RUN:20260817T141542Z
   falsifiers:
   - duas execucoes da mesma suite divergem em qualquer veredicto (F4)
   owner: engineering
-  last_reviewed: '2026-08-15'
+  last_reviewed: '2026-08-17'
 - id: C-106
   statement: Modelos de 0.5B a 3B cabem em 16 GB de RAM sem GPU em quantizacao de quatro a oito bits,
     considerando apenas pesos residentes.

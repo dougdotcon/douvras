@@ -1,8 +1,8 @@
 ---
 artifact: MODEL_CAPABILITY_ASSESSMENT
 model: smollm3-3b
-run_id: 20260815T113727Z
-generated_at: 2026-08-15T11:37:27+00:00
+run_id: 20260817T141542Z
+generated_at: 2026-08-17T14:15:42+00:00
 method: DOUVRAS 2.0
 cycle: C-002
 weakest_status: ASSUMPTION
@@ -40,11 +40,11 @@ Cada linha e uma execucao declarada como diagnostica: mesma suite, uma variavel 
 
 | Variavel trocada | Tarefas | Escore | Chamadas | Comparar com |
 |---|---:|---:|---:|---:|
-| modo padrao do modelo (raciocinio ligado) | 16 | 31.2% | 14 | 12.5% |
+| modo padrao do modelo (raciocinio ligado) | 71 | 21.1% | 35 | 14.1% |
 
 A ultima coluna e o escore **das mesmas tarefas** na execucao publicada, para que a comparacao seja pareada e nao contra o agregado de 96.
 
-**O escore publicado e portanto um piso, nao a capacidade.** No modo padrao do modelo, o modelo ganha **+18.8 pontos** no mesmo recorte de 16 tarefas. Um ranking construido sobre o numero de cima classificaria este modelo abaixo do que ele faz por padrao.
+**O escore publicado e portanto um piso, nao a capacidade.** No modo padrao do modelo, o modelo ganha **+7.0 pontos** no mesmo recorte de 71 tarefas. Um ranking construido sobre o numero de cima classificaria este modelo abaixo do que ele faz por padrao.
 
 ## 2 · Ficha e proveniencia
 

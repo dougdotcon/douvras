@@ -159,9 +159,17 @@ exemplo — `"ferramenta": "nome_da_ferramenta"` copiado literalmente. O SmolLM3
 protocolo; o que falha nele é a **escolha** da ferramenta, não a forma da ação.
 
 **E os 10,4 % do SmolLM3 são piso, não capacidade.** Ele foi medido em `/no_think`, mas o modo
-padrão dele é `/think`. Nas mesmas 16 tarefas, pareadas: **12,5 % → 31,2 %**. As chamadas de
-ferramenta são **idênticas** nos dois modos (14 e 14) — raciocinar não faz o modelo agir mais,
-faz ele escolher melhor. `tool_selection` e `hallucination` saltam de 0 % para 100 %.
+padrão dele é `/think`. Nas mesmas 71 tarefas (pareado contra o publicado): **14,1 % → 21,1 %**,
++7,0 pontos.
+
+O efeito **não é uniforme por capacidade**, e essa é a parte que a amostra inicial de 16 tarefas
+não mostrava direito: `hallucination` salta de 0 % para 83,3 %, mas `arguments` cai de 50 % para
+41,7 % e `error_recovery` cai de 33,3 % para 0 %. Raciocinar não é estritamente "mesma ação,
+julgamento melhor" — muda o comportamento em direções diferentes por capacidade, e as chamadas
+de ferramenta por tarefa **caem** com raciocínio ligado (0,81/tarefa → 0,49/tarefa), não ficam
+iguais. Uma afirmação anterior nesta mesma linha de pesquisa dizia o contrário — foi retratada
+por [R-103](model-atlas/00_GOVERNANCE/RETRACTIONS_AND_CORRECTIONS.md#r-103) quando a amostra
+cresceu de 16 para 71 tarefas e o padrão simples não se sustentou.
 
 Com isso, `C-108` — *"modelos de 2B a 3B não instanciam chamada de ferramenta"* — foi
 **retratada no mesmo ciclo em que foi registrada**, pelo falsificador que ela própria declarou.

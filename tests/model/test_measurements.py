@@ -175,9 +175,12 @@ def test_a_margem_agregada_entre_os_dois_modelos_reais_continua_abaixo_do_limiar
 def test_o_modo_de_raciocinio_muda_o_escore_e_o_assessment_diz_isso(registry, tasks_corpus) -> None:
     """`G-116`: o número publicado do `smollm3-3b` é piso, e o relatório precisa dizer.
 
-    Medido: nas mesmas 16 tarefas, `/no_think` faz 12,5 % e o modo padrão faz 31,2 %. As
-    chamadas de ferramenta são **idênticas** nos dois — raciocinar não faz o modelo agir mais,
-    faz ele escolher melhor.
+    Medido em 71/96 tarefas de `/think` (execução completa interrompida por `G-118`): o modo
+    padrão vence o publicado no recorte pareado, mas o efeito NÃO é uniforme por capacidade
+    (`hallucination` melhora muito, `arguments` e `error_recovery` pioram) e as chamadas de
+    ferramenta por tarefa caem, não ficam iguais — ao contrário do que uma amostra anterior de
+    16 tarefas sugeriu e que foi retratada (`R-103`). Este teste so verifica a direção do
+    agregado pareado (`alvo > base`), que é o que sobreviveu à retratação.
     """
     diags = [d for d in Measurement.diagnostics("smollm3-3b") if not d.fewshot]
     assert diags, "sem o diagnóstico de modo, o escore publicado fica sem limite de leitura"

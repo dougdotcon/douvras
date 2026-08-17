@@ -136,11 +136,33 @@ class Timings:
 class LlamaServer:
     """Sobe `llama-server`, fala HTTP, derruba no fim."""
 
-    def __init__(self, model: Path, port: int = 8177, ctx: int = 4096, threads: int | None = None):
+    def __init__(
+        self,
+        model: Path,
+        port: int = 8177,
+        ctx: int = 4096,
+        threads: int | None = None,
+        request_timeout_s: int = 900,
+        log_path: Path | None = None,
+    ):
         self.model = model
         self.port = port
         self.ctx = ctx
         self.threads = threads or max(1, (os.cpu_count() or 4) - 1)
+        #: Se dado, stdout+stderr do processo do servidor vao pra cá em vez de `DEVNULL`.
+        #: Sem isto, o servidor morrendo (OOM, assert, crash nativo) nao deixa rastro nenhum —
+        #: o cliente so ve `ConnectionResetError` e o motivo real fica perdido para sempre.
+        #: Descoberto ao vivo: duas mortes seguidas do processo sem NENHUM traceback do lado
+        #: python, porque o erro de verdade estava do lado do servidor, jogado no DEVNULL.
+        self.log_path = log_path
+        self._log_fh = None
+        # 300s bastava para respostas curtas, mas uma chamada em modo `/think` (ate 1024
+        # tokens gerados, a ~8 tok/s em CPU) pode passar disso, sobretudo em turnos tardios de
+        # uma trajetoria longa, com mais contexto pra processar. Descoberto ao vivo: a execucao
+        # completa de `smollm3-3b` em `/think` matou o processo inteiro na tarefa 23/96, depois
+        # de 22 tarefas boas — 300s era curto demais para o proprio instrumento, nao para o
+        # modelo. Perder um processo de horas por causa disso e caro; 900s da folga real.
+        self.request_timeout_s = request_timeout_s
         self.proc: subprocess.Popen | None = None
         self.timings = Timings()
 
@@ -150,6 +172,8 @@ class LlamaServer:
 
     def __enter__(self) -> "LlamaServer":
         exe = find_server()
+        self._log_fh = open(self.log_path, "ab") if self.log_path else None
+        saida = self._log_fh or subprocess.DEVNULL
         self.proc = subprocess.Popen(
             [
                 str(exe), "-m", str(self.model),
@@ -161,7 +185,7 @@ class LlamaServer:
                 # assim mediria o palpite do harness, nao o modelo.
                 "--jinja",
             ],
-            stdout=subprocess.DEVNULL, stderr=subprocess.DEVNULL,
+            stdout=saida, stderr=saida,
         )
         for _ in range(180):
             if self.proc.poll() is not None:
@@ -183,6 +207,14 @@ class LlamaServer:
             except subprocess.TimeoutExpired:  # pragma: no cover
                 self.proc.kill()
         self.proc = None
+        if self._log_fh:
+            self._log_fh.close()
+            self._log_fh = None
+
+    @property
+    def alive(self) -> bool:
+        """O processo do servidor ainda esta de pe? Falso tambem se nunca foi iniciado."""
+        return self.proc is not None and self.proc.poll() is None
 
     def complete(self, prompt: str, max_tokens: int = 256) -> str:
         """Completa um prompt **cru**, sem passar por template de chat.
@@ -209,7 +241,7 @@ class LlamaServer:
         req = urllib.request.Request(
             f"{self.url}/completion", data=corpo, headers={"Content-Type": "application/json"}
         )
-        with urllib.request.urlopen(req, timeout=300) as r:
+        with urllib.request.urlopen(req, timeout=self.request_timeout_s) as r:
             doc = json.loads(r.read().decode("utf-8"))
         if doc.get("timings"):
             self.timings.add(doc["timings"])
@@ -235,7 +267,7 @@ class LlamaServer:
             data=corpo,
             headers={"Content-Type": "application/json"},
         )
-        with urllib.request.urlopen(req, timeout=300) as r:
+        with urllib.request.urlopen(req, timeout=self.request_timeout_s) as r:
             doc = json.loads(r.read().decode("utf-8"))
         if doc.get("timings"):
             self.timings.add(doc["timings"])

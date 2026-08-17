@@ -7,6 +7,68 @@ artifact: CHANGELOG
 Registra mudanças de **código, corpus, priors e alegações**. Uma mudança de prior que altera
 uma recomendação é tão relevante quanto uma mudança de código, e por isso entra aqui.
 
+## [0.3.2] — 2026-08-17 — `/think` chega a 71/96, retrata a conclusão da amostra de 16
+
+A execução completa de `smollm3-3b` em `/think` avançou de 16 para 71 tarefas graduadas (73,9 %
+do corpus) antes de ser interrompida em definitivo por `G-118`. O ganho de amostra mudou a
+conclusão publicada.
+
+### Retratado — `R-103`
+
+"As chamadas de ferramenta são idênticas entre `/think` e `/no_think`" — publicado no ciclo
+anterior a partir de 16 tarefas (14 chamadas em cada modo, coincidência de amostra pequena).
+Com 71 tarefas: **0,81 chamada/tarefa em `/no_think` vs 0,49 em `/think`** — caem, não ficam
+iguais. E o efeito por capacidade é misto, não uniformemente positivo:
+
+| Capacidade | `/no_think` | `/think` |
+|---|---:|---:|
+| `hallucination` | 0,0 % | **83,3 %** |
+| `arguments` | 50,0 % | **41,7 %** (piora) |
+| `error_recovery` | 33,3 % | **0,0 %** (piora) |
+
+O que sobrevive: `/no_think` continua sendo **piso**, não capacidade — o agregado pareado nas
+71 tarefas ainda sobe com raciocínio (14,1 % → 21,1 %, +7,0 pontos). Só a explicação
+mecanística ("mesma ação, julgamento melhor") caiu.
+
+### Por que parou em 71/96, não 96/96
+
+Três causas reais, nesta ordem de aparição, cada uma corrigida quando encontrada:
+
+1. **Timeout HTTP curto demais** para respostas longas de raciocínio em CPU — corrigido
+   (300s → 900s configurável).
+2. **Sessão reiniciando sozinha**, matando qualquer processo filho do bash — contornado
+   rodando a suíte via Agendador de Tarefas do Windows, desacoplada da árvore de processos
+   da sessão. Checkpoint passou a gravar a cada tarefa, não a cada 5.
+3. **`llama-server` morrendo sob carga sustentada** (`ConnectionResetError`), sem log próprio
+   (rodava com `stdout`/`stderr` em `DEVNULL`) — corrigido: log do servidor capturado, e o
+   harness agora detecta processo morto e reinicia sozinho antes da próxima tarefa.
+4. **Bloqueio definitivo**: Smart App Control do Windows passou a recusar executar
+   `llama-server.exe` depois de ~36h rodando sem problema (`G-118`, aberta). Isso não é
+   contornável por código — é decisão de segurança do usuário, e a execução parou aí.
+
+### Corrigido no processo
+
+- `print()` derrubava o processo inteiro com `OSError: Invalid argument` ao tentar escrever um
+  caractere fora de ASCII sob a página de código do Agendador de Tarefas — `stdout`/`stderr`
+  reconfigurados para UTF-8 com `errors="replace"`.
+- Merge de `--resume-from` duplicava o registro de uma tarefa que errasse por infraestrutura
+  duas vezes seguidas (uma entrada do checkpoint antigo, outra da nova tentativa).
+- Venv do projeto era **Python de 32 bits**, com endereçamento útil de ~2 GB numa máquina com
+  14 GB de RAM — causou `MemoryError` ao serializar o checkpoint com dezenas de trajetórias de
+  `/think` acumuladas. Reconstruído com Python 3.11 de 64 bits.
+
+### Adicionado
+
+- `LlamaServer.alive`, `log_path` — o servidor pode ter seu próprio log capturado, e o
+  harness sabe distinguir "está vivo" de "morreu" em vez de só tentar e falhar.
+- `run_bench.py --resume-from`, `--ctx`: retomada real de execução interrompida, sem perder
+  tarefas já graduadas; contexto do servidor configurável (`/think` precisa de mais que 4096).
+- `publish_run.py --allow-partial`: publicar uma medição incompleta exige reconhecer isso
+  explicitamente — por padrão o script recusa.
+
+`G-116` segue **PARCIAL**, com evidência bem maior que antes mas ainda não fechada — bloqueada
+por `G-118`, que não é um problema de código.
+
 ## [0.3.1] — 2026-08-15 — O modo de raciocínio vale +18,8 pontos, e o escore publicado vira piso
 
 `smollm3-3b` executado em `/think` — o modo **padrão** dele — em 16 tarefas, 2 por capacidade,
