@@ -1,6 +1,6 @@
 ---
 artifact: DEPENDENCY_DAG
-run_id: 20260817T141542Z
+run_id: 20260818T024500Z
 generated_by: scripts/run_model_cycle.py
 ---
 
@@ -45,4 +45,4 @@ codigo e corpus que estao no repositorio e reexecutam identicos.
 | telemetria -> velocidade util | `G-102` | caber nao e rodar, e o relatorio nao pode dizer que roda |
 | corpus real -> validade externa | `G-107` | o instrumento mede o gerador ate prova em contrario |
 
-Lacunas registradas neste ciclo: **13 abertas, 3 parcial(is) — 16 registradas**.
+Lacunas registradas neste ciclo: **13 abertas, 2 parcial(is) — 15 registradas**.

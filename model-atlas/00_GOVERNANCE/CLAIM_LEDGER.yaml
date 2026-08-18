@@ -16,11 +16,13 @@
   - RUN:20260815T095603Z
   - RUN:20260815T113727Z
   - RUN:20260817T141542Z
+  - RUN:20260818T024251Z
+  - RUN:20260818T024500Z
   falsifiers:
   - o grader aceita alguma trajetoria declarada como errada (F1)
   - o grader rejeita a trajetoria de referencia de alguma tarefa (F2)
   owner: engineering
-  last_reviewed: '2026-08-17'
+  last_reviewed: '2026-08-18'
 - id: C-102
   statement: O escore agregado do BR-Agent-Bench separa um respondente correto de um respondente degenerado
     por margem maior que 0.20.
@@ -39,10 +41,12 @@
   - RUN:20260815T095603Z
   - RUN:20260815T113727Z
   - RUN:20260817T141542Z
+  - RUN:20260818T024251Z
+  - RUN:20260818T024500Z
   falsifiers:
   - margem entre oraculo e melhor sonda degenerada abaixo de 0.20 (F3)
   owner: research
-  last_reviewed: '2026-08-17'
+  last_reviewed: '2026-08-18'
   note: 'Falsificador F3 da PROBLEM_CHARTER. Se disparar, nenhum escore agregado pode ser apresentado
     como decisao. | F3 disparado: margem agregada 0.0625 abaixo do limiar declarado (ver CE-101)'
 - id: C-103
@@ -62,11 +66,13 @@
   - RUN:20260815T095603Z
   - RUN:20260815T113727Z
   - RUN:20260817T141542Z
+  - RUN:20260818T024251Z
+  - RUN:20260818T024500Z
   falsifiers:
   - alguma tarefa declara regra que nenhum grader implementa (F5)
   - alguma capacidade tem menos de oito tarefas (F5)
   owner: engineering
-  last_reviewed: '2026-08-17'
+  last_reviewed: '2026-08-18'
 - id: C-104
   statement: Todo modo de falha declarado no corpus e disparado por ao menos uma sonda de calibracao,
     portanto e detectavel quando acontece.
@@ -84,10 +90,12 @@
   - RUN:20260815T095603Z
   - RUN:20260815T113727Z
   - RUN:20260817T141542Z
+  - RUN:20260818T024251Z
+  - RUN:20260818T024500Z
   falsifiers:
   - algum modo declarado nunca aparece em nenhuma execucao de sonda (F6)
   owner: engineering
-  last_reviewed: '2026-08-17'
+  last_reviewed: '2026-08-18'
 - id: C-105
   statement: 'A suite e deterministica: mesma entrada produz os mesmos vereditos, sem fonte de aleatoriedade
     no caminho principal.'
@@ -105,10 +113,12 @@
   - RUN:20260815T095603Z
   - RUN:20260815T113727Z
   - RUN:20260817T141542Z
+  - RUN:20260818T024251Z
+  - RUN:20260818T024500Z
   falsifiers:
   - duas execucoes da mesma suite divergem em qualquer veredicto (F4)
   owner: engineering
-  last_reviewed: '2026-08-17'
+  last_reviewed: '2026-08-18'
 - id: C-106
   statement: Modelos de 0.5B a 3B cabem em 16 GB de RAM sem GPU em quantizacao de quatro a oito bits,
     considerando apenas pesos residentes.
@@ -162,6 +172,28 @@
     e error_recovery +0.333. E o diagnostico de CE-101 visto em modelos reais em vez de sondas. NAO ressuscita
     C-102, que falava de separar respondente correto de degenerado — outra afirmacao, outro falsificador.
     Dois modelos nao fazem uma tendencia, e por isso CONJECTURE.'
+- id: C-110
+  statement: Ativar o modo de raciocinio (/think) num modelo hibrido melhora o escore agregado do BR-Agent-Bench,
+    mas o efeito por capacidade nao e uniforme — algumas capacidades melhoram muito, outras pioram, e
+    o numero de chamadas de ferramenta cai em vez de se manter igual.
+  status: HYPOTHESIS
+  assumptions:
+  - A-103
+  - A-107
+  evidence:
+  - RUN:smollm3-3b-think-agent-ptbr-v2
+  falsifiers:
+  - um segundo modelo de raciocinio hibrido cujo /think melhore TODAS as capacidades (efeito uniforme)
+  - um segundo modelo de raciocinio hibrido cujo numero de chamadas de ferramenta se mantenha igual ou
+    suba com /think
+  owner: research
+  last_reviewed: '2026-08-17'
+  note: 'Medido em UM modelo (smollm3-3b), 96/96 tarefas, zero erro de infraestrutura: agregado 10.4%
+    -> 25.0% (+14.6 pontos); tool_selection +75.0, hallucination +83.3, mas arguments -8.3 e error_recovery
+    -33.3; chamadas de ferramenta 78->66 (caem, nao empatam). Passou por retratacao em duas etapas — 16
+    tarefas (R-103 inicial) e 71 tarefas (R-103 atualizada) davam leituras diferentes da versao final
+    de 96. HYPOTHESIS, nao CONJECTURE, porque a direcao (efeito misto, chamadas caem) se sustentou atraves
+    de tres tamanhos de amostra crescentes sem inverter — mas continua sendo um unico modelo.'
 - id: C-107
   statement: O CSS identifica uma capacidade alvo para especializacao por dados com margem maior que o
     ruido dos proprios pesos.

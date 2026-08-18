@@ -1,8 +1,8 @@
 ---
 artifact: MODEL_CAPABILITY_ASSESSMENT
 model: smollm3-3b
-run_id: 20260817T141542Z
-generated_at: 2026-08-17T14:15:42+00:00
+run_id: 20260818T024500Z
+generated_at: 2026-08-18T02:45:00+00:00
 method: DOUVRAS 2.0
 cycle: C-002
 weakest_status: ASSUMPTION
@@ -40,11 +40,11 @@ Cada linha e uma execucao declarada como diagnostica: mesma suite, uma variavel 
 
 | Variavel trocada | Tarefas | Escore | Chamadas | Comparar com |
 |---|---:|---:|---:|---:|
-| modo padrao do modelo (raciocinio ligado) | 71 | 21.1% | 35 | 14.1% |
+| modo padrao do modelo (raciocinio ligado) | 96 | 25.0% | 66 | 10.4% |
 
 A ultima coluna e o escore **das mesmas tarefas** na execucao publicada, para que a comparacao seja pareada e nao contra o agregado de 96.
 
-**O escore publicado e portanto um piso, nao a capacidade.** No modo padrao do modelo, o modelo ganha **+7.0 pontos** no mesmo recorte de 71 tarefas. Um ranking construido sobre o numero de cima classificaria este modelo abaixo do que ele faz por padrao.
+**O escore publicado e portanto um piso, nao a capacidade.** No modo padrao do modelo, o modelo ganha **+14.6 pontos** no mesmo recorte de 96 tarefas. Um ranking construido sobre o numero de cima classificaria este modelo abaixo do que ele faz por padrao.
 
 ## 2 · Ficha e proveniencia
 
@@ -206,8 +206,8 @@ Lacunas abertas mantem todo derivado em `CONDITIONAL_RESULT` ou abaixo. Elo mais
 
 ## 11 · O que este relatorio nao demonstra
 
-- **Nao** mede nenhuma capacidade de `smollm3-3b`.
-- **Nao** compara modelos: sem execucao nao ha ranking.
+- **Mede** capacidade real de `smollm3-3b`, mas so nas 96 tarefas deste corpus, com o prompt e a quantizacao declarados na secao 1 — outro prompt ou outra quantizacao e outro instrumento (`G-112`, `G-113`).
+- **Compara** com outro modelo real quando ambos tem execucao publicada, mas dois modelos nao sustentam ranking geral — sustentam contraexemplo (`C-108` retratada) e conjectura (`C-109`, `C-110`), nao lei de comportamento.
 - **Nao** valida o corpus de tarefas contra desempenho humano — as tarefas sao sinteticas e a dificuldade declarada e de autoria, nao calibrada.
 - **Nao** demonstra que as sondas cobrem o espaco de falhas reais; elas cobrem os modos **declarados**, que e coisa diferente.
 - O numero de memoria diz que cabe, nao que roda em velocidade util.

@@ -1,8 +1,8 @@
 ---
 artifact: MODEL_CAPABILITY_ASSESSMENT
 model: tucano-2b4-instruct
-run_id: 20260817T141542Z
-generated_at: 2026-08-17T14:15:42+00:00
+run_id: 20260818T024500Z
+generated_at: 2026-08-18T02:45:00+00:00
 method: DOUVRAS 2.0
 cycle: C-002
 weakest_status: ASSUMPTION
@@ -206,8 +206,8 @@ Lacunas abertas mantem todo derivado em `CONDITIONAL_RESULT` ou abaixo. Elo mais
 
 ## 11 · O que este relatorio nao demonstra
 
-- **Nao** mede nenhuma capacidade de `tucano-2b4-instruct`.
-- **Nao** compara modelos: sem execucao nao ha ranking.
+- **Mede** capacidade real de `tucano-2b4-instruct`, mas so nas 96 tarefas deste corpus, com o prompt e a quantizacao declarados na secao 1 — outro prompt ou outra quantizacao e outro instrumento (`G-112`, `G-113`).
+- **Compara** com outro modelo real quando ambos tem execucao publicada, mas dois modelos nao sustentam ranking geral — sustentam contraexemplo (`C-108` retratada) e conjectura (`C-109`, `C-110`), nao lei de comportamento.
 - **Nao** valida o corpus de tarefas contra desempenho humano — as tarefas sao sinteticas e a dificuldade declarada e de autoria, nao calibrada.
 - **Nao** demonstra que as sondas cobrem o espaco de falhas reais; elas cobrem os modos **declarados**, que e coisa diferente.
 - O numero de memoria diz que cabe, nao que roda em velocidade util.

@@ -113,12 +113,34 @@ contagem real — o defeito não estava no código, estava na prosa escrita por 
 commit anterior, que não foi atualizada quando a amostra cresceu.
 
 **O que sobrevive.** O achado principal do `R-101`/commit `2fbac50` continua de pé: o escore
-publicado em `/no_think` é **piso, não capacidade** — `/think` ainda vence no agregado pareado
-(14,1 % → 21,1 %, +7,0 pontos). O que cai é só a explicação mecanística de *por que*.
+publicado em `/no_think` é **piso, não capacidade** — `/think` ainda vence no agregado pareado.
+O que cai é só a explicação mecanística de *por que*.
 
-**Consequência aplicada.** README corrigido com os números de 71 tarefas e a direção mista por
-capacidade. `G-116` permanece `PARCIAL` — agora com melhor evidência (71/96 em vez de 16/96),
-mas ainda não fechada.
+**Atualização com as 96/96 completas (fecha `G-116` e `G-118`).** `G-118` — bloqueio do Smart
+App Control do Windows contra `llama-server.exe` — o usuário desativou a política, decisão
+dele, não minha (mexer em configuração de segurança do sistema está fora do que eu posso
+fazer). Com isso a suite terminou: **96/96 tarefas, zero erro de infraestrutura**.
+
+| | `/no_think` (publicado) | `/think`, 71/96 (interino) | `/think`, **96/96 (final)** |
+|---|---:|---:|---:|
+| escore agregado | 10,4 % | 21,1 % | **25,0 %** |
+| chamadas de ferramenta | 78 | 35/71 (0,49/tarefa) | **66/96** (0,69/tarefa) |
+| `tool_selection` | 0,0 % | — | **75,0 %** |
+| `hallucination` | 0,0 % | 83,3 % | **83,3 %** |
+| `arguments` | 50,0 % | 41,7 % | **41,7 %** |
+| `error_recovery` | 33,3 % | 0,0 % | **0,0 %** |
+
+O número de 71 tarefas já apontava a direção certa (efeito misto, chamadas caem em vez de
+ficarem iguais) — não é uma segunda retratação, é a mesma correção com a amostra completa. A
+peça que a amostra de 71 não continha: `tool_selection` sozinho explica boa parte do ganho
+agregado (+75 pontos), e isso só aparece quando as últimas 12 tarefas dessa capacidade entram
+na conta.
+
+**Consequência aplicada.** `G-116` **FECHADA**. `G-118` **FECHADA**. Medição publicada em
+[`RUN-smollm3-3b-think-agent-ptbr-v2.json`](../99_RELEASES/runs/RUN-smollm3-3b-think-agent-ptbr-v2.json),
+substituindo a versão de 71 tarefas. `G-117` permanece `OPEN` com o número final (+14,6 pontos):
+o problema que ela nomeia — nenhum modelo comparado sob orçamento de tempo igual — continua sem
+evidência que o feche; terminar a suite só tornou o número mais preciso.
 
 ---
 

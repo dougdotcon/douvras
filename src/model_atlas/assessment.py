@@ -67,10 +67,16 @@ MANDATORY_SECTIONS: tuple[str, ...] = (
 #: "nenhuma ficha foi conferida contra o upstream" depois de `G-108` fechar, porque a frase era
 #: fixa e o `Finding` era calculado. Texto fixo ao lado de numero calculado e a receita da
 #: incoerencia — e nenhuma das duas primeiras regras a pegava.
+#:
+#: A quarta nasceu do mesmo defeito num lugar diferente: a secao 11 (`o_que_nao_demonstra`) tinha
+#: "Nao mede nenhuma capacidade" como texto fixo, e continuou la depois do primeiro modelo real
+#: ser medido — a secao 1, alguns paragrafos antes, no mesmo relatorio, ja dizia o escore. Nenhum
+#: teste de coerencia cobria a secao 11 porque ela nunca tinha entrado no calculo antes.
 COHERENCE_RULES: tuple[tuple[str, str], ...] = (
     (r"nenhuma capacidade foi medida", "css_alvo"),
     (r"nenhuma execucao real ocorreu", "tokens_por_segundo"),
     (r"nenhuma ficha deste corpus foi conferida", "proveniencia_verificada"),
+    (r"Nao\*\* mede nenhuma capacidade", "css_alvo"),
 )
 
 
@@ -527,12 +533,28 @@ class Assessment:
             ]
         )
 
+        if self.evaluable:
+            primeira_linha = (
+                "- **Mede** capacidade real de `" + self.spec.id + "`, mas so nas "
+                f"{len(self.tasks)} tarefas deste corpus, com o prompt e a quantizacao "
+                "declarados na secao 1 — outro prompt ou outra quantizacao e outro instrumento "
+                "(`G-112`, `G-113`)."
+            )
+            segunda_linha = (
+                "- **Compara** com outro modelo real quando ambos tem execucao publicada, mas "
+                "dois modelos nao sustentam ranking geral — sustentam contraexemplo (`C-108` "
+                "retratada) e conjectura (`C-109`, `C-110`), nao lei de comportamento."
+            )
+        else:
+            primeira_linha = "- **Nao** mede nenhuma capacidade de `" + self.spec.id + "`."
+            segunda_linha = "- **Nao** compara modelos: sem execucao nao ha ranking."
+
         s["o_que_nao_demonstra"] = "\n".join(
             [
                 "## 11 · O que este relatorio nao demonstra",
                 "",
-                "- **Nao** mede nenhuma capacidade de `" + self.spec.id + "`.",
-                "- **Nao** compara modelos: sem execucao nao ha ranking.",
+                primeira_linha,
+                segunda_linha,
                 "- **Nao** valida o corpus de tarefas contra desempenho humano — as tarefas sao "
                 "sinteticas e a dificuldade declarada e de autoria, nao calibrada.",
                 "- **Nao** demonstra que as sondas cobrem o espaco de falhas reais; elas cobrem "

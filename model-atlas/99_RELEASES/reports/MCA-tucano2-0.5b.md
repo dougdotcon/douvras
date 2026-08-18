@@ -1,8 +1,8 @@
 ---
 artifact: MODEL_CAPABILITY_ASSESSMENT
 model: tucano2-0.5b
-run_id: 20260817T141542Z
-generated_at: 2026-08-17T14:15:42+00:00
+run_id: 20260818T024500Z
+generated_at: 2026-08-18T02:45:00+00:00
 method: DOUVRAS 2.0
 cycle: C-002
 weakest_status: ASSUMPTION

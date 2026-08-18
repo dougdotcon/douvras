@@ -7,6 +7,46 @@ artifact: CHANGELOG
 Registra mudanças de **código, corpus, priors e alegações**. Uma mudança de prior que altera
 uma recomendação é tão relevante quanto uma mudança de código, e por isso entra aqui.
 
+## [0.3.3] — 2026-08-17 — `/think` fecha em 96/96: fecha `G-116` e `G-118`
+
+`G-118` (Smart App Control bloqueando `llama-server.exe`) foi decisão do usuário desativar a
+política — ação que está fora do que este agente executa por conta própria (mexer em
+configuração de segurança do sistema é regra dura, não julgamento de caso). Depois disso, mais
+uma trava: contenção de RAM com outro processo do usuário, resolvida esperando ele terminar.
+Com as duas fora do caminho, a suíte terminou: **96/96 tarefas, zero erro de infraestrutura**.
+
+### Números finais, pareados contra `/no_think` publicado
+
+| | `/no_think` | `/think`, 71/96 (interino) | `/think`, **96/96** |
+|---|---:|---:|---:|
+| agregado | 10,4 % | 21,1 % | **25,0 %** |
+| chamadas de ferramenta | 78 | 35/71 | **66/96** |
+| `tool_selection` | 0,0 % | — | **75,0 %** |
+| `hallucination` | 0,0 % | 83,3 % | **83,3 %** |
+| `arguments` | 50,0 % | 41,7 % | **41,7 %** |
+| `error_recovery` | 33,3 % | 0,0 % | **0,0 %** |
+
+A peça que só aparece nas 96 completas: `tool_selection` (0 %→75 %) é praticamente todo o
+ganho agregado. A amostra de 71 não continha as últimas tarefas dessa capacidade.
+
+### Corrigido
+
+- Seção 11 do assessment (`o_que_nao_demonstra`) tinha texto fixo — "Não mede nenhuma
+  capacidade" — que continuou aparecendo para modelos **já medidos**, contradizendo a seção 1
+  do mesmo relatório. Mesma classe de defeito do `G-012` (texto fixo ao lado de número
+  calculado), num lugar que nenhuma das três regras de coerência anteriores cobria. Quarta
+  regra adicionada.
+
+### Adicionado
+
+- `C-110`: reasoning melhora o agregado mas o efeito por capacidade não é uniforme, e chamadas
+  de ferramenta caem em vez de empatar. `HYPOTHESIS` — direção estável através de três amostras
+  crescentes (16→71→96), mas ainda um único modelo.
+
+### Fechado
+
+`G-116` (medição completa de `/think`), `G-118` (bloqueio do Smart App Control).
+
 ## [0.3.2] — 2026-08-17 — `/think` chega a 71/96, retrata a conclusão da amostra de 16
 
 A execução completa de `smollm3-3b` em `/think` avançou de 16 para 71 tarefas graduadas (73,9 %
