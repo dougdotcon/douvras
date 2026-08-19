@@ -204,3 +204,102 @@ def test_corpus_recusa_ids_duplicados(tmp_path) -> None:
     (tmp_path / "a.json").write_text(json.dumps([doc, doc]), encoding="utf-8")
     with pytest.raises(TaskCorpusError, match="duplicados"):
         TaskSet.load(tmp_path)
+
+
+# ------------------------------------------------------- answer_grounded (G-120) ---
+#
+# Achado ao vivo: um adaptador LoRA aprendeu a chamar a ferramenta com o argumento ERRADO
+# (garantindo falha) e responder um JSON fixo e plausivel com as chaves certas. `answer_json`
+# so verificava presenca de chave, nunca valor; `must_call` so verificava o nome da ferramenta,
+# nunca sucesso. O adaptador passava 12/12 sem nunca ler uma observacao real. Estes testes
+# fixam o exploit exato para que ele nunca volte a passar em silencio.
+
+_REGRAS_CHAMADO = dict(
+    must_call=["consultar_chamado"],
+    answer_json={"required_keys": ["ticket", "departamento", "prioridade"]},
+    answer_grounded={
+        "tool": "consultar_chamado",
+        "fields": {"departamento": "departamento", "prioridade": "prioridade"},
+    },
+)
+
+
+def _tarefa_chamado() -> EvalTask:
+    return tarefa(
+        capability=Capability.STRUCTURED_OUTPUT,
+        tools=("consultar_chamado",),
+        environment={
+            "state": {},
+            "tools": {
+                "consultar_chamado": {
+                    "kind": "lookup", "arg": "id",
+                    "table": {"7000": {"departamento": "financeiro", "prioridade": "baixa"}},
+                }
+            },
+        },
+        rules=_REGRAS_CHAMADO,
+    )
+
+
+def test_resposta_grounded_na_observacao_real_passa() -> None:
+    t = _tarefa_chamado()
+    traj = (
+        Step(kind=StepKind.CALL, tool="consultar_chamado", args={"id": "7000"},
+             observation={"departamento": "financeiro", "prioridade": "baixa"}),
+        Step(kind=StepKind.ANSWER,
+             text='{"ticket": "7000", "departamento": "financeiro", "prioridade": "baixa"}'),
+    )
+    g = grade(t, traj)
+    assert g.passed, g.failures
+
+
+def test_exploit_exato_argumento_errado_e_resposta_alucinada_e_reprovado() -> None:
+    """O caso real: chave errada na chamada (falha garantida), resposta fixa e plausivel."""
+    t = _tarefa_chamado()
+    traj = (
+        Step(kind=StepKind.CALL, tool="consultar_chamado", args={"ticket": "7000"},
+             observation=None, error="chave nao encontrada: "),
+        Step(kind=StepKind.ANSWER,
+             text='{"ticket": "7000", "departamento": "Servicos de Transporte", '
+                  '"prioridade": "Modalidade 1"}'),
+    )
+    g = grade(t, traj)
+    assert not g.passed
+    assert FailureMode.FAIL_HALLUCINATION in g.failures
+    assert FailureMode.FAIL_ARGUMENT not in g.failures, "arg_equals nao foi declarado nesta tarefa"
+
+
+def test_resposta_diverge_da_observacao_mesmo_com_chamada_bem_sucedida() -> None:
+    """Chamada certa, observacao real recebida — e a resposta ainda assim inventa outro valor."""
+    t = _tarefa_chamado()
+    traj = (
+        Step(kind=StepKind.CALL, tool="consultar_chamado", args={"id": "7000"},
+             observation={"departamento": "financeiro", "prioridade": "baixa"}),
+        Step(kind=StepKind.ANSWER,
+             text='{"ticket": "7000", "departamento": "juridico", "prioridade": "alta"}'),
+    )
+    g = grade(t, traj)
+    assert not g.passed
+    assert FailureMode.FAIL_HALLUCINATION in g.failures
+
+
+def test_sem_answer_grounded_declarado_a_regra_fica_muda() -> None:
+    """`answer_grounded` e opt-in: uma tarefa que nao declara a regra nao e afetada por ela —
+    e o motivo de precisar ter sido adicionada as 12 tarefas de `structured_output`, nao so
+    escrita no grader."""
+    t = tarefa(
+        capability=Capability.STRUCTURED_OUTPUT,
+        tools=("consultar_chamado",),
+        environment={
+            "state": {},
+            "tools": {"consultar_chamado": {"kind": "lookup", "arg": "id", "table": {"7000": {"x": 1}}}},
+        },
+        rules={"must_call": ["consultar_chamado"], "answer_json": {"required_keys": ["ticket"]}},
+    )
+    traj = (
+        Step(kind=StepKind.CALL, tool="consultar_chamado", args={"ticket": "7000"}, observation=None,
+             error="chave nao encontrada: "),
+        Step(kind=StepKind.ANSWER, text='{"ticket": "7000"}'),
+    )
+    g = grade(t, traj)
+    assert g.passed, "sem answer_grounded nas rules, a tarefa nao pode reprovar por causa dele"

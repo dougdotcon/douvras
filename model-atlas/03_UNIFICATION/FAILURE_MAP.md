@@ -1,6 +1,6 @@
 ---
 artifact: FAILURE_MAP
-run_id: 20260818T024500Z
+run_id: 20260819T135303Z
 generated_by: scripts/run_model_cycle.py
 status: COMPUTATIONAL_EVIDENCE
 ---
@@ -25,7 +25,7 @@ grader consegue detectar quando ele acontece.
 | `planning` | 12 | 12 |
 | `pt_br_numeracy` | 12 | 12 |
 | `safety_refusal` | 12 | 12 |
-| `structured_output` | 12 | 24 |
+| `structured_output` | 12 | 36 |
 | `tool_selection` | 12 | 24 |
 
 ## Celulas da taxonomia

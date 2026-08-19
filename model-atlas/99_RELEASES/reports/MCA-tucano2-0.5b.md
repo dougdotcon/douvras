@@ -1,8 +1,8 @@
 ---
 artifact: MODEL_CAPABILITY_ASSESSMENT
 model: tucano2-0.5b
-run_id: 20260818T024500Z
-generated_at: 2026-08-18T02:45:00+00:00
+run_id: 20260819T135303Z
+generated_at: 2026-08-19T13:53:03+00:00
 method: DOUVRAS 2.0
 cycle: C-002
 weakest_status: ASSUMPTION
@@ -159,7 +159,7 @@ A ordem so vira prioridade quando houver medicao real: hoje ela reflete a cobert
 
 - tarefas no corpus: **96**
 - aceitacao do gabarito: **100.0%** (96/96)
-- rejeicao de contraexemplo: **100.0%** (132 declarados)
+- rejeicao de contraexemplo: **100.0%** (144 declarados)
 - precisao do rotulo: **100.0%**
 - margem de discriminacao: **0.062** (NAO discrimina)
 - modos de falha sem sonda: **nenhum**

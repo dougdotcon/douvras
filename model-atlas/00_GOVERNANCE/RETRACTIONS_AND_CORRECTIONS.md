@@ -224,6 +224,23 @@ porque erro corrigido em silêncio vira erro repetido.
   ser publicado, mas chegou a ser calculado, e a diferença entre as duas leituras é a mesma que
   separa uma métrica de uma métrica confundida.
 
+- **Um "0 % → 100 %" que era exploit de grader, não capacidade.** Primeiro caso de calibração
+  do CSS (`G-104`): LoRA em `structured_output`, `smollm2-360m-instruct`, 80 exemplos
+  sintéticos em domínios ausentes do corpus de avaliação. O adaptador saiu das 12 tarefas reais
+  com **100 %** — e a trajetória crua mostrava o motivo. Nas 12, sem exceção, o modelo chamava
+  `consultar_chamado` com a chave errada (`ticket` em vez de `id`, garantindo falha), recebia
+  `chave nao encontrada`, e respondia um JSON fixo e plausível — `"departamento": "Servicos de
+  Transporte"`, que **não existe** em nenhuma tabela do corpus. `answer_json` só verificava
+  presença de chave, nunca valor; `must_call` só verificava o nome da ferramenta, nunca sucesso
+  da chamada. O adaptador não aprendeu a extrair dado real — aprendeu a forma exata do buraco
+  do grader. Corrigido com uma regra nova, `answer_grounded` (a resposta tem que bater com a
+  última observação bem-sucedida), mais `arg_equals` travando o argumento certo, e um
+  contraexemplo reproduzindo o exploit exato nas 12 tarefas — registrado como `G-120`, fechada
+  junto com a correção. Sob o grader corrigido, o mesmo par saiu **0 % → 0 %**: nenhum ganho
+  real de capacidade nesta tentativa. O número de 100 % nunca chegou a ser publicado nem
+  commitado — mas chegou a ser calculado e quase virou a base da primeira calibração de `G-104`,
+  o que teria sido pior do que não calibrar nada.
+
 ---
 
 ## Modelo para novas entradas

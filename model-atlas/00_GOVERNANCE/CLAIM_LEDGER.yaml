@@ -18,11 +18,13 @@
   - RUN:20260817T141542Z
   - RUN:20260818T024251Z
   - RUN:20260818T024500Z
+  - RUN:20260819T133318Z
+  - RUN:20260819T135303Z
   falsifiers:
   - o grader aceita alguma trajetoria declarada como errada (F1)
   - o grader rejeita a trajetoria de referencia de alguma tarefa (F2)
   owner: engineering
-  last_reviewed: '2026-08-18'
+  last_reviewed: '2026-08-19'
 - id: C-102
   statement: O escore agregado do BR-Agent-Bench separa um respondente correto de um respondente degenerado
     por margem maior que 0.20.
@@ -43,10 +45,12 @@
   - RUN:20260817T141542Z
   - RUN:20260818T024251Z
   - RUN:20260818T024500Z
+  - RUN:20260819T133318Z
+  - RUN:20260819T135303Z
   falsifiers:
   - margem entre oraculo e melhor sonda degenerada abaixo de 0.20 (F3)
   owner: research
-  last_reviewed: '2026-08-18'
+  last_reviewed: '2026-08-19'
   note: 'Falsificador F3 da PROBLEM_CHARTER. Se disparar, nenhum escore agregado pode ser apresentado
     como decisao. | F3 disparado: margem agregada 0.0625 abaixo do limiar declarado (ver CE-101)'
 - id: C-103
@@ -68,11 +72,13 @@
   - RUN:20260817T141542Z
   - RUN:20260818T024251Z
   - RUN:20260818T024500Z
+  - RUN:20260819T133318Z
+  - RUN:20260819T135303Z
   falsifiers:
   - alguma tarefa declara regra que nenhum grader implementa (F5)
   - alguma capacidade tem menos de oito tarefas (F5)
   owner: engineering
-  last_reviewed: '2026-08-18'
+  last_reviewed: '2026-08-19'
 - id: C-104
   statement: Todo modo de falha declarado no corpus e disparado por ao menos uma sonda de calibracao,
     portanto e detectavel quando acontece.
@@ -92,10 +98,12 @@
   - RUN:20260817T141542Z
   - RUN:20260818T024251Z
   - RUN:20260818T024500Z
+  - RUN:20260819T133318Z
+  - RUN:20260819T135303Z
   falsifiers:
   - algum modo declarado nunca aparece em nenhuma execucao de sonda (F6)
   owner: engineering
-  last_reviewed: '2026-08-18'
+  last_reviewed: '2026-08-19'
 - id: C-105
   statement: 'A suite e deterministica: mesma entrada produz os mesmos vereditos, sem fonte de aleatoriedade
     no caminho principal.'
@@ -115,10 +123,12 @@
   - RUN:20260817T141542Z
   - RUN:20260818T024251Z
   - RUN:20260818T024500Z
+  - RUN:20260819T133318Z
+  - RUN:20260819T135303Z
   falsifiers:
   - duas execucoes da mesma suite divergem em qualquer veredicto (F4)
   owner: engineering
-  last_reviewed: '2026-08-18'
+  last_reviewed: '2026-08-19'
 - id: C-106
   statement: Modelos de 0.5B a 3B cabem em 16 GB de RAM sem GPU em quantizacao de quatro a oito bits,
     considerando apenas pesos residentes.
@@ -209,3 +219,28 @@
   note: Nao avaliavel neste ciclo. Sem capacidade medida nao existe deficit, e sem deficit nao existe
     CSS. O motor esta implementado e exercitado sob teste com fingerprint sintetico, para nao repetir
     o G-014 do Silicon Atlas.
+- id: C-111
+  statement: Um fine-tune LoRA pequeno (80 exemplos sinteticos, 1 epoca) em smollm2-360m-instruct nao
+    produz ganho medido em structured_output, mesmo com dataset desenhado para ensinar a habilidade geral
+    (dominios ausentes do corpus de avaliacao).
+  status: CONJECTURE
+  assumptions:
+  - A-103
+  - A-107
+  evidence:
+  - RUN:eval_360m_base_v2
+  - RUN:eval_360m_tuned_v2
+  falsifiers:
+  - o mesmo dataset e receita em um modelo maior (smollm3-3b, se a RAM permitir) produzir ganho
+  - um dataset maior ou mais epocas no mesmo modelo pequeno produzir ganho
+  - um segundo caso independente de baixa tratabilidade aparente em structured_output
+  owner: research
+  last_reviewed: '2026-08-19'
+  note: 'CONFUNDIDO por desenho, nao so por resultado: 360M e 80 exemplos/1 epoca foram escolhas forcadas
+    por limite de RAM (LoRA em smollm3-3b nao completou nem 1 passo sem esgotar a memoria), nao um teste
+    adequadamente dimensionado da tratabilidade real. Primeiro (1/3) caso de G-104, e o mais fraco possivel:
+    um resultado nulo aqui nao diz se structured_output e pouco tratavel ou se o experimento era pequeno
+    demais. NAO usar para ajustar o prior tractability=0.90 em capability_priors.v1.json — fazer isso
+    seria reponderar o instrumento por um unico caso confundido, o erro que CE-001 do Silicon Atlas ja
+    ensinou a nao repetir. Publicado so depois de corrigir G-120: a primeira leitura (100%) era exploit
+    de grader, nao capacidade.'

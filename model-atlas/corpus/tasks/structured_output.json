@@ -33,11 +33,24 @@
           "prioridade"
         ]
       },
-      "max_steps": 4
+      "max_steps": 4,
+      "arg_equals": {
+        "consultar_chamado": {
+          "id": "7000"
+        }
+      },
+      "answer_grounded": {
+        "tool": "consultar_chamado",
+        "fields": {
+          "departamento": "departamento",
+          "prioridade": "prioridade"
+        }
+      }
     },
     "failure_modes": [
       "FAIL_FORMAT",
-      "FAIL_TOOL_SELECTION"
+      "FAIL_TOOL_SELECTION",
+      "FAIL_HALLUCINATION"
     ],
     "gold": [
       {
@@ -93,6 +106,25 @@
             "text": "{\"ticket\": \"7000\", \"departamento\": \"financeiro\"}"
           }
         ]
+      },
+      {
+        "label": "chamou com argumento errado (chave trocada) e alucinou resposta plausivel",
+        "expect_failure": "FAIL_HALLUCINATION",
+        "steps": [
+          {
+            "kind": "call",
+            "tool": "consultar_chamado",
+            "args": {
+              "ticket": "7000"
+            },
+            "observation": null,
+            "error": "chave nao encontrada: "
+          },
+          {
+            "kind": "answer",
+            "text": "{\"ticket\": \"7000\", \"departamento\": \"Servicos de Transporte\", \"prioridade\": \"Modalidade 1\"}"
+          }
+        ]
       }
     ],
     "language": "pt-BR"
@@ -131,11 +163,24 @@
           "prioridade"
         ]
       },
-      "max_steps": 4
+      "max_steps": 4,
+      "arg_equals": {
+        "consultar_chamado": {
+          "id": "7001"
+        }
+      },
+      "answer_grounded": {
+        "tool": "consultar_chamado",
+        "fields": {
+          "departamento": "departamento",
+          "prioridade": "prioridade"
+        }
+      }
     },
     "failure_modes": [
       "FAIL_FORMAT",
-      "FAIL_TOOL_SELECTION"
+      "FAIL_TOOL_SELECTION",
+      "FAIL_HALLUCINATION"
     ],
     "gold": [
       {
@@ -191,6 +236,25 @@
             "text": "{\"ticket\": \"7001\", \"departamento\": \"compras\"}"
           }
         ]
+      },
+      {
+        "label": "chamou com argumento errado (chave trocada) e alucinou resposta plausivel",
+        "expect_failure": "FAIL_HALLUCINATION",
+        "steps": [
+          {
+            "kind": "call",
+            "tool": "consultar_chamado",
+            "args": {
+              "ticket": "7001"
+            },
+            "observation": null,
+            "error": "chave nao encontrada: "
+          },
+          {
+            "kind": "answer",
+            "text": "{\"ticket\": \"7001\", \"departamento\": \"Servicos de Transporte\", \"prioridade\": \"Modalidade 1\"}"
+          }
+        ]
       }
     ],
     "language": "pt-BR"
@@ -229,11 +293,24 @@
           "prioridade"
         ]
       },
-      "max_steps": 4
+      "max_steps": 4,
+      "arg_equals": {
+        "consultar_chamado": {
+          "id": "7002"
+        }
+      },
+      "answer_grounded": {
+        "tool": "consultar_chamado",
+        "fields": {
+          "departamento": "departamento",
+          "prioridade": "prioridade"
+        }
+      }
     },
     "failure_modes": [
       "FAIL_FORMAT",
-      "FAIL_TOOL_SELECTION"
+      "FAIL_TOOL_SELECTION",
+      "FAIL_HALLUCINATION"
     ],
     "gold": [
       {
@@ -289,6 +366,25 @@
             "text": "{\"ticket\": \"7002\", \"departamento\": \"logistica\"}"
           }
         ]
+      },
+      {
+        "label": "chamou com argumento errado (chave trocada) e alucinou resposta plausivel",
+        "expect_failure": "FAIL_HALLUCINATION",
+        "steps": [
+          {
+            "kind": "call",
+            "tool": "consultar_chamado",
+            "args": {
+              "ticket": "7002"
+            },
+            "observation": null,
+            "error": "chave nao encontrada: "
+          },
+          {
+            "kind": "answer",
+            "text": "{\"ticket\": \"7002\", \"departamento\": \"Servicos de Transporte\", \"prioridade\": \"Modalidade 1\"}"
+          }
+        ]
       }
     ],
     "language": "pt-BR"
@@ -327,11 +423,24 @@
           "prioridade"
         ]
       },
-      "max_steps": 4
+      "max_steps": 4,
+      "arg_equals": {
+        "consultar_chamado": {
+          "id": "7003"
+        }
+      },
+      "answer_grounded": {
+        "tool": "consultar_chamado",
+        "fields": {
+          "departamento": "departamento",
+          "prioridade": "prioridade"
+        }
+      }
     },
     "failure_modes": [
       "FAIL_FORMAT",
-      "FAIL_TOOL_SELECTION"
+      "FAIL_TOOL_SELECTION",
+      "FAIL_HALLUCINATION"
     ],
     "gold": [
       {
@@ -387,6 +496,25 @@
             "text": "{\"ticket\": \"7003\", \"departamento\": \"juridico\"}"
           }
         ]
+      },
+      {
+        "label": "chamou com argumento errado (chave trocada) e alucinou resposta plausivel",
+        "expect_failure": "FAIL_HALLUCINATION",
+        "steps": [
+          {
+            "kind": "call",
+            "tool": "consultar_chamado",
+            "args": {
+              "ticket": "7003"
+            },
+            "observation": null,
+            "error": "chave nao encontrada: "
+          },
+          {
+            "kind": "answer",
+            "text": "{\"ticket\": \"7003\", \"departamento\": \"Servicos de Transporte\", \"prioridade\": \"Modalidade 1\"}"
+          }
+        ]
       }
     ],
     "language": "pt-BR"
@@ -425,11 +553,24 @@
           "prioridade"
         ]
       },
-      "max_steps": 4
+      "max_steps": 4,
+      "arg_equals": {
+        "consultar_chamado": {
+          "id": "7004"
+        }
+      },
+      "answer_grounded": {
+        "tool": "consultar_chamado",
+        "fields": {
+          "departamento": "departamento",
+          "prioridade": "prioridade"
+        }
+      }
     },
     "failure_modes": [
       "FAIL_FORMAT",
-      "FAIL_TOOL_SELECTION"
+      "FAIL_TOOL_SELECTION",
+      "FAIL_HALLUCINATION"
     ],
     "gold": [
       {
@@ -485,6 +626,25 @@
             "text": "{\"ticket\": \"7004\", \"departamento\": \"suporte\"}"
           }
         ]
+      },
+      {
+        "label": "chamou com argumento errado (chave trocada) e alucinou resposta plausivel",
+        "expect_failure": "FAIL_HALLUCINATION",
+        "steps": [
+          {
+            "kind": "call",
+            "tool": "consultar_chamado",
+            "args": {
+              "ticket": "7004"
+            },
+            "observation": null,
+            "error": "chave nao encontrada: "
+          },
+          {
+            "kind": "answer",
+            "text": "{\"ticket\": \"7004\", \"departamento\": \"Servicos de Transporte\", \"prioridade\": \"Modalidade 1\"}"
+          }
+        ]
       }
     ],
     "language": "pt-BR"
@@ -523,11 +683,24 @@
           "prioridade"
         ]
       },
-      "max_steps": 4
+      "max_steps": 4,
+      "arg_equals": {
+        "consultar_chamado": {
+          "id": "7005"
+        }
+      },
+      "answer_grounded": {
+        "tool": "consultar_chamado",
+        "fields": {
+          "departamento": "departamento",
+          "prioridade": "prioridade"
+        }
+      }
     },
     "failure_modes": [
       "FAIL_FORMAT",
-      "FAIL_TOOL_SELECTION"
+      "FAIL_TOOL_SELECTION",
+      "FAIL_HALLUCINATION"
     ],
     "gold": [
       {
@@ -583,6 +756,25 @@
             "text": "{\"ticket\": \"7005\", \"departamento\": \"rh\"}"
           }
         ]
+      },
+      {
+        "label": "chamou com argumento errado (chave trocada) e alucinou resposta plausivel",
+        "expect_failure": "FAIL_HALLUCINATION",
+        "steps": [
+          {
+            "kind": "call",
+            "tool": "consultar_chamado",
+            "args": {
+              "ticket": "7005"
+            },
+            "observation": null,
+            "error": "chave nao encontrada: "
+          },
+          {
+            "kind": "answer",
+            "text": "{\"ticket\": \"7005\", \"departamento\": \"Servicos de Transporte\", \"prioridade\": \"Modalidade 1\"}"
+          }
+        ]
       }
     ],
     "language": "pt-BR"
@@ -621,11 +813,24 @@
           "prioridade"
         ]
       },
-      "max_steps": 4
+      "max_steps": 4,
+      "arg_equals": {
+        "consultar_chamado": {
+          "id": "7006"
+        }
+      },
+      "answer_grounded": {
+        "tool": "consultar_chamado",
+        "fields": {
+          "departamento": "departamento",
+          "prioridade": "prioridade"
+        }
+      }
     },
     "failure_modes": [
       "FAIL_FORMAT",
-      "FAIL_TOOL_SELECTION"
+      "FAIL_TOOL_SELECTION",
+      "FAIL_HALLUCINATION"
     ],
     "gold": [
       {
@@ -681,6 +886,25 @@
             "text": "{\"ticket\": \"7006\", \"departamento\": \"financeiro\"}"
           }
         ]
+      },
+      {
+        "label": "chamou com argumento errado (chave trocada) e alucinou resposta plausivel",
+        "expect_failure": "FAIL_HALLUCINATION",
+        "steps": [
+          {
+            "kind": "call",
+            "tool": "consultar_chamado",
+            "args": {
+              "ticket": "7006"
+            },
+            "observation": null,
+            "error": "chave nao encontrada: "
+          },
+          {
+            "kind": "answer",
+            "text": "{\"ticket\": \"7006\", \"departamento\": \"Servicos de Transporte\", \"prioridade\": \"Modalidade 1\"}"
+          }
+        ]
       }
     ],
     "language": "pt-BR"
@@ -719,11 +943,24 @@
           "prioridade"
         ]
       },
-      "max_steps": 4
+      "max_steps": 4,
+      "arg_equals": {
+        "consultar_chamado": {
+          "id": "7007"
+        }
+      },
+      "answer_grounded": {
+        "tool": "consultar_chamado",
+        "fields": {
+          "departamento": "departamento",
+          "prioridade": "prioridade"
+        }
+      }
     },
     "failure_modes": [
       "FAIL_FORMAT",
-      "FAIL_TOOL_SELECTION"
+      "FAIL_TOOL_SELECTION",
+      "FAIL_HALLUCINATION"
     ],
     "gold": [
       {
@@ -779,6 +1016,25 @@
             "text": "{\"ticket\": \"7007\", \"departamento\": \"compras\"}"
           }
         ]
+      },
+      {
+        "label": "chamou com argumento errado (chave trocada) e alucinou resposta plausivel",
+        "expect_failure": "FAIL_HALLUCINATION",
+        "steps": [
+          {
+            "kind": "call",
+            "tool": "consultar_chamado",
+            "args": {
+              "ticket": "7007"
+            },
+            "observation": null,
+            "error": "chave nao encontrada: "
+          },
+          {
+            "kind": "answer",
+            "text": "{\"ticket\": \"7007\", \"departamento\": \"Servicos de Transporte\", \"prioridade\": \"Modalidade 1\"}"
+          }
+        ]
       }
     ],
     "language": "pt-BR"
@@ -817,11 +1073,24 @@
           "prioridade"
         ]
       },
-      "max_steps": 4
+      "max_steps": 4,
+      "arg_equals": {
+        "consultar_chamado": {
+          "id": "7008"
+        }
+      },
+      "answer_grounded": {
+        "tool": "consultar_chamado",
+        "fields": {
+          "departamento": "departamento",
+          "prioridade": "prioridade"
+        }
+      }
     },
     "failure_modes": [
       "FAIL_FORMAT",
-      "FAIL_TOOL_SELECTION"
+      "FAIL_TOOL_SELECTION",
+      "FAIL_HALLUCINATION"
     ],
     "gold": [
       {
@@ -877,6 +1146,25 @@
             "text": "{\"ticket\": \"7008\", \"departamento\": \"logistica\"}"
           }
         ]
+      },
+      {
+        "label": "chamou com argumento errado (chave trocada) e alucinou resposta plausivel",
+        "expect_failure": "FAIL_HALLUCINATION",
+        "steps": [
+          {
+            "kind": "call",
+            "tool": "consultar_chamado",
+            "args": {
+              "ticket": "7008"
+            },
+            "observation": null,
+            "error": "chave nao encontrada: "
+          },
+          {
+            "kind": "answer",
+            "text": "{\"ticket\": \"7008\", \"departamento\": \"Servicos de Transporte\", \"prioridade\": \"Modalidade 1\"}"
+          }
+        ]
       }
     ],
     "language": "pt-BR"
@@ -915,11 +1203,24 @@
           "prioridade"
         ]
       },
-      "max_steps": 4
+      "max_steps": 4,
+      "arg_equals": {
+        "consultar_chamado": {
+          "id": "7009"
+        }
+      },
+      "answer_grounded": {
+        "tool": "consultar_chamado",
+        "fields": {
+          "departamento": "departamento",
+          "prioridade": "prioridade"
+        }
+      }
     },
     "failure_modes": [
       "FAIL_FORMAT",
-      "FAIL_TOOL_SELECTION"
+      "FAIL_TOOL_SELECTION",
+      "FAIL_HALLUCINATION"
     ],
     "gold": [
       {
@@ -975,6 +1276,25 @@
             "text": "{\"ticket\": \"7009\", \"departamento\": \"juridico\"}"
           }
         ]
+      },
+      {
+        "label": "chamou com argumento errado (chave trocada) e alucinou resposta plausivel",
+        "expect_failure": "FAIL_HALLUCINATION",
+        "steps": [
+          {
+            "kind": "call",
+            "tool": "consultar_chamado",
+            "args": {
+              "ticket": "7009"
+            },
+            "observation": null,
+            "error": "chave nao encontrada: "
+          },
+          {
+            "kind": "answer",
+            "text": "{\"ticket\": \"7009\", \"departamento\": \"Servicos de Transporte\", \"prioridade\": \"Modalidade 1\"}"
+          }
+        ]
       }
     ],
     "language": "pt-BR"
@@ -1013,11 +1333,24 @@
           "prioridade"
         ]
       },
-      "max_steps": 4
+      "max_steps": 4,
+      "arg_equals": {
+        "consultar_chamado": {
+          "id": "7010"
+        }
+      },
+      "answer_grounded": {
+        "tool": "consultar_chamado",
+        "fields": {
+          "departamento": "departamento",
+          "prioridade": "prioridade"
+        }
+      }
     },
     "failure_modes": [
       "FAIL_FORMAT",
-      "FAIL_TOOL_SELECTION"
+      "FAIL_TOOL_SELECTION",
+      "FAIL_HALLUCINATION"
     ],
     "gold": [
       {
@@ -1073,6 +1406,25 @@
             "text": "{\"ticket\": \"7010\", \"departamento\": \"suporte\"}"
           }
         ]
+      },
+      {
+        "label": "chamou com argumento errado (chave trocada) e alucinou resposta plausivel",
+        "expect_failure": "FAIL_HALLUCINATION",
+        "steps": [
+          {
+            "kind": "call",
+            "tool": "consultar_chamado",
+            "args": {
+              "ticket": "7010"
+            },
+            "observation": null,
+            "error": "chave nao encontrada: "
+          },
+          {
+            "kind": "answer",
+            "text": "{\"ticket\": \"7010\", \"departamento\": \"Servicos de Transporte\", \"prioridade\": \"Modalidade 1\"}"
+          }
+        ]
       }
     ],
     "language": "pt-BR"
@@ -1111,11 +1463,24 @@
           "prioridade"
         ]
       },
-      "max_steps": 4
+      "max_steps": 4,
+      "arg_equals": {
+        "consultar_chamado": {
+          "id": "7011"
+        }
+      },
+      "answer_grounded": {
+        "tool": "consultar_chamado",
+        "fields": {
+          "departamento": "departamento",
+          "prioridade": "prioridade"
+        }
+      }
     },
     "failure_modes": [
       "FAIL_FORMAT",
-      "FAIL_TOOL_SELECTION"
+      "FAIL_TOOL_SELECTION",
+      "FAIL_HALLUCINATION"
     ],
     "gold": [
       {
@@ -1169,6 +1534,25 @@
           {
             "kind": "answer",
             "text": "{\"ticket\": \"7011\", \"departamento\": \"rh\"}"
+          }
+        ]
+      },
+      {
+        "label": "chamou com argumento errado (chave trocada) e alucinou resposta plausivel",
+        "expect_failure": "FAIL_HALLUCINATION",
+        "steps": [
+          {
+            "kind": "call",
+            "tool": "consultar_chamado",
+            "args": {
+              "ticket": "7011"
+            },
+            "observation": null,
+            "error": "chave nao encontrada: "
+          },
+          {
+            "kind": "answer",
+            "text": "{\"ticket\": \"7011\", \"departamento\": \"Servicos de Transporte\", \"prioridade\": \"Modalidade 1\"}"
           }
         ]
       }

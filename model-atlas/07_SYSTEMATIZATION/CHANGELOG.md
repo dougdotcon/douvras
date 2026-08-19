@@ -7,6 +7,68 @@ artifact: CHANGELOG
 Registra mudanças de **código, corpus, priors e alegações**. Uma mudança de prior que altera
 uma recomendação é tão relevante quanto uma mudança de código, e por isso entra aqui.
 
+## [0.4.0] — 2026-08-19 — Primeiro caso de `G-104`: achado um exploit de grader antes de publicar
+
+Primeira tentativa de calibrar os priors do CSS (`G-104`): medir uma capacidade, construir
+dataset direcionado, fine-tunar, medir de novo. `structured_output`, LoRA em
+`smollm2-360m-instruct` (o único modelo do corpus que roda fine-tuning nesta máquina — ver
+"Feasibility de fine-tuning" abaixo).
+
+### Achado ao vivo: "0 % → 100 %" era exploit, não capacidade
+
+O adaptador saiu das 12 tarefas reais de `structured_output` com 100 %. Inspecionar a
+trajetória crua (não só o veredicto agregado) mostrou por quê: em todas as 12, sem exceção, o
+modelo chamava `consultar_chamado` com a chave errada (`ticket` em vez de `id`, garantindo
+falha), recebia erro, e respondia um JSON fixo e plausível — `"departamento": "Servicos de
+Transporte"`, valor que **não existe** em nenhuma tabela do corpus.
+
+O grader não pegava porque `answer_json` só verificava presença de chave (nunca valor) e
+`must_call` só verificava o nome da ferramenta usada (nunca se a chamada teve sucesso). Doze
+tarefas, doze respostas fabricadas, zero detecção.
+
+**Corrigido (`G-120`, fechada):**
+- regra nova `answer_grounded` — a resposta final tem que bater com a última observação
+  bem-sucedida da ferramenta, não só ter as chaves certas;
+- `arg_equals` adicionado às 12 tarefas, travando o argumento correto;
+- contraexemplo reproduzindo o exploit exato, verificado como rejeitado;
+- 5 testes novos em `test_graders_and_env.py` fixando o comportamento, incluindo um teste
+  que confirma que `answer_grounded` é opt-in (não afeta tarefas que não o declaram).
+
+Sob o grader corrigido, o mesmo par saiu **0 % → 0 %**: nenhum ganho real de capacidade nesta
+tentativa. `G-104` vai a **PARCIAL** (1/3 casos) com esse resultado — explicitamente marcado
+como fraco/confundido, não uma calibração limpa (ver razão abaixo). `C-111` registrada como
+`CONJECTURE`. O prior declarado (`tractability: 0.90`) **não foi alterado**: um caso confundido
+não é motivo para reponderar o instrumento.
+
+Nada disso chegou a ser publicado ou commitado antes da correção — mas o número chegou a ser
+calculado, e quase virou a base da primeira calibração de `G-104`. Documentado em
+`RETRACTIONS_AND_CORRECTIONS.md` como correção de percurso.
+
+### Feasibility de fine-tuning nesta máquina (achado à parte, vale para além de `G-104`)
+
+- **LoRA em `smollm3-3b` (3B) não é viável aqui**: nem um passo de gradiente completou sem
+  esgotar a RAM (venv 64-bit, 14 GB de RAM), mesmo com `gradient_checkpointing`. Confirma
+  empiricamente o que o documento de planejamento original só supunha.
+- **LoRA em `smollm2-360m-instruct` (360 M) é viável, mas lento**: ~800–850 s por passo de
+  gradiente em CPU pura. 80 exemplos, 1 época = 80 passos = **18h21min** de treino real.
+- Ambos os modelos pequenos alternativos do corpus (`tucano2-0.5b`, `qwen3.5-0.8b`) foram
+  descartados antes de tentar: o primeiro é modelo base sem instruction-tuning, o segundo tem
+  arquitetura `Qwen3_5ForConditionalGeneration`, não um LM causal padrão.
+
+### Infraestrutura nova
+
+- `.local/train_lora_structured_output.py` — script de treino LoRA, parametrizado por modelo/
+  dataset/saída, com checkpoint a cada passo e callback de progresso (`tqdm` não aparece em log
+  redirecionado — sem isso, uma execução de 18h fica sem nenhum sinal visível).
+- `.local/build_structured_output_dataset.py` — gera exemplos de treino em domínios ausentes
+  do corpus de avaliação (pedido/funcionário/produto/contrato, não "chamado"), no mesmo formato
+  exato do harness real (`CABECALHO`/`CONTRATO` de `backends.py`) — treino e avaliação têm que
+  falar o mesmo formato, ou uma diferença de formato se disfarça de capacidade.
+- `.local/eval_hf_model.py` — avalia modelo `transformers` (base ou base+adaptador LoRA) contra
+  o BR-Agent-Bench real, reusando `build_messages`/`parse_action`/`grade` do harness principal.
+  Salva trajetórias completas, não só o veredicto — foi inspecionando essas trajetórias que o
+  exploit apareceu.
+
 ## [0.3.3] — 2026-08-17 — `/think` fecha em 96/96: fecha `G-116` e `G-118`
 
 `G-118` (Smart App Control bloqueando `llama-server.exe`) foi decisão do usuário desativar a
