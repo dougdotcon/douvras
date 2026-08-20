@@ -1,6 +1,6 @@
 {
-  "run_id": "20260815T024441Z",
-  "generated_at": "2026-08-15T02:44:41+00:00",
+  "run_id": "20260820T015321Z",
+  "generated_at": "2026-08-20T01:53:21+00:00",
   "inputs": {
     "model_id": "llama-3-8b",
     "device_key": "h100-sxm",
@@ -1079,10 +1079,10 @@
     "model": "llama-3-8b",
     "device": "h100-sxm",
     "request": "prompt=2048 gen=512 B=1 ctx=2304",
-    "total_time_s": 2.989494924078723,
-    "decode_time_share": 0.9803185857600923,
-    "generated_tokens_per_second": 171.26638880572236,
-    "energy_per_generated_token_j": 6.621264148252484,
+    "total_time_s": 2.9894949240787154,
+    "decode_time_share": 0.9803185857600925,
+    "generated_tokens_per_second": 171.26638880572278,
+    "energy_per_generated_token_j": 6.621264148252467,
     "hotspots": {
       "gate_proj": 0.2446,
       "up_proj": 0.2446,
@@ -1101,8 +1101,8 @@
     "device": "h100-sxm",
     "workload": "decode B=1 T=2304 act=bf16",
     "weight_precision": "bf16",
-    "total_time_s": 0.005723940304902008,
-    "tokens_per_second": 174.70482687312366,
+    "total_time_s": 0.0057239403049019946,
+    "tokens_per_second": 174.70482687312406,
     "total_flops": 16235171328.0,
     "total_bytes": 15328121856.0,
     "weight_read_bytes_per_step": 15009857536.0,
@@ -1110,8 +1110,8 @@
     "kv_bytes": 302120960.0,
     "mean_arithmetic_intensity": 1.0591755128593883,
     "device_ridge_point": 92.30410447761194,
-    "memory_bound_share": 0.9991468969604774,
-    "energy_per_token_j": 6.490948305758877,
+    "memory_bound_share": 0.9991468969604778,
+    "energy_per_token_j": 6.490948305758862,
     "fits_in_device_memory": true,
     "memory_headroom": 0.7992434688,
     "hotspots_by_role": {
@@ -1138,8 +1138,8 @@
     "device": "h100-sxm",
     "workload": "prefill B=1 S=2048 act=bf16",
     "weight_precision": "bf16",
-    "total_time_s": 0.058837487968894486,
-    "tokens_per_second": 34807.74028086843,
+    "total_time_s": 0.05883748796889432,
+    "tokens_per_second": 34807.74028086852,
     "total_flops": 29710058503680.0,
     "total_bytes": 47558169600.0,
     "weight_read_bytes_per_step": 15026626560.0,
@@ -1147,8 +1147,8 @@
     "kv_bytes": 536870912.0,
     "mean_arithmetic_intensity": 624.7098816788778,
     "device_ridge_point": 253.1769722814499,
-    "memory_bound_share": 0.15013435588682783,
-    "energy_per_token_j": 0.032578960623401536,
+    "memory_bound_share": 0.15013435588682855,
+    "energy_per_token_j": 0.032578960623401446,
     "fits_in_device_memory": true,
     "memory_headroom": 0.7992434688,
     "hotspots_by_role": {
@@ -1201,8 +1201,8 @@
     "weight_gb_before": 15.009857536,
     "weight_gb_after": 7.505195008,
     "memory_reduction": 0.5,
-    "time_ms_before": 5.723940304902008,
-    "time_ms_after": 2.92369309296171,
+    "time_ms_before": 5.723940304901994,
+    "time_ms_after": 2.9236930929617064,
     "speedup": 1.958,
     "quality_delta": "UNMEASURED (G-002)",
     "findings": [
@@ -1223,7 +1223,7 @@
       },
       {
         "name": "quant.sensitivity.speedup",
-        "value": 1.9577774146956168,
+        "value": 1.9577774146956146,
         "unit": "x sobre baseline",
         "status": "CONDITIONAL_RESULT",
         "assumptions": [
@@ -1260,19 +1260,19 @@
       "cost_share": 0.2446,
       "recommended_precision": "int4",
       "weight_elems": 1879048192,
-      "LHS": 0.5868,
+      "LHS": 0.5832,
       "scorecard": {
         "name": "gate_proj",
         "kind": "LHS",
-        "score": 0.5868,
+        "score": 0.5832,
         "status": "ASSUMPTION",
         "factors": {
           "E": {
-            "value": 0.4778,
+            "value": 0.46,
             "weight": 0.2,
-            "contribution": 0.0956,
+            "contribution": 0.092,
             "status": "COMPUTATIONAL_EVIDENCE",
-            "note": "preservado em 1/2 transicoes de versao; presente em 4/9 modelos do corpus"
+            "note": "preservado em 1/2 transicoes de versao; presente em 4/10 modelos do corpus"
           },
           "F": {
             "value": 0.2446,
@@ -1326,19 +1326,19 @@
       "cost_share": 0.2446,
       "recommended_precision": "int4",
       "weight_elems": 1879048192,
-      "LHS": 0.5868,
+      "LHS": 0.5832,
       "scorecard": {
         "name": "up_proj",
         "kind": "LHS",
-        "score": 0.5868,
+        "score": 0.5832,
         "status": "ASSUMPTION",
         "factors": {
           "E": {
-            "value": 0.4778,
+            "value": 0.46,
             "weight": 0.2,
-            "contribution": 0.0956,
+            "contribution": 0.092,
             "status": "COMPUTATIONAL_EVIDENCE",
-            "note": "preservado em 1/2 transicoes de versao; presente em 4/9 modelos do corpus"
+            "note": "preservado em 1/2 transicoes de versao; presente em 4/10 modelos do corpus"
           },
           "F": {
             "value": 0.2446,
@@ -1392,19 +1392,19 @@
       "cost_share": 0.0699,
       "recommended_precision": "int8",
       "weight_elems": 536870912,
-      "LHS": 0.5801,
+      "LHS": 0.5765,
       "scorecard": {
         "name": "q_proj",
         "kind": "LHS",
-        "score": 0.5801,
+        "score": 0.5765,
         "status": "ASSUMPTION",
         "factors": {
           "E": {
-            "value": 0.4778,
+            "value": 0.46,
             "weight": 0.2,
-            "contribution": 0.0956,
+            "contribution": 0.092,
             "status": "COMPUTATIONAL_EVIDENCE",
-            "note": "preservado em 1/2 transicoes de versao; presente em 4/9 modelos do corpus"
+            "note": "preservado em 1/2 transicoes de versao; presente em 4/10 modelos do corpus"
           },
           "F": {
             "value": 0.0699,
@@ -1458,19 +1458,19 @@
       "cost_share": 0.0175,
       "recommended_precision": "int8",
       "weight_elems": 134217728,
-      "LHS": 0.5722,
+      "LHS": 0.5687,
       "scorecard": {
         "name": "v_proj",
         "kind": "LHS",
-        "score": 0.5722,
+        "score": 0.5687,
         "status": "ASSUMPTION",
         "factors": {
           "E": {
-            "value": 0.4778,
+            "value": 0.46,
             "weight": 0.2,
-            "contribution": 0.0956,
+            "contribution": 0.092,
             "status": "COMPUTATIONAL_EVIDENCE",
-            "note": "preservado em 1/2 transicoes de versao; presente em 4/9 modelos do corpus"
+            "note": "preservado em 1/2 transicoes de versao; presente em 4/10 modelos do corpus"
           },
           "F": {
             "value": 0.0175,
@@ -1524,19 +1524,19 @@
       "cost_share": 0.2446,
       "recommended_precision": "int4",
       "weight_elems": 1879048192,
-      "LHS": 0.5718,
+      "LHS": 0.5682,
       "scorecard": {
         "name": "down_proj",
         "kind": "LHS",
-        "score": 0.5718,
+        "score": 0.5682,
         "status": "ASSUMPTION",
         "factors": {
           "E": {
-            "value": 0.4778,
+            "value": 0.46,
             "weight": 0.2,
-            "contribution": 0.0956,
+            "contribution": 0.092,
             "status": "COMPUTATIONAL_EVIDENCE",
-            "note": "preservado em 1/2 transicoes de versao; presente em 4/9 modelos do corpus"
+            "note": "preservado em 1/2 transicoes de versao; presente em 4/10 modelos do corpus"
           },
           "F": {
             "value": 0.2446,
@@ -1590,19 +1590,19 @@
       "cost_share": 0.0175,
       "recommended_precision": "int8",
       "weight_elems": 134217728,
-      "LHS": 0.5647,
+      "LHS": 0.5612,
       "scorecard": {
         "name": "k_proj",
         "kind": "LHS",
-        "score": 0.5647,
+        "score": 0.5612,
         "status": "ASSUMPTION",
         "factors": {
           "E": {
-            "value": 0.4778,
+            "value": 0.46,
             "weight": 0.2,
-            "contribution": 0.0956,
+            "contribution": 0.092,
             "status": "COMPUTATIONAL_EVIDENCE",
-            "note": "preservado em 1/2 transicoes de versao; presente em 4/9 modelos do corpus"
+            "note": "preservado em 1/2 transicoes de versao; presente em 4/10 modelos do corpus"
           },
           "F": {
             "value": 0.0175,
@@ -1656,19 +1656,19 @@
       "cost_share": 0.0699,
       "recommended_precision": "int4",
       "weight_elems": 536870912,
-      "LHS": 0.5426,
+      "LHS": 0.539,
       "scorecard": {
         "name": "o_proj",
         "kind": "LHS",
-        "score": 0.5426,
+        "score": 0.539,
         "status": "ASSUMPTION",
         "factors": {
           "E": {
-            "value": 0.4778,
+            "value": 0.46,
             "weight": 0.2,
-            "contribution": 0.0956,
+            "contribution": 0.092,
             "status": "COMPUTATIONAL_EVIDENCE",
-            "note": "preservado em 1/2 transicoes de versao; presente em 4/9 modelos do corpus"
+            "note": "preservado em 1/2 transicoes de versao; presente em 4/10 modelos do corpus"
           },
           "F": {
             "value": 0.0699,
@@ -1722,19 +1722,19 @@
       "cost_share": 0.0673,
       "recommended_precision": "int8",
       "weight_elems": 525336576,
-      "LHS": 0.4902,
+      "LHS": 0.4858,
       "scorecard": {
         "name": "lm_head",
         "kind": "LHS",
-        "score": 0.4902,
+        "score": 0.4858,
         "status": "ASSUMPTION",
         "factors": {
           "E": {
-            "value": 0.5222,
+            "value": 0.5,
             "weight": 0.2,
-            "contribution": 0.1044,
+            "contribution": 0.1,
             "status": "COMPUTATIONAL_EVIDENCE",
-            "note": "preservado em 1/2 transicoes de versao; presente em 5/9 modelos do corpus"
+            "note": "preservado em 1/2 transicoes de versao; presente em 5/10 modelos do corpus"
           },
           "F": {
             "value": 0.0673,
@@ -1788,19 +1788,19 @@
       "cost_share": 0.0193,
       "recommended_precision": "bf16",
       "weight_elems": 0,
-      "LHS": 0.445,
+      "LHS": 0.4414,
       "scorecard": {
         "name": "kv_read",
         "kind": "LHS",
-        "score": 0.445,
+        "score": 0.4414,
         "status": "MODEL",
         "factors": {
           "E": {
-            "value": 0.4778,
+            "value": 0.46,
             "weight": 0.2,
-            "contribution": 0.0956,
+            "contribution": 0.092,
             "status": "COMPUTATIONAL_EVIDENCE",
-            "note": "preservado em 1/2 transicoes de versao; presente em 4/9 modelos do corpus"
+            "note": "preservado em 1/2 transicoes de versao; presente em 4/10 modelos do corpus"
           },
           "F": {
             "value": 0.0193,
@@ -1869,49 +1869,49 @@
             "role": "gate_proj",
             "share": 0.2446,
             "precision": "int4",
-            "reason": "regular e quantizavel, porem E=0.48 < 0.6: prototipar antes de fixar"
+            "reason": "regular e quantizavel, porem E=0.46 < 0.6: prototipar antes de fixar"
           },
           {
             "role": "up_proj",
             "share": 0.2446,
             "precision": "int4",
-            "reason": "regular e quantizavel, porem E=0.48 < 0.6: prototipar antes de fixar"
+            "reason": "regular e quantizavel, porem E=0.46 < 0.6: prototipar antes de fixar"
           },
           {
             "role": "down_proj",
             "share": 0.2446,
             "precision": "int4",
-            "reason": "regular e quantizavel, porem E=0.48 < 0.6: prototipar antes de fixar"
+            "reason": "regular e quantizavel, porem E=0.46 < 0.6: prototipar antes de fixar"
           },
           {
             "role": "q_proj",
             "share": 0.0699,
             "precision": "int8",
-            "reason": "regular e quantizavel, porem E=0.48 < 0.6: prototipar antes de fixar"
+            "reason": "regular e quantizavel, porem E=0.46 < 0.6: prototipar antes de fixar"
           },
           {
             "role": "o_proj",
             "share": 0.0699,
             "precision": "int4",
-            "reason": "regular e quantizavel, porem LHS=0.54 < 0.55; E=0.48 < 0.6: prototipar antes de fixar"
+            "reason": "regular e quantizavel, porem LHS=0.54 < 0.55; E=0.46 < 0.6: prototipar antes de fixar"
           },
           {
             "role": "lm_head",
             "share": 0.0673,
             "precision": "int8",
-            "reason": "regular e quantizavel, porem LHS=0.49 < 0.55; E=0.52 < 0.6: prototipar antes de fixar"
+            "reason": "regular e quantizavel, porem LHS=0.49 < 0.55; E=0.50 < 0.6: prototipar antes de fixar"
           },
           {
             "role": "v_proj",
             "share": 0.0175,
             "precision": "int8",
-            "reason": "regular e quantizavel, porem E=0.48 < 0.6: prototipar antes de fixar"
+            "reason": "regular e quantizavel, porem E=0.46 < 0.6: prototipar antes de fixar"
           },
           {
             "role": "k_proj",
             "share": 0.0175,
             "precision": "int8",
-            "reason": "regular e quantizavel, porem E=0.48 < 0.6: prototipar antes de fixar"
+            "reason": "regular e quantizavel, porem E=0.46 < 0.6: prototipar antes de fixar"
           }
         ]
       },
@@ -1923,7 +1923,7 @@
             "role": "kv_read",
             "share": 0.0193,
             "precision": "bf16",
-            "reason": "LHS=0.44 < 0.55; E=0.48 < 0.6; Q=0.00 < 0.6"
+            "reason": "LHS=0.44 < 0.55; E=0.46 < 0.6; Q=0.00 < 0.6"
           }
         ]
       }
@@ -2046,7 +2046,7 @@
     "decidable": true,
     "discriminates": false,
     "score_spread": 0.14179,
-    "noise_band": 0.02823,
+    "noise_band": 0.02808,
     "margin": 0.0067,
     "inert_weight": 0.35,
     "contenders": [
@@ -2064,7 +2064,7 @@
       "Q",
       "V"
     ],
-    "diagnosis": "top-1 estavel, mas a margem sobre o concorrente (0.0067) nao supera o ruido dos pesos (0.0282): a ordem pode ser artefato",
+    "diagnosis": "top-1 estavel, mas a margem sobre o concorrente (0.0067) nao supera o ruido dos pesos (0.0281): a ordem pode ser artefato",
     "winners": {
       "gate_proj": 1922,
       "q_proj": 78
@@ -2074,17 +2074,17 @@
   "falsifiers": {
     "F1": {
       "criterio": "nenhum padrao com cobertura >= 0.80 entre versoes da familia",
-      "observado": "estabilidade exata entre versoes = 0.50; alcance cross-familia do melhor padrao = 0.33",
+      "observado": "estabilidade exata entre versoes = 0.50; alcance cross-familia do melhor padrao = 0.30",
       "disparado": true
     },
     "F2": {
       "criterio": "o padrao mais custoso muda de identidade entre versoes",
-      "observado": "bloco mais custoso 'mlp' (papel gate_proj, 24.5% do custo): E = 0.48",
+      "observado": "bloco mais custoso 'mlp' (papel gate_proj, 24.5% do custo): E = 0.46",
       "disparado": true
     },
     "F3": {
       "criterio": "top-1 do ranking troca sob perturbacao de +-20% dos pesos, ou vence por margem menor que o ruido (criterio reforcado apos CE-001)",
-      "observado": "estabilidade do top-1 = 0.961 (limite 0.95); margem = 0.0067 contra ruido 0.0282",
+      "observado": "estabilidade do top-1 = 0.961 (limite 0.95); margem = 0.0067 contra ruido 0.0281",
       "disparado": true
     },
     "F4": {
@@ -2151,7 +2151,7 @@
       },
       {
         "name": "llama-3-8b.serving.decode_time_share",
-        "value": 0.9803185857600923,
+        "value": 0.9803185857600925,
         "unit": "fracao do tempo de requisicao",
         "status": "CONDITIONAL_RESULT",
         "assumptions": [
@@ -2167,7 +2167,7 @@
       },
       {
         "name": "llama-3-8b.serving.energy_per_token",
-        "value": 6.621264148252484,
+        "value": 6.621264148252467,
         "unit": "J/token gerado",
         "status": "CONDITIONAL_RESULT",
         "assumptions": [
@@ -2185,7 +2185,7 @@
       },
       {
         "name": "llama-3-8b.decode.tokens_per_s",
-        "value": 174.70482687312366,
+        "value": 174.70482687312406,
         "unit": "tok/s",
         "status": "CONDITIONAL_RESULT",
         "assumptions": [
@@ -2200,7 +2200,7 @@
       },
       {
         "name": "llama-3-8b.decode.memory_bound_share",
-        "value": 0.9991468969604774,
+        "value": 0.9991468969604778,
         "unit": "fracao do tempo",
         "status": "CONDITIONAL_RESULT",
         "assumptions": [
@@ -2230,7 +2230,7 @@
       },
       {
         "name": "llama-3-8b.decode.energy_per_token",
-        "value": 6.490948305758877,
+        "value": 6.490948305758862,
         "unit": "J/token",
         "status": "CONDITIONAL_RESULT",
         "assumptions": [
@@ -2262,7 +2262,7 @@
       },
       {
         "name": "quant.sensitivity.speedup",
-        "value": 1.9577774146956168,
+        "value": 1.9577774146956146,
         "unit": "x sobre baseline",
         "status": "CONDITIONAL_RESULT",
         "assumptions": [
@@ -2291,7 +2291,7 @@
       },
       {
         "name": "quant.reachable_cost_share.int4",
-        "value": 0.805212865719834,
+        "value": 0.805212865719836,
         "unit": "fracao do tempo",
         "status": "CONDITIONAL_RESULT",
         "assumptions": [
@@ -2436,7 +2436,7 @@
       },
       {
         "name": "SRS.llama-3-8b",
-        "value": 0.27572044076285307,
+        "value": 0.27572044076285324,
         "unit": "score SRS",
         "status": "ASSUMPTION",
         "assumptions": [
@@ -2551,7 +2551,7 @@
           "M.kv_read",
           "L.kv_read"
         ],
-        "note": "perturbacao +-20%, 2000 amostras; DECIDIVEL; top-1 estavel, mas a margem sobre o concorrente (0.0067) nao supera o ruido dos pesos (0.0282): a ordem pode ser artefato"
+        "note": "perturbacao +-20%, 2000 amostras; DECIDIVEL; top-1 estavel, mas a margem sobre o concorrente (0.0067) nao supera o ruido dos pesos (0.0281): a ordem pode ser artefato"
       },
       {
         "name": "stability.llama.exact",

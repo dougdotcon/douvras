@@ -10,7 +10,7 @@ Lacuna aberta não impede o ciclo — impede que o resultado seja promovido acim
 
 | Gap | Por que importa | Evidência necessária | Bloqueia | Status |
 |---|---|---|---|---|
-| G-001 | A IR é derivada de config, não traçada do modelo real; operador ausente invalida o perfil | `torch.export`/ONNX de 1 modelo por família, diff contra a IR | C-007 promovido acima de `MODEL` | OPEN |
+| G-001 | A IR é derivada de config, não traçada do modelo real; operador ausente invalida o perfil | `torch.export`/ONNX de 1 modelo por família, diff contra a IR | C-007 promovido acima de `MODEL` | **PARCIAL** — auditoria de pesos reais (`ir.importers.audit_against_real_weights`) contra `smollm2-360m-instruct` (arquitetura `LlamaForCausalLM`, checkpoint real via `named_parameters()`): **291/291 nós casados, zero órfão, zero divergência de shape, contagem de parâmetros com 0,0000 % de erro**. Valida o caminho **denso genérico** do construtor (usado por `llama`/`mistral`/`qwen` no corpus) — não cobre os ramos especiais (4 normas + janela alternada do Gemma, MoE do Mixtral, QKV fundido do Phi), nem é o protocolo exato do ADR (FLOPs/bytes via `torch.export`, que cobriria também operadores sem peso como RoPE/softmax). Faltam: um modelo por ramo especial, e a divergência de FLOPs para operadores funcionais |
 | G-002 | Tolerância à quantização é prior, não medição; é 15 % do LHS e 10 % do SRS | Perplexidade/acurácia por camada em INT8/INT4/ternário | C-004, qualquer recomendação de precisão | OPEN |
 | G-003 | Roofline não foi calibrado contra latência real | Latência por camada em A100/H100, mesmos shapes | A-002, A-005 | OPEN |
 | G-004 | Energia por token é modelo analítico, não telemetria | Potência medida sob workload declarado | A-003, cálculo de break-even | OPEN |

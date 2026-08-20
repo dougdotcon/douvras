@@ -1,6 +1,6 @@
 {
-  "run_id": "20260815T024442Z",
-  "generated_at": "2026-08-15T02:44:42+00:00",
+  "run_id": "20260820T015323Z",
+  "generated_at": "2026-08-20T01:53:23+00:00",
   "inputs": {
     "model_id": "qwen2.5-14b",
     "device_key": "h100-sxm",
@@ -1393,10 +1393,10 @@
     "model": "qwen2.5-14b",
     "device": "h100-sxm",
     "request": "prompt=2048 gen=512 B=1 ctx=2304",
-    "total_time_s": 5.55070641841469,
+    "total_time_s": 5.550706418414678,
     "decode_time_share": 0.9803979860543101,
-    "generated_tokens_per_second": 92.24051164035978,
-    "energy_per_generated_token_j": 12.293947418910662,
+    "generated_tokens_per_second": 92.24051164035998,
+    "energy_per_generated_token_j": 12.293947418910633,
     "hotspots": {
       "gate_proj": 0.2381,
       "up_proj": 0.2381,
@@ -1415,8 +1415,8 @@
     "device": "h100-sxm",
     "workload": "decode B=1 T=2304 act=bf16",
     "weight_precision": "bf16",
-    "total_time_s": 0.010628713659750967,
-    "tokens_per_second": 94.08476246630114,
+    "total_time_s": 0.010628713659750943,
+    "tokens_per_second": 94.08476246630136,
     "total_flops": 30277931008.0,
     "total_bytes": 28462381056.0,
     "weight_read_bytes_per_step": 27982942208.0,
@@ -1424,8 +1424,8 @@
     "kv_bytes": 453181440.0,
     "mean_arithmetic_intensity": 1.0637877044941493,
     "device_ridge_point": 92.30410447761194,
-    "memory_bound_share": 0.9991385756378058,
-    "energy_per_token_j": 12.052961290157597,
+    "memory_bound_share": 0.9991385756378053,
+    "energy_per_token_j": 12.052961290157569,
     "fits_in_device_memory": true,
     "memory_headroom": 0.6307491584,
     "hotspots_by_role": {
@@ -1452,8 +1452,8 @@
     "device": "h100-sxm",
     "workload": "prefill B=1 S=2048 act=bf16",
     "weight_precision": "bf16",
-    "total_time_s": 0.10880502462219531,
-    "tokens_per_second": 18822.66014011108,
+    "total_time_s": 0.10880502462219496,
+    "tokens_per_second": 18822.660140111137,
     "total_flops": 56218749234176.0,
     "total_bytes": 81318320128.0,
     "weight_read_bytes_per_step": 28003903488.0,
@@ -1461,8 +1461,8 @@
     "kv_bytes": 805306368.0,
     "mean_arithmetic_intensity": 691.3417437261893,
     "device_ridge_point": 253.1769722814499,
-    "memory_bound_share": 0.1303201924901982,
-    "energy_per_token_j": 0.060246532188266345,
+    "memory_bound_share": 0.13032019249019863,
+    "energy_per_token_j": 0.06024653218826616,
     "fits_in_device_memory": true,
     "memory_headroom": 0.6307491584,
     "hotspots_by_role": {
@@ -1515,8 +1515,8 @@
     "weight_gb_before": 27.982942208,
     "weight_gb_after": 13.991967744,
     "memory_reduction": 0.5,
-    "time_ms_before": 10.628713659750968,
-    "time_ms_after": 5.408200800049475,
+    "time_ms_before": 10.628713659750943,
+    "time_ms_after": 5.4082008000494595,
     "speedup": 1.965,
     "quality_delta": "UNMEASURED (G-002)",
     "findings": [
@@ -1537,7 +1537,7 @@
       },
       {
         "name": "quant.sensitivity.speedup",
-        "value": 1.965295678306496,
+        "value": 1.9652956783064972,
         "unit": "x sobre baseline",
         "status": "CONDITIONAL_RESULT",
         "assumptions": [
@@ -1574,19 +1574,19 @@
       "cost_share": 0.2381,
       "recommended_precision": "int4",
       "weight_elems": 3397386240,
-      "LHS": 0.5168,
+      "LHS": 0.515,
       "scorecard": {
         "name": "gate_proj",
         "kind": "LHS",
-        "score": 0.5168,
+        "score": 0.515,
         "status": "OPEN_GAP",
         "factors": {
           "E": {
-            "value": 0.0889,
+            "value": 0.08,
             "weight": 0.2,
-            "contribution": 0.0178,
+            "contribution": 0.016,
             "status": "COMPUTATIONAL_EVIDENCE",
-            "note": "preservado em 0/1 transicoes de versao; presente em 2/9 modelos do corpus"
+            "note": "preservado em 0/1 transicoes de versao; presente em 2/10 modelos do corpus"
           },
           "F": {
             "value": 0.2381,
@@ -1640,19 +1640,19 @@
       "cost_share": 0.2381,
       "recommended_precision": "int4",
       "weight_elems": 3397386240,
-      "LHS": 0.5168,
+      "LHS": 0.515,
       "scorecard": {
         "name": "up_proj",
         "kind": "LHS",
-        "score": 0.5168,
+        "score": 0.515,
         "status": "OPEN_GAP",
         "factors": {
           "E": {
-            "value": 0.0889,
+            "value": 0.08,
             "weight": 0.2,
-            "contribution": 0.0178,
+            "contribution": 0.016,
             "status": "COMPUTATIONAL_EVIDENCE",
-            "note": "preservado em 0/1 transicoes de versao; presente em 2/9 modelos do corpus"
+            "note": "preservado em 0/1 transicoes de versao; presente em 2/10 modelos do corpus"
           },
           "F": {
             "value": 0.2381,
@@ -1706,19 +1706,19 @@
       "cost_share": 0.0882,
       "recommended_precision": "int8",
       "weight_elems": 1258536960,
-      "LHS": 0.5138,
+      "LHS": 0.512,
       "scorecard": {
         "name": "q_proj",
         "kind": "LHS",
-        "score": 0.5138,
+        "score": 0.512,
         "status": "OPEN_GAP",
         "factors": {
           "E": {
-            "value": 0.0889,
+            "value": 0.08,
             "weight": 0.2,
-            "contribution": 0.0178,
+            "contribution": 0.016,
             "status": "COMPUTATIONAL_EVIDENCE",
-            "note": "preservado em 0/1 transicoes de versao; presente em 2/9 modelos do corpus"
+            "note": "preservado em 0/1 transicoes de versao; presente em 2/10 modelos do corpus"
           },
           "F": {
             "value": 0.0882,
@@ -1772,19 +1772,19 @@
       "cost_share": 0.0177,
       "recommended_precision": "int8",
       "weight_elems": 251707392,
-      "LHS": 0.5032,
+      "LHS": 0.5014,
       "scorecard": {
         "name": "v_proj",
         "kind": "LHS",
-        "score": 0.5032,
+        "score": 0.5014,
         "status": "OPEN_GAP",
         "factors": {
           "E": {
-            "value": 0.0889,
+            "value": 0.08,
             "weight": 0.2,
-            "contribution": 0.0178,
+            "contribution": 0.016,
             "status": "COMPUTATIONAL_EVIDENCE",
-            "note": "preservado em 0/1 transicoes de versao; presente em 2/9 modelos do corpus"
+            "note": "preservado em 0/1 transicoes de versao; presente em 2/10 modelos do corpus"
           },
           "F": {
             "value": 0.0177,
@@ -1838,19 +1838,19 @@
       "cost_share": 0.2381,
       "recommended_precision": "int4",
       "weight_elems": 3397386240,
-      "LHS": 0.5018,
+      "LHS": 0.5,
       "scorecard": {
         "name": "down_proj",
         "kind": "LHS",
-        "score": 0.5018,
+        "score": 0.5,
         "status": "OPEN_GAP",
         "factors": {
           "E": {
-            "value": 0.0889,
+            "value": 0.08,
             "weight": 0.2,
-            "contribution": 0.0178,
+            "contribution": 0.016,
             "status": "COMPUTATIONAL_EVIDENCE",
-            "note": "preservado em 0/1 transicoes de versao; presente em 2/9 modelos do corpus"
+            "note": "preservado em 0/1 transicoes de versao; presente em 2/10 modelos do corpus"
           },
           "F": {
             "value": 0.2381,
@@ -1904,19 +1904,19 @@
       "cost_share": 0.0177,
       "recommended_precision": "int8",
       "weight_elems": 251707392,
-      "LHS": 0.4957,
+      "LHS": 0.4939,
       "scorecard": {
         "name": "k_proj",
         "kind": "LHS",
-        "score": 0.4957,
+        "score": 0.4939,
         "status": "OPEN_GAP",
         "factors": {
           "E": {
-            "value": 0.0889,
+            "value": 0.08,
             "weight": 0.2,
-            "contribution": 0.0178,
+            "contribution": 0.016,
             "status": "COMPUTATIONAL_EVIDENCE",
-            "note": "preservado em 0/1 transicoes de versao; presente em 2/9 modelos do corpus"
+            "note": "preservado em 0/1 transicoes de versao; presente em 2/10 modelos do corpus"
           },
           "F": {
             "value": 0.0177,
@@ -1970,19 +1970,19 @@
       "cost_share": 0.0882,
       "recommended_precision": "int4",
       "weight_elems": 1258291200,
-      "LHS": 0.4763,
+      "LHS": 0.4745,
       "scorecard": {
         "name": "o_proj",
         "kind": "LHS",
-        "score": 0.4763,
+        "score": 0.4745,
         "status": "OPEN_GAP",
         "factors": {
           "E": {
-            "value": 0.0889,
+            "value": 0.08,
             "weight": 0.2,
-            "contribution": 0.0178,
+            "contribution": 0.016,
             "status": "COMPUTATIONAL_EVIDENCE",
-            "note": "preservado em 0/1 transicoes de versao; presente em 2/9 modelos do corpus"
+            "note": "preservado em 0/1 transicoes de versao; presente em 2/10 modelos do corpus"
           },
           "F": {
             "value": 0.0882,
@@ -2036,19 +2036,19 @@
       "cost_share": 0.0537,
       "recommended_precision": "int8",
       "weight_elems": 778567680,
-      "LHS": 0.3996,
+      "LHS": 0.3978,
       "scorecard": {
         "name": "lm_head",
         "kind": "LHS",
-        "score": 0.3996,
+        "score": 0.3978,
         "status": "OPEN_GAP",
         "factors": {
           "E": {
-            "value": 0.0889,
+            "value": 0.08,
             "weight": 0.2,
-            "contribution": 0.0178,
+            "contribution": 0.016,
             "status": "COMPUTATIONAL_EVIDENCE",
-            "note": "preservado em 0/1 transicoes de versao; presente em 2/9 modelos do corpus"
+            "note": "preservado em 0/1 transicoes de versao; presente em 2/10 modelos do corpus"
           },
           "F": {
             "value": 0.0537,
@@ -2102,19 +2102,19 @@
       "cost_share": 0.0156,
       "recommended_precision": "bf16",
       "weight_elems": 0,
-      "LHS": 0.3754,
+      "LHS": 0.3736,
       "scorecard": {
         "name": "kv_read",
         "kind": "LHS",
-        "score": 0.3754,
+        "score": 0.3736,
         "status": "OPEN_GAP",
         "factors": {
           "E": {
-            "value": 0.0889,
+            "value": 0.08,
             "weight": 0.2,
-            "contribution": 0.0178,
+            "contribution": 0.016,
             "status": "COMPUTATIONAL_EVIDENCE",
-            "note": "preservado em 0/1 transicoes de versao; presente em 2/9 modelos do corpus"
+            "note": "preservado em 0/1 transicoes de versao; presente em 2/10 modelos do corpus"
           },
           "F": {
             "value": 0.0156,
@@ -2183,49 +2183,49 @@
             "role": "gate_proj",
             "share": 0.2381,
             "precision": "int4",
-            "reason": "regular e quantizavel, porem LHS=0.52 < 0.55; E=0.09 < 0.6: prototipar antes de fixar"
+            "reason": "regular e quantizavel, porem LHS=0.51 < 0.55; E=0.08 < 0.6: prototipar antes de fixar"
           },
           {
             "role": "up_proj",
             "share": 0.2381,
             "precision": "int4",
-            "reason": "regular e quantizavel, porem LHS=0.52 < 0.55; E=0.09 < 0.6: prototipar antes de fixar"
+            "reason": "regular e quantizavel, porem LHS=0.51 < 0.55; E=0.08 < 0.6: prototipar antes de fixar"
           },
           {
             "role": "down_proj",
             "share": 0.2381,
             "precision": "int4",
-            "reason": "regular e quantizavel, porem LHS=0.50 < 0.55; E=0.09 < 0.6: prototipar antes de fixar"
+            "reason": "regular e quantizavel, porem LHS=0.50 < 0.55; E=0.08 < 0.6: prototipar antes de fixar"
           },
           {
             "role": "q_proj",
             "share": 0.0882,
             "precision": "int8",
-            "reason": "regular e quantizavel, porem LHS=0.51 < 0.55; E=0.09 < 0.6: prototipar antes de fixar"
+            "reason": "regular e quantizavel, porem LHS=0.51 < 0.55; E=0.08 < 0.6: prototipar antes de fixar"
           },
           {
             "role": "o_proj",
             "share": 0.0882,
             "precision": "int4",
-            "reason": "regular e quantizavel, porem LHS=0.48 < 0.55; E=0.09 < 0.6: prototipar antes de fixar"
+            "reason": "regular e quantizavel, porem LHS=0.47 < 0.55; E=0.08 < 0.6: prototipar antes de fixar"
           },
           {
             "role": "lm_head",
             "share": 0.0537,
             "precision": "int8",
-            "reason": "regular e quantizavel, porem LHS=0.40 < 0.55; E=0.09 < 0.6: prototipar antes de fixar"
+            "reason": "regular e quantizavel, porem LHS=0.40 < 0.55; E=0.08 < 0.6: prototipar antes de fixar"
           },
           {
             "role": "v_proj",
             "share": 0.0177,
             "precision": "int8",
-            "reason": "regular e quantizavel, porem LHS=0.50 < 0.55; E=0.09 < 0.6: prototipar antes de fixar"
+            "reason": "regular e quantizavel, porem LHS=0.50 < 0.55; E=0.08 < 0.6: prototipar antes de fixar"
           },
           {
             "role": "k_proj",
             "share": 0.0177,
             "precision": "int8",
-            "reason": "regular e quantizavel, porem LHS=0.50 < 0.55; E=0.09 < 0.6: prototipar antes de fixar"
+            "reason": "regular e quantizavel, porem LHS=0.49 < 0.55; E=0.08 < 0.6: prototipar antes de fixar"
           }
         ]
       },
@@ -2237,7 +2237,7 @@
             "role": "kv_read",
             "share": 0.0156,
             "precision": "bf16",
-            "reason": "LHS=0.38 < 0.55; E=0.09 < 0.6; Q=0.00 < 0.6"
+            "reason": "LHS=0.37 < 0.55; E=0.08 < 0.6; Q=0.00 < 0.6"
           }
         ]
       }
@@ -2360,7 +2360,7 @@
     "decidable": false,
     "discriminates": false,
     "score_spread": 0.14138,
-    "noise_band": 0.02684,
+    "noise_band": 0.02683,
     "margin": 0.00299,
     "inert_weight": 0.55,
     "contenders": [
@@ -2392,7 +2392,7 @@
     },
     "F2": {
       "criterio": "o padrao mais custoso muda de identidade entre versoes",
-      "observado": "bloco mais custoso 'mlp' (papel gate_proj, 23.8% do custo): E = 0.09",
+      "observado": "bloco mais custoso 'mlp' (papel gate_proj, 23.8% do custo): E = 0.08",
       "disparado": true
     },
     "F3": {
@@ -2476,7 +2476,7 @@
       },
       {
         "name": "qwen2.5-14b.serving.energy_per_token",
-        "value": 12.293947418910662,
+        "value": 12.293947418910633,
         "unit": "J/token gerado",
         "status": "CONDITIONAL_RESULT",
         "assumptions": [
@@ -2494,7 +2494,7 @@
       },
       {
         "name": "qwen2.5-14b.decode.tokens_per_s",
-        "value": 94.08476246630114,
+        "value": 94.08476246630136,
         "unit": "tok/s",
         "status": "CONDITIONAL_RESULT",
         "assumptions": [
@@ -2509,7 +2509,7 @@
       },
       {
         "name": "qwen2.5-14b.decode.memory_bound_share",
-        "value": 0.9991385756378058,
+        "value": 0.9991385756378053,
         "unit": "fracao do tempo",
         "status": "CONDITIONAL_RESULT",
         "assumptions": [
@@ -2539,7 +2539,7 @@
       },
       {
         "name": "qwen2.5-14b.decode.energy_per_token",
-        "value": 12.052961290157597,
+        "value": 12.052961290157569,
         "unit": "J/token",
         "status": "CONDITIONAL_RESULT",
         "assumptions": [
@@ -2571,7 +2571,7 @@
       },
       {
         "name": "quant.sensitivity.speedup",
-        "value": 1.965295678306496,
+        "value": 1.9652956783064972,
         "unit": "x sobre baseline",
         "status": "CONDITIONAL_RESULT",
         "assumptions": [
@@ -2600,7 +2600,7 @@
       },
       {
         "name": "quant.reachable_cost_share.int4",
-        "value": 0.8041908676182894,
+        "value": 0.8041908676182914,
         "unit": "fracao do tempo",
         "status": "CONDITIONAL_RESULT",
         "assumptions": [
@@ -2742,7 +2742,7 @@
       },
       {
         "name": "SRS.qwen2.5-14b",
-        "value": 0.24737482420221002,
+        "value": 0.24737482420221016,
         "unit": "score SRS",
         "status": "OPEN_GAP",
         "assumptions": [

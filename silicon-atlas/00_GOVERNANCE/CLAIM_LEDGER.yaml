@@ -19,11 +19,12 @@
   - RUN:20260815T004530Z
   - RUN:20260815T004803Z
   - RUN:20260815T024439Z
+  - RUN:20260820T015320Z
   falsifiers:
   - cobertura de padrao maxima abaixo de 0.80 no corpus de tres familias
   - padrao so reaparece dentro da mesma familia (cobertura cruzada zero)
   owner: research
-  last_reviewed: '2026-08-15'
+  last_reviewed: '2026-08-20'
 - id: C-002
   statement: Uma minoria de classes de operador concentra a maior parte do tempo roofline de inferencia,
     em prefill e em decode.
@@ -46,11 +47,12 @@
   - RUN:20260815T004530Z
   - RUN:20260815T004803Z
   - RUN:20260815T024439Z
+  - RUN:20260820T015320Z
   falsifiers:
   - nenhuma classe de operador ultrapassa 40 por cento do tempo em nenhuma fase
   - ranking de classes muda entre versoes da mesma familia
   owner: research
-  last_reviewed: '2026-08-15'
+  last_reviewed: '2026-08-20'
 - id: C-003
   statement: O gargalo de decode e movimentacao de memoria, nao aritmetica; portanto ganho estimado apenas
     por FLOPs superestima o beneficio de hardening.
@@ -72,10 +74,11 @@
   - RUN:20260815T004530Z
   - RUN:20260815T004803Z
   - RUN:20260815T024439Z
+  - RUN:20260820T015320Z
   falsifiers:
   - intensidade aritmetica media em decode acima do ponto de inflexao do dispositivo
   owner: research
-  last_reviewed: '2026-08-15'
+  last_reviewed: '2026-08-20'
 - id: C-004
   statement: Ganho de 100x de um ASIC sobre GPU para inferencia de LLM.
   status: CONDITIONAL_HYPOTHESIS
@@ -126,10 +129,11 @@
   - RUN:20260815T004530Z
   - RUN:20260815T004803Z
   - RUN:20260815T024439Z
+  - RUN:20260820T015320Z
   falsifiers:
   - top-1 troca em mais de 5 por cento das amostras de perturbacao
   owner: engineering
-  last_reviewed: '2026-08-15'
+  last_reviewed: '2026-08-20'
   note: 'Falsificador F3 da PROBLEM_CHARTER. Se falhar, toda recomendacao derivada e retratada. | falsificador
     disparado | F3 reforcado (CE-001): o LHS nao separa candidatos por mais que o ruido dos proprios pesos
     em nenhum modelo do corpus'
@@ -155,7 +159,30 @@
   - RUN:20260815T004530Z
   - RUN:20260815T004803Z
   - RUN:20260815T024439Z
+  - RUN:20260820T015320Z
   falsifiers:
   - erro acima de 5 por cento em qualquer modelo do corpus (F5, invalida tudo a jusante)
   owner: engineering
-  last_reviewed: '2026-08-15'
+  last_reviewed: '2026-08-20'
+- id: C-008
+  statement: Para o caminho denso generico do construtor (nao-Gemma, nao-MoE, sem QKV fundido), todo no
+    com peso da IR analitica corresponde a um tensor real do checkpoint, com a shape certa -- nao ha operador
+    ausente nem inventado.
+  status: HYPOTHESIS
+  assumptions:
+  - A-001
+  evidence:
+  - AUDIT:smollm2-360m-instruct
+  falsifiers:
+  - qualquer no da IR sem tensor real correspondente (operador inventado)
+  - qualquer tensor real sem no na IR (operador ausente)
+  - qualquer divergencia de shape entre no e tensor casado
+  owner: engineering
+  last_reviewed: '2026-08-19'
+  note: 'Primeira evidencia real (nao so config) para A-001/G-001. `smollm2-360m-instruct`, checkpoint
+    real via named_parameters(): 291/291 nos casados, zero orfao dos dois lados, zero divergencia de shape,
+    contagem de parametros com 0.0000% de erro. Escopo explicito: valida so o caminho denso generico (usado
+    por llama/mistral/qwen no corpus) -- nao cobre os ramos especiais (4 normas + janela alternada do
+    Gemma, MoE do Mixtral, QKV fundido do Phi), e nao e o protocolo exato do ADR-0001 (FLOPs/bytes via
+    torch.export, que cobriria tambem operadores sem peso como RoPE/softmax). HYPOTHESIS, nao demonstrado:
+    um unico modelo, um unico caminho de codigo.'

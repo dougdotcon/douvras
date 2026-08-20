@@ -1,6 +1,6 @@
 {
-  "run_id": "20260815T024440Z",
-  "generated_at": "2026-08-15T02:44:40+00:00",
+  "run_id": "20260820T015321Z",
+  "generated_at": "2026-08-20T01:53:21+00:00",
   "inputs": {
     "model_id": "gemma-2-9b",
     "device_key": "h100-sxm",
@@ -1315,10 +1315,10 @@
     "model": "gemma-2-9b",
     "device": "h100-sxm",
     "request": "prompt=2048 gen=512 B=1 ctx=2304",
-    "total_time_s": 3.7636477693545305,
+    "total_time_s": 3.7636477693545407,
     "decode_time_share": 0.9805077873633706,
-    "generated_tokens_per_second": 136.03823507846712,
-    "energy_per_generated_token_j": 8.335891739156324,
+    "generated_tokens_per_second": 136.03823507846676,
+    "energy_per_generated_token_j": 8.335891739156345,
     "hotspots": {
       "gate_proj": 0.2231,
       "up_proj": 0.2231,
@@ -1337,8 +1337,8 @@
     "device": "h100-sxm",
     "workload": "decode B=1 T=2304 act=bf16",
     "weight_precision": "bf16",
-    "total_time_s": 0.007207589739736125,
-    "tokens_per_second": 138.74263604196355,
+    "total_time_s": 0.007207589739736145,
+    "tokens_per_second": 138.74263604196315,
     "total_flops": 20089710080.0,
     "total_bytes": 19300540416.0,
     "weight_read_bytes_per_step": 18483419136.0,
@@ -1346,8 +1346,8 @@
     "kv_bytes": 793067520.0,
     "mean_arithmetic_intensity": 1.0408884749851763,
     "device_ridge_point": 92.30410447761194,
-    "memory_bound_share": 0.999110786927234,
-    "energy_per_token_j": 8.173406764860767,
+    "memory_bound_share": 0.9991107869272344,
+    "energy_per_token_j": 8.173406764860788,
     "fits_in_device_memory": true,
     "memory_headroom": 0.7689573504,
     "hotspots_by_role": {
@@ -1374,8 +1374,8 @@
     "device": "h100-sxm",
     "workload": "prefill B=1 S=2048 act=bf16",
     "weight_precision": "bf16",
-    "total_time_s": 0.0733618226096345,
-    "tokens_per_second": 27916.427470696988,
+    "total_time_s": 0.07336182260963439,
+    "tokens_per_second": 27916.42747069703,
     "total_flops": 35570762360832.0,
     "total_bytes": 64962549760.0,
     "weight_read_bytes_per_step": 18498092032.0,
@@ -1383,8 +1383,8 @@
     "kv_bytes": 1409286144.0,
     "mean_arithmetic_intensity": 547.5579775154441,
     "device_ridge_point": 253.1769722814499,
-    "memory_bound_share": 0.18408141083283194,
-    "energy_per_token_j": 0.040621243573889416,
+    "memory_bound_share": 0.1840814108328332,
+    "energy_per_token_j": 0.040621243573889354,
     "fits_in_device_memory": true,
     "memory_headroom": 0.7689573504,
     "hotspots_by_role": {
@@ -1437,8 +1437,8 @@
     "weight_gb_before": 18.483419136,
     "weight_gb_after": 9.242315264,
     "memory_reduction": 0.5,
-    "time_ms_before": 7.207589739736125,
-    "time_ms_after": 3.7594166531689606,
+    "time_ms_before": 7.207589739736145,
+    "time_ms_after": 3.759416653168953,
     "speedup": 1.917,
     "quality_delta": "UNMEASURED (G-002)",
     "findings": [
@@ -1459,7 +1459,7 @@
       },
       {
         "name": "quant.sensitivity.speedup",
-        "value": 1.9172096111402186,
+        "value": 1.9172096111402277,
         "unit": "x sobre baseline",
         "status": "CONDITIONAL_RESULT",
         "assumptions": [
@@ -1496,19 +1496,19 @@
       "cost_share": 0.2231,
       "recommended_precision": "int4",
       "weight_elems": 2157969408,
-      "LHS": 0.5154,
+      "LHS": 0.5132,
       "scorecard": {
         "name": "gate_proj",
         "kind": "LHS",
-        "score": 0.5154,
+        "score": 0.5132,
         "status": "OPEN_GAP",
         "factors": {
           "E": {
-            "value": 0.1111,
+            "value": 0.1,
             "weight": 0.2,
-            "contribution": 0.0222,
+            "contribution": 0.02,
             "status": "ASSUMPTION",
-            "note": "familia com uma unica versao no corpus: estabilidade temporal nao observada; usando apenas cobertura de corpus (1/9 modelos)"
+            "note": "familia com uma unica versao no corpus: estabilidade temporal nao observada; usando apenas cobertura de corpus (1/10 modelos)"
           },
           "F": {
             "value": 0.2231,
@@ -1562,19 +1562,19 @@
       "cost_share": 0.2231,
       "recommended_precision": "int4",
       "weight_elems": 2157969408,
-      "LHS": 0.5154,
+      "LHS": 0.5132,
       "scorecard": {
         "name": "up_proj",
         "kind": "LHS",
-        "score": 0.5154,
+        "score": 0.5132,
         "status": "OPEN_GAP",
         "factors": {
           "E": {
-            "value": 0.1111,
+            "value": 0.1,
             "weight": 0.2,
-            "contribution": 0.0222,
+            "contribution": 0.02,
             "status": "ASSUMPTION",
-            "note": "familia com uma unica versao no corpus: estabilidade temporal nao observada; usando apenas cobertura de corpus (1/9 modelos)"
+            "note": "familia com uma unica versao no corpus: estabilidade temporal nao observada; usando apenas cobertura de corpus (1/10 modelos)"
           },
           "F": {
             "value": 0.2231,
@@ -1628,19 +1628,19 @@
       "cost_share": 0.0638,
       "recommended_precision": "int8",
       "weight_elems": 616562688,
-      "LHS": 0.511,
+      "LHS": 0.5088,
       "scorecard": {
         "name": "q_proj",
         "kind": "LHS",
-        "score": 0.511,
+        "score": 0.5088,
         "status": "OPEN_GAP",
         "factors": {
           "E": {
-            "value": 0.1111,
+            "value": 0.1,
             "weight": 0.2,
-            "contribution": 0.0222,
+            "contribution": 0.02,
             "status": "ASSUMPTION",
-            "note": "familia com uma unica versao no corpus: estabilidade temporal nao observada; usando apenas cobertura de corpus (1/9 modelos)"
+            "note": "familia com uma unica versao no corpus: estabilidade temporal nao observada; usando apenas cobertura de corpus (1/10 modelos)"
           },
           "F": {
             "value": 0.0638,
@@ -1694,19 +1694,19 @@
       "cost_share": 0.0319,
       "recommended_precision": "int8",
       "weight_elems": 308281344,
-      "LHS": 0.5062,
+      "LHS": 0.504,
       "scorecard": {
         "name": "v_proj",
         "kind": "LHS",
-        "score": 0.5062,
+        "score": 0.504,
         "status": "OPEN_GAP",
         "factors": {
           "E": {
-            "value": 0.1111,
+            "value": 0.1,
             "weight": 0.2,
-            "contribution": 0.0222,
+            "contribution": 0.02,
             "status": "ASSUMPTION",
-            "note": "familia com uma unica versao no corpus: estabilidade temporal nao observada; usando apenas cobertura de corpus (1/9 modelos)"
+            "note": "familia com uma unica versao no corpus: estabilidade temporal nao observada; usando apenas cobertura de corpus (1/10 modelos)"
           },
           "F": {
             "value": 0.0319,
@@ -1760,19 +1760,19 @@
       "cost_share": 0.2231,
       "recommended_precision": "int4",
       "weight_elems": 2157969408,
-      "LHS": 0.5004,
+      "LHS": 0.4982,
       "scorecard": {
         "name": "down_proj",
         "kind": "LHS",
-        "score": 0.5004,
+        "score": 0.4982,
         "status": "OPEN_GAP",
         "factors": {
           "E": {
-            "value": 0.1111,
+            "value": 0.1,
             "weight": 0.2,
-            "contribution": 0.0222,
+            "contribution": 0.02,
             "status": "ASSUMPTION",
-            "note": "familia com uma unica versao no corpus: estabilidade temporal nao observada; usando apenas cobertura de corpus (1/9 modelos)"
+            "note": "familia com uma unica versao no corpus: estabilidade temporal nao observada; usando apenas cobertura de corpus (1/10 modelos)"
           },
           "F": {
             "value": 0.2231,
@@ -1826,19 +1826,19 @@
       "cost_share": 0.0319,
       "recommended_precision": "int8",
       "weight_elems": 308281344,
-      "LHS": 0.4987,
+      "LHS": 0.4965,
       "scorecard": {
         "name": "k_proj",
         "kind": "LHS",
-        "score": 0.4987,
+        "score": 0.4965,
         "status": "OPEN_GAP",
         "factors": {
           "E": {
-            "value": 0.1111,
+            "value": 0.1,
             "weight": 0.2,
-            "contribution": 0.0222,
+            "contribution": 0.02,
             "status": "ASSUMPTION",
-            "note": "familia com uma unica versao no corpus: estabilidade temporal nao observada; usando apenas cobertura de corpus (1/9 modelos)"
+            "note": "familia com uma unica versao no corpus: estabilidade temporal nao observada; usando apenas cobertura de corpus (1/10 modelos)"
           },
           "F": {
             "value": 0.0319,
@@ -1892,19 +1892,19 @@
       "cost_share": 0.0638,
       "recommended_precision": "int4",
       "weight_elems": 616562688,
-      "LHS": 0.4735,
+      "LHS": 0.4713,
       "scorecard": {
         "name": "o_proj",
         "kind": "LHS",
-        "score": 0.4735,
+        "score": 0.4713,
         "status": "OPEN_GAP",
         "factors": {
           "E": {
-            "value": 0.1111,
+            "value": 0.1,
             "weight": 0.2,
-            "contribution": 0.0222,
+            "contribution": 0.02,
             "status": "ASSUMPTION",
-            "note": "familia com uma unica versao no corpus: estabilidade temporal nao observada; usando apenas cobertura de corpus (1/9 modelos)"
+            "note": "familia com uma unica versao no corpus: estabilidade temporal nao observada; usando apenas cobertura de corpus (1/10 modelos)"
           },
           "F": {
             "value": 0.0638,
@@ -1958,19 +1958,19 @@
       "cost_share": 0.0934,
       "recommended_precision": "int8",
       "weight_elems": 0,
-      "LHS": 0.41,
+      "LHS": 0.4078,
       "scorecard": {
         "name": "lm_head",
         "kind": "LHS",
-        "score": 0.41,
+        "score": 0.4078,
         "status": "OPEN_GAP",
         "factors": {
           "E": {
-            "value": 0.1111,
+            "value": 0.1,
             "weight": 0.2,
-            "contribution": 0.0222,
+            "contribution": 0.02,
             "status": "ASSUMPTION",
-            "note": "familia com uma unica versao no corpus: estabilidade temporal nao observada; usando apenas cobertura de corpus (1/9 modelos)"
+            "note": "familia com uma unica versao no corpus: estabilidade temporal nao observada; usando apenas cobertura de corpus (1/10 modelos)"
           },
           "F": {
             "value": 0.0934,
@@ -2024,19 +2024,19 @@
       "cost_share": 0.0403,
       "recommended_precision": "bf16",
       "weight_elems": 0,
-      "LHS": 0.38,
+      "LHS": 0.3778,
       "scorecard": {
         "name": "kv_read",
         "kind": "LHS",
-        "score": 0.38,
+        "score": 0.3778,
         "status": "OPEN_GAP",
         "factors": {
           "E": {
-            "value": 0.1111,
+            "value": 0.1,
             "weight": 0.2,
-            "contribution": 0.0222,
+            "contribution": 0.02,
             "status": "ASSUMPTION",
-            "note": "familia com uma unica versao no corpus: estabilidade temporal nao observada; usando apenas cobertura de corpus (1/9 modelos)"
+            "note": "familia com uma unica versao no corpus: estabilidade temporal nao observada; usando apenas cobertura de corpus (1/10 modelos)"
           },
           "F": {
             "value": 0.0403,
@@ -2105,49 +2105,49 @@
             "role": "gate_proj",
             "share": 0.2231,
             "precision": "int4",
-            "reason": "regular e quantizavel, porem LHS=0.52 < 0.55; E=0.11 < 0.6: prototipar antes de fixar"
+            "reason": "regular e quantizavel, porem LHS=0.51 < 0.55; E=0.10 < 0.6: prototipar antes de fixar"
           },
           {
             "role": "up_proj",
             "share": 0.2231,
             "precision": "int4",
-            "reason": "regular e quantizavel, porem LHS=0.52 < 0.55; E=0.11 < 0.6: prototipar antes de fixar"
+            "reason": "regular e quantizavel, porem LHS=0.51 < 0.55; E=0.10 < 0.6: prototipar antes de fixar"
           },
           {
             "role": "down_proj",
             "share": 0.2231,
             "precision": "int4",
-            "reason": "regular e quantizavel, porem LHS=0.50 < 0.55; E=0.11 < 0.6: prototipar antes de fixar"
+            "reason": "regular e quantizavel, porem LHS=0.50 < 0.55; E=0.10 < 0.6: prototipar antes de fixar"
           },
           {
             "role": "lm_head",
             "share": 0.0934,
             "precision": "int8",
-            "reason": "regular e quantizavel, porem LHS=0.41 < 0.55; E=0.11 < 0.6: prototipar antes de fixar"
+            "reason": "regular e quantizavel, porem LHS=0.41 < 0.55; E=0.10 < 0.6: prototipar antes de fixar"
           },
           {
             "role": "q_proj",
             "share": 0.0638,
             "precision": "int8",
-            "reason": "regular e quantizavel, porem LHS=0.51 < 0.55; E=0.11 < 0.6: prototipar antes de fixar"
+            "reason": "regular e quantizavel, porem LHS=0.51 < 0.55; E=0.10 < 0.6: prototipar antes de fixar"
           },
           {
             "role": "o_proj",
             "share": 0.0638,
             "precision": "int4",
-            "reason": "regular e quantizavel, porem LHS=0.47 < 0.55; E=0.11 < 0.6: prototipar antes de fixar"
+            "reason": "regular e quantizavel, porem LHS=0.47 < 0.55; E=0.10 < 0.6: prototipar antes de fixar"
           },
           {
             "role": "v_proj",
             "share": 0.0319,
             "precision": "int8",
-            "reason": "regular e quantizavel, porem LHS=0.51 < 0.55; E=0.11 < 0.6: prototipar antes de fixar"
+            "reason": "regular e quantizavel, porem LHS=0.50 < 0.55; E=0.10 < 0.6: prototipar antes de fixar"
           },
           {
             "role": "k_proj",
             "share": 0.0319,
             "precision": "int8",
-            "reason": "regular e quantizavel, porem LHS=0.50 < 0.55; E=0.11 < 0.6: prototipar antes de fixar"
+            "reason": "regular e quantizavel, porem LHS=0.50 < 0.55; E=0.10 < 0.6: prototipar antes de fixar"
           }
         ]
       },
@@ -2159,7 +2159,7 @@
             "role": "kv_read",
             "share": 0.0403,
             "precision": "bf16",
-            "reason": "LHS=0.38 < 0.55; E=0.11 < 0.6; Q=0.00 < 0.6"
+            "reason": "LHS=0.38 < 0.55; E=0.10 < 0.6; Q=0.00 < 0.6"
           }
         ]
       }
@@ -2282,7 +2282,7 @@
     "decidable": false,
     "discriminates": false,
     "score_spread": 0.13542,
-    "noise_band": 0.02669,
+    "noise_band": 0.02668,
     "margin": 0.0044,
     "inert_weight": 0.55,
     "contenders": [
@@ -2314,7 +2314,7 @@
     },
     "F2": {
       "criterio": "o padrao mais custoso muda de identidade entre versoes",
-      "observado": "bloco mais custoso 'mlp' (papel gate_proj, 22.3% do custo): E = 0.11",
+      "observado": "bloco mais custoso 'mlp' (papel gate_proj, 22.3% do custo): E = 0.10",
       "disparado": true
     },
     "F3": {
@@ -2402,7 +2402,7 @@
       },
       {
         "name": "gemma-2-9b.serving.energy_per_token",
-        "value": 8.335891739156324,
+        "value": 8.335891739156345,
         "unit": "J/token gerado",
         "status": "CONDITIONAL_RESULT",
         "assumptions": [
@@ -2420,7 +2420,7 @@
       },
       {
         "name": "gemma-2-9b.decode.tokens_per_s",
-        "value": 138.74263604196355,
+        "value": 138.74263604196315,
         "unit": "tok/s",
         "status": "CONDITIONAL_RESULT",
         "assumptions": [
@@ -2435,7 +2435,7 @@
       },
       {
         "name": "gemma-2-9b.decode.memory_bound_share",
-        "value": 0.999110786927234,
+        "value": 0.9991107869272344,
         "unit": "fracao do tempo",
         "status": "CONDITIONAL_RESULT",
         "assumptions": [
@@ -2465,7 +2465,7 @@
       },
       {
         "name": "gemma-2-9b.decode.energy_per_token",
-        "value": 8.173406764860767,
+        "value": 8.173406764860788,
         "unit": "J/token",
         "status": "CONDITIONAL_RESULT",
         "assumptions": [
@@ -2497,7 +2497,7 @@
       },
       {
         "name": "quant.sensitivity.speedup",
-        "value": 1.9172096111402186,
+        "value": 1.9172096111402277,
         "unit": "x sobre baseline",
         "status": "CONDITIONAL_RESULT",
         "assumptions": [
@@ -2526,7 +2526,7 @@
       },
       {
         "name": "quant.reachable_cost_share.int4",
-        "value": 0.7344094385874619,
+        "value": 0.7344094385874599,
         "unit": "fracao do tempo",
         "status": "CONDITIONAL_RESULT",
         "assumptions": [
@@ -2668,7 +2668,7 @@
       },
       {
         "name": "SRS.gemma-2-9b",
-        "value": 0.16800451657965512,
+        "value": 0.168004516579655,
         "unit": "score SRS",
         "status": "OPEN_GAP",
         "assumptions": [

@@ -1,8 +1,8 @@
 ---
 artifact: SILICON_READINESS_ASSESSMENT
 model: llama-3-8b
-run_id: 20260815T024441Z
-generated_at: 2026-08-15T02:44:41+00:00
+run_id: 20260820T015321Z
+generated_at: 2026-08-20T01:53:21+00:00
 method: DOUVRAS 2.0
 cycle: C-001
 weakest_status: ASSUMPTION
@@ -54,13 +54,13 @@ Lacunas abertas que limitam o status de tudo acima: `G-001`, `G-002`, `G-003`, `
 ## 5. Criterios de falha (declarados antes da execucao)
 
 - **F1** — nenhum padrao com cobertura >= 0.80 entre versoes da familia  
-  observado: estabilidade exata entre versoes = 0.50; alcance cross-familia do melhor padrao = 0.33  
+  observado: estabilidade exata entre versoes = 0.50; alcance cross-familia do melhor padrao = 0.30  
   **DISPARADO**
 - **F2** — o padrao mais custoso muda de identidade entre versoes  
-  observado: bloco mais custoso 'mlp' (papel gate_proj, 24.5% do custo): E = 0.48  
+  observado: bloco mais custoso 'mlp' (papel gate_proj, 24.5% do custo): E = 0.46  
   **DISPARADO**
 - **F3** — top-1 do ranking troca sob perturbacao de +-20% dos pesos, ou vence por margem menor que o ruido (criterio reforcado apos CE-001)  
-  observado: estabilidade do top-1 = 0.961 (limite 0.95); margem = 0.0067 contra ruido 0.0282  
+  observado: estabilidade do top-1 = 0.961 (limite 0.95); margem = 0.0067 contra ruido 0.0281  
   **DISPARADO**
 - **F4** — break-even P50 posterior a vida economica  
   observado: nao avaliavel: regiao fixa vazia (nenhum FLOP endurecido e nenhum peso a fixar): nao ha ponto de projeto a simular  
@@ -104,29 +104,29 @@ hardening abaixo e ponderada por essa mistura, nao por FLOPs isolados.
 
 | Papel | Bloco | Custo | Instancias/token | Precisao | LHS |
 |---|---|---|---|---|---|
-| gate_proj | mlp | 24.5% | 32 | int4 | 0.587 |
-| up_proj | mlp | 24.5% | 32 | int4 | 0.587 |
-| q_proj | attention | 7.0% | 32 | int8 | 0.580 |
-| v_proj | attention | 1.7% | 32 | int8 | 0.572 |
-| down_proj | mlp | 24.5% | 32 | int4 | 0.572 |
-| k_proj | attention | 1.7% | 32 | int8 | 0.565 |
-| o_proj | attention | 7.0% | 32 | int4 | 0.543 |
-| lm_head | head | 6.7% | 1 | int8 | 0.490 |
+| gate_proj | mlp | 24.5% | 32 | int4 | 0.583 |
+| up_proj | mlp | 24.5% | 32 | int4 | 0.583 |
+| q_proj | attention | 7.0% | 32 | int8 | 0.577 |
+| v_proj | attention | 1.7% | 32 | int8 | 0.569 |
+| down_proj | mlp | 24.5% | 32 | int4 | 0.568 |
+| k_proj | attention | 1.7% | 32 | int8 | 0.561 |
+| o_proj | attention | 7.0% | 32 | int4 | 0.539 |
+| lm_head | head | 6.7% | 1 | int8 | 0.486 |
 
 ### Particao recomendada
 
 ```text
 FPGA/eFPGA: 97.6% do custo
-  ├── gate_proj             24.5%  regular e quantizavel, porem E=0.48 < 0.6: prototipar antes de fixar
-  ├── up_proj               24.5%  regular e quantizavel, porem E=0.48 < 0.6: prototipar antes de fixar
-  ├── down_proj             24.5%  regular e quantizavel, porem E=0.48 < 0.6: prototipar antes de fixar
-  ├── q_proj                 7.0%  regular e quantizavel, porem E=0.48 < 0.6: prototipar antes de fixar
-  ├── o_proj                 7.0%  regular e quantizavel, porem LHS=0.54 < 0.55; E=0.48 < 0.6: prototipar antes de fixar
-  ├── lm_head                6.7%  regular e quantizavel, porem LHS=0.49 < 0.55; E=0.52 < 0.6: prototipar antes de fixar
-  ├── v_proj                 1.7%  regular e quantizavel, porem E=0.48 < 0.6: prototipar antes de fixar
-  └── k_proj                 1.7%  regular e quantizavel, porem E=0.48 < 0.6: prototipar antes de fixar
+  ├── gate_proj             24.5%  regular e quantizavel, porem E=0.46 < 0.6: prototipar antes de fixar
+  ├── up_proj               24.5%  regular e quantizavel, porem E=0.46 < 0.6: prototipar antes de fixar
+  ├── down_proj             24.5%  regular e quantizavel, porem E=0.46 < 0.6: prototipar antes de fixar
+  ├── q_proj                 7.0%  regular e quantizavel, porem E=0.46 < 0.6: prototipar antes de fixar
+  ├── o_proj                 7.0%  regular e quantizavel, porem LHS=0.54 < 0.55; E=0.46 < 0.6: prototipar antes de fixar
+  ├── lm_head                6.7%  regular e quantizavel, porem LHS=0.49 < 0.55; E=0.50 < 0.6: prototipar antes de fixar
+  ├── v_proj                 1.7%  regular e quantizavel, porem E=0.46 < 0.6: prototipar antes de fixar
+  └── k_proj                 1.7%  regular e quantizavel, porem E=0.46 < 0.6: prototipar antes de fixar
 CPU/GPU: 1.9% do custo
-  └── kv_read                1.9%  LHS=0.44 < 0.55; E=0.48 < 0.6; Q=0.00 < 0.6
+  └── kv_read                1.9%  LHS=0.44 < 0.55; E=0.46 < 0.6; Q=0.00 < 0.6
 ```
 
 Nivel de especializacao implicado: **3 — acelerador por arquitetura**.
@@ -154,7 +154,7 @@ A regiao fixa ficou **vazia** sob a politica de particionamento vigente: regiao 
 
 Consequencia registrada: os fatores **P** (ganho por watt), **R** (receita) e **N** (risco de NRE) do SRS entram como **zero declarado**, e o falsificador **F4** fica *nao avaliavel*. Publicar percentis de area, NRE ou break-even aqui seria descrever um objeto inexistente — foi exatamente o defeito retratado em `R-002`.
 
-Isto **e** o resultado: para llama-3-8b, o bloco que domina o custo (mlp, 24.5% do tempo) tem estabilidade estrutural E = 0.48, abaixo do limite da politica. O gasto em mascara nao tem o que financiar. A decisao economica so passa a existir se essa estabilidade subir — por escopo declarado mais estreito, por observacao de mais versoes, ou por calibracao da politica contra casos reais (`G-011`).
+Isto **e** o resultado: para llama-3-8b, o bloco que domina o custo (mlp, 24.5% do tempo) tem estabilidade estrutural E = 0.46, abaixo do limite da politica. O gasto em mascara nao tem o que financiar. A decisao economica so passa a existir se essa estabilidade subir — por escopo declarado mais estreito, por observacao de mais versoes, ou por calibracao da politica contra casos reais (`G-011`).
 
 ### Silicon Readiness Score
 
@@ -196,10 +196,10 @@ enderecavel de um bloco de IP, e nao se confunde com estabilidade temporal:
 
 | Bloco | Cobertura do corpus | Modelos atendidos |
 |---|---|---|
-| attention | 0.33 | llama-3-8b, llama-3.1-8b, mixtral-8x7b-v0.1 |
-| mlp | 0.33 | llama-3-8b, llama-3.1-8b, mistral-7b-v0.1 |
+| attention | 0.30 | llama-3-8b, llama-3.1-8b, mixtral-8x7b-v0.1 |
+| mlp | 0.30 | llama-3-8b, llama-3.1-8b, mistral-7b-v0.1 |
 
-Alcance maximo: **33%** de um corpus de 9 modelos. Um bloco
+Alcance maximo: **30%** de um corpus de 10 modelos. Um bloco
 estavel no tempo e util a um cliente; um bloco com alcance cross-familia e util a um mercado.
 As duas propriedades sao independentes e ambas precisam ser verdadeiras para justificar IP.
 
@@ -211,7 +211,7 @@ top-1 estavel em **96.1%** das amostras, top-3 em
 80.3%. Fator dominante: `R`.
 
 Dispersao dos scores: 0.1418. Largura do ruido induzido pelos pesos:
-0.0282. **Diagnostico: top-1 estavel, mas a margem sobre o concorrente (0.0067) nao supera o ruido dos pesos (0.0282): a ordem pode ser artefato.**
+0.0281. **Diagnostico: top-1 estavel, mas a margem sobre o concorrente (0.0067) nao supera o ruido dos pesos (0.0281): a ordem pode ser artefato.**
 
 Disputam a primeira posicao, dentro do ruido: `gate_proj`, `up_proj`, `q_proj`, `v_proj`, `down_proj`, `k_proj`. Entre eles, **70% do peso do LHS esta em fatores identicos** — estabilidade, regularidade, previsibilidade de memoria, volume e vida util sao os mesmos para toda projecao linear do mesmo modelo. Sobre o conjunto completo de candidatos o peso inerte e 35%.
 

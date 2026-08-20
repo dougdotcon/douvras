@@ -1,6 +1,6 @@
 {
-  "run_id": "20260815T024442Z",
-  "generated_at": "2026-08-15T02:44:42+00:00",
+  "run_id": "20260820T015323Z",
+  "generated_at": "2026-08-20T01:53:23+00:00",
   "inputs": {
     "model_id": "phi-3-mini-4k",
     "device_key": "h100-sxm",
@@ -971,10 +971,10 @@
     "model": "phi-3-mini-4k",
     "device": "h100-sxm",
     "request": "prompt=2048 gen=512 B=1 ctx=2304",
-    "total_time_s": 1.612498197832665,
+    "total_time_s": 1.6124981978326625,
     "decode_time_share": 0.9797344471355833,
-    "generated_tokens_per_second": 317.51973471236846,
-    "energy_per_generated_token_j": 3.5714315553559413,
+    "generated_tokens_per_second": 317.519734712369,
+    "energy_per_generated_token_j": 3.571431555355936,
     "hotspots": {
       "gate_proj": 0.1944,
       "up_proj": 0.1944,
@@ -993,8 +993,8 @@
     "device": "h100-sxm",
     "workload": "decode B=1 T=2304 act=bf16",
     "weight_precision": "bf16",
-    "total_time_s": 0.0030855859967982625,
-    "tokens_per_second": 324.08754805007646,
+    "total_time_s": 0.0030855859967982577,
+    "tokens_per_second": 324.087548050077,
     "total_flops": 8264292224.0,
     "total_bytes": 8261436672.0,
     "weight_read_bytes_per_step": 7445164032.0,
@@ -1002,8 +1002,8 @@
     "kv_bytes": 805306368.0,
     "mean_arithmetic_intensity": 1.0003456483555309,
     "device_ridge_point": 92.30410447761194,
-    "memory_bound_share": 0.9989454782018194,
-    "energy_per_token_j": 3.4990545203692296,
+    "memory_bound_share": 0.99894547820182,
+    "energy_per_token_j": 3.4990545203692243,
     "fits_in_device_memory": true,
     "memory_headroom": 0.9044730112,
     "hotspots_by_role": {
@@ -1030,8 +1030,8 @@
     "device": "h100-sxm",
     "workload": "prefill B=1 S=2048 act=bf16",
     "weight_precision": "bf16",
-    "total_time_s": 0.03267816747195454,
-    "tokens_per_second": 62671.81296985701,
+    "total_time_s": 0.03267816747195449,
+    "tokens_per_second": 62671.81296985711,
     "total_flops": 15687467326336.0,
     "total_bytes": 31251768576.0,
     "weight_read_bytes_per_step": 7457740800.0,
@@ -1039,8 +1039,8 @@
     "kv_bytes": 1610219520.0,
     "mean_arithmetic_intensity": 501.9705457048371,
     "device_ridge_point": 253.1769722814499,
-    "memory_bound_share": 0.19239109736439405,
-    "energy_per_token_j": 0.018094258746677954,
+    "memory_bound_share": 0.19239109736439364,
+    "energy_per_token_j": 0.018094258746677926,
     "fits_in_device_memory": true,
     "memory_headroom": 0.9044730112,
     "hotspots_by_role": {
@@ -1093,8 +1093,8 @@
     "weight_gb_before": 7.445164032,
     "weight_gb_after": 3.722781696,
     "memory_reduction": 0.5,
-    "time_ms_before": 3.0855859967982626,
-    "time_ms_after": 1.6966373639624412,
+    "time_ms_before": 3.0855859967982577,
+    "time_ms_after": 1.6966373639624361,
     "speedup": 1.819,
     "quality_delta": "UNMEASURED (G-002)",
     "findings": [
@@ -1115,7 +1115,7 @@
       },
       {
         "name": "quant.sensitivity.speedup",
-        "value": 1.8186479104715558,
+        "value": 1.8186479104715587,
         "unit": "x sobre baseline",
         "status": "CONDITIONAL_RESULT",
         "assumptions": [
@@ -1152,19 +1152,19 @@
       "cost_share": 0.0729,
       "recommended_precision": "int8",
       "weight_elems": 301989888,
-      "LHS": 0.5052,
+      "LHS": 0.503,
       "scorecard": {
         "name": "q_proj",
         "kind": "LHS",
-        "score": 0.5052,
+        "score": 0.503,
         "status": "OPEN_GAP",
         "factors": {
           "E": {
-            "value": 0.1111,
+            "value": 0.1,
             "weight": 0.2,
-            "contribution": 0.0222,
+            "contribution": 0.02,
             "status": "ASSUMPTION",
-            "note": "familia com uma unica versao no corpus: estabilidade temporal nao observada; usando apenas cobertura de corpus (1/9 modelos)"
+            "note": "familia com uma unica versao no corpus: estabilidade temporal nao observada; usando apenas cobertura de corpus (1/10 modelos)"
           },
           "F": {
             "value": 0.0729,
@@ -1218,19 +1218,19 @@
       "cost_share": 0.0729,
       "recommended_precision": "int8",
       "weight_elems": 301989888,
-      "LHS": 0.5052,
+      "LHS": 0.503,
       "scorecard": {
         "name": "v_proj",
         "kind": "LHS",
-        "score": 0.5052,
+        "score": 0.503,
         "status": "OPEN_GAP",
         "factors": {
           "E": {
-            "value": 0.1111,
+            "value": 0.1,
             "weight": 0.2,
-            "contribution": 0.0222,
+            "contribution": 0.02,
             "status": "ASSUMPTION",
-            "note": "familia com uma unica versao no corpus: estabilidade temporal nao observada; usando apenas cobertura de corpus (1/9 modelos)"
+            "note": "familia com uma unica versao no corpus: estabilidade temporal nao observada; usando apenas cobertura de corpus (1/10 modelos)"
           },
           "F": {
             "value": 0.0729,
@@ -1284,19 +1284,19 @@
       "cost_share": 0.1944,
       "recommended_precision": "int4",
       "weight_elems": 805306368,
-      "LHS": 0.504,
+      "LHS": 0.5017,
       "scorecard": {
         "name": "gate_proj",
         "kind": "LHS",
-        "score": 0.504,
+        "score": 0.5017,
         "status": "OPEN_GAP",
         "factors": {
           "E": {
-            "value": 0.1111,
+            "value": 0.1,
             "weight": 0.2,
-            "contribution": 0.0222,
+            "contribution": 0.02,
             "status": "ASSUMPTION",
-            "note": "familia com uma unica versao no corpus: estabilidade temporal nao observada; usando apenas cobertura de corpus (1/9 modelos)"
+            "note": "familia com uma unica versao no corpus: estabilidade temporal nao observada; usando apenas cobertura de corpus (1/10 modelos)"
           },
           "F": {
             "value": 0.1944,
@@ -1350,19 +1350,19 @@
       "cost_share": 0.1944,
       "recommended_precision": "int4",
       "weight_elems": 805306368,
-      "LHS": 0.504,
+      "LHS": 0.5017,
       "scorecard": {
         "name": "up_proj",
         "kind": "LHS",
-        "score": 0.504,
+        "score": 0.5017,
         "status": "OPEN_GAP",
         "factors": {
           "E": {
-            "value": 0.1111,
+            "value": 0.1,
             "weight": 0.2,
-            "contribution": 0.0222,
+            "contribution": 0.02,
             "status": "ASSUMPTION",
-            "note": "familia com uma unica versao no corpus: estabilidade temporal nao observada; usando apenas cobertura de corpus (1/9 modelos)"
+            "note": "familia com uma unica versao no corpus: estabilidade temporal nao observada; usando apenas cobertura de corpus (1/10 modelos)"
           },
           "F": {
             "value": 0.1944,
@@ -1416,19 +1416,19 @@
       "cost_share": 0.0729,
       "recommended_precision": "int8",
       "weight_elems": 301989888,
-      "LHS": 0.4977,
+      "LHS": 0.4955,
       "scorecard": {
         "name": "k_proj",
         "kind": "LHS",
-        "score": 0.4977,
+        "score": 0.4955,
         "status": "OPEN_GAP",
         "factors": {
           "E": {
-            "value": 0.1111,
+            "value": 0.1,
             "weight": 0.2,
-            "contribution": 0.0222,
+            "contribution": 0.02,
             "status": "ASSUMPTION",
-            "note": "familia com uma unica versao no corpus: estabilidade temporal nao observada; usando apenas cobertura de corpus (1/9 modelos)"
+            "note": "familia com uma unica versao no corpus: estabilidade temporal nao observada; usando apenas cobertura de corpus (1/10 modelos)"
           },
           "F": {
             "value": 0.0729,
@@ -1482,19 +1482,19 @@
       "cost_share": 0.1944,
       "recommended_precision": "int4",
       "weight_elems": 805306368,
-      "LHS": 0.489,
+      "LHS": 0.4867,
       "scorecard": {
         "name": "down_proj",
         "kind": "LHS",
-        "score": 0.489,
+        "score": 0.4867,
         "status": "OPEN_GAP",
         "factors": {
           "E": {
-            "value": 0.1111,
+            "value": 0.1,
             "weight": 0.2,
-            "contribution": 0.0222,
+            "contribution": 0.02,
             "status": "ASSUMPTION",
-            "note": "familia com uma unica versao no corpus: estabilidade temporal nao observada; usando apenas cobertura de corpus (1/9 modelos)"
+            "note": "familia com uma unica versao no corpus: estabilidade temporal nao observada; usando apenas cobertura de corpus (1/10 modelos)"
           },
           "F": {
             "value": 0.1944,
@@ -1548,19 +1548,19 @@
       "cost_share": 0.0729,
       "recommended_precision": "int4",
       "weight_elems": 301989888,
-      "LHS": 0.4677,
+      "LHS": 0.4655,
       "scorecard": {
         "name": "o_proj",
         "kind": "LHS",
-        "score": 0.4677,
+        "score": 0.4655,
         "status": "OPEN_GAP",
         "factors": {
           "E": {
-            "value": 0.1111,
+            "value": 0.1,
             "weight": 0.2,
-            "contribution": 0.0222,
+            "contribution": 0.02,
             "status": "ASSUMPTION",
-            "note": "familia com uma unica versao no corpus: estabilidade temporal nao observada; usando apenas cobertura de corpus (1/9 modelos)"
+            "note": "familia com uma unica versao no corpus: estabilidade temporal nao observada; usando apenas cobertura de corpus (1/10 modelos)"
           },
           "F": {
             "value": 0.0729,
@@ -1614,19 +1614,19 @@
       "cost_share": 0.0234,
       "recommended_precision": "int8",
       "weight_elems": 98500608,
-      "LHS": 0.3995,
+      "LHS": 0.3973,
       "scorecard": {
         "name": "lm_head",
         "kind": "LHS",
-        "score": 0.3995,
+        "score": 0.3973,
         "status": "OPEN_GAP",
         "factors": {
           "E": {
-            "value": 0.1111,
+            "value": 0.1,
             "weight": 0.2,
-            "contribution": 0.0222,
+            "contribution": 0.02,
             "status": "ASSUMPTION",
-            "note": "familia com uma unica versao no corpus: estabilidade temporal nao observada; usando apenas cobertura de corpus (1/9 modelos)"
+            "note": "familia com uma unica versao no corpus: estabilidade temporal nao observada; usando apenas cobertura de corpus (1/10 modelos)"
           },
           "F": {
             "value": 0.0234,
@@ -1680,19 +1680,19 @@
       "cost_share": 0.0956,
       "recommended_precision": "bf16",
       "weight_elems": 0,
-      "LHS": 0.3811,
+      "LHS": 0.3789,
       "scorecard": {
         "name": "kv_read",
         "kind": "LHS",
-        "score": 0.3811,
+        "score": 0.3789,
         "status": "OPEN_GAP",
         "factors": {
           "E": {
-            "value": 0.1111,
+            "value": 0.1,
             "weight": 0.2,
-            "contribution": 0.0222,
+            "contribution": 0.02,
             "status": "ASSUMPTION",
-            "note": "familia com uma unica versao no corpus: estabilidade temporal nao observada; usando apenas cobertura de corpus (1/9 modelos)"
+            "note": "familia com uma unica versao no corpus: estabilidade temporal nao observada; usando apenas cobertura de corpus (1/10 modelos)"
           },
           "F": {
             "value": 0.0956,
@@ -1761,49 +1761,49 @@
             "role": "gate_proj",
             "share": 0.1944,
             "precision": "int4",
-            "reason": "regular e quantizavel, porem LHS=0.50 < 0.55; E=0.11 < 0.6: prototipar antes de fixar"
+            "reason": "regular e quantizavel, porem LHS=0.50 < 0.55; E=0.10 < 0.6: prototipar antes de fixar"
           },
           {
             "role": "up_proj",
             "share": 0.1944,
             "precision": "int4",
-            "reason": "regular e quantizavel, porem LHS=0.50 < 0.55; E=0.11 < 0.6: prototipar antes de fixar"
+            "reason": "regular e quantizavel, porem LHS=0.50 < 0.55; E=0.10 < 0.6: prototipar antes de fixar"
           },
           {
             "role": "down_proj",
             "share": 0.1944,
             "precision": "int4",
-            "reason": "regular e quantizavel, porem LHS=0.49 < 0.55; E=0.11 < 0.6: prototipar antes de fixar"
+            "reason": "regular e quantizavel, porem LHS=0.49 < 0.55; E=0.10 < 0.6: prototipar antes de fixar"
           },
           {
             "role": "q_proj",
             "share": 0.0729,
             "precision": "int8",
-            "reason": "regular e quantizavel, porem LHS=0.51 < 0.55; E=0.11 < 0.6: prototipar antes de fixar"
+            "reason": "regular e quantizavel, porem LHS=0.50 < 0.55; E=0.10 < 0.6: prototipar antes de fixar"
           },
           {
             "role": "v_proj",
             "share": 0.0729,
             "precision": "int8",
-            "reason": "regular e quantizavel, porem LHS=0.51 < 0.55; E=0.11 < 0.6: prototipar antes de fixar"
+            "reason": "regular e quantizavel, porem LHS=0.50 < 0.55; E=0.10 < 0.6: prototipar antes de fixar"
           },
           {
             "role": "k_proj",
             "share": 0.0729,
             "precision": "int8",
-            "reason": "regular e quantizavel, porem LHS=0.50 < 0.55; E=0.11 < 0.6: prototipar antes de fixar"
+            "reason": "regular e quantizavel, porem LHS=0.50 < 0.55; E=0.10 < 0.6: prototipar antes de fixar"
           },
           {
             "role": "o_proj",
             "share": 0.0729,
             "precision": "int4",
-            "reason": "regular e quantizavel, porem LHS=0.47 < 0.55; E=0.11 < 0.6: prototipar antes de fixar"
+            "reason": "regular e quantizavel, porem LHS=0.47 < 0.55; E=0.10 < 0.6: prototipar antes de fixar"
           },
           {
             "role": "lm_head",
             "share": 0.0234,
             "precision": "int8",
-            "reason": "regular e quantizavel, porem LHS=0.40 < 0.55; E=0.11 < 0.6: prototipar antes de fixar"
+            "reason": "regular e quantizavel, porem LHS=0.40 < 0.55; E=0.10 < 0.6: prototipar antes de fixar"
           }
         ]
       },
@@ -1815,7 +1815,7 @@
             "role": "kv_read",
             "share": 0.0956,
             "precision": "bf16",
-            "reason": "LHS=0.38 < 0.55; E=0.11 < 0.6; Q=0.00 < 0.6"
+            "reason": "LHS=0.38 < 0.55; E=0.10 < 0.6; Q=0.00 < 0.6"
           }
         ]
       }
@@ -1938,7 +1938,7 @@
     "decidable": false,
     "discriminates": false,
     "score_spread": 0.1241,
-    "noise_band": 0.02636,
+    "noise_band": 0.02634,
     "margin": 0.00128,
     "inert_weight": 0.55,
     "contenders": [
@@ -1955,7 +1955,7 @@
       "Q",
       "V"
     ],
-    "diagnosis": "score NAO discrimina: entre os 6 candidatos que disputam a primeira posicao, 70% do peso esta em fatores identicos; a margem (0.0013) e menor que o ruido (0.0264)",
+    "diagnosis": "score NAO discrimina: entre os 6 candidatos que disputam a primeira posicao, 70% do peso esta em fatores identicos; a margem (0.0013) e menor que o ruido (0.0263)",
     "winners": {
       "q_proj": 1326,
       "up_proj": 674
@@ -1970,12 +1970,12 @@
     },
     "F2": {
       "criterio": "o padrao mais custoso muda de identidade entre versoes",
-      "observado": "bloco mais custoso 'mlp' (papel gate_proj, 19.4% do custo): E = 0.11",
+      "observado": "bloco mais custoso 'mlp' (papel gate_proj, 19.4% do custo): E = 0.10",
       "disparado": true
     },
     "F3": {
       "criterio": "top-1 do ranking troca sob perturbacao de +-20% dos pesos, ou vence por margem menor que o ruido (criterio reforcado apos CE-001)",
-      "observado": "estabilidade do top-1 = 0.663 (limite 0.95); margem = 0.0013 contra ruido 0.0264",
+      "observado": "estabilidade do top-1 = 0.663 (limite 0.95); margem = 0.0013 contra ruido 0.0263",
       "disparado": true
     },
     "F4": {
@@ -2054,7 +2054,7 @@
       },
       {
         "name": "phi-3-mini-4k.serving.energy_per_token",
-        "value": 3.5714315553559413,
+        "value": 3.571431555355936,
         "unit": "J/token gerado",
         "status": "CONDITIONAL_RESULT",
         "assumptions": [
@@ -2072,7 +2072,7 @@
       },
       {
         "name": "phi-3-mini-4k.decode.tokens_per_s",
-        "value": 324.08754805007646,
+        "value": 324.087548050077,
         "unit": "tok/s",
         "status": "CONDITIONAL_RESULT",
         "assumptions": [
@@ -2087,7 +2087,7 @@
       },
       {
         "name": "phi-3-mini-4k.decode.memory_bound_share",
-        "value": 0.9989454782018194,
+        "value": 0.99894547820182,
         "unit": "fracao do tempo",
         "status": "CONDITIONAL_RESULT",
         "assumptions": [
@@ -2117,7 +2117,7 @@
       },
       {
         "name": "phi-3-mini-4k.decode.energy_per_token",
-        "value": 3.4990545203692296,
+        "value": 3.4990545203692243,
         "unit": "J/token",
         "status": "CONDITIONAL_RESULT",
         "assumptions": [
@@ -2149,7 +2149,7 @@
       },
       {
         "name": "quant.sensitivity.speedup",
-        "value": 1.8186479104715558,
+        "value": 1.8186479104715587,
         "unit": "x sobre baseline",
         "status": "CONDITIONAL_RESULT",
         "assumptions": [
@@ -2178,7 +2178,7 @@
       },
       {
         "name": "quant.reachable_cost_share.int4",
-        "value": 0.6576527084856268,
+        "value": 0.657652708485628,
         "unit": "fracao do tempo",
         "status": "CONDITIONAL_RESULT",
         "assumptions": [
@@ -2320,7 +2320,7 @@
       },
       {
         "name": "SRS.phi-3-mini-4k",
-        "value": 0.21148249937707408,
+        "value": 0.2114824993770741,
         "unit": "score SRS",
         "status": "OPEN_GAP",
         "assumptions": [
@@ -2431,7 +2431,7 @@
           "M.kv_read",
           "L.kv_read"
         ],
-        "note": "perturbacao +-20%, 2000 amostras; NAO DECIDIVEL — F3 disparado; score NAO discrimina: entre os 6 candidatos que disputam a primeira posicao, 70% do peso esta em fatores identicos; a margem (0.0013) e menor que o ruido (0.0264)"
+        "note": "perturbacao +-20%, 2000 amostras; NAO DECIDIVEL — F3 disparado; score NAO discrimina: entre os 6 candidatos que disputam a primeira posicao, 70% do peso esta em fatores identicos; a margem (0.0013) e menor que o ruido (0.0263)"
       },
       {
         "name": "stability.phi.exact",

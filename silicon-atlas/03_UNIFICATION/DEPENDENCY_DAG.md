@@ -1,6 +1,6 @@
 ---
 artifact: DEPENDENCY_DAG
-run_id: 20260815T024439Z
+run_id: 20260820T015320Z
 generated_by: scripts/run_cycle.py
 ---
 
@@ -50,6 +50,7 @@ graph TD
     C005{{"C-005<br/>HYPOTHESIS"}}
     C006{{"C-006<br/>RETRACTED"}}
     C007{{"C-007<br/>HYPOTHESIS"}}
+    C008{{"C-008<br/>HYPOTHESIS"}}
     A001 --> C001
     A002 --> C002
     A005 --> C002
@@ -63,6 +64,7 @@ graph TD
     A007 --> C005
     A001 --> C007
     A009 --> C007
+    A001 --> C008
     G001 -.-> A001
     G003 -.-> A002
     G004 -.-> A003
@@ -87,7 +89,7 @@ graph TD
 
 ## Contagem
 
-- alegacoes: 7
+- alegacoes: 8
 - itens de evidencia: 5
 - premissas: 9
 - lacunas abertas: 14

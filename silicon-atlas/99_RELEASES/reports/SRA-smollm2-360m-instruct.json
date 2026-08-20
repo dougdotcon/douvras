@@ -1,8 +1,8 @@
 {
-  "run_id": "20260820T015323Z",
-  "generated_at": "2026-08-20T01:53:23+00:00",
+  "run_id": "20260820T015324Z",
+  "generated_at": "2026-08-20T01:53:24+00:00",
   "inputs": {
-    "model_id": "qwen2.5-7b",
+    "model_id": "smollm2-360m-instruct",
     "device_key": "h100-sxm",
     "batch": 1,
     "prompt_len": 2048,
@@ -16,42 +16,42 @@
     "hardened_only": true
   },
   "model": {
-    "id": "qwen2.5-7b",
-    "family": "qwen",
-    "version_label": "2.5-7B",
-    "architecture": "Qwen2ForCausalLM",
-    "hidden_size": 3584,
-    "num_layers": 28,
-    "num_heads": 28,
-    "num_kv_heads": 4,
-    "head_dim": 128,
-    "intermediate_size": 18944,
-    "vocab_size": 152064,
-    "max_position": 131072,
+    "id": "smollm2-360m-instruct",
+    "family": "smollm",
+    "version_label": "2.0",
+    "architecture": "LlamaForCausalLM",
+    "hidden_size": 960,
+    "num_layers": 32,
+    "num_heads": 15,
+    "num_kv_heads": 5,
+    "head_dim": 64,
+    "intermediate_size": 2560,
+    "vocab_size": 49152,
+    "max_position": 8192,
     "norm_type": "rmsnorm",
     "norms_per_layer": 2,
     "mlp_type": "swiglu",
     "position_type": "rope",
-    "rope_theta": 1000000.0,
-    "tie_word_embeddings": false,
-    "qkv_bias": true,
+    "rope_theta": 100000.0,
+    "tie_word_embeddings": true,
+    "qkv_bias": false,
     "o_bias": false,
     "mlp_bias": false,
-    "sliding_window": 131072,
-    "release_date": "2024-09-19",
+    "sliding_window": null,
+    "release_date": "2024-11-01",
     "license": "apache-2.0",
-    "published_params": 7615616512,
-    "hf_repo": "Qwen/Qwen2.5-7B",
+    "published_params": 361821120,
+    "hf_repo": "HuggingFaceTB/SmolLM2-360M-Instruct",
     "default_dtype": "bf16",
     "attention_type": "gqa",
     "provenance": {
-      "source_url": "https://huggingface.co/Qwen/Qwen2.5-7B/resolve/main/config.json",
+      "source_url": "https://huggingface.co/HuggingFaceTB/SmolLM2-360M-Instruct/resolve/main/config.json",
       "provenance": "FETCHED",
-      "sha256": "267ce68584c5f24c3b267d934db2de68dd21d1ca677fb78ed809eb60067f7642",
-      "retrieved_at": "2026-08-15T00:39:46+00:00"
+      "sha256": "224f72354f10d617a359cc82ad15a3c96e866b9b2ffadb81997eeea9e88e22ee",
+      "retrieved_at": "2026-08-18T00:00:00Z"
     },
     "moe": null,
-    "derived_params": 7615616512
+    "derived_params": 361821120
   },
   "device": {
     "key": "h100-sxm",
@@ -66,31 +66,30 @@
     "source": "picos densos de datasheet do fabricante; eficiencia e custo assumidos"
   },
   "fingerprint": {
-    "model": "qwen2.5-7b",
-    "family": "qwen",
-    "version": "2.5-7B",
-    "release_date": "2024-09-19",
+    "model": "smollm2-360m-instruct",
+    "family": "smollm",
+    "version": "2.0",
+    "release_date": "2024-11-01",
     "architecture_class": "decoder_transformer",
     "attention": "gqa",
-    "gqa_ratio": 7,
-    "head_dim": 128,
-    "layers": 28,
-    "hidden_size": 3584,
-    "intermediate_size": 18944,
+    "gqa_ratio": 3,
+    "head_dim": 64,
+    "layers": 32,
+    "hidden_size": 960,
+    "intermediate_size": 2560,
     "mlp": "swiglu",
-    "mlp_ratio": 5.2857,
+    "mlp_ratio": 2.6667,
     "normalization": "rmsnorm",
     "norms_per_layer": 2,
     "position": "rope",
-    "rope_theta": 1000000.0,
+    "rope_theta": 100000.0,
     "routing": "dense",
-    "vocab_size": 152064,
-    "tied_embeddings": false,
-    "sliding_window": 131072,
-    "params": 7615616512,
+    "vocab_size": 49152,
+    "tied_embeddings": true,
+    "sliding_window": null,
+    "params": 361821120,
     "quantization_candidates": [
       "int8",
-      "int4",
       "ternary"
     ],
     "dynamic_regions": [
@@ -101,23 +100,23 @@
       "L0.attention": {
         "role": "attention",
         "topology": "1b843e6dbe080a7d",
-        "pattern": "b73ce20f6e2f7a4d",
-        "exact": "3cd26995b6ee1550",
+        "pattern": "a4a3ad475b93c89f",
+        "exact": "9e50b7950962986f",
         "num_nodes": 13,
         "constants": {
           "input_layernorm.norm": "rmsnorm",
           "pv.causal": true,
           "qk.causal": true,
-          "rope_k.theta": 1000000.0,
-          "rope_q.theta": 1000000.0,
+          "rope_k.theta": 100000.0,
+          "rope_q.theta": 100000.0,
           "softmax.causal": true
         }
       },
       "L0.mlp": {
         "role": "mlp",
         "topology": "0c8cab6eb751d660",
-        "pattern": "10a85f9e7f510cf6",
-        "exact": "6ab254d6b8f10887",
+        "pattern": "803150f1f591d287",
+        "exact": "eeb60f7f96ea90ac",
         "num_nodes": 7,
         "constants": {
           "act.fn": "silu",
@@ -127,23 +126,23 @@
       "L1.attention": {
         "role": "attention",
         "topology": "1b843e6dbe080a7d",
-        "pattern": "b73ce20f6e2f7a4d",
-        "exact": "3cd26995b6ee1550",
+        "pattern": "a4a3ad475b93c89f",
+        "exact": "9e50b7950962986f",
         "num_nodes": 13,
         "constants": {
           "input_layernorm.norm": "rmsnorm",
           "pv.causal": true,
           "qk.causal": true,
-          "rope_k.theta": 1000000.0,
-          "rope_q.theta": 1000000.0,
+          "rope_k.theta": 100000.0,
+          "rope_q.theta": 100000.0,
           "softmax.causal": true
         }
       },
       "L1.mlp": {
         "role": "mlp",
         "topology": "0c8cab6eb751d660",
-        "pattern": "10a85f9e7f510cf6",
-        "exact": "6ab254d6b8f10887",
+        "pattern": "803150f1f591d287",
+        "exact": "eeb60f7f96ea90ac",
         "num_nodes": 7,
         "constants": {
           "act.fn": "silu",
@@ -153,23 +152,23 @@
       "L10.attention": {
         "role": "attention",
         "topology": "1b843e6dbe080a7d",
-        "pattern": "b73ce20f6e2f7a4d",
-        "exact": "3cd26995b6ee1550",
+        "pattern": "a4a3ad475b93c89f",
+        "exact": "9e50b7950962986f",
         "num_nodes": 13,
         "constants": {
           "input_layernorm.norm": "rmsnorm",
           "pv.causal": true,
           "qk.causal": true,
-          "rope_k.theta": 1000000.0,
-          "rope_q.theta": 1000000.0,
+          "rope_k.theta": 100000.0,
+          "rope_q.theta": 100000.0,
           "softmax.causal": true
         }
       },
       "L10.mlp": {
         "role": "mlp",
         "topology": "0c8cab6eb751d660",
-        "pattern": "10a85f9e7f510cf6",
-        "exact": "6ab254d6b8f10887",
+        "pattern": "803150f1f591d287",
+        "exact": "eeb60f7f96ea90ac",
         "num_nodes": 7,
         "constants": {
           "act.fn": "silu",
@@ -179,23 +178,23 @@
       "L11.attention": {
         "role": "attention",
         "topology": "1b843e6dbe080a7d",
-        "pattern": "b73ce20f6e2f7a4d",
-        "exact": "3cd26995b6ee1550",
+        "pattern": "a4a3ad475b93c89f",
+        "exact": "9e50b7950962986f",
         "num_nodes": 13,
         "constants": {
           "input_layernorm.norm": "rmsnorm",
           "pv.causal": true,
           "qk.causal": true,
-          "rope_k.theta": 1000000.0,
-          "rope_q.theta": 1000000.0,
+          "rope_k.theta": 100000.0,
+          "rope_q.theta": 100000.0,
           "softmax.causal": true
         }
       },
       "L11.mlp": {
         "role": "mlp",
         "topology": "0c8cab6eb751d660",
-        "pattern": "10a85f9e7f510cf6",
-        "exact": "6ab254d6b8f10887",
+        "pattern": "803150f1f591d287",
+        "exact": "eeb60f7f96ea90ac",
         "num_nodes": 7,
         "constants": {
           "act.fn": "silu",
@@ -205,23 +204,23 @@
       "L12.attention": {
         "role": "attention",
         "topology": "1b843e6dbe080a7d",
-        "pattern": "b73ce20f6e2f7a4d",
-        "exact": "3cd26995b6ee1550",
+        "pattern": "a4a3ad475b93c89f",
+        "exact": "9e50b7950962986f",
         "num_nodes": 13,
         "constants": {
           "input_layernorm.norm": "rmsnorm",
           "pv.causal": true,
           "qk.causal": true,
-          "rope_k.theta": 1000000.0,
-          "rope_q.theta": 1000000.0,
+          "rope_k.theta": 100000.0,
+          "rope_q.theta": 100000.0,
           "softmax.causal": true
         }
       },
       "L12.mlp": {
         "role": "mlp",
         "topology": "0c8cab6eb751d660",
-        "pattern": "10a85f9e7f510cf6",
-        "exact": "6ab254d6b8f10887",
+        "pattern": "803150f1f591d287",
+        "exact": "eeb60f7f96ea90ac",
         "num_nodes": 7,
         "constants": {
           "act.fn": "silu",
@@ -231,23 +230,23 @@
       "L13.attention": {
         "role": "attention",
         "topology": "1b843e6dbe080a7d",
-        "pattern": "b73ce20f6e2f7a4d",
-        "exact": "3cd26995b6ee1550",
+        "pattern": "a4a3ad475b93c89f",
+        "exact": "9e50b7950962986f",
         "num_nodes": 13,
         "constants": {
           "input_layernorm.norm": "rmsnorm",
           "pv.causal": true,
           "qk.causal": true,
-          "rope_k.theta": 1000000.0,
-          "rope_q.theta": 1000000.0,
+          "rope_k.theta": 100000.0,
+          "rope_q.theta": 100000.0,
           "softmax.causal": true
         }
       },
       "L13.mlp": {
         "role": "mlp",
         "topology": "0c8cab6eb751d660",
-        "pattern": "10a85f9e7f510cf6",
-        "exact": "6ab254d6b8f10887",
+        "pattern": "803150f1f591d287",
+        "exact": "eeb60f7f96ea90ac",
         "num_nodes": 7,
         "constants": {
           "act.fn": "silu",
@@ -257,23 +256,23 @@
       "L14.attention": {
         "role": "attention",
         "topology": "1b843e6dbe080a7d",
-        "pattern": "b73ce20f6e2f7a4d",
-        "exact": "3cd26995b6ee1550",
+        "pattern": "a4a3ad475b93c89f",
+        "exact": "9e50b7950962986f",
         "num_nodes": 13,
         "constants": {
           "input_layernorm.norm": "rmsnorm",
           "pv.causal": true,
           "qk.causal": true,
-          "rope_k.theta": 1000000.0,
-          "rope_q.theta": 1000000.0,
+          "rope_k.theta": 100000.0,
+          "rope_q.theta": 100000.0,
           "softmax.causal": true
         }
       },
       "L14.mlp": {
         "role": "mlp",
         "topology": "0c8cab6eb751d660",
-        "pattern": "10a85f9e7f510cf6",
-        "exact": "6ab254d6b8f10887",
+        "pattern": "803150f1f591d287",
+        "exact": "eeb60f7f96ea90ac",
         "num_nodes": 7,
         "constants": {
           "act.fn": "silu",
@@ -283,23 +282,23 @@
       "L15.attention": {
         "role": "attention",
         "topology": "1b843e6dbe080a7d",
-        "pattern": "b73ce20f6e2f7a4d",
-        "exact": "3cd26995b6ee1550",
+        "pattern": "a4a3ad475b93c89f",
+        "exact": "9e50b7950962986f",
         "num_nodes": 13,
         "constants": {
           "input_layernorm.norm": "rmsnorm",
           "pv.causal": true,
           "qk.causal": true,
-          "rope_k.theta": 1000000.0,
-          "rope_q.theta": 1000000.0,
+          "rope_k.theta": 100000.0,
+          "rope_q.theta": 100000.0,
           "softmax.causal": true
         }
       },
       "L15.mlp": {
         "role": "mlp",
         "topology": "0c8cab6eb751d660",
-        "pattern": "10a85f9e7f510cf6",
-        "exact": "6ab254d6b8f10887",
+        "pattern": "803150f1f591d287",
+        "exact": "eeb60f7f96ea90ac",
         "num_nodes": 7,
         "constants": {
           "act.fn": "silu",
@@ -309,23 +308,23 @@
       "L16.attention": {
         "role": "attention",
         "topology": "1b843e6dbe080a7d",
-        "pattern": "b73ce20f6e2f7a4d",
-        "exact": "3cd26995b6ee1550",
+        "pattern": "a4a3ad475b93c89f",
+        "exact": "9e50b7950962986f",
         "num_nodes": 13,
         "constants": {
           "input_layernorm.norm": "rmsnorm",
           "pv.causal": true,
           "qk.causal": true,
-          "rope_k.theta": 1000000.0,
-          "rope_q.theta": 1000000.0,
+          "rope_k.theta": 100000.0,
+          "rope_q.theta": 100000.0,
           "softmax.causal": true
         }
       },
       "L16.mlp": {
         "role": "mlp",
         "topology": "0c8cab6eb751d660",
-        "pattern": "10a85f9e7f510cf6",
-        "exact": "6ab254d6b8f10887",
+        "pattern": "803150f1f591d287",
+        "exact": "eeb60f7f96ea90ac",
         "num_nodes": 7,
         "constants": {
           "act.fn": "silu",
@@ -335,23 +334,23 @@
       "L17.attention": {
         "role": "attention",
         "topology": "1b843e6dbe080a7d",
-        "pattern": "b73ce20f6e2f7a4d",
-        "exact": "3cd26995b6ee1550",
+        "pattern": "a4a3ad475b93c89f",
+        "exact": "9e50b7950962986f",
         "num_nodes": 13,
         "constants": {
           "input_layernorm.norm": "rmsnorm",
           "pv.causal": true,
           "qk.causal": true,
-          "rope_k.theta": 1000000.0,
-          "rope_q.theta": 1000000.0,
+          "rope_k.theta": 100000.0,
+          "rope_q.theta": 100000.0,
           "softmax.causal": true
         }
       },
       "L17.mlp": {
         "role": "mlp",
         "topology": "0c8cab6eb751d660",
-        "pattern": "10a85f9e7f510cf6",
-        "exact": "6ab254d6b8f10887",
+        "pattern": "803150f1f591d287",
+        "exact": "eeb60f7f96ea90ac",
         "num_nodes": 7,
         "constants": {
           "act.fn": "silu",
@@ -361,23 +360,23 @@
       "L18.attention": {
         "role": "attention",
         "topology": "1b843e6dbe080a7d",
-        "pattern": "b73ce20f6e2f7a4d",
-        "exact": "3cd26995b6ee1550",
+        "pattern": "a4a3ad475b93c89f",
+        "exact": "9e50b7950962986f",
         "num_nodes": 13,
         "constants": {
           "input_layernorm.norm": "rmsnorm",
           "pv.causal": true,
           "qk.causal": true,
-          "rope_k.theta": 1000000.0,
-          "rope_q.theta": 1000000.0,
+          "rope_k.theta": 100000.0,
+          "rope_q.theta": 100000.0,
           "softmax.causal": true
         }
       },
       "L18.mlp": {
         "role": "mlp",
         "topology": "0c8cab6eb751d660",
-        "pattern": "10a85f9e7f510cf6",
-        "exact": "6ab254d6b8f10887",
+        "pattern": "803150f1f591d287",
+        "exact": "eeb60f7f96ea90ac",
         "num_nodes": 7,
         "constants": {
           "act.fn": "silu",
@@ -387,23 +386,23 @@
       "L19.attention": {
         "role": "attention",
         "topology": "1b843e6dbe080a7d",
-        "pattern": "b73ce20f6e2f7a4d",
-        "exact": "3cd26995b6ee1550",
+        "pattern": "a4a3ad475b93c89f",
+        "exact": "9e50b7950962986f",
         "num_nodes": 13,
         "constants": {
           "input_layernorm.norm": "rmsnorm",
           "pv.causal": true,
           "qk.causal": true,
-          "rope_k.theta": 1000000.0,
-          "rope_q.theta": 1000000.0,
+          "rope_k.theta": 100000.0,
+          "rope_q.theta": 100000.0,
           "softmax.causal": true
         }
       },
       "L19.mlp": {
         "role": "mlp",
         "topology": "0c8cab6eb751d660",
-        "pattern": "10a85f9e7f510cf6",
-        "exact": "6ab254d6b8f10887",
+        "pattern": "803150f1f591d287",
+        "exact": "eeb60f7f96ea90ac",
         "num_nodes": 7,
         "constants": {
           "act.fn": "silu",
@@ -413,23 +412,23 @@
       "L2.attention": {
         "role": "attention",
         "topology": "1b843e6dbe080a7d",
-        "pattern": "b73ce20f6e2f7a4d",
-        "exact": "3cd26995b6ee1550",
+        "pattern": "a4a3ad475b93c89f",
+        "exact": "9e50b7950962986f",
         "num_nodes": 13,
         "constants": {
           "input_layernorm.norm": "rmsnorm",
           "pv.causal": true,
           "qk.causal": true,
-          "rope_k.theta": 1000000.0,
-          "rope_q.theta": 1000000.0,
+          "rope_k.theta": 100000.0,
+          "rope_q.theta": 100000.0,
           "softmax.causal": true
         }
       },
       "L2.mlp": {
         "role": "mlp",
         "topology": "0c8cab6eb751d660",
-        "pattern": "10a85f9e7f510cf6",
-        "exact": "6ab254d6b8f10887",
+        "pattern": "803150f1f591d287",
+        "exact": "eeb60f7f96ea90ac",
         "num_nodes": 7,
         "constants": {
           "act.fn": "silu",
@@ -439,23 +438,23 @@
       "L20.attention": {
         "role": "attention",
         "topology": "1b843e6dbe080a7d",
-        "pattern": "b73ce20f6e2f7a4d",
-        "exact": "3cd26995b6ee1550",
+        "pattern": "a4a3ad475b93c89f",
+        "exact": "9e50b7950962986f",
         "num_nodes": 13,
         "constants": {
           "input_layernorm.norm": "rmsnorm",
           "pv.causal": true,
           "qk.causal": true,
-          "rope_k.theta": 1000000.0,
-          "rope_q.theta": 1000000.0,
+          "rope_k.theta": 100000.0,
+          "rope_q.theta": 100000.0,
           "softmax.causal": true
         }
       },
       "L20.mlp": {
         "role": "mlp",
         "topology": "0c8cab6eb751d660",
-        "pattern": "10a85f9e7f510cf6",
-        "exact": "6ab254d6b8f10887",
+        "pattern": "803150f1f591d287",
+        "exact": "eeb60f7f96ea90ac",
         "num_nodes": 7,
         "constants": {
           "act.fn": "silu",
@@ -465,23 +464,23 @@
       "L21.attention": {
         "role": "attention",
         "topology": "1b843e6dbe080a7d",
-        "pattern": "b73ce20f6e2f7a4d",
-        "exact": "3cd26995b6ee1550",
+        "pattern": "a4a3ad475b93c89f",
+        "exact": "9e50b7950962986f",
         "num_nodes": 13,
         "constants": {
           "input_layernorm.norm": "rmsnorm",
           "pv.causal": true,
           "qk.causal": true,
-          "rope_k.theta": 1000000.0,
-          "rope_q.theta": 1000000.0,
+          "rope_k.theta": 100000.0,
+          "rope_q.theta": 100000.0,
           "softmax.causal": true
         }
       },
       "L21.mlp": {
         "role": "mlp",
         "topology": "0c8cab6eb751d660",
-        "pattern": "10a85f9e7f510cf6",
-        "exact": "6ab254d6b8f10887",
+        "pattern": "803150f1f591d287",
+        "exact": "eeb60f7f96ea90ac",
         "num_nodes": 7,
         "constants": {
           "act.fn": "silu",
@@ -491,23 +490,23 @@
       "L22.attention": {
         "role": "attention",
         "topology": "1b843e6dbe080a7d",
-        "pattern": "b73ce20f6e2f7a4d",
-        "exact": "3cd26995b6ee1550",
+        "pattern": "a4a3ad475b93c89f",
+        "exact": "9e50b7950962986f",
         "num_nodes": 13,
         "constants": {
           "input_layernorm.norm": "rmsnorm",
           "pv.causal": true,
           "qk.causal": true,
-          "rope_k.theta": 1000000.0,
-          "rope_q.theta": 1000000.0,
+          "rope_k.theta": 100000.0,
+          "rope_q.theta": 100000.0,
           "softmax.causal": true
         }
       },
       "L22.mlp": {
         "role": "mlp",
         "topology": "0c8cab6eb751d660",
-        "pattern": "10a85f9e7f510cf6",
-        "exact": "6ab254d6b8f10887",
+        "pattern": "803150f1f591d287",
+        "exact": "eeb60f7f96ea90ac",
         "num_nodes": 7,
         "constants": {
           "act.fn": "silu",
@@ -517,23 +516,23 @@
       "L23.attention": {
         "role": "attention",
         "topology": "1b843e6dbe080a7d",
-        "pattern": "b73ce20f6e2f7a4d",
-        "exact": "3cd26995b6ee1550",
+        "pattern": "a4a3ad475b93c89f",
+        "exact": "9e50b7950962986f",
         "num_nodes": 13,
         "constants": {
           "input_layernorm.norm": "rmsnorm",
           "pv.causal": true,
           "qk.causal": true,
-          "rope_k.theta": 1000000.0,
-          "rope_q.theta": 1000000.0,
+          "rope_k.theta": 100000.0,
+          "rope_q.theta": 100000.0,
           "softmax.causal": true
         }
       },
       "L23.mlp": {
         "role": "mlp",
         "topology": "0c8cab6eb751d660",
-        "pattern": "10a85f9e7f510cf6",
-        "exact": "6ab254d6b8f10887",
+        "pattern": "803150f1f591d287",
+        "exact": "eeb60f7f96ea90ac",
         "num_nodes": 7,
         "constants": {
           "act.fn": "silu",
@@ -543,23 +542,23 @@
       "L24.attention": {
         "role": "attention",
         "topology": "1b843e6dbe080a7d",
-        "pattern": "b73ce20f6e2f7a4d",
-        "exact": "3cd26995b6ee1550",
+        "pattern": "a4a3ad475b93c89f",
+        "exact": "9e50b7950962986f",
         "num_nodes": 13,
         "constants": {
           "input_layernorm.norm": "rmsnorm",
           "pv.causal": true,
           "qk.causal": true,
-          "rope_k.theta": 1000000.0,
-          "rope_q.theta": 1000000.0,
+          "rope_k.theta": 100000.0,
+          "rope_q.theta": 100000.0,
           "softmax.causal": true
         }
       },
       "L24.mlp": {
         "role": "mlp",
         "topology": "0c8cab6eb751d660",
-        "pattern": "10a85f9e7f510cf6",
-        "exact": "6ab254d6b8f10887",
+        "pattern": "803150f1f591d287",
+        "exact": "eeb60f7f96ea90ac",
         "num_nodes": 7,
         "constants": {
           "act.fn": "silu",
@@ -569,23 +568,23 @@
       "L25.attention": {
         "role": "attention",
         "topology": "1b843e6dbe080a7d",
-        "pattern": "b73ce20f6e2f7a4d",
-        "exact": "3cd26995b6ee1550",
+        "pattern": "a4a3ad475b93c89f",
+        "exact": "9e50b7950962986f",
         "num_nodes": 13,
         "constants": {
           "input_layernorm.norm": "rmsnorm",
           "pv.causal": true,
           "qk.causal": true,
-          "rope_k.theta": 1000000.0,
-          "rope_q.theta": 1000000.0,
+          "rope_k.theta": 100000.0,
+          "rope_q.theta": 100000.0,
           "softmax.causal": true
         }
       },
       "L25.mlp": {
         "role": "mlp",
         "topology": "0c8cab6eb751d660",
-        "pattern": "10a85f9e7f510cf6",
-        "exact": "6ab254d6b8f10887",
+        "pattern": "803150f1f591d287",
+        "exact": "eeb60f7f96ea90ac",
         "num_nodes": 7,
         "constants": {
           "act.fn": "silu",
@@ -595,23 +594,23 @@
       "L26.attention": {
         "role": "attention",
         "topology": "1b843e6dbe080a7d",
-        "pattern": "b73ce20f6e2f7a4d",
-        "exact": "3cd26995b6ee1550",
+        "pattern": "a4a3ad475b93c89f",
+        "exact": "9e50b7950962986f",
         "num_nodes": 13,
         "constants": {
           "input_layernorm.norm": "rmsnorm",
           "pv.causal": true,
           "qk.causal": true,
-          "rope_k.theta": 1000000.0,
-          "rope_q.theta": 1000000.0,
+          "rope_k.theta": 100000.0,
+          "rope_q.theta": 100000.0,
           "softmax.causal": true
         }
       },
       "L26.mlp": {
         "role": "mlp",
         "topology": "0c8cab6eb751d660",
-        "pattern": "10a85f9e7f510cf6",
-        "exact": "6ab254d6b8f10887",
+        "pattern": "803150f1f591d287",
+        "exact": "eeb60f7f96ea90ac",
         "num_nodes": 7,
         "constants": {
           "act.fn": "silu",
@@ -621,23 +620,75 @@
       "L27.attention": {
         "role": "attention",
         "topology": "1b843e6dbe080a7d",
-        "pattern": "b73ce20f6e2f7a4d",
-        "exact": "3cd26995b6ee1550",
+        "pattern": "a4a3ad475b93c89f",
+        "exact": "9e50b7950962986f",
         "num_nodes": 13,
         "constants": {
           "input_layernorm.norm": "rmsnorm",
           "pv.causal": true,
           "qk.causal": true,
-          "rope_k.theta": 1000000.0,
-          "rope_q.theta": 1000000.0,
+          "rope_k.theta": 100000.0,
+          "rope_q.theta": 100000.0,
           "softmax.causal": true
         }
       },
       "L27.mlp": {
         "role": "mlp",
         "topology": "0c8cab6eb751d660",
-        "pattern": "10a85f9e7f510cf6",
-        "exact": "6ab254d6b8f10887",
+        "pattern": "803150f1f591d287",
+        "exact": "eeb60f7f96ea90ac",
+        "num_nodes": 7,
+        "constants": {
+          "act.fn": "silu",
+          "post_attention_layernorm.norm": "rmsnorm"
+        }
+      },
+      "L28.attention": {
+        "role": "attention",
+        "topology": "1b843e6dbe080a7d",
+        "pattern": "a4a3ad475b93c89f",
+        "exact": "9e50b7950962986f",
+        "num_nodes": 13,
+        "constants": {
+          "input_layernorm.norm": "rmsnorm",
+          "pv.causal": true,
+          "qk.causal": true,
+          "rope_k.theta": 100000.0,
+          "rope_q.theta": 100000.0,
+          "softmax.causal": true
+        }
+      },
+      "L28.mlp": {
+        "role": "mlp",
+        "topology": "0c8cab6eb751d660",
+        "pattern": "803150f1f591d287",
+        "exact": "eeb60f7f96ea90ac",
+        "num_nodes": 7,
+        "constants": {
+          "act.fn": "silu",
+          "post_attention_layernorm.norm": "rmsnorm"
+        }
+      },
+      "L29.attention": {
+        "role": "attention",
+        "topology": "1b843e6dbe080a7d",
+        "pattern": "a4a3ad475b93c89f",
+        "exact": "9e50b7950962986f",
+        "num_nodes": 13,
+        "constants": {
+          "input_layernorm.norm": "rmsnorm",
+          "pv.causal": true,
+          "qk.causal": true,
+          "rope_k.theta": 100000.0,
+          "rope_q.theta": 100000.0,
+          "softmax.causal": true
+        }
+      },
+      "L29.mlp": {
+        "role": "mlp",
+        "topology": "0c8cab6eb751d660",
+        "pattern": "803150f1f591d287",
+        "exact": "eeb60f7f96ea90ac",
         "num_nodes": 7,
         "constants": {
           "act.fn": "silu",
@@ -647,23 +698,75 @@
       "L3.attention": {
         "role": "attention",
         "topology": "1b843e6dbe080a7d",
-        "pattern": "b73ce20f6e2f7a4d",
-        "exact": "3cd26995b6ee1550",
+        "pattern": "a4a3ad475b93c89f",
+        "exact": "9e50b7950962986f",
         "num_nodes": 13,
         "constants": {
           "input_layernorm.norm": "rmsnorm",
           "pv.causal": true,
           "qk.causal": true,
-          "rope_k.theta": 1000000.0,
-          "rope_q.theta": 1000000.0,
+          "rope_k.theta": 100000.0,
+          "rope_q.theta": 100000.0,
           "softmax.causal": true
         }
       },
       "L3.mlp": {
         "role": "mlp",
         "topology": "0c8cab6eb751d660",
-        "pattern": "10a85f9e7f510cf6",
-        "exact": "6ab254d6b8f10887",
+        "pattern": "803150f1f591d287",
+        "exact": "eeb60f7f96ea90ac",
+        "num_nodes": 7,
+        "constants": {
+          "act.fn": "silu",
+          "post_attention_layernorm.norm": "rmsnorm"
+        }
+      },
+      "L30.attention": {
+        "role": "attention",
+        "topology": "1b843e6dbe080a7d",
+        "pattern": "a4a3ad475b93c89f",
+        "exact": "9e50b7950962986f",
+        "num_nodes": 13,
+        "constants": {
+          "input_layernorm.norm": "rmsnorm",
+          "pv.causal": true,
+          "qk.causal": true,
+          "rope_k.theta": 100000.0,
+          "rope_q.theta": 100000.0,
+          "softmax.causal": true
+        }
+      },
+      "L30.mlp": {
+        "role": "mlp",
+        "topology": "0c8cab6eb751d660",
+        "pattern": "803150f1f591d287",
+        "exact": "eeb60f7f96ea90ac",
+        "num_nodes": 7,
+        "constants": {
+          "act.fn": "silu",
+          "post_attention_layernorm.norm": "rmsnorm"
+        }
+      },
+      "L31.attention": {
+        "role": "attention",
+        "topology": "1b843e6dbe080a7d",
+        "pattern": "a4a3ad475b93c89f",
+        "exact": "9e50b7950962986f",
+        "num_nodes": 13,
+        "constants": {
+          "input_layernorm.norm": "rmsnorm",
+          "pv.causal": true,
+          "qk.causal": true,
+          "rope_k.theta": 100000.0,
+          "rope_q.theta": 100000.0,
+          "softmax.causal": true
+        }
+      },
+      "L31.mlp": {
+        "role": "mlp",
+        "topology": "0c8cab6eb751d660",
+        "pattern": "803150f1f591d287",
+        "exact": "eeb60f7f96ea90ac",
         "num_nodes": 7,
         "constants": {
           "act.fn": "silu",
@@ -673,23 +776,23 @@
       "L4.attention": {
         "role": "attention",
         "topology": "1b843e6dbe080a7d",
-        "pattern": "b73ce20f6e2f7a4d",
-        "exact": "3cd26995b6ee1550",
+        "pattern": "a4a3ad475b93c89f",
+        "exact": "9e50b7950962986f",
         "num_nodes": 13,
         "constants": {
           "input_layernorm.norm": "rmsnorm",
           "pv.causal": true,
           "qk.causal": true,
-          "rope_k.theta": 1000000.0,
-          "rope_q.theta": 1000000.0,
+          "rope_k.theta": 100000.0,
+          "rope_q.theta": 100000.0,
           "softmax.causal": true
         }
       },
       "L4.mlp": {
         "role": "mlp",
         "topology": "0c8cab6eb751d660",
-        "pattern": "10a85f9e7f510cf6",
-        "exact": "6ab254d6b8f10887",
+        "pattern": "803150f1f591d287",
+        "exact": "eeb60f7f96ea90ac",
         "num_nodes": 7,
         "constants": {
           "act.fn": "silu",
@@ -699,23 +802,23 @@
       "L5.attention": {
         "role": "attention",
         "topology": "1b843e6dbe080a7d",
-        "pattern": "b73ce20f6e2f7a4d",
-        "exact": "3cd26995b6ee1550",
+        "pattern": "a4a3ad475b93c89f",
+        "exact": "9e50b7950962986f",
         "num_nodes": 13,
         "constants": {
           "input_layernorm.norm": "rmsnorm",
           "pv.causal": true,
           "qk.causal": true,
-          "rope_k.theta": 1000000.0,
-          "rope_q.theta": 1000000.0,
+          "rope_k.theta": 100000.0,
+          "rope_q.theta": 100000.0,
           "softmax.causal": true
         }
       },
       "L5.mlp": {
         "role": "mlp",
         "topology": "0c8cab6eb751d660",
-        "pattern": "10a85f9e7f510cf6",
-        "exact": "6ab254d6b8f10887",
+        "pattern": "803150f1f591d287",
+        "exact": "eeb60f7f96ea90ac",
         "num_nodes": 7,
         "constants": {
           "act.fn": "silu",
@@ -725,23 +828,23 @@
       "L6.attention": {
         "role": "attention",
         "topology": "1b843e6dbe080a7d",
-        "pattern": "b73ce20f6e2f7a4d",
-        "exact": "3cd26995b6ee1550",
+        "pattern": "a4a3ad475b93c89f",
+        "exact": "9e50b7950962986f",
         "num_nodes": 13,
         "constants": {
           "input_layernorm.norm": "rmsnorm",
           "pv.causal": true,
           "qk.causal": true,
-          "rope_k.theta": 1000000.0,
-          "rope_q.theta": 1000000.0,
+          "rope_k.theta": 100000.0,
+          "rope_q.theta": 100000.0,
           "softmax.causal": true
         }
       },
       "L6.mlp": {
         "role": "mlp",
         "topology": "0c8cab6eb751d660",
-        "pattern": "10a85f9e7f510cf6",
-        "exact": "6ab254d6b8f10887",
+        "pattern": "803150f1f591d287",
+        "exact": "eeb60f7f96ea90ac",
         "num_nodes": 7,
         "constants": {
           "act.fn": "silu",
@@ -751,23 +854,23 @@
       "L7.attention": {
         "role": "attention",
         "topology": "1b843e6dbe080a7d",
-        "pattern": "b73ce20f6e2f7a4d",
-        "exact": "3cd26995b6ee1550",
+        "pattern": "a4a3ad475b93c89f",
+        "exact": "9e50b7950962986f",
         "num_nodes": 13,
         "constants": {
           "input_layernorm.norm": "rmsnorm",
           "pv.causal": true,
           "qk.causal": true,
-          "rope_k.theta": 1000000.0,
-          "rope_q.theta": 1000000.0,
+          "rope_k.theta": 100000.0,
+          "rope_q.theta": 100000.0,
           "softmax.causal": true
         }
       },
       "L7.mlp": {
         "role": "mlp",
         "topology": "0c8cab6eb751d660",
-        "pattern": "10a85f9e7f510cf6",
-        "exact": "6ab254d6b8f10887",
+        "pattern": "803150f1f591d287",
+        "exact": "eeb60f7f96ea90ac",
         "num_nodes": 7,
         "constants": {
           "act.fn": "silu",
@@ -777,23 +880,23 @@
       "L8.attention": {
         "role": "attention",
         "topology": "1b843e6dbe080a7d",
-        "pattern": "b73ce20f6e2f7a4d",
-        "exact": "3cd26995b6ee1550",
+        "pattern": "a4a3ad475b93c89f",
+        "exact": "9e50b7950962986f",
         "num_nodes": 13,
         "constants": {
           "input_layernorm.norm": "rmsnorm",
           "pv.causal": true,
           "qk.causal": true,
-          "rope_k.theta": 1000000.0,
-          "rope_q.theta": 1000000.0,
+          "rope_k.theta": 100000.0,
+          "rope_q.theta": 100000.0,
           "softmax.causal": true
         }
       },
       "L8.mlp": {
         "role": "mlp",
         "topology": "0c8cab6eb751d660",
-        "pattern": "10a85f9e7f510cf6",
-        "exact": "6ab254d6b8f10887",
+        "pattern": "803150f1f591d287",
+        "exact": "eeb60f7f96ea90ac",
         "num_nodes": 7,
         "constants": {
           "act.fn": "silu",
@@ -803,23 +906,23 @@
       "L9.attention": {
         "role": "attention",
         "topology": "1b843e6dbe080a7d",
-        "pattern": "b73ce20f6e2f7a4d",
-        "exact": "3cd26995b6ee1550",
+        "pattern": "a4a3ad475b93c89f",
+        "exact": "9e50b7950962986f",
         "num_nodes": 13,
         "constants": {
           "input_layernorm.norm": "rmsnorm",
           "pv.causal": true,
           "qk.causal": true,
-          "rope_k.theta": 1000000.0,
-          "rope_q.theta": 1000000.0,
+          "rope_k.theta": 100000.0,
+          "rope_q.theta": 100000.0,
           "softmax.causal": true
         }
       },
       "L9.mlp": {
         "role": "mlp",
         "topology": "0c8cab6eb751d660",
-        "pattern": "10a85f9e7f510cf6",
-        "exact": "6ab254d6b8f10887",
+        "pattern": "803150f1f591d287",
+        "exact": "eeb60f7f96ea90ac",
         "num_nodes": 7,
         "constants": {
           "act.fn": "silu",
@@ -829,16 +932,16 @@
       "embedding": {
         "role": "embedding",
         "topology": "6ee389465d8b9a6a",
-        "pattern": "d886524e2bb8228c",
-        "exact": "38622da2c64bdb2b",
+        "pattern": "9a167d2fcc0abaed",
+        "exact": "6d5982906a61269c",
         "num_nodes": 1,
         "constants": {}
       },
       "head": {
         "role": "head",
-        "topology": "1a12bd5a3fa9c2fb",
-        "pattern": "b9cfe3d7404efd73",
-        "exact": "4d32b01bf1ddecc9",
+        "topology": "7d5cb1d017c70c31",
+        "pattern": "068d3d0b9f565523",
+        "exact": "2f028c11365ca7ef",
         "num_nodes": 3,
         "constants": {
           "final_norm.norm": "rmsnorm"
@@ -847,18 +950,12 @@
     }
   },
   "stability": {
-    "family": "qwen",
+    "family": "smollm",
     "versions": [
-      "qwen2.5-7b",
-      "qwen2.5-14b"
+      "smollm2-360m-instruct"
     ],
     "transitions": 0,
-    "scale_pairs": [
-      [
-        "qwen2.5-7b",
-        "qwen2.5-14b"
-      ]
-    ],
+    "scale_pairs": [],
     "level_stability": {
       "topology": null,
       "pattern": null,
@@ -870,98 +967,98 @@
     "diffs": []
   },
   "serving_profile": {
-    "model": "qwen2.5-7b",
+    "model": "smollm2-360m-instruct",
     "device": "h100-sxm",
     "request": "prompt=2048 gen=512 B=1 ctx=2304",
-    "total_time_s": 2.786717498542347,
-    "decode_time_share": 0.9802309331912361,
-    "generated_tokens_per_second": 183.7287060018867,
-    "energy_per_generated_token_j": 6.172143834662151,
+    "total_time_s": 0.16187075029978168,
+    "decode_time_share": 0.9728615979818497,
+    "generated_tokens_per_second": 3163.0174015489847,
+    "energy_per_generated_token_j": 0.3585184196092821,
     "hotspots": {
-      "gate_proj": 0.2655,
-      "up_proj": 0.2655,
-      "down_proj": 0.2655,
-      "lm_head": 0.0749,
-      "q_proj": 0.0502,
-      "o_proj": 0.0502,
-      "kv_read": 0.0091,
-      "k_proj": 0.0072,
-      "v_proj": 0.0072,
-      "act": 0.0012
+      "gate_proj": 0.1893,
+      "up_proj": 0.1893,
+      "down_proj": 0.1893,
+      "lm_head": 0.1117,
+      "kv_read": 0.1116,
+      "q_proj": 0.071,
+      "o_proj": 0.071,
+      "k_proj": 0.0238,
+      "v_proj": 0.0238,
+      "act": 0.0032
     }
   },
   "decode_profile": {
-    "model": "qwen2.5-7b",
+    "model": "smollm2-360m-instruct",
     "device": "h100-sxm",
     "workload": "decode B=1 T=2304 act=bf16",
     "weight_precision": "bf16",
-    "total_time_s": 0.0053352083869853744,
-    "tokens_per_second": 187.43410331251252,
-    "total_flops": 15080452608.0,
-    "total_bytes": 14289141760.0,
-    "weight_read_bytes_per_step": 14141245440.0,
-    "resident_weight_bytes": 15231233024.0,
-    "kv_bytes": 132177920.0,
-    "mean_arithmetic_intensity": 1.0553784727795996,
+    "total_time_s": 0.0003075739000061847,
+    "tokens_per_second": 3251.251162663321,
+    "total_flops": 1013568192.0,
+    "total_bytes": 821476608.0,
+    "weight_read_bytes_per_step": 723644160.0,
+    "resident_weight_bytes": 723642240.0,
+    "kv_bytes": 94412800.0,
+    "mean_arithmetic_intensity": 1.2338369493778696,
     "device_ridge_point": 92.30410447761194,
-    "memory_bound_share": 0.9992992529081677,
-    "energy_per_token_j": 6.0501263108414145,
+    "memory_bound_share": 0.9962790109608161,
+    "energy_per_token_j": 0.34878880260701345,
     "fits_in_device_memory": true,
-    "memory_headroom": 0.8096095872,
+    "memory_headroom": 0.990954472,
     "hotspots_by_role": {
-      "gate_proj": 0.266,
-      "up_proj": 0.266,
-      "down_proj": 0.266,
-      "lm_head": 0.0763,
-      "q_proj": 0.0504,
-      "o_proj": 0.0503,
-      "kv_read": 0.0092,
-      "k_proj": 0.0072,
-      "v_proj": 0.0072,
-      "qk": 0.0004
+      "gate_proj": 0.1911,
+      "up_proj": 0.1911,
+      "down_proj": 0.1911,
+      "lm_head": 0.1146,
+      "kv_read": 0.1145,
+      "q_proj": 0.0717,
+      "o_proj": 0.0717,
+      "k_proj": 0.024,
+      "v_proj": 0.024,
+      "qk": 0.0019
     },
     "hotspots_by_block": {
-      "mlp": 0.7985,
-      "attention": 0.1252,
-      "head": 0.0763,
+      "mlp": 0.5749,
+      "attention": 0.3104,
+      "head": 0.1147,
       "embedding": 0.0
     }
   },
   "prefill_profile": {
-    "model": "qwen2.5-7b",
+    "model": "smollm2-360m-instruct",
     "device": "h100-sxm",
     "workload": "prefill B=1 S=2048 act=bf16",
     "weight_precision": "bf16",
-    "total_time_s": 0.05509080440583497,
-    "tokens_per_second": 37174.9881325582,
-    "total_flops": 27589552057344.0,
-    "total_bytes": 45322309632.0,
-    "weight_read_bytes_per_step": 14155918336.0,
-    "resident_weight_bytes": 15231233024.0,
-    "kv_bytes": 234881024.0,
-    "mean_arithmetic_intensity": 608.7410875871226,
+    "total_time_s": 0.004392913496615096,
+    "tokens_per_second": 466205.40139888035,
+    "total_flops": 1553719099392.0,
+    "total_bytes": 7492398848.0,
+    "weight_read_bytes_per_step": 727574400.0,
+    "resident_weight_bytes": 723642240.0,
+    "kv_bytes": 167772160.0,
+    "mean_arithmetic_intensity": 207.37271612372123,
     "device_ridge_point": 253.1769722814499,
-    "memory_bound_share": 0.1570776888323378,
-    "energy_per_token_j": 0.030504380955184013,
+    "memory_bound_share": 0.43798215642273214,
+    "energy_per_token_j": 0.002432404250567148,
     "fits_in_device_memory": true,
-    "memory_headroom": 0.8096095872,
+    "memory_headroom": 0.990954472,
     "hotspots_by_role": {
-      "gate_proj": 0.2381,
-      "up_proj": 0.2381,
-      "down_proj": 0.2381,
-      "act": 0.0505,
-      "glu_mul": 0.0505,
-      "q_proj": 0.045,
-      "o_proj": 0.045,
-      "residual_add": 0.0191,
-      "qk": 0.0129,
-      "pv": 0.0129
+      "gate_proj": 0.1235,
+      "up_proj": 0.1235,
+      "down_proj": 0.1235,
+      "act": 0.0977,
+      "glu_mul": 0.0977,
+      "residual_add": 0.0733,
+      "qk": 0.0494,
+      "pv": 0.0494,
+      "q_proj": 0.0463,
+      "o_proj": 0.0463
     },
     "hotspots_by_block": {
-      "mlp": 0.831,
-      "attention": 0.1601,
-      "head": 0.0087,
-      "embedding": 0.0002
+      "mlp": 0.627,
+      "attention": 0.3622,
+      "head": 0.0099,
+      "embedding": 0.0008
     }
   },
   "quantization": {
@@ -992,17 +1089,17 @@
         "v_proj": 0.637
       }
     },
-    "weight_gb_before": 14.14124544,
-    "weight_gb_after": 7.070827008,
-    "memory_reduction": 0.5,
-    "time_ms_before": 5.335208386985374,
-    "time_ms_after": 2.6969925541495594,
-    "speedup": 1.978,
+    "weight_gb_before": 0.72364416,
+    "weight_gb_after": 0.36188448,
+    "memory_reduction": 0.4999,
+    "time_ms_before": 0.30757390000618473,
+    "time_ms_after": 0.17258894478230313,
+    "speedup": 1.782,
     "quality_delta": "UNMEASURED (G-002)",
     "findings": [
       {
         "name": "quant.sensitivity.memory_reduction",
-        "value": 0.49998555374766196,
+        "value": 0.4999137697732543,
         "unit": "fracao",
         "status": "CONDITIONAL_RESULT",
         "assumptions": [
@@ -1017,7 +1114,7 @@
       },
       {
         "name": "quant.sensitivity.speedup",
-        "value": 1.9782065689342334,
+        "value": 1.7821182022646134,
         "unit": "x sobre baseline",
         "status": "CONDITIONAL_RESULT",
         "assumptions": [
@@ -1048,30 +1145,30 @@
   },
   "candidates": [
     {
-      "role": "gate_proj",
-      "block": "mlp",
-      "instances_per_token": 28,
-      "cost_share": 0.2655,
-      "recommended_precision": "int4",
-      "weight_elems": 1901068288,
-      "LHS": 0.5049,
+      "role": "q_proj",
+      "block": "attention",
+      "instances_per_token": 32,
+      "cost_share": 0.071,
+      "recommended_precision": "int8",
+      "weight_elems": 29491200,
+      "LHS": 0.5027,
       "scorecard": {
-        "name": "gate_proj",
+        "name": "q_proj",
         "kind": "LHS",
-        "score": 0.5049,
+        "score": 0.5027,
         "status": "OPEN_GAP",
         "factors": {
           "E": {
-            "value": 0.08,
+            "value": 0.1,
             "weight": 0.2,
-            "contribution": 0.016,
-            "status": "COMPUTATIONAL_EVIDENCE",
-            "note": "preservado em 0/1 transicoes de versao; presente em 2/10 modelos do corpus"
+            "contribution": 0.02,
+            "status": "ASSUMPTION",
+            "note": "familia com uma unica versao no corpus: estabilidade temporal nao observada; usando apenas cobertura de corpus (1/10 modelos)"
           },
           "F": {
-            "value": 0.2655,
+            "value": 0.071,
             "weight": 0.15,
-            "contribution": 0.0398,
+            "contribution": 0.0107,
             "status": "CONDITIONAL_RESULT",
             "note": ""
           },
@@ -1080,21 +1177,87 @@
             "weight": 0.15,
             "contribution": 0.15,
             "status": "MODEL",
-            "note": "28 nos, 0% dinamicos"
+            "note": "32 nos, 0% dinamicos"
+          },
+          "Q": {
+            "value": 0.85,
+            "weight": 0.15,
+            "contribution": 0.1275,
+            "status": "ASSUMPTION",
+            "note": "melhor precisao aceitavel: int8 (camada representativa 16)"
+          },
+          "V": {
+            "value": 0.6305,
+            "weight": 0.15,
+            "contribution": 0.0946,
+            "status": "MODEL",
+            "note": "32 instancias por token"
+          },
+          "M": {
+            "value": 1.0,
+            "weight": 0.1,
+            "contribution": 0.1,
+            "status": "MODEL",
+            "note": "0% com enderecamento dependente de dado"
+          },
+          "L": {
+            "value": 0.0,
+            "weight": 0.1,
+            "contribution": 0.0,
+            "status": "OPEN_GAP",
+            "note": "sem transicao temporal na familia (0 transicao(oes)): vida util nao estimavel"
+          }
+        }
+      }
+    },
+    {
+      "role": "gate_proj",
+      "block": "mlp",
+      "instances_per_token": 32,
+      "cost_share": 0.1893,
+      "recommended_precision": "int4",
+      "weight_elems": 78643200,
+      "LHS": 0.501,
+      "scorecard": {
+        "name": "gate_proj",
+        "kind": "LHS",
+        "score": 0.501,
+        "status": "OPEN_GAP",
+        "factors": {
+          "E": {
+            "value": 0.1,
+            "weight": 0.2,
+            "contribution": 0.02,
+            "status": "ASSUMPTION",
+            "note": "familia com uma unica versao no corpus: estabilidade temporal nao observada; usando apenas cobertura de corpus (1/10 modelos)"
+          },
+          "F": {
+            "value": 0.1893,
+            "weight": 0.15,
+            "contribution": 0.0284,
+            "status": "CONDITIONAL_RESULT",
+            "note": ""
+          },
+          "R": {
+            "value": 1.0,
+            "weight": 0.15,
+            "contribution": 0.15,
+            "status": "MODEL",
+            "note": "32 nos, 0% dinamicos"
           },
           "Q": {
             "value": 0.72,
             "weight": 0.15,
             "contribution": 0.108,
             "status": "ASSUMPTION",
-            "note": "melhor precisao aceitavel: int4 (camada representativa 14)"
+            "note": "melhor precisao aceitavel: int4 (camada representativa 16)"
           },
           "V": {
-            "value": 0.6072,
+            "value": 0.6305,
             "weight": 0.15,
-            "contribution": 0.0911,
+            "contribution": 0.0946,
             "status": "MODEL",
-            "note": "28 instancias por token"
+            "note": "32 instancias por token"
           },
           "M": {
             "value": 1.0,
@@ -1116,28 +1279,28 @@
     {
       "role": "up_proj",
       "block": "mlp",
-      "instances_per_token": 28,
-      "cost_share": 0.2655,
+      "instances_per_token": 32,
+      "cost_share": 0.1893,
       "recommended_precision": "int4",
-      "weight_elems": 1901068288,
-      "LHS": 0.5049,
+      "weight_elems": 78643200,
+      "LHS": 0.501,
       "scorecard": {
         "name": "up_proj",
         "kind": "LHS",
-        "score": 0.5049,
+        "score": 0.501,
         "status": "OPEN_GAP",
         "factors": {
           "E": {
-            "value": 0.08,
+            "value": 0.1,
             "weight": 0.2,
-            "contribution": 0.016,
-            "status": "COMPUTATIONAL_EVIDENCE",
-            "note": "preservado em 0/1 transicoes de versao; presente em 2/10 modelos do corpus"
+            "contribution": 0.02,
+            "status": "ASSUMPTION",
+            "note": "familia com uma unica versao no corpus: estabilidade temporal nao observada; usando apenas cobertura de corpus (1/10 modelos)"
           },
           "F": {
-            "value": 0.2655,
+            "value": 0.1893,
             "weight": 0.15,
-            "contribution": 0.0398,
+            "contribution": 0.0284,
             "status": "CONDITIONAL_RESULT",
             "note": ""
           },
@@ -1146,153 +1309,21 @@
             "weight": 0.15,
             "contribution": 0.15,
             "status": "MODEL",
-            "note": "28 nos, 0% dinamicos"
+            "note": "32 nos, 0% dinamicos"
           },
           "Q": {
             "value": 0.72,
             "weight": 0.15,
             "contribution": 0.108,
             "status": "ASSUMPTION",
-            "note": "melhor precisao aceitavel: int4 (camada representativa 14)"
+            "note": "melhor precisao aceitavel: int4 (camada representativa 16)"
           },
           "V": {
-            "value": 0.6072,
+            "value": 0.6305,
             "weight": 0.15,
-            "contribution": 0.0911,
+            "contribution": 0.0946,
             "status": "MODEL",
-            "note": "28 instancias por token"
-          },
-          "M": {
-            "value": 1.0,
-            "weight": 0.1,
-            "contribution": 0.1,
-            "status": "MODEL",
-            "note": "0% com enderecamento dependente de dado"
-          },
-          "L": {
-            "value": 0.0,
-            "weight": 0.1,
-            "contribution": 0.0,
-            "status": "OPEN_GAP",
-            "note": "sem transicao temporal na familia (0 transicao(oes)): vida util nao estimavel"
-          }
-        }
-      }
-    },
-    {
-      "role": "q_proj",
-      "block": "attention",
-      "instances_per_token": 28,
-      "cost_share": 0.0502,
-      "recommended_precision": "int8",
-      "weight_elems": 359761920,
-      "LHS": 0.4921,
-      "scorecard": {
-        "name": "q_proj",
-        "kind": "LHS",
-        "score": 0.4921,
-        "status": "OPEN_GAP",
-        "factors": {
-          "E": {
-            "value": 0.08,
-            "weight": 0.2,
-            "contribution": 0.016,
-            "status": "COMPUTATIONAL_EVIDENCE",
-            "note": "preservado em 0/1 transicoes de versao; presente em 2/10 modelos do corpus"
-          },
-          "F": {
-            "value": 0.0502,
-            "weight": 0.15,
-            "contribution": 0.0075,
-            "status": "CONDITIONAL_RESULT",
-            "note": ""
-          },
-          "R": {
-            "value": 1.0,
-            "weight": 0.15,
-            "contribution": 0.15,
-            "status": "MODEL",
-            "note": "28 nos, 0% dinamicos"
-          },
-          "Q": {
-            "value": 0.85,
-            "weight": 0.15,
-            "contribution": 0.1275,
-            "status": "ASSUMPTION",
-            "note": "melhor precisao aceitavel: int8 (camada representativa 14)"
-          },
-          "V": {
-            "value": 0.6072,
-            "weight": 0.15,
-            "contribution": 0.0911,
-            "status": "MODEL",
-            "note": "28 instancias por token"
-          },
-          "M": {
-            "value": 1.0,
-            "weight": 0.1,
-            "contribution": 0.1,
-            "status": "MODEL",
-            "note": "0% com enderecamento dependente de dado"
-          },
-          "L": {
-            "value": 0.0,
-            "weight": 0.1,
-            "contribution": 0.0,
-            "status": "OPEN_GAP",
-            "note": "sem transicao temporal na familia (0 transicao(oes)): vida util nao estimavel"
-          }
-        }
-      }
-    },
-    {
-      "role": "down_proj",
-      "block": "mlp",
-      "instances_per_token": 28,
-      "cost_share": 0.2655,
-      "recommended_precision": "int4",
-      "weight_elems": 1901068288,
-      "LHS": 0.4899,
-      "scorecard": {
-        "name": "down_proj",
-        "kind": "LHS",
-        "score": 0.4899,
-        "status": "OPEN_GAP",
-        "factors": {
-          "E": {
-            "value": 0.08,
-            "weight": 0.2,
-            "contribution": 0.016,
-            "status": "COMPUTATIONAL_EVIDENCE",
-            "note": "preservado em 0/1 transicoes de versao; presente em 2/10 modelos do corpus"
-          },
-          "F": {
-            "value": 0.2655,
-            "weight": 0.15,
-            "contribution": 0.0398,
-            "status": "CONDITIONAL_RESULT",
-            "note": ""
-          },
-          "R": {
-            "value": 1.0,
-            "weight": 0.15,
-            "contribution": 0.15,
-            "status": "MODEL",
-            "note": "28 nos, 0% dinamicos"
-          },
-          "Q": {
-            "value": 0.62,
-            "weight": 0.15,
-            "contribution": 0.093,
-            "status": "ASSUMPTION",
-            "note": "melhor precisao aceitavel: int4 (camada representativa 14)"
-          },
-          "V": {
-            "value": 0.6072,
-            "weight": 0.15,
-            "contribution": 0.0911,
-            "status": "MODEL",
-            "note": "28 instancias por token"
+            "note": "32 instancias por token"
           },
           "M": {
             "value": 1.0,
@@ -1314,28 +1345,28 @@
     {
       "role": "v_proj",
       "block": "attention",
-      "instances_per_token": 28,
-      "cost_share": 0.0072,
+      "instances_per_token": 32,
+      "cost_share": 0.0238,
       "recommended_precision": "int8",
-      "weight_elems": 51394560,
-      "LHS": 0.4857,
+      "weight_elems": 9830400,
+      "LHS": 0.4957,
       "scorecard": {
         "name": "v_proj",
         "kind": "LHS",
-        "score": 0.4857,
+        "score": 0.4957,
         "status": "OPEN_GAP",
         "factors": {
           "E": {
-            "value": 0.08,
+            "value": 0.1,
             "weight": 0.2,
-            "contribution": 0.016,
-            "status": "COMPUTATIONAL_EVIDENCE",
-            "note": "preservado em 0/1 transicoes de versao; presente em 2/10 modelos do corpus"
+            "contribution": 0.02,
+            "status": "ASSUMPTION",
+            "note": "familia com uma unica versao no corpus: estabilidade temporal nao observada; usando apenas cobertura de corpus (1/10 modelos)"
           },
           "F": {
-            "value": 0.0072,
+            "value": 0.0238,
             "weight": 0.15,
-            "contribution": 0.0011,
+            "contribution": 0.0036,
             "status": "CONDITIONAL_RESULT",
             "note": ""
           },
@@ -1344,21 +1375,21 @@
             "weight": 0.15,
             "contribution": 0.15,
             "status": "MODEL",
-            "note": "28 nos, 0% dinamicos"
+            "note": "32 nos, 0% dinamicos"
           },
           "Q": {
             "value": 0.85,
             "weight": 0.15,
             "contribution": 0.1275,
             "status": "ASSUMPTION",
-            "note": "melhor precisao aceitavel: int8 (camada representativa 14)"
+            "note": "melhor precisao aceitavel: int8 (camada representativa 16)"
           },
           "V": {
-            "value": 0.6072,
+            "value": 0.6305,
             "weight": 0.15,
-            "contribution": 0.0911,
+            "contribution": 0.0946,
             "status": "MODEL",
-            "note": "28 instancias por token"
+            "note": "32 instancias por token"
           },
           "M": {
             "value": 1.0,
@@ -1380,28 +1411,28 @@
     {
       "role": "k_proj",
       "block": "attention",
-      "instances_per_token": 28,
-      "cost_share": 0.0072,
+      "instances_per_token": 32,
+      "cost_share": 0.0238,
       "recommended_precision": "int8",
-      "weight_elems": 51394560,
-      "LHS": 0.4782,
+      "weight_elems": 9830400,
+      "LHS": 0.4882,
       "scorecard": {
         "name": "k_proj",
         "kind": "LHS",
-        "score": 0.4782,
+        "score": 0.4882,
         "status": "OPEN_GAP",
         "factors": {
           "E": {
-            "value": 0.08,
+            "value": 0.1,
             "weight": 0.2,
-            "contribution": 0.016,
-            "status": "COMPUTATIONAL_EVIDENCE",
-            "note": "preservado em 0/1 transicoes de versao; presente em 2/10 modelos do corpus"
+            "contribution": 0.02,
+            "status": "ASSUMPTION",
+            "note": "familia com uma unica versao no corpus: estabilidade temporal nao observada; usando apenas cobertura de corpus (1/10 modelos)"
           },
           "F": {
-            "value": 0.0072,
+            "value": 0.0238,
             "weight": 0.15,
-            "contribution": 0.0011,
+            "contribution": 0.0036,
             "status": "CONDITIONAL_RESULT",
             "note": ""
           },
@@ -1410,21 +1441,87 @@
             "weight": 0.15,
             "contribution": 0.15,
             "status": "MODEL",
-            "note": "28 nos, 0% dinamicos"
+            "note": "32 nos, 0% dinamicos"
           },
           "Q": {
             "value": 0.8,
             "weight": 0.15,
             "contribution": 0.12,
             "status": "ASSUMPTION",
-            "note": "melhor precisao aceitavel: int8 (camada representativa 14)"
+            "note": "melhor precisao aceitavel: int8 (camada representativa 16)"
           },
           "V": {
-            "value": 0.6072,
+            "value": 0.6305,
             "weight": 0.15,
-            "contribution": 0.0911,
+            "contribution": 0.0946,
             "status": "MODEL",
-            "note": "28 instancias por token"
+            "note": "32 instancias por token"
+          },
+          "M": {
+            "value": 1.0,
+            "weight": 0.1,
+            "contribution": 0.1,
+            "status": "MODEL",
+            "note": "0% com enderecamento dependente de dado"
+          },
+          "L": {
+            "value": 0.0,
+            "weight": 0.1,
+            "contribution": 0.0,
+            "status": "OPEN_GAP",
+            "note": "sem transicao temporal na familia (0 transicao(oes)): vida util nao estimavel"
+          }
+        }
+      }
+    },
+    {
+      "role": "down_proj",
+      "block": "mlp",
+      "instances_per_token": 32,
+      "cost_share": 0.1893,
+      "recommended_precision": "int4",
+      "weight_elems": 78643200,
+      "LHS": 0.486,
+      "scorecard": {
+        "name": "down_proj",
+        "kind": "LHS",
+        "score": 0.486,
+        "status": "OPEN_GAP",
+        "factors": {
+          "E": {
+            "value": 0.1,
+            "weight": 0.2,
+            "contribution": 0.02,
+            "status": "ASSUMPTION",
+            "note": "familia com uma unica versao no corpus: estabilidade temporal nao observada; usando apenas cobertura de corpus (1/10 modelos)"
+          },
+          "F": {
+            "value": 0.1893,
+            "weight": 0.15,
+            "contribution": 0.0284,
+            "status": "CONDITIONAL_RESULT",
+            "note": ""
+          },
+          "R": {
+            "value": 1.0,
+            "weight": 0.15,
+            "contribution": 0.15,
+            "status": "MODEL",
+            "note": "32 nos, 0% dinamicos"
+          },
+          "Q": {
+            "value": 0.62,
+            "weight": 0.15,
+            "contribution": 0.093,
+            "status": "ASSUMPTION",
+            "note": "melhor precisao aceitavel: int4 (camada representativa 16)"
+          },
+          "V": {
+            "value": 0.6305,
+            "weight": 0.15,
+            "contribution": 0.0946,
+            "status": "MODEL",
+            "note": "32 instancias por token"
           },
           "M": {
             "value": 1.0,
@@ -1446,28 +1543,28 @@
     {
       "role": "o_proj",
       "block": "attention",
-      "instances_per_token": 28,
-      "cost_share": 0.0502,
+      "instances_per_token": 32,
+      "cost_share": 0.071,
       "recommended_precision": "int4",
-      "weight_elems": 359661568,
-      "LHS": 0.4546,
+      "weight_elems": 29491200,
+      "LHS": 0.4652,
       "scorecard": {
         "name": "o_proj",
         "kind": "LHS",
-        "score": 0.4546,
+        "score": 0.4652,
         "status": "OPEN_GAP",
         "factors": {
           "E": {
-            "value": 0.08,
+            "value": 0.1,
             "weight": 0.2,
-            "contribution": 0.016,
-            "status": "COMPUTATIONAL_EVIDENCE",
-            "note": "preservado em 0/1 transicoes de versao; presente em 2/10 modelos do corpus"
+            "contribution": 0.02,
+            "status": "ASSUMPTION",
+            "note": "familia com uma unica versao no corpus: estabilidade temporal nao observada; usando apenas cobertura de corpus (1/10 modelos)"
           },
           "F": {
-            "value": 0.0502,
+            "value": 0.071,
             "weight": 0.15,
-            "contribution": 0.0075,
+            "contribution": 0.0107,
             "status": "CONDITIONAL_RESULT",
             "note": ""
           },
@@ -1476,21 +1573,21 @@
             "weight": 0.15,
             "contribution": 0.15,
             "status": "MODEL",
-            "note": "28 nos, 0% dinamicos"
+            "note": "32 nos, 0% dinamicos"
           },
           "Q": {
             "value": 0.6,
             "weight": 0.15,
             "contribution": 0.09,
             "status": "ASSUMPTION",
-            "note": "melhor precisao aceitavel: int4 (camada representativa 14)"
+            "note": "melhor precisao aceitavel: int4 (camada representativa 16)"
           },
           "V": {
-            "value": 0.6072,
+            "value": 0.6305,
             "weight": 0.15,
-            "contribution": 0.0911,
+            "contribution": 0.0946,
             "status": "MODEL",
-            "note": "28 instancias por token"
+            "note": "32 instancias por token"
           },
           "M": {
             "value": 1.0,
@@ -1513,27 +1610,27 @@
       "role": "lm_head",
       "block": "head",
       "instances_per_token": 1,
-      "cost_share": 0.0749,
+      "cost_share": 0.1117,
       "recommended_precision": "int8",
-      "weight_elems": 544997376,
-      "LHS": 0.401,
+      "weight_elems": 0,
+      "LHS": 0.4105,
       "scorecard": {
         "name": "lm_head",
         "kind": "LHS",
-        "score": 0.401,
+        "score": 0.4105,
         "status": "OPEN_GAP",
         "factors": {
           "E": {
-            "value": 0.08,
+            "value": 0.1,
             "weight": 0.2,
-            "contribution": 0.016,
-            "status": "COMPUTATIONAL_EVIDENCE",
-            "note": "preservado em 0/1 transicoes de versao; presente em 2/10 modelos do corpus"
+            "contribution": 0.02,
+            "status": "ASSUMPTION",
+            "note": "familia com uma unica versao no corpus: estabilidade temporal nao observada; usando apenas cobertura de corpus (1/10 modelos)"
           },
           "F": {
-            "value": 0.0749,
+            "value": 0.1117,
             "weight": 0.15,
-            "contribution": 0.0112,
+            "contribution": 0.0168,
             "status": "CONDITIONAL_RESULT",
             "note": ""
           },
@@ -1578,28 +1675,28 @@
     {
       "role": "kv_read",
       "block": "attention",
-      "instances_per_token": 28,
-      "cost_share": 0.0091,
+      "instances_per_token": 32,
+      "cost_share": 0.1116,
       "recommended_precision": "bf16",
       "weight_elems": 0,
-      "LHS": 0.3584,
+      "LHS": 0.3813,
       "scorecard": {
         "name": "kv_read",
         "kind": "LHS",
-        "score": 0.3584,
+        "score": 0.3813,
         "status": "OPEN_GAP",
         "factors": {
           "E": {
-            "value": 0.08,
+            "value": 0.1,
             "weight": 0.2,
-            "contribution": 0.016,
-            "status": "COMPUTATIONAL_EVIDENCE",
-            "note": "preservado em 0/1 transicoes de versao; presente em 2/10 modelos do corpus"
+            "contribution": 0.02,
+            "status": "ASSUMPTION",
+            "note": "familia com uma unica versao no corpus: estabilidade temporal nao observada; usando apenas cobertura de corpus (1/10 modelos)"
           },
           "F": {
-            "value": 0.0091,
+            "value": 0.1116,
             "weight": 0.15,
-            "contribution": 0.0014,
+            "contribution": 0.0167,
             "status": "CONDITIONAL_RESULT",
             "note": ""
           },
@@ -1608,7 +1705,7 @@
             "weight": 0.15,
             "contribution": 0.15,
             "status": "MODEL",
-            "note": "28 nos, 0% dinamicos"
+            "note": "32 nos, 0% dinamicos"
           },
           "Q": {
             "value": 0.0,
@@ -1618,11 +1715,11 @@
             "note": "papel sem pesos: quantizacao de peso nao se aplica"
           },
           "V": {
-            "value": 0.6072,
+            "value": 0.6305,
             "weight": 0.15,
-            "contribution": 0.0911,
+            "contribution": 0.0946,
             "status": "MODEL",
-            "note": "28 instancias por token"
+            "note": "32 instancias por token"
           },
           "M": {
             "value": 1.0,
@@ -1643,81 +1740,81 @@
     }
   ],
   "partition": {
-    "model": "qwen2.5-7b",
+    "model": "smollm2-360m-instruct",
     "phase": "serving",
     "policy_version": "1.0",
     "level": 3,
     "level_label": "acelerador por arquitetura",
     "hardened_share": 0,
     "amdahl_ceiling": 1.0,
-    "uncovered_share": 0.0048,
+    "uncovered_share": 0.0193,
     "blocked_by": {
-      "estabilidade": 0.9952
+      "estabilidade": 0.9807
     },
     "regions": {
       "reconfigurable": {
         "target": "FPGA/eFPGA",
-        "share": 0.9861,
+        "share": 0.8691,
         "roles": [
           {
             "role": "gate_proj",
-            "share": 0.2655,
+            "share": 0.1893,
             "precision": "int4",
-            "reason": "regular e quantizavel, porem LHS=0.50 < 0.55; E=0.08 < 0.6: prototipar antes de fixar"
+            "reason": "regular e quantizavel, porem LHS=0.50 < 0.55; E=0.10 < 0.6: prototipar antes de fixar"
           },
           {
             "role": "up_proj",
-            "share": 0.2655,
+            "share": 0.1893,
             "precision": "int4",
-            "reason": "regular e quantizavel, porem LHS=0.50 < 0.55; E=0.08 < 0.6: prototipar antes de fixar"
+            "reason": "regular e quantizavel, porem LHS=0.50 < 0.55; E=0.10 < 0.6: prototipar antes de fixar"
           },
           {
             "role": "down_proj",
-            "share": 0.2655,
+            "share": 0.1893,
             "precision": "int4",
-            "reason": "regular e quantizavel, porem LHS=0.49 < 0.55; E=0.08 < 0.6: prototipar antes de fixar"
+            "reason": "regular e quantizavel, porem LHS=0.49 < 0.55; E=0.10 < 0.6: prototipar antes de fixar"
           },
           {
             "role": "lm_head",
-            "share": 0.0749,
+            "share": 0.1117,
             "precision": "int8",
-            "reason": "regular e quantizavel, porem LHS=0.40 < 0.55; E=0.08 < 0.6: prototipar antes de fixar"
+            "reason": "regular e quantizavel, porem LHS=0.41 < 0.55; E=0.10 < 0.6: prototipar antes de fixar"
           },
           {
             "role": "q_proj",
-            "share": 0.0502,
+            "share": 0.071,
             "precision": "int8",
-            "reason": "regular e quantizavel, porem LHS=0.49 < 0.55; E=0.08 < 0.6: prototipar antes de fixar"
+            "reason": "regular e quantizavel, porem LHS=0.50 < 0.55; E=0.10 < 0.6: prototipar antes de fixar"
           },
           {
             "role": "o_proj",
-            "share": 0.0502,
+            "share": 0.071,
             "precision": "int4",
-            "reason": "regular e quantizavel, porem LHS=0.45 < 0.55; E=0.08 < 0.6: prototipar antes de fixar"
+            "reason": "regular e quantizavel, porem LHS=0.47 < 0.55; E=0.10 < 0.6: prototipar antes de fixar"
           },
           {
             "role": "v_proj",
-            "share": 0.0072,
+            "share": 0.0238,
             "precision": "int8",
-            "reason": "regular e quantizavel, porem LHS=0.49 < 0.55; E=0.08 < 0.6: prototipar antes de fixar"
+            "reason": "regular e quantizavel, porem LHS=0.50 < 0.55; E=0.10 < 0.6: prototipar antes de fixar"
           },
           {
             "role": "k_proj",
-            "share": 0.0072,
+            "share": 0.0238,
             "precision": "int8",
-            "reason": "regular e quantizavel, porem LHS=0.48 < 0.55; E=0.08 < 0.6: prototipar antes de fixar"
+            "reason": "regular e quantizavel, porem LHS=0.49 < 0.55; E=0.10 < 0.6: prototipar antes de fixar"
           }
         ]
       },
       "programmable": {
         "target": "CPU/GPU",
-        "share": 0.0091,
+        "share": 0.1116,
         "roles": [
           {
             "role": "kv_read",
-            "share": 0.0091,
+            "share": 0.1116,
             "precision": "bf16",
-            "reason": "LHS=0.36 < 0.55; E=0.08 < 0.6; Q=0.00 < 0.6"
+            "reason": "LHS=0.38 < 0.55; E=0.10 < 0.6; Q=0.00 < 0.6"
           }
         ]
       }
@@ -1727,14 +1824,14 @@
     "samples": 0,
     "tech_node": "6nm",
     "design_point": {
-      "model": "qwen2.5-7b",
+      "model": "smollm2-360m-instruct",
       "hardened_roles": [],
       "hardened_weight_gbit": 0.0,
       "hardened_precision": "int8",
       "hardened_flops_per_token": 0.0,
-      "total_flops_per_token": 15080452608.0,
+      "total_flops_per_token": 1013568192.0,
       "hardened_cost_share": 0,
-      "kv_bytes_at_context_gb": 0.13217792,
+      "kv_bytes_at_context_gb": 0.0944128,
       "batch": 1,
       "target_tokens_per_second": 1000.0,
       "is_empty": true
@@ -1751,9 +1848,9 @@
     "sensitivity_breakeven": []
   },
   "srs": {
-    "name": "qwen2.5-7b",
+    "name": "smollm2-360m-instruct",
     "kind": "SRS",
-    "score": 0.2522,
+    "score": 0.2093,
     "status": "OPEN_GAP",
     "factors": {
       "A": {
@@ -1761,12 +1858,12 @@
         "weight": 0.15,
         "contribution": 0.0,
         "status": "OPEN_GAP",
-        "note": "familia qwen sem transicao temporal no corpus (2 versao(oes)): estabilidade nao observada"
+        "note": "familia smollm sem transicao temporal no corpus (1 versao(oes)): estabilidade nao observada"
       },
       "H": {
-        "value": 0.2233,
+        "value": 0.1472,
         "weight": 0.15,
-        "contribution": 0.0335,
+        "contribution": 0.0221,
         "status": "CONDITIONAL_RESULT",
         "note": "indice de Herfindahl das participacoes por papel em decode"
       },
@@ -1785,18 +1882,18 @@
         "note": "regiao fixa vazia: sem ponto de projeto nao ha ganho, receita nem NRE"
       },
       "Q": {
-        "value": 0.6873,
+        "value": 0.6223,
         "weight": 0.1,
-        "contribution": 0.0687,
+        "contribution": 0.0622,
         "status": "ASSUMPTION",
         "note": "media dos priors ponderada por custo; nao medido"
       },
       "D": {
-        "value": 1.0,
+        "value": 0.75,
         "weight": 0.1,
-        "contribution": 0.1,
+        "contribution": 0.075,
         "status": "OBSERVATION",
-        "note": "licenca permissiva=sim; duas ou mais versoes no corpus=sim; contagem de parametros publicada=sim; proveniencia verificada=sim"
+        "note": "licenca permissiva=sim; duas ou mais versoes no corpus=nao; contagem de parametros publicada=sim; proveniencia verificada=sim"
       },
       "C": {
         "value": 1.0,
@@ -1833,22 +1930,23 @@
   "sensitivity": {
     "perturbation": 0.2,
     "samples": 2000,
-    "top1_stability": 1.0,
-    "top3_stability": 0.659,
-    "band_stability": 0.9555,
+    "top1_stability": 0.715,
+    "top3_stability": 0.921,
+    "band_stability": 1.0,
     "threshold": 0.95,
-    "decidable": true,
+    "decidable": false,
     "discriminates": false,
-    "score_spread": 0.14646,
-    "noise_band": 0.02622,
-    "margin": 0.01278,
+    "score_spread": 0.12141,
+    "noise_band": 0.02634,
+    "margin": 0.00176,
     "inert_weight": 0.55,
     "contenders": [
+      "q_proj",
       "gate_proj",
       "up_proj",
-      "q_proj",
-      "down_proj",
-      "v_proj"
+      "v_proj",
+      "k_proj",
+      "down_proj"
     ],
     "contender_inert_weight": 0.7,
     "varying_factors": [
@@ -1856,26 +1954,27 @@
       "Q",
       "V"
     ],
-    "diagnosis": "top-1 estavel, mas a margem sobre o concorrente (0.0128) nao supera o ruido dos pesos (0.0262): a ordem pode ser artefato",
+    "diagnosis": "score NAO discrimina: entre os 6 candidatos que disputam a primeira posicao, 70% do peso esta em fatores identicos; a margem (0.0018) e menor que o ruido (0.0263)",
     "winners": {
-      "gate_proj": 2000
+      "q_proj": 1430,
+      "gate_proj": 570
     },
     "dominant_factor": "R"
   },
   "falsifiers": {
     "F1": {
       "criterio": "nenhum padrao com cobertura >= 0.80 entre versoes da familia",
-      "observado": "familia sem transicao temporal no corpus (2 versao(oes)): nao avaliavel",
+      "observado": "familia sem transicao temporal no corpus (1 versao(oes)): nao avaliavel",
       "disparado": null
     },
     "F2": {
       "criterio": "o padrao mais custoso muda de identidade entre versoes",
-      "observado": "bloco mais custoso 'mlp' (papel gate_proj, 26.5% do custo): E = 0.08",
+      "observado": "bloco mais custoso 'mlp' (papel gate_proj, 18.9% do custo): E = 0.10",
       "disparado": true
     },
     "F3": {
       "criterio": "top-1 do ranking troca sob perturbacao de +-20% dos pesos, ou vence por margem menor que o ruido (criterio reforcado apos CE-001)",
-      "observado": "estabilidade do top-1 = 1.000 (limite 0.95); margem = 0.0128 contra ruido 0.0262",
+      "observado": "estabilidade do top-1 = 0.715 (limite 0.95); margem = 0.0018 contra ruido 0.0263",
       "disparado": true
     },
     "F4": {
@@ -1890,7 +1989,7 @@
     }
   },
   "findings": {
-    "title": "Silicon Readiness Assessment — qwen2.5-7b",
+    "title": "Silicon Readiness Assessment — smollm2-360m-instruct",
     "weakest_status": "OPEN_GAP",
     "open_gaps": [
       "G-001",
@@ -1913,7 +2012,7 @@
       "economics.breakeven_years.p50",
       "economics.p_breakeven_before_obsolescence",
       "economics.die_area_mm2.p50",
-      "stability.qwen.exact"
+      "stability.smollm.exact"
     ],
     "evidence_debt": 0.3333,
     "status_histogram": {
@@ -1923,8 +2022,8 @@
     },
     "findings": [
       {
-        "name": "qwen2.5-7b.params",
-        "value": 7615616512,
+        "name": "smollm2-360m-instruct.params",
+        "value": 361821120,
         "unit": "params",
         "status": "MODEL",
         "assumptions": [
@@ -1937,8 +2036,8 @@
         "note": "derivado analiticamente do config; ver ADR-0001"
       },
       {
-        "name": "qwen2.5-7b.serving.decode_time_share",
-        "value": 0.9802309331912361,
+        "name": "smollm2-360m-instruct.serving.decode_time_share",
+        "value": 0.9728615979818497,
         "unit": "fracao do tempo de requisicao",
         "status": "CONDITIONAL_RESULT",
         "assumptions": [
@@ -1953,8 +2052,8 @@
         "note": "mistura prefill/decode assumida; telemetria real fecharia G-009"
       },
       {
-        "name": "qwen2.5-7b.serving.energy_per_token",
-        "value": 6.172143834662151,
+        "name": "smollm2-360m-instruct.serving.energy_per_token",
+        "value": 0.3585184196092821,
         "unit": "J/token gerado",
         "status": "CONDITIONAL_RESULT",
         "assumptions": [
@@ -1971,8 +2070,8 @@
         "note": ""
       },
       {
-        "name": "qwen2.5-7b.decode.tokens_per_s",
-        "value": 187.43410331251252,
+        "name": "smollm2-360m-instruct.decode.tokens_per_s",
+        "value": 3251.251162663321,
         "unit": "tok/s",
         "status": "CONDITIONAL_RESULT",
         "assumptions": [
@@ -1986,8 +2085,8 @@
         "note": ""
       },
       {
-        "name": "qwen2.5-7b.decode.memory_bound_share",
-        "value": 0.9992992529081677,
+        "name": "smollm2-360m-instruct.decode.memory_bound_share",
+        "value": 0.9962790109608161,
         "unit": "fracao do tempo",
         "status": "CONDITIONAL_RESULT",
         "assumptions": [
@@ -2001,8 +2100,8 @@
         "note": ""
       },
       {
-        "name": "qwen2.5-7b.decode.arith_intensity",
-        "value": 1.0553784727795996,
+        "name": "smollm2-360m-instruct.decode.arith_intensity",
+        "value": 1.2338369493778696,
         "unit": "FLOP/byte",
         "status": "CONDITIONAL_RESULT",
         "assumptions": [
@@ -2016,8 +2115,8 @@
         "note": ""
       },
       {
-        "name": "qwen2.5-7b.decode.energy_per_token",
-        "value": 6.0501263108414145,
+        "name": "smollm2-360m-instruct.decode.energy_per_token",
+        "value": 0.34878880260701345,
         "unit": "J/token",
         "status": "CONDITIONAL_RESULT",
         "assumptions": [
@@ -2034,7 +2133,7 @@
       },
       {
         "name": "quant.sensitivity.memory_reduction",
-        "value": 0.49998555374766196,
+        "value": 0.4999137697732543,
         "unit": "fracao",
         "status": "CONDITIONAL_RESULT",
         "assumptions": [
@@ -2049,7 +2148,7 @@
       },
       {
         "name": "quant.sensitivity.speedup",
-        "value": 1.9782065689342334,
+        "value": 1.7821182022646134,
         "unit": "x sobre baseline",
         "status": "CONDITIONAL_RESULT",
         "assumptions": [
@@ -2078,7 +2177,7 @@
       },
       {
         "name": "quant.reachable_cost_share.int4",
-        "value": 0.8483434651193995,
+        "value": 0.6449612718353352,
         "unit": "fracao do tempo",
         "status": "CONDITIONAL_RESULT",
         "assumptions": [
@@ -2093,15 +2192,15 @@
         "note": "papeis alcancados: down_proj, gate_proj, o_proj, up_proj"
       },
       {
-        "name": "qwen2.5-7b.partition.hardened_share",
+        "name": "smollm2-360m-instruct.partition.hardened_share",
         "value": 0,
         "unit": "fracao do tempo",
         "status": "OPEN_GAP",
         "assumptions": [
-          "A-001",
           "A-002",
           "A-004",
-          "A-005"
+          "A-005",
+          "A-007"
         ],
         "gaps": [
           "G-001",
@@ -2110,12 +2209,12 @@
           "G-006"
         ],
         "parents": [
+          "LHS.q_proj",
           "LHS.gate_proj",
           "LHS.up_proj",
-          "LHS.q_proj",
-          "LHS.down_proj",
           "LHS.v_proj",
           "LHS.k_proj",
+          "LHS.down_proj",
           "LHS.o_proj",
           "LHS.lm_head",
           "LHS.kv_read"
@@ -2123,15 +2222,15 @@
         "note": "regiao fixa sob politica v1.0"
       },
       {
-        "name": "qwen2.5-7b.partition.amdahl_ceiling",
+        "name": "smollm2-360m-instruct.partition.amdahl_ceiling",
         "value": 1.0,
         "unit": "x sobre baseline",
         "status": "OPEN_GAP",
         "assumptions": [
-          "A-001",
           "A-002",
           "A-004",
-          "A-005"
+          "A-005",
+          "A-007"
         ],
         "gaps": [
           "G-001",
@@ -2140,12 +2239,12 @@
           "G-006"
         ],
         "parents": [
+          "LHS.q_proj",
           "LHS.gate_proj",
           "LHS.up_proj",
-          "LHS.q_proj",
-          "LHS.down_proj",
           "LHS.v_proj",
           "LHS.k_proj",
+          "LHS.down_proj",
           "LHS.o_proj",
           "LHS.lm_head",
           "LHS.kv_read"
@@ -2158,10 +2257,10 @@
         "unit": "x (teto do sistema)",
         "status": "OPEN_GAP",
         "assumptions": [
-          "A-001",
           "A-002",
           "A-004",
-          "A-005"
+          "A-005",
+          "A-007"
         ],
         "gaps": [
           "G-001",
@@ -2170,12 +2269,12 @@
           "G-006"
         ],
         "parents": [
+          "LHS.q_proj",
           "LHS.gate_proj",
           "LHS.up_proj",
-          "LHS.q_proj",
-          "LHS.down_proj",
           "LHS.v_proj",
           "LHS.k_proj",
+          "LHS.down_proj",
           "LHS.o_proj",
           "LHS.lm_head",
           "LHS.kv_read"
@@ -2219,8 +2318,8 @@
         "note": "regiao fixa vazia (nenhum FLOP endurecido e nenhum peso a fixar): nao ha ponto de projeto a simular"
       },
       {
-        "name": "SRS.qwen2.5-7b",
-        "value": 0.25222965099670647,
+        "name": "SRS.smollm2-360m-instruct",
+        "value": 0.20931440319547026,
         "unit": "score SRS",
         "status": "OPEN_GAP",
         "assumptions": [
@@ -2251,14 +2350,14 @@
       },
       {
         "name": "readiness.rank_stability",
-        "value": 1.0,
+        "value": 0.715,
         "unit": "fracao das amostras com mesmo top-1",
         "status": "OPEN_GAP",
         "assumptions": [
-          "A-001",
           "A-002",
           "A-004",
-          "A-005"
+          "A-005",
+          "A-007"
         ],
         "gaps": [
           "G-001",
@@ -2267,6 +2366,13 @@
           "G-006"
         ],
         "parents": [
+          "E.q_proj",
+          "F.q_proj",
+          "R.q_proj",
+          "Q.q_proj",
+          "V.q_proj",
+          "M.q_proj",
+          "L.q_proj",
           "E.gate_proj",
           "F.gate_proj",
           "R.gate_proj",
@@ -2281,20 +2387,6 @@
           "V.up_proj",
           "M.up_proj",
           "L.up_proj",
-          "E.q_proj",
-          "F.q_proj",
-          "R.q_proj",
-          "Q.q_proj",
-          "V.q_proj",
-          "M.q_proj",
-          "L.q_proj",
-          "E.down_proj",
-          "F.down_proj",
-          "R.down_proj",
-          "Q.down_proj",
-          "V.down_proj",
-          "M.down_proj",
-          "L.down_proj",
           "E.v_proj",
           "F.v_proj",
           "R.v_proj",
@@ -2309,6 +2401,13 @@
           "V.k_proj",
           "M.k_proj",
           "L.k_proj",
+          "E.down_proj",
+          "F.down_proj",
+          "R.down_proj",
+          "Q.down_proj",
+          "V.down_proj",
+          "M.down_proj",
+          "L.down_proj",
           "E.o_proj",
           "F.o_proj",
           "R.o_proj",
@@ -2331,10 +2430,10 @@
           "M.kv_read",
           "L.kv_read"
         ],
-        "note": "perturbacao +-20%, 2000 amostras; DECIDIVEL; top-1 estavel, mas a margem sobre o concorrente (0.0128) nao supera o ruido dos pesos (0.0262): a ordem pode ser artefato"
+        "note": "perturbacao +-20%, 2000 amostras; NAO DECIDIVEL — F3 disparado; score NAO discrimina: entre os 6 candidatos que disputam a primeira posicao, 70% do peso esta em fatores identicos; a margem (0.0018) e menor que o ruido (0.0263)"
       },
       {
-        "name": "stability.qwen.exact",
+        "name": "stability.smollm.exact",
         "value": null,
         "unit": "fracao de blocos preservados",
         "status": "OPEN_GAP",
@@ -2343,7 +2442,7 @@
           "G-006"
         ],
         "parents": [],
-        "note": "2 versao(oes) sem transicao temporal: estabilidade estrutural nao observada; 1 par(es) de escala ignorado(s)"
+        "note": "1 versao(oes) sem transicao temporal: estabilidade estrutural nao observada"
       }
     ]
   }

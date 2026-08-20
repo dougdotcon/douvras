@@ -1,7 +1,7 @@
 ---
 artifact: EXPERIMENT_RESULT
 experiment: X-001
-run_id: 20260815T024439Z
+run_id: 20260820T015320Z
 generated_by: scripts/run_cycle.py
 ---
 
@@ -29,10 +29,11 @@ H1 (estabilidade parcial) e H2 (valor concentrado), do Metodo 14.2.
 | phi-3-mini-4k | 99.9% | gate_proj, up_proj, down_proj | 58.3% | 0.0% | 1.00x | 0.211 | software |
 | qwen2.5-14b | 99.9% | gate_proj, up_proj, down_proj | 71.4% | 0.0% | 1.00x | 0.247 | software |
 | qwen2.5-7b | 99.9% | gate_proj, up_proj, down_proj | 79.6% | 0.0% | 1.00x | 0.252 | software |
+| smollm2-360m-instruct | 99.6% | gate_proj, up_proj, down_proj | 56.8% | 0.0% | 1.00x | 0.209 | software |
 
 ## Interpretacao permitida
 
-- **H2 sustentada nesta rodada**: em todos os 9 modelos avaliados, os tres
+- **H2 sustentada nesta rodada**: em todos os 10 modelos avaliados, os tres
   papeis mais custosos concentram a maior parte do tempo de servico. O custo de inferencia
   e estruturalmente concentrado, e a concentracao esta nas projecoes lineares.
 - **C-003 sustentada**: o decode e dominado por movimentacao de memoria em todos os casos.

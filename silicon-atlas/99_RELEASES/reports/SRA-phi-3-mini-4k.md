@@ -1,8 +1,8 @@
 ---
 artifact: SILICON_READINESS_ASSESSMENT
 model: phi-3-mini-4k
-run_id: 20260815T024442Z
-generated_at: 2026-08-15T02:44:42+00:00
+run_id: 20260820T015323Z
+generated_at: 2026-08-20T01:53:23+00:00
 method: DOUVRAS 2.0
 cycle: C-001
 weakest_status: OPEN_GAP
@@ -57,10 +57,10 @@ Lacunas abertas que limitam o status de tudo acima: `G-001`, `G-002`, `G-003`, `
   observado: familia sem transicao temporal no corpus (1 versao(oes)): nao avaliavel  
   **nao disparado**
 - **F2** — o padrao mais custoso muda de identidade entre versoes  
-  observado: bloco mais custoso 'mlp' (papel gate_proj, 19.4% do custo): E = 0.11  
+  observado: bloco mais custoso 'mlp' (papel gate_proj, 19.4% do custo): E = 0.10  
   **DISPARADO**
 - **F3** — top-1 do ranking troca sob perturbacao de +-20% dos pesos, ou vence por margem menor que o ruido (criterio reforcado apos CE-001)  
-  observado: estabilidade do top-1 = 0.663 (limite 0.95); margem = 0.0013 contra ruido 0.0264  
+  observado: estabilidade do top-1 = 0.663 (limite 0.95); margem = 0.0013 contra ruido 0.0263  
   **DISPARADO**
 - **F4** — break-even P50 posterior a vida economica  
   observado: nao avaliavel: regiao fixa vazia (nenhum FLOP endurecido e nenhum peso a fixar): nao ha ponto de projeto a simular  
@@ -104,29 +104,29 @@ hardening abaixo e ponderada por essa mistura, nao por FLOPs isolados.
 
 | Papel | Bloco | Custo | Instancias/token | Precisao | LHS |
 |---|---|---|---|---|---|
-| q_proj | attention | 7.3% | 32 | int8 | 0.505 |
-| v_proj | attention | 7.3% | 32 | int8 | 0.505 |
-| gate_proj | mlp | 19.4% | 32 | int4 | 0.504 |
-| up_proj | mlp | 19.4% | 32 | int4 | 0.504 |
-| k_proj | attention | 7.3% | 32 | int8 | 0.498 |
-| down_proj | mlp | 19.4% | 32 | int4 | 0.489 |
-| o_proj | attention | 7.3% | 32 | int4 | 0.468 |
-| lm_head | head | 2.3% | 1 | int8 | 0.399 |
+| q_proj | attention | 7.3% | 32 | int8 | 0.503 |
+| v_proj | attention | 7.3% | 32 | int8 | 0.503 |
+| gate_proj | mlp | 19.4% | 32 | int4 | 0.502 |
+| up_proj | mlp | 19.4% | 32 | int4 | 0.502 |
+| k_proj | attention | 7.3% | 32 | int8 | 0.496 |
+| down_proj | mlp | 19.4% | 32 | int4 | 0.487 |
+| o_proj | attention | 7.3% | 32 | int4 | 0.466 |
+| lm_head | head | 2.3% | 1 | int8 | 0.397 |
 
 ### Particao recomendada
 
 ```text
 FPGA/eFPGA: 89.8% do custo
-  ├── gate_proj             19.4%  regular e quantizavel, porem LHS=0.50 < 0.55; E=0.11 < 0.6: prototipar antes de fixar
-  ├── up_proj               19.4%  regular e quantizavel, porem LHS=0.50 < 0.55; E=0.11 < 0.6: prototipar antes de fixar
-  ├── down_proj             19.4%  regular e quantizavel, porem LHS=0.49 < 0.55; E=0.11 < 0.6: prototipar antes de fixar
-  ├── q_proj                 7.3%  regular e quantizavel, porem LHS=0.51 < 0.55; E=0.11 < 0.6: prototipar antes de fixar
-  ├── v_proj                 7.3%  regular e quantizavel, porem LHS=0.51 < 0.55; E=0.11 < 0.6: prototipar antes de fixar
-  ├── k_proj                 7.3%  regular e quantizavel, porem LHS=0.50 < 0.55; E=0.11 < 0.6: prototipar antes de fixar
-  ├── o_proj                 7.3%  regular e quantizavel, porem LHS=0.47 < 0.55; E=0.11 < 0.6: prototipar antes de fixar
-  └── lm_head                2.3%  regular e quantizavel, porem LHS=0.40 < 0.55; E=0.11 < 0.6: prototipar antes de fixar
+  ├── gate_proj             19.4%  regular e quantizavel, porem LHS=0.50 < 0.55; E=0.10 < 0.6: prototipar antes de fixar
+  ├── up_proj               19.4%  regular e quantizavel, porem LHS=0.50 < 0.55; E=0.10 < 0.6: prototipar antes de fixar
+  ├── down_proj             19.4%  regular e quantizavel, porem LHS=0.49 < 0.55; E=0.10 < 0.6: prototipar antes de fixar
+  ├── q_proj                 7.3%  regular e quantizavel, porem LHS=0.50 < 0.55; E=0.10 < 0.6: prototipar antes de fixar
+  ├── v_proj                 7.3%  regular e quantizavel, porem LHS=0.50 < 0.55; E=0.10 < 0.6: prototipar antes de fixar
+  ├── k_proj                 7.3%  regular e quantizavel, porem LHS=0.50 < 0.55; E=0.10 < 0.6: prototipar antes de fixar
+  ├── o_proj                 7.3%  regular e quantizavel, porem LHS=0.47 < 0.55; E=0.10 < 0.6: prototipar antes de fixar
+  └── lm_head                2.3%  regular e quantizavel, porem LHS=0.40 < 0.55; E=0.10 < 0.6: prototipar antes de fixar
 CPU/GPU: 9.6% do custo
-  └── kv_read                9.6%  LHS=0.38 < 0.55; E=0.11 < 0.6; Q=0.00 < 0.6
+  └── kv_read                9.6%  LHS=0.38 < 0.55; E=0.10 < 0.6; Q=0.00 < 0.6
 ```
 
 Nivel de especializacao implicado: **3 — acelerador por arquitetura**.
@@ -154,7 +154,7 @@ A regiao fixa ficou **vazia** sob a politica de particionamento vigente: regiao 
 
 Consequencia registrada: os fatores **P** (ganho por watt), **R** (receita) e **N** (risco de NRE) do SRS entram como **zero declarado**, e o falsificador **F4** fica *nao avaliavel*. Publicar percentis de area, NRE ou break-even aqui seria descrever um objeto inexistente — foi exatamente o defeito retratado em `R-002`.
 
-Isto **e** o resultado: para phi-3-mini-4k, o bloco que domina o custo (mlp, 19.4% do tempo) tem estabilidade estrutural E = 0.11, abaixo do limite da politica. O gasto em mascara nao tem o que financiar. A decisao economica so passa a existir se essa estabilidade subir — por escopo declarado mais estreito, por observacao de mais versoes, ou por calibracao da politica contra casos reais (`G-011`).
+Isto **e** o resultado: para phi-3-mini-4k, o bloco que domina o custo (mlp, 19.4% do tempo) tem estabilidade estrutural E = 0.10, abaixo do limite da politica. O gasto em mascara nao tem o que financiar. A decisao economica so passa a existir se essa estabilidade subir — por escopo declarado mais estreito, por observacao de mais versoes, ou por calibracao da politica contra casos reais (`G-011`).
 
 ### Silicon Readiness Score
 
@@ -179,7 +179,7 @@ _Familia sem transicao temporal no corpus (1 versao(oes)): o efeito de escopo na
 
 ### Alcance cross-familia
 
-Nenhum bloco exato deste modelo reaparece em outra familia do corpus (alcance maximo 0.11). Um bloco de IP construido a partir dele atende, hoje, um unico modelo.
+Nenhum bloco exato deste modelo reaparece em outra familia do corpus (alcance maximo 0.10). Um bloco de IP construido a partir dele atende, hoje, um unico modelo.
 
 ### Estabilidade do proprio score
 
@@ -189,7 +189,7 @@ top-1 estavel em **66.3%** das amostras, top-3 em
 100.0%. Fator dominante: `R`.
 
 Dispersao dos scores: 0.1241. Largura do ruido induzido pelos pesos:
-0.0264. **Diagnostico: score NAO discrimina: entre os 6 candidatos que disputam a primeira posicao, 70% do peso esta em fatores identicos; a margem (0.0013) e menor que o ruido (0.0264).**
+0.0263. **Diagnostico: score NAO discrimina: entre os 6 candidatos que disputam a primeira posicao, 70% do peso esta em fatores identicos; a margem (0.0013) e menor que o ruido (0.0263).**
 
 Disputam a primeira posicao, dentro do ruido: `q_proj`, `v_proj`, `gate_proj`, `up_proj`, `k_proj`, `down_proj`. Entre eles, **70% do peso do LHS esta em fatores identicos** — estabilidade, regularidade, previsibilidade de memoria, volume e vida util sao os mesmos para toda projecao linear do mesmo modelo. Sobre o conjunto completo de candidatos o peso inerte e 55%.
 
