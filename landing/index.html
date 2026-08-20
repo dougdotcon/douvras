@@ -1,0 +1,184 @@
+<!DOCTYPE html>
+<html lang="pt">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Agent Ledger — AI Eval Audit</title>
+<meta name="description" content="Auditoria independente de agentes de IA. Não dizemos que funciona — provamos, com metodologia falsificável.">
+<link rel="stylesheet" href="style.css">
+</head>
+<body>
+
+<header class="topbar">
+  <div class="wrap topbar-inner">
+    <span class="brand">Agent<span class="brand-accent">Ledger</span></span>
+    <div class="topbar-right">
+      <button class="lang-toggle" id="langToggle" type="button" aria-label="Switch language">EN</button>
+      <a class="btn btn-whatsapp btn-small" id="ctaTop" target="_blank" rel="noopener">
+        <svg viewBox="0 0 24 24" width="16" height="16" fill="currentColor" aria-hidden="true"><path d="M17.6 6.32A7.85 7.85 0 0 0 12.05 4a7.94 7.94 0 0 0-6.9 11.9L4 20l4.2-1.1a7.9 7.9 0 0 0 3.85 1h.003a7.94 7.94 0 0 0 5.55-13.58zM12.05 18.4h-.003a6.57 6.57 0 0 1-3.36-.92l-.24-.14-2.5.65.66-2.44-.16-.25a6.6 6.6 0 1 1 12.28-3.5 6.56 6.56 0 0 1-6.66 6.6zm3.6-4.93c-.2-.1-1.17-.58-1.35-.64s-.32-.1-.45.1-.5.64-.62.77-.23.15-.43.05a5.4 5.4 0 0 1-1.6-.98 6 6 0 0 1-1.1-1.37c-.12-.2 0-.3.09-.4.1-.1.2-.23.3-.35.1-.12.13-.2.2-.33a.36.36 0 0 0-.02-.35c-.05-.1-.45-1.08-.62-1.48-.16-.4-.33-.33-.45-.34h-.38a.74.74 0 0 0-.53.25 2.24 2.24 0 0 0-.7 1.67c0 .98.72 1.93.82 2.06s1.4 2.15 3.4 3 2 .57 2.36.53a2 2 0 0 0 1.34-.94c.16-.3.16-.55.12-.6s-.19-.15-.4-.25z"/></svg>
+        <span data-i18n="cta_short">Falar no WhatsApp</span>
+      </a>
+    </div>
+  </div>
+</header>
+
+<main>
+
+  <section class="hero">
+    <div class="wrap">
+      <p class="eyebrow" data-i18n="hero_eyebrow">AI Eval Audit · metodologia DOUVRAS</p>
+      <h1 data-i18n="hero_title">Não dizemos que seu agente de IA funciona.<br>Provamos — ou provamos que não.</h1>
+      <p class="lede" data-i18n="hero_lede">
+        Auditoria independente de agentes de IA e modelos de linguagem: tool calling, JSON,
+        recuperação de erro, alucinação, segurança. Cada número vem de execução real, com o
+        método que aplicamos primeiro contra nós mesmos.
+      </p>
+      <div class="hero-actions">
+        <a class="btn btn-whatsapp" id="ctaHero" target="_blank" rel="noopener">
+          <svg viewBox="0 0 24 24" width="18" height="18" fill="currentColor" aria-hidden="true"><path d="M17.6 6.32A7.85 7.85 0 0 0 12.05 4a7.94 7.94 0 0 0-6.9 11.9L4 20l4.2-1.1a7.9 7.9 0 0 0 3.85 1h.003a7.94 7.94 0 0 0 5.55-13.58zM12.05 18.4h-.003a6.57 6.57 0 0 1-3.36-.92l-.24-.14-2.5.65.66-2.44-.16-.25a6.6 6.6 0 1 1 12.28-3.5 6.56 6.56 0 0 1-6.66 6.6zm3.6-4.93c-.2-.1-1.17-.58-1.35-.64s-.32-.1-.45.1-.5.64-.62.77-.23.15-.43.05a5.4 5.4 0 0 1-1.6-.98 6 6 0 0 1-1.1-1.37c-.12-.2 0-.3.09-.4.1-.1.2-.23.3-.35.1-.12.13-.2.2-.33a.36.36 0 0 0-.02-.35c-.05-.1-.45-1.08-.62-1.48-.16-.4-.33-.33-.45-.34h-.38a.74.74 0 0 0-.53.25 2.24 2.24 0 0 0-.7 1.67c0 .98.72 1.93.82 2.06s1.4 2.15 3.4 3 2 .57 2.36.53a2 2 0 0 0 1.34-.94c.16-.3.16-.55.12-.6s-.19-.15-.4-.25z"/></svg>
+          <span data-i18n="cta_full">Pedir uma auditoria pelo WhatsApp</span>
+        </a>
+        <a class="btn btn-ghost" href="#proof" data-i18n="hero_secondary">Ver a prova antes de falar com a gente</a>
+      </div>
+    </div>
+  </section>
+
+  <section class="proof" id="proof">
+    <div class="wrap">
+      <h2 data-i18n="proof_title">Prova, não promessa</h2>
+      <p class="section-lede" data-i18n="proof_lede">
+        Três coisas que já aconteceram nesta pesquisa — verificáveis no repositório público,
+        não alegação de marketing.
+      </p>
+
+      <div class="proof-grid">
+        <article class="proof-card">
+          <span class="proof-tag" data-i18n="proof1_tag">DEFEITO ENCONTRADO EM MODELO PUBLICADO</span>
+          <h3 data-i18n="proof1_title">Achamos um bug que não era nosso</h3>
+          <p data-i18n="proof1_body">
+            O template de chat publicado dentro de um modelo GGUF real fecha a tag de instrução
+            no lugar errado — qualquer ferramenta padrão (llama-server, Ollama, LM Studio)
+            recebe saída degenerada desse modelo sem saber por quê.
+          </p>
+          <pre class="code-proof"><code>&lt;instruction&gt;Qual é a capital da França?
+→ resposta coerente
+
+&lt;instruction&gt;Qual é a capital da França?&lt;/instruction&gt;
+→ "FFQuala&lt;/&lt;/. A PerguntQualfQual..."</code></pre>
+        </article>
+
+        <article class="proof-card">
+          <span class="proof-tag" data-i18n="proof2_tag">DERRUBAMOS NOSSA PRÓPRIA HIPÓTESE</span>
+          <h3 data-i18n="proof2_title">Publicamos quando erramos, no mesmo ciclo</h3>
+          <p data-i18n="proof2_body">
+            Registramos a hipótese de que modelos pequenos não chamam ferramenta. O segundo
+            modelo que testamos — nós mesmos — a derrubou horas depois. A retratação foi
+            publicada junto, não escondida.
+          </p>
+          <div class="mini-table">
+            <div class="mini-row mini-head">
+              <span data-i18n="proof2_col1">Modelo</span><span data-i18n="proof2_col2">Chamadas de ferramenta</span>
+            </div>
+            <div class="mini-row"><span>Modelo A</span><span class="num-bad">0 / 96</span></div>
+            <div class="mini-row"><span>Modelo B</span><span class="num-good">78 / 96</span></div>
+          </div>
+        </article>
+
+        <article class="proof-card">
+          <span class="proof-tag" data-i18n="proof3_tag">CONTRA O PRÓPRIO INTERESSE</span>
+          <h3 data-i18n="proof3_title">Dissemos quando nosso próprio placar não presta</h3>
+          <p data-i18n="proof3_body">
+            O escore agregado do nosso benchmark não separa um agente correto de um degenerado
+            com confiança suficiente — e publicamos isso mesmo sendo desfavorável ao nosso
+            instrumento. Se o placar de IA que você usa hoje nunca admitiu um limite, vale
+            perguntar por quê.
+          </p>
+        </article>
+      </div>
+    </div>
+  </section>
+
+  <section class="deliver">
+    <div class="wrap">
+      <h2 data-i18n="deliver_title">O que você recebe</h2>
+      <p class="section-lede" data-i18n="deliver_lede">
+        Um relatório de agente, com número reproduzível em cada linha — não impressão, execução.
+      </p>
+
+      <div class="report-mock">
+        <div class="report-mock-head" data-i18n="report_head">Agent Evaluation Report — seu agente</div>
+        <div class="report-row"><span data-i18n="metric_tool">Tool use</span><span class="bar"><i style="width:72%"></i></span><b>72%</b></div>
+        <div class="report-row"><span data-i18n="metric_instr">Instruction following</span><span class="bar"><i style="width:91%"></i></span><b>91%</b></div>
+        <div class="report-row"><span data-i18n="metric_halluc">Hallucination</span><span class="bar bar-warn"><i style="width:18%"></i></span><b>18%</b></div>
+        <div class="report-row"><span data-i18n="metric_recovery">Error recovery</span><span class="bar bar-bad"><i style="width:37%"></i></span><b>37%</b></div>
+        <div class="report-row"><span data-i18n="metric_json">JSON compliance</span><span class="bar"><i style="width:96%"></i></span><b>96%</b></div>
+        <div class="report-row"><span data-i18n="metric_security">Security</span><span class="bar"><i style="width:81%"></i></span><b>81%</b></div>
+        <div class="report-mock-foot" data-i18n="report_foot">17 falhas críticas · 38 falhas altas · dataset de falhas incluído</div>
+        <p class="report-note" data-i18n="report_note">Números ilustrativos — o relatório do seu agente é gerado a partir da execução real dele, não preenchido a mão.</p>
+      </div>
+
+      <ol class="steps">
+        <li><b data-i18n="step1_t">1. Você nos dá acesso</b><span data-i18n="step1_d">ao agente, modelo ou API — ou só aos logs, se preferir não expor o sistema.</span></li>
+        <li><b data-i18n="step2_t">2. Rodamos a auditoria</b><span data-i18n="step2_d">centenas de tarefas com gabarito e contraexemplo, grader determinístico, sem depender de outro LLM para julgar.</span></li>
+        <li><b data-i18n="step3_t">3. Você recebe o relatório</b><span data-i18n="step3_d">com as falhas priorizadas, o dataset reproduzível, e uma chamada para revisar junto.</span></li>
+      </ol>
+    </div>
+  </section>
+
+  <section class="pricing">
+    <div class="wrap">
+      <h2 data-i18n="pricing_title">Como começar</h2>
+      <div class="pricing-card">
+        <div class="pricing-line">
+          <span data-i18n="pricing_label_br">Brasil · primeiros casos</span>
+          <span class="pricing-value">R$ 1.500 – R$ 3.000</span>
+        </div>
+        <div class="pricing-line">
+          <span data-i18n="pricing_label_intl">Internacional · pacote</span>
+          <span class="pricing-value">US$ 1.500 <span class="pricing-fx">≈ € 1.300</span></span>
+        </div>
+        <p class="pricing-note" data-i18n="pricing_note">
+          Dois preços diferentes de propósito: o valor em reais é de entrada, pra construir os
+          primeiros casos reais no Brasil. O pacote internacional já reflete referência de
+          mercado (Upwork, projetos de ML/eval). Customizações (benchmark específico do seu
+          domínio, dataset de treino) sob consulta nos dois casos.
+        </p>
+        <p class="pricing-fx-note" data-i18n="pricing_fx_note">
+          Câmbio de referência 15/08/2026: US$ 1 ≈ R$ 5,11 · € 1 ≈ R$ 5,98. Conversão
+          ilustrativa, não cotação de fechamento de negócio.
+        </p>
+        <a class="btn btn-whatsapp btn-block" id="ctaPricing" target="_blank" rel="noopener">
+          <span data-i18n="cta_full">Pedir uma auditoria pelo WhatsApp</span>
+        </a>
+      </div>
+    </div>
+  </section>
+
+  <section class="about">
+    <div class="wrap">
+      <h2 data-i18n="about_title">Como isso é construído</h2>
+      <p data-i18n="about_body">
+        A infraestrutura por trás desta auditoria é o método <b>DOUVRAS</b> — Delimitação,
+        Observação, Unificação, Validação, Redução, Arquitetura e Sistematização — desenvolvido
+        para exigir que toda alegação venha com evidência, toda lacuna seja registrada, e toda
+        hipótese tenha um jeito declarado de ser derrubada antes de ser testada.
+      </p>
+      <p data-i18n="about_body2">
+        O código, o corpus de tarefas, os relatórios e as retratações são públicos.
+      </p>
+      <a class="link-repo" href="https://github.com/dougdotcon/douvras" target="_blank" rel="noopener" data-i18n="about_link">Ver o repositório →</a>
+    </div>
+  </section>
+
+</main>
+
+<footer class="footer">
+  <div class="wrap footer-inner">
+    <span>Agent Ledger</span>
+    <a id="ctaFooter" target="_blank" rel="noopener" data-i18n="cta_short">Falar no WhatsApp</a>
+  </div>
+</footer>
+
+<script src="script.js"></script>
+</body>
+</html>
